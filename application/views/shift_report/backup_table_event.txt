@@ -1,0 +1,165 @@
+<table>
+				        		
+
+							<!-- :::::: jika shift sudah cut off ::::::::  -->
+							 <?php if($activity !='' || $activity !=null) { ?>
+							 	
+				        				
+				        				<?php $data_event_closed=json_decode($activity); ?>
+										<?php //var_dump($id_shift) ?>
+
+										<?php $no=1; ?>
+				        				<?php foreach($data_event_closed->activity->event as $key) {?>
+											<tr>
+												<td><?=$no?></td>
+												<td>Event Name</td>
+												<td> : </td>
+												<td><?=$key->event_name?></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>	
+												<td>Report Number</td>
+												<td> : </td>
+												<td><?=$key->report_number?></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>	
+												<td>Create Date</td>
+												<td> : </td>
+												<td><?=$key->create_at?></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>	
+												<td>Status</td>
+												<td> : </td>
+												<td><?=$key->status?></td>
+											</tr>
+											<tr>
+												<td colspan="4" style="height: 30px;"></td>	
+											</tr>
+				        				<?php $no++; }?>
+
+				        				<?php $data_event_open_and_inverstigated=json_decode($next_activity); ?>	
+													<!-- <?php //var_dump($data->activity->event) ?> -->
+													<?php foreach($data_event_open_and_inverstigated->activity->event as $key) {?>
+														<tr>
+															<td><?=$no?></td>
+															<td>Event Name</td>
+															<td> : </td>
+															<td><?=$key->event_name?></td>
+														</tr>
+														<tr>
+															<td>&nbsp;</td>	
+															<td>Report Number</td>
+															<td> : </td>
+															<td><?=$key->report_number?></td>
+														</tr>
+														<tr>
+															<td>&nbsp;</td>	
+															<td>Create Date</td>
+															<td> : </td>
+															<td><?=$key->create_at?></td>
+														</tr>
+														<tr>
+															<td>&nbsp;</td>	
+															<td>Status</td>
+															<td> : </td>
+															<td><?=$key->status?></td>
+														</tr>	
+														<tr>
+															<td colspan="4" style="height: 30px;"></td>	
+														</tr>	
+														
+							        				<?php $no++; }?>	
+
+				        			
+							
+							<!-- :::::: jika shift belum cut off :::::::: -->
+
+										<?php } else { ?>
+											
+											<?php if( count( $data_event_open_status ) > 0 || count( $data_event_closed_status ) > 0  ) { ?>
+												
+												<!-- event dengan status open -->
+												<?php $no=1; ?>
+												<?php foreach($data_event_open_status as $key){ ?>
+						        					<tr>
+														<td><?=$no?></td>
+														<td>Event Name</td>
+														<td> : </td>
+														<td><?=$key->event_name?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Report Number</td>
+														<td> : </td>
+														<td><?=$key->report_number?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Create Date</td>
+														<td> : </td>
+														<td><?=$key->create_at?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Status</td>
+														<td> : </td>
+														<td><?=$key->status?></td>
+													</tr>
+
+													<tr>
+														<td colspan="4" style="height: 30px;"></td>	
+													</tr>
+						        					<?php $no++ ?>	
+						        				<?php } ?>
+												
+												<!-- event dengan status closed -->	
+												<?php //var_dump($data_event_closed_status)?>
+						        				<?php foreach($data_event_closed_status as $keyClosed){ ?>
+						        					<tr>
+														<td><?=$no?></td>
+														<td>Event Name</td>
+														<td> : </td>
+														<td><?=$key->event_name?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Report Number</td>
+														<td> : </td>
+														<td><?=$key->report_number?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Create Date</td>
+														<td> : </td>
+														<td><?=$key->create_at?></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>	
+														<td>Status</td>
+														<td> : </td>
+														<td><?=$key->status?></td>
+													</tr>
+
+													<tr>
+														<td colspan="4" style="height: 30px;"></td>	
+													</tr>
+						        					<?php $no++ ?>	
+						        				<?php } ?>
+												
+												<!-- jika data belum atau tidak tersedia -->	
+												<?php } else { ?>	
+										 		
+										 			<tr>
+										 				<td colspan="6">
+										 					there is no data event
+										 				</td>
+										 			</tr>
+										 		<?php } ?>
+										 			
+										 <?php } ?>		
+
+
+				        		
+				        	</table>
