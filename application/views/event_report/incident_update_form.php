@@ -19,7 +19,7 @@
 		<label>Incident start:</label><br>
 		<div class='input-group date'>
 			 <!-- <?php  $datetime //= new DateTime( $start_time );   ?> -->
-			<!-- <input type="text" name="start_time" id="start_time_incident" class="form-control start_time" value="<?php// echo $datetime->format('Y-m-d H:i:s'); ?>"></input><br> -->
+			<!-- <input type="text" name="start_time" id="start_time_incident" class="form-control start_time" value=""></input><br> -->
 			<input type="text" name="start_time" id="start_time_incident" class="form-control start_time" value="<?=$start_time?>"></input><br>
 			 <span class="input-group-addon">
 			       <span class="glyphicon glyphicon-calendar"></span>

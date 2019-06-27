@@ -1406,16 +1406,16 @@ if(isset($system_log_remote['logs'])){?>
                       <div class="input-group-addon">
                         <i class="fa fa-laptop"></i>
                       </div>
-                      <input type="text" name="ip_wan" id="edit-ip_wan" class="form-control" value="<?php //echo $jar->ip_wan;?>">
+                      <input type="text" name="ip_wan" id="edit-ip_wan" class="form-control" value="">
                     </div>
                   </div>
                   <div class="form-group">
                     <label>BANDWIDTH</label>
-                    <input type="text" name="bandwidth" id="edit-bandwidth" class="form-control" value="<?php// echo $jar->bandwidth;?>">
+                    <input type="text" name="bandwidth" id="edit-bandwidth" class="form-control" value="">
                   </div>
                   <div class="form-group">
                     <label>Note</label>
-                    <textarea name="keterangan" id="edit-keterangan" class="form-control" rows="3"  value="<?php //echo $jar->keterangan;?>" placeholder="Enter ..."></textarea>
+                    <textarea name="keterangan" id="edit-keterangan" class="form-control" rows="3"  value="" placeholder="Enter ..."></textarea>
                   </div>
                   <!-- /.input group -->
                 <!-- </div> -->
