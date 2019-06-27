@@ -33,3 +33,7 @@ user_guide/*
 bower_components/*
 system/*
 application/views/cache/*
+application/libraries/*
+application/third_party/*
+code/*
+plugins/*
