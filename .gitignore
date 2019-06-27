@@ -32,3 +32,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 user_guide/*
 bower_components/*
 system/*
+application/views/cache
