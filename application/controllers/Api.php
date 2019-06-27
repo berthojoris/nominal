@@ -10,12 +10,10 @@ class Api extends CI_Controller {
     }
     public function index()
     {
-        $users = EloquentUser::take(5)->get();
-        foreach ($users as $key => $value) {
-            echo "ID : ".$value->id."<br>";
-            echo "Nama : ".$value->nama."<br>";
-            echo "Username : ".$value->username."<br>";
-            echo "Email : ".$value->email."<br><br>";
-        }
+		$users = EloquentUser::take(5)->get();
+		
+		return view('api', [
+			'users' => $users
+		]);
     }
 }
