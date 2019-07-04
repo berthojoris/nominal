@@ -630,10 +630,10 @@ class Dashboard extends CI_Controller {
 		
 
 		if(in_array( $this->session->userdata('role'), array(1,2,3,5,10))){
-			$this->template->views('detail_uker',$data);
+			$this->template->views('detail_uker_new',$data);
         }else if (in_array( $this->session->userdata('role'), array(6,7))){
             if ($this->session->userdata('kanwil')==$data['kanwil'][0]->kode_kanwil) {
-            	$this->template->views('detail_uker',$data);
+            	$this->template->views('detail_uker_new',$data);
             }else{
         		redirect('Dashboard/All_Kanwil');
             }

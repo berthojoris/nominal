@@ -1,6 +1,5 @@
 <!-- REQUIRED JS SCRIPTS -->
 <!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.min.new.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <!--<script src="<?php echo base_url(); ?>assets/js/ajax.js"></script>-->
 <!-- <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> -->
