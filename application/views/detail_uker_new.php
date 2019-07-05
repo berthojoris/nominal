@@ -1,7 +1,22 @@
 <script type="text/javascript">
-    // $(document).ready(function() {
-    //     initialize();
-    // });
+    $(document).ready(function() {
+        // initialize();
+        var formData = $("#formTicketRemedy").serialize();
+        var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
+
+        $("#submitTiketRemedy").click(function (e) { 
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: urlCreateTicket,
+                data: formData,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response)
+                }
+            });
+        });
+    });
 </script>
 <style type="text/css">
     th{
@@ -74,9 +89,9 @@
 <!-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHsVQ1T62EfD-uo64IeLr7CxWbgw1Y8kU&callback=initialize"></script> -->
 <script type="text/javascript">
     //Initialize Select2 Elements
-    // $(function () {
-    //   $('.selectpicker').selectpicker();
-    // }); 
+    $(function () {
+      $('.selectpicker').selectpicker();
+    }); 
     
     
     $(document).ready(function(){
@@ -385,7 +400,11 @@
                                 <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#HISTORY">
                                 History Alarm
                                 </button>
-                                <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#tiketRemedy">Tiket Remedy</button>
+                                <?php
+                                    if($data[0]->status_onoff==1 && $data[0]->kode_op==1) {
+                                        echo '<button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#tiketRemedy">Tiket Remedy</button>';
+                                    }
+                                ?>
                             </div>
                             <?php if($data[0]->status_onoff==1 && in_array($this->session->userdata('role'),array(1,5))){?>
                             <div class="input-group-btn">
@@ -908,7 +927,7 @@
         </div>
 
         <div class="modal fade" id="tiketRemedy">
-            <div class="modal-dialog" style="width: 1200px">
+            <div class="modal-dialog" style="width: 800px">
                 <div class="modal-content" >
                     <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -916,7 +935,85 @@
                         <h4 class="modal-title">Tiket Remedy</h4>
                     </div>
                     <div class="modal-body">
-                        
+                        <form role="form" id="formTicketRemedy" action="<?php echo base_url(); ?>index.php/Dashboard/insertTicket" method='post'>
+                            <div class="box-body">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>ID Remote</label>
+                                            <input type="text" name="remote_id" id="remote_id" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Creator</label>
+                                            <input type="text" name="created_by" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Check</label>
+                                            <input type="text" name="last_check" id="last_check" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status Ticket</label>
+                                            <input type="text" name="status_ticket" id="status_ticket" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Incident Number</label>
+                                            <input type="text" name="incident_number" id="incident_number" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="remote_ticket_description" id="remote_ticket_description" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Notes</label>
+                                            <textarea name="remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Summary</label>
+                                            <textarea name="remote_ticket_summary" id="remote_ticket_summary" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>ID Jarkom</label>
+                                            <input type="text" name="jk_jarkom_id" id="jarkom_id" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Creator</label>
+                                            <input type="text" name="jk_created_by" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Check</label>
+                                            <input type="text" name="jk_last_check" id="last_check" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status Ticket</label>
+                                            <input type="text" name="jk_status_ticket" id="status_ticket" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Incident Number</label>
+                                            <input type="text" name="jk_incident_number" id="incident_number" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="jk_remote_ticket_description" id="remote_ticket_description" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Notes</label>
+                                            <textarea name="jk_remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Summary</label>
+                                            <textarea name="jk_remote_ticket_summary" id="remote_ticket_summary" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Create Ticket">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1593,7 +1690,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         // Bertho nonaktif AlarmRemote
-    	// AlarmRemote(<?php echo $data[0]->id_remote;?>);
+    	AlarmRemote(<?php echo $data[0]->id_remote;?>);
     	initialize();
     });
     
@@ -2263,27 +2360,27 @@
     
     function initialize()
     {
-    	//var centerlat = <?php echo $data[0]->latitude;?>;
-    	//var centerlng = <?php echo $data[0]->longitude;?>;
-        // Bertho nonaktifkan map
-    	// if(lat==0 && lng==0)
-    	// {
-    	// 	mymap = L.map('map-canvas').setView([latinduk,lnginduk], 16);
-    	// }
-    	// else
-    	// {
-    	// 	mymap = L.map('map-canvas').setView([lat,lng], 16);
-    	// }
+    	var centerlat = <?php echo $data[0]->latitude;?>;
+    	var centerlng = <?php echo $data[0]->longitude;?>;
+        Bertho nonaktifkan map
+    	if(lat==0 && lng==0)
+    	{
+    		mymap = L.map('map-canvas').setView([latinduk,lnginduk], 16);
+    	}
+    	else
+    	{
+    		mymap = L.map('map-canvas').setView([lat,lng], 16);
+    	}
     	
-    	// osmUrl='http://172.18.65.56/hot/{z}/{x}/{y}.png';
-    	// osmAttrib='PT Bank Rakyat Indonesia (Persero) Tbk. | Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+    	osmUrl='http://172.18.65.56/hot/{z}/{x}/{y}.png';
+    	osmAttrib='PT Bank Rakyat Indonesia (Persero) Tbk. | Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
     
-    	// L.tileLayer(osmUrl, {
-    	// 	maxZoom: 20,
-    	// 	attribution: osmAttrib
-    	// }).addTo(mymap);
+    	L.tileLayer(osmUrl, {
+    		maxZoom: 20,
+    		attribution: osmAttrib
+    	}).addTo(mymap);
     	
-    	// getLocationOnMap();
+    	getLocationOnMap();
     }
     
     

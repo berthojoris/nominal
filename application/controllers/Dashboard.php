@@ -1,15 +1,53 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 class Dashboard extends CI_Controller {
+
 	public function __construct() {
+
 		parent::__construct();
 		$this->load->model(array('m_dashboard'));
+		$this->load->model('EloquentRemoteTicket');
+		$this->load->model('EloquentJarkomTicket');
 
         $this->load->library('session');
 		$this->load->library('curl');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
         }
+	}
+
+	public function insertTicket()
+	{
+		EloquentRemoteTicket::create([
+			'id_remote' => $this->input->post('remote_id'),
+			'created_at' => date('Y-m-d H:i:s'),
+			'user_creator' => $this->session->id,
+			'last_check' => $this->input->post('last_check'),
+			'status_ticket' => $this->input->post('status_ticket'),
+			'incident_number' => $this->input->post('incident_number'),
+			'description' => $this->input->post('remote_ticket_description'),
+			'notes' => $this->input->post('remote_ticket_notes'),
+			'summary' => $this->input->post('remote_ticket_summary')
+		]);
+
+		EloquentJarkomTicket::create([
+			'id_jarkom' => $this->input->post('jk_jarkom_id'),
+			'created_at' => date('Y-m-d H:i:s'),
+			'user_creator' => $this->session->id,
+			'last_check' => $this->input->post('jk_last_check'),
+			'status_ticket' => $this->input->post('jk_status_ticket'),
+			'incident_number' => $this->input->post('jk_incident_number'),
+			'description' => $this->input->post('jk_description'),
+			'notes' => $this->input->post('jk_notes'),
+			'summary' => $this->input->post('jk_summary'),
+		]);
+
+		$this->session->set_userdata('notif_success','done');
+
+		redirect('Dashboard/new_list_all');
 	}
 
     public function index()
@@ -626,7 +664,11 @@ class Dashboard extends CI_Controller {
 	        }
 	        $data['militan'].="</td></tr>";
         }
-		//end get data from librenms
+        //end get data from librenms
+        
+        // $log = new Logger('debug');
+        // $log->pushHandler(new StreamHandler(FCPATH.'log/logger.log', Logger::DEBUG));
+        // $log->info('database', $data);
 		
 
 		if(in_array( $this->session->userdata('role'), array(1,2,3,5,10))){

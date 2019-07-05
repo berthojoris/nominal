@@ -39,6 +39,11 @@ a {color : #777777;}
 </section>
 <section class="content">
 <div class="row">
+<?php 
+if(!empty($this->session->userdata('notif_success'))) {
+    echo '<div class="alert alert-success" role="alert">Success create ticket</div>';
+}
+?>
     <div class="panel panel-default">
         <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">List Remote - All Region</div>
         <div class="panel-body">

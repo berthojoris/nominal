@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "illuminate/database": "^5.8",
         "illuminate/events": "^5.8",
-        "jenssegers/blade": "^1.2"
+        "jenssegers/blade": "^1.2",
+        "monolog/monolog": "^1.24"
     },
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"

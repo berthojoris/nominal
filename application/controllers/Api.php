@@ -8,12 +8,13 @@ class Api extends CI_Controller {
         parent::__construct();
         $this->load->model('EloquentUser');
     }
+    
     public function index()
     {
-		$users = EloquentUser::take(5)->get();
+		  $users = EloquentUser::take(5)->get();
 		
-		return view('api', [
-			'users' => $users
-		]);
+      return view('api', [
+        'users' => $users
+      ]);
     }
 }
