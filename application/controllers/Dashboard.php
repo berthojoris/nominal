@@ -29,8 +29,7 @@ class Dashboard extends CI_Controller {
 			'status_ticket' => $this->input->post('status_ticket'),
 			'incident_number' => $this->input->post('incident_number'),
 			'description' => $this->input->post('remote_ticket_description'),
-			'notes' => $this->input->post('remote_ticket_notes'),
-			'summary' => $this->input->post('remote_ticket_summary')
+			'notes' => $this->input->post('remote_ticket_notes')
 		]);
 
 		EloquentJarkomTicket::create([
@@ -41,8 +40,7 @@ class Dashboard extends CI_Controller {
 			'status_ticket' => $this->input->post('jk_status_ticket'),
 			'incident_number' => $this->input->post('jk_incident_number'),
 			'description' => $this->input->post('jk_description'),
-			'notes' => $this->input->post('jk_notes'),
-			'summary' => $this->input->post('jk_summary'),
+			'notes' => $this->input->post('jk_notes')
 		]);
 
 		$this->session->set_userdata('notif_success','done');

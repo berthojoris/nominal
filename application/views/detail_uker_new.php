@@ -968,10 +968,6 @@
                                             <label>Notes</label>
                                             <textarea name="remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Summary</label>
-                                            <textarea name="remote_ticket_summary" id="remote_ticket_summary" class="form-control"></textarea>
-                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -1002,10 +998,6 @@
                                         <div class="form-group">
                                             <label>Notes</label>
                                             <textarea name="jk_remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Summary</label>
-                                            <textarea name="jk_remote_ticket_summary" id="remote_ticket_summary" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
