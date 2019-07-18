@@ -938,8 +938,7 @@
                         <form role="form" id="formTicketRemedy" action="<?php echo base_url(); ?>index.php/Dashboard/insertTicket" method='post'>
                             <div class="box-body">
                                 <div class="row">
-
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>ID Remote</label>
                                             <input type="text" name="remote_id" id="remote_id" class="form-control">
@@ -967,37 +966,6 @@
                                         <div class="form-group">
                                             <label>Notes</label>
                                             <textarea name="remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>ID Jarkom</label>
-                                            <input type="text" name="jk_jarkom_id" id="jarkom_id" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>User Creator</label>
-                                            <input type="text" name="jk_created_by" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Last Check</label>
-                                            <input type="text" name="jk_last_check" id="last_check" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Status Ticket</label>
-                                            <input type="text" name="jk_status_ticket" id="status_ticket" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Incident Number</label>
-                                            <input type="text" name="jk_incident_number" id="incident_number" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="jk_remote_ticket_description" id="remote_ticket_description" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Notes</label>
-                                            <textarea name="jk_remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -33,18 +33,6 @@ class Dashboard extends CI_Controller {
 			'ip' => $this->input->ip_address()
 		]);
 
-		EloquentJarkomTicket::create([
-			'id_jarkom' => $this->input->post('jk_jarkom_id'),
-			'created_at' => date('Y-m-d H:i:s'),
-			'user_creator' => $this->session->id,
-			'last_check' => $this->input->post('jk_last_check'),
-			'status_ticket' => $this->input->post('jk_status_ticket'),
-			'incident_number' => $this->input->post('jk_incident_number'),
-			'description' => $this->input->post('jk_description'),
-			'notes' => $this->input->post('jk_notes'),
-			'ip' => $this->input->ip_address()
-		]);
-
 		$this->session->set_userdata('notif_success','done');
 
 		redirect('Dashboard/new_list_all');
