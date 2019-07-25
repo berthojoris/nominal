@@ -8,8 +8,11 @@
 
 <style>
 a {color : #777777;}
-
 .formChild{margin-bottom:20px;}	
+.resetBtn {
+	margin-top: 25px;
+	margin-left: -20px;	
+}
 </style>
 
 

@@ -30,7 +30,7 @@
 						
 	</div>
 
-	<div class="col-md-12 formChild">
+	<div class="col-md-11 formChild">
 		<label>Incident end:</label><br>
 		<div class='input-group date'>
 			<!--  <?php  $datetime //= new DateTime( $end_time );   ?> -->
@@ -43,6 +43,10 @@
 	  	
 		<span class="error_message" id="end_time" style="display: none">message error</span>
 						
+	</div>
+
+	<div class="col-md-1 resetBtn">
+		<button id="btnReset" class="btn btn-info">Reset</button>
 	</div>
 
 
@@ -227,6 +231,11 @@
 		
 		$('#end_time_incident').datetimepicker({
 			format:"Y-m-d H:i:s"	
+		});
+
+		$(".resetBtn").click(function (e) { 
+			e.preventDefault();
+			$("#end_time_incident").val("0000-00-00 00:00:00");
 		});
   
 		

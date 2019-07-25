@@ -10,9 +10,10 @@
 
 <style>
 a {color : #777777;}
-
-
-
+.resetBtn {
+	margin-top: 25px;
+	margin-left: -20px;	
+}
 </style>
 
 
@@ -278,17 +279,19 @@ a {color : #777777;}
 
 					
 
-					<div class="col-md-12">
+					<div class="col-md-11">
 						<label>Incident End:</label><br>
 						<div class='input-group date'>
 							<input type="text" name="end_time" id="end_time_incident" class="form-control end_time"></input><br>
 							<span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    <span class="glyphicon glyphicon-calendar"></span>
 			                 </span>
 						</div>
-						 
 						 <span class="error_message" id="end_time" style="display: none">message error</span>
-						
+					</div>
+
+					<div class="col-md-1 resetBtn">
+						<button id="btnReset" class="btn btn-info">Reset</button>
 					</div>
 
 					<div class="col-md-12">
@@ -730,7 +733,10 @@ a {color : #777777;}
    // getTime();
 
    
-   	
+   	$(".resetBtn").click(function (e) { 
+		e.preventDefault();
+		$("#end_time_incident").val("0000-00-00 00:00:00");
+	});
    
   });
 
