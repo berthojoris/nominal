@@ -1,22 +1,38 @@
 <script type="text/javascript">
-    $(document).ready(function() {
-        // initialize();
-        var formData = $("#formTicketRemedy").serialize();
-        var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
+$(document).ready(function() {
+    // initialize();
+    var formData = $("#formTicketRemedy").serialize();
+    var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
+    var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi";
 
-        $("#submitTiketRemedy").click(function (e) { 
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: urlCreateTicket,
-                data: formData,
-                dataType: "json",
-                success: function (response) {
-                    console.log(response)
-                }
-            });
+    $("#submitTiketRemedy").click(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: urlCreateTicket,
+            data: formData,
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+            }
         });
     });
+
+    $('#tiketRemedy').on('show.bs.modal', function (e) {
+        $.ajax({
+            type: "GET",
+            url: ticketApi,
+            dataType: "json",
+            success: function (response) {
+                $("#incident_number").val(response.incident_number);
+                $("#status_ticket").val(response.status);
+                $("#remote_ticket_description").val(response.description);
+                $("#remote_ticket_notes").val(response.notes);
+            }
+        });
+    });
+
+});
 </script>
 <style type="text/css">
     th{
