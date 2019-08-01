@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		$this->load->model(array('m_dashboard'));
 		$this->load->model('EloquentRemoteTicket');
-		$this->load->model('EloquentJarkomTicket');
+		$this->load->model('EloquentRemoteTicketDetail');
 
         $this->load->library('session');
 		$this->load->library('curl');
@@ -21,7 +21,8 @@ class Dashboard extends CI_Controller {
 
 	public function tiketapi()
     {
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/10.35.65.10/BRI:INC:GetInfoFromIPAddress', 'wsdl');
+		$ip = (empty($this->uri->segment(3))) ? '127.0.0.1' : $this->uri->segment(3);
+    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/'.$ip.'/BRI:INC:GetInfoFromIPAddress', 'wsdl');
         $header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
         $client->setHeaders($header);
         $result = $client->call("Get_ticket_info");
@@ -41,23 +42,39 @@ class Dashboard extends CI_Controller {
                 'status' => '-',
                 'code' => 404
             ]);
-        }
-        return $jsonOutput;
+		}
+        echo $jsonOutput;
     }
 
 	public function insertTicket()
 	{
-		EloquentRemoteTicket::create([
-			'id_remote' => $this->input->post('remote_id'),
-			'created_at' => date('Y-m-d H:i:s'),
-			'user_creator' => $this->session->id,
-			'last_check' => $this->input->post('last_check'),
-			'status_ticket' => $this->input->post('status_ticket'),
-			'incident_number' => $this->input->post('incident_number'),
-			'description' => $this->input->post('remote_ticket_description'),
-			'notes' => $this->input->post('remote_ticket_notes'),
-			'ip' => $this->input->ip_address()
-		]);
+        $insert = EloquentRemoteTicket::create([
+            'type' => $this->input->post('type'),
+            'id_remote' => $this->input->post('remote_id'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'user_creator' => $this->session->id,
+            'last_check' => $this->input->post('last_check'),
+            'status_ticket' => $this->input->post('status_ticket'),
+            'incident_number' => $this->input->post('incident_number'),
+            'description' => $this->input->post('remote_ticket_description'),
+            'ip' => $this->input->ip_address()
+        ]);
+
+		if($this->input->post('formCounter') > 0) {
+            foreach ($this->input->post('branch') as $key => $val) {
+                EloquentRemoteTicketDetail::create([
+                    'remote_ticket_id' => $insert->id,
+                    'branch' => $this->input->post('branch')[$key],
+                    'ip_address' => $this->input->post('ip_address')[$key],
+                    'nama_uker' => $this->input->post('nama_uker')[$key],
+                    'provider_jarkom' => $this->input->post('provider_jarkom')[$key],
+                    'permasalahan' => $this->input->post('permasalahan')[$key],
+                    'action' => $this->input->post('action')[$key],
+                    'pool' => $this->input->post('pool')[$key],
+                    'pic' => $this->input->post('pic')[$key],
+                ]);
+            }
+        }
 
 		$this->session->set_userdata('notif_success','done');
 

@@ -3,7 +3,55 @@ $(document).ready(function() {
     // initialize();
     var formData = $("#formTicketRemedy").serialize();
     var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
-    var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi";
+    var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi/"+$("#txtIPLan").val();
+    $("#formCounter").val(0);
+    $("#appendData").empty();
+
+    $("#addForm").click(function (e) {
+        e.preventDefault();
+        var formCounter = $("#formCounter").val();
+        console.log("NILAI SEKARANG : "+formCounter);
+        formCounter = parseInt(formCounter) + parseInt(1);
+        var cloneElement = `
+            <div class="panel">
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" name="branch[]" id="branch_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>IP Address</label>
+                    <input type="text" name="ip_address[]" id="ip_address_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nama Uker</label>
+                    <input type="text" name="nama_uker[]" id="nama_uker_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Provide Jarkom</label>
+                    <input type="text" name="provider_jarkom[]" id="provider_jarkom_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Permasalahan</label>
+                    <input type="text" name="permasalahan[]" id="permasalahan_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Action</label>
+                    <input type="text" name="action[]" id="action_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Pool</label>
+                    <input type="text" name="pool[]" id="pool_`+formCounter+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>PIC</label>
+                    <input type="text" name="pic[]" id="pic_`+formCounter+`" class="form-control">
+                </div>
+            </div>
+        `;
+        $("#formCounter").val(formCounter);
+        console.log("SETELAH PENJUMLAHAN : "+$("#formCounter").val());
+        $("#appendData").append(cloneElement);
+    });
 
     $("#submitTiketRemedy").click(function (e) { 
         e.preventDefault();
@@ -35,39 +83,47 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
-    th{
+th {
     width: 180px;
     font-size: 14px;
-    }
-    td{
+}
+td {
     font-size: 14px;
-    }
-    a {color : #777777;}
-    #map-canvas {
+}
+a {
+    color : #777777;
+}
+#map-canvas {
     height: 600px;
     width: 550px;
     margin: 0px;
     padding: 0px
-    }
-    .container {
+}
+.container {
     width: 300px;
     float: left;
     height: 430px;
     background: transparent;
     margin-right: -10px
-    }
-    .loader {
+}
+.loader {
     border: 5px solid #f3f3f3; /* Light grey */
     border-top: 5px solid #3498db; /* Blue */
     border-radius: 50%;
     width: 30px;
     height: 30px;
     animation: spin 2s linear infinite;
-    }
-    @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-    }
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.ganjil {
+    background-color: #4DC7FF;
+}
+.genap {
+    background-color: #B3E7FF;
+}
 </style>
 <script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/swal/sweetalert.min.css">
@@ -114,7 +170,7 @@ $(document).ready(function() {
     	$("#loading").hide();
     	$("#panel-for-ports").hide();
     	$("#div-graph").hide();
-    
+        $("#appendData").empty();
     });
     
     function edit_jarkom(kodeja) {
@@ -331,7 +387,10 @@ $(document).ready(function() {
                     <tr>
                         <th>IP LAN</th>
                         <td style="width: 10px">:</td>
-                        <td><?php echo $data[0]->ip_lan;?></td>
+                        <td>
+                        <?php echo $data[0]->ip_lan;?>
+                        <input type="hidden" name="txtIPLan" id="txtIPLan" value="<?php echo $data[0]->ip_lan ?>">
+                        </td>
                     </tr>
                     <tr>
                         <th>PIC REGION</th>
@@ -417,7 +476,7 @@ $(document).ready(function() {
                                 History Alarm
                                 </button>
                                 <?php
-                                    if($data[0]->status_onoff==1 && $data[0]->kode_op==1) {
+                                    if($data[0]->kode_op==1) {
                                         echo '<button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#tiketRemedy">Tiket Remedy</button>';
                                     }
                                 ?>
@@ -956,6 +1015,13 @@ $(document).ready(function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label>Jenis</label>
+                                            <select class="form-control" id="type" name="type">
+                                                <option value="remote">Remote</option>
+                                                <option value="jarkom">Jarkom</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>ID Remote</label>
                                             <input type="text" name="remote_id" id="remote_id" class="form-control">
                                         </div>
@@ -981,8 +1047,11 @@ $(document).ready(function() {
                                         </div>
                                         <div class="form-group">
                                             <label>Notes</label>
-                                            <textarea name="remote_ticket_notes" id="remote_ticket_notes" class="form-control"></textarea>
+                                            <input type="hidden" id="formCounter" name="formCounter">
+                                            <button id="addForm" class="btn btn-success btn-sm" style="margin-bottom: 10px;">Add Notes</button>
                                         </div>
+                                        <hr>
+                                        <div id="appendData"></div>
                                     </div>
                                 </div>
                             </div>

@@ -11,15 +11,16 @@
         "source": "https://github.com/bcit-ci/CodeIgniter"
     },
     "require": {
-        "php": ">=5.3.7",
+        "php": ">=5.4",
         "guzzlehttp/guzzle": "^6.3",
         "illuminate/database": "^5.8",
         "illuminate/events": "^5.8",
         "jenssegers/blade": "^1.2",
         "monolog/monolog": "^1.24",
         "phpro/soap-client": "^1.0",
-        "econea/nusoap": "~0.9.5.1"
-    },
+        "econea/nusoap": "~0.9.5.1",
+		"ext-json": "*"
+	},
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"
     },
