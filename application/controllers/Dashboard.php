@@ -2,6 +2,8 @@
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 class Dashboard extends CI_Controller {
 
@@ -48,33 +50,36 @@ class Dashboard extends CI_Controller {
 
 	public function insertTicket()
 	{
-        $insert = EloquentRemoteTicket::create([
-            'type' => $this->input->post('type'),
-            'id_remote' => $this->input->post('remote_id'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'user_creator' => $this->session->id,
-            'last_check' => $this->input->post('last_check'),
-            'status_ticket' => $this->input->post('status_ticket'),
-            'incident_number' => $this->input->post('incident_number'),
-            'description' => $this->input->post('remote_ticket_description'),
-            'ip' => $this->input->ip_address()
-        ]);
+		$uuid = Uuid::uuid1();
+		
+		foreach ($this->input->post('type') as $key => $val) {
+			EloquentRemoteTicket::create([
+				'uuid' => $uuid,
+				'type' => $this->input->post('type')[$key],
+				'id_remote' => $this->input->post('remote_id')[$key],
+				'created_at' => date('Y-m-d H:i:s'),
+				'user_creator' => $this->session->id,
+				'last_check' => $this->input->post('last_check')[$key],
+				'status_ticket' => $this->input->post('status_ticket')[$key],
+				'incident_number' => $this->input->post('incident_number')[$key],
+				'description' => $this->input->post('remote_ticket_description')[$key],
+				'ip' => $this->input->ip_address()
+			]);
+		}
 
-		if($this->input->post('formCounter') > 0) {
-            foreach ($this->input->post('branch') as $key => $val) {
-                EloquentRemoteTicketDetail::create([
-                    'remote_ticket_id' => $insert->id,
-                    'branch' => $this->input->post('branch')[$key],
-                    'ip_address' => $this->input->post('ip_address')[$key],
-                    'nama_uker' => $this->input->post('nama_uker')[$key],
-                    'provider_jarkom' => $this->input->post('provider_jarkom')[$key],
-                    'permasalahan' => $this->input->post('permasalahan')[$key],
-                    'action' => $this->input->post('action')[$key],
-                    'pool' => $this->input->post('pool')[$key],
-                    'pic' => $this->input->post('pic')[$key],
-                ]);
-            }
-        }
+		if($this->input->post('formCounter') == 1) {
+			EloquentRemoteTicketDetail::create([
+				'remote_ticket_uuid' => $uuid,
+				'branch' => $this->input->post('branch'),
+				'ip_address' => $this->input->post('ip_address'),
+				'nama_uker' => $this->input->post('nama_uker'),
+				'provider_jarkom' => $this->input->post('provider_jarkom'),
+				'permasalahan' => $this->input->post('permasalahan'),
+				'action' => $this->input->post('action'),
+				'pool' => $this->input->post('pool'),
+				'pic' => $this->input->post('pic'),
+			]);
+		}
 
 		$this->session->set_userdata('notif_success','done');
 
