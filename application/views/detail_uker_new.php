@@ -15,6 +15,7 @@ $(document).ready(function() {
     $("#formCounter").val(0);
     $("#appendData").empty();
     $("#createTicket").prop("disabled", false);
+    $("#addForm").prop("disabled", false);
 
     $('#tiketRemedy').on('hide.bs.modal', function (e) {
         $("#appendData").empty();
@@ -44,31 +45,31 @@ $(document).ready(function() {
                 </div>
                 <div class="form-group">
                     <label>ID Remote</label>
-                    <input type="text" name="remote_id[]" id="remote_id" class="form-control">
+                    <input type="text" name="remote_id[]" id="remote_id_2" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>User Creator</label>
-                    <input type="text" name="created_by[]" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                    <input type="text" name="created_by[]" id="created_by_2" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
                 </div>
                 <div class="form-group">
                     <label>Last Check</label>
-                    <input type="text" name="last_check[]" id="last_check" class="form-control">
+                    <input type="text" name="last_check[]" id="last_check_2" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Status Ticket</label>
-                    <input type="text" name="status_ticket[]" id="status_ticket" class="form-control">
+                    <input type="text" name="status_ticket[]" id="status_ticket_2" value="`+$("#status_ticket").val()+`" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Incident Number</label>
-                    <input type="text" name="incident_number[]" id="incident_number" class="form-control">
+                    <input type="text" name="incident_number[]" id="incident_number_2" value="`+$("#incident_number").val()+`" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea name="remote_ticket_description[]" id="remote_ticket_description" class="form-control"></textarea>
+                    <textarea name="remote_ticket_description[]" id="remote_ticket_description_2" class="form-control">`+$("#remote_ticket_description").val()+`</textarea>
                 </div>
                 <div class="form-group">
                     <label>Notes</label>
-                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
+                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_2" class="form-control">`+$("#remote_ticket_notes").val()+`</textarea>
                 </div>
                 <div class="panelGenap">
                     <div class="form-group">
@@ -110,6 +111,7 @@ $(document).ready(function() {
         $("#appendData").append(cloneElement);
         $("#deleteForm").show();
         $(this).hide();
+        $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1000);
     });
 
     $("#submitTiketRemedy").click(function (e) { 
@@ -127,12 +129,14 @@ $(document).ready(function() {
 
     $('#tiketRemedy').on('show.bs.modal', function (e) {
         $("#createTicket").prop("disabled", true);
+        $("#addForm").prop("disabled", true);
         $.ajax({
             type: "GET",
             url: ticketApi,
             dataType: "json",
             success: function (response) {
                 $("#createTicket").prop("disabled", false);
+                $("#addForm").prop("disabled", false);
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
                 $("#remote_ticket_description").val(response.description);
@@ -1116,7 +1120,6 @@ a {
                                             <input type="hidden" id="formCounter" name="formCounter">
                                             <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
-                                        <hr>
                                         <div id="appendData"></div>
                                     </div>
                                 </div>
