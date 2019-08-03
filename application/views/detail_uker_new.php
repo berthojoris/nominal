@@ -68,6 +68,7 @@ $(document).ready(function() {
                 </div>
                 <div class="form-group">
                     <label>Notes</label>
+                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                 </div>
                 <div class="panelGenap">
                     <div class="form-group">
@@ -1113,6 +1114,7 @@ a {
                                         <div class="form-group">
                                             <label>Notes</label>
                                             <input type="hidden" id="formCounter" name="formCounter">
+                                            <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
                                         <hr>
                                         <div id="appendData"></div>

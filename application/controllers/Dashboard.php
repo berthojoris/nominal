@@ -63,6 +63,7 @@ class Dashboard extends CI_Controller {
 				'status_ticket' => $this->input->post('status_ticket')[$key],
 				'incident_number' => $this->input->post('incident_number')[$key],
 				'description' => $this->input->post('remote_ticket_description')[$key],
+				'notes' => $this->input->post('remote_ticket_description')[$key],
 				'ip' => $this->input->ip_address()
 			]);
 		}
