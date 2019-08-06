@@ -14,14 +14,20 @@ $(document).ready(function() {
     var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi/"+$("#txtIPLan").val();
     $("#formCounter").val(0);
     $("#appendData").empty();
+    $("#appendData2").empty();
     $("#createTicket").prop("disabled", false);
     $("#addForm").prop("disabled", false);
+    $("#addFormSecond").prop("disabled", false);
+    $("#addFormSecond").hide();
 
     $('#tiketRemedy').on('hide.bs.modal', function (e) {
         $("#appendData").empty();
+        $("#appendData2").empty();
         $("#formCounter").val(0);
         $("#addForm").show();
         $("#deleteForm").hide();
+        $("#deleteForm2").hide();
+        $("#addFormSecond").hide();
     });
 
     $("#deleteForm").click(function (e) { 
@@ -30,6 +36,18 @@ $(document).ready(function() {
         $("#appendData").empty();
         $("#addForm").show();
         $(this).hide();
+        $("#addFormSecond").hide();
+    });
+
+    $("#deleteForm2").click(function (e) { 
+        e.preventDefault();
+        $("#formCounter").val(1);
+        $("#appendData2").empty();
+        $("#addForm").show();
+        $(this).hide();
+        $("#addForm").hide();
+        $("#addFormSecond").show();
+        $("#deleteForm2").hide();
     });
 
     $("#addForm").click(function (e) {
@@ -71,39 +89,37 @@ $(document).ready(function() {
                     <label>Notes</label>
                     <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_2" class="form-control">`+$("#remote_ticket_notes").val()+`</textarea>
                 </div>
-                <div class="panelGenap">
-                    <div class="form-group">
-                        <label>Branch</label>
-                        <input type="text" name="branch" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>IP Address</label>
-                        <input type="text" name="ip_address" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Uker</label>
-                        <input type="text" name="nama_uker" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Provide Jarkom</label>
-                        <input type="text" name="provider_jarkom" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Permasalahan</label>
-                        <input type="text" name="permasalahan" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Action</label>
-                        <input type="text" name="action" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Pool</label>
-                        <input type="text" name="pool" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>PIC</label>
-                        <input type="text" name="pic" class="form-control">
-                    </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" name="branch[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>IP Address</label>
+                    <input type="text" name="ip_address[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nama Uker</label>
+                    <input type="text" name="nama_uker[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Provide Jarkom</label>
+                    <input type="text" name="provider_jarkom[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Permasalahan</label>
+                    <input type="text" name="permasalahan[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Action</label>
+                    <input type="text" name="action[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Pool</label>
+                    <input type="text" name="pool[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>PIC</label>
+                    <input type="text" name="pic[]" class="form-control">
                 </div>
             </div>
         `;
@@ -111,7 +127,89 @@ $(document).ready(function() {
         $("#appendData").append(cloneElement);
         $("#deleteForm").show();
         $(this).hide();
-        $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1000);
+        $("#addFormSecond").show();
+        $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
+    });
+
+    $("#addFormSecond").click(function (e) {
+        e.preventDefault();
+        var cloneElement2 = `
+            <div class="panelGenap">
+                <div class="form-group">
+                    <label>Jenis</label>
+                    <select class="form-control" id="type" name="type[]">
+                        <option value="remote">Remote</option>
+                        <option value="jarkom">Jarkom</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID Remote</label>
+                    <input type="text" name="remote_id[]" id="remote_id_2" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>User Creator</label>
+                    <input type="text" name="created_by[]" id="created_by_3" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Last Check</label>
+                    <input type="text" name="last_check[]" id="last_check_3" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Status Ticket</label>
+                    <input type="text" name="status_ticket[]" id="status_ticket_3" value="`+$("#status_ticket").val()+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Incident Number</label>
+                    <input type="text" name="incident_number[]" id="incident_number_2" value="`+$("#incident_number").val()+`" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="remote_ticket_description[]" id="remote_ticket_description_3" class="form-control">`+$("#remote_ticket_description").val()+`</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_3" class="form-control">`+$("#remote_ticket_notes").val()+`</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" name="branch[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>IP Address</label>
+                    <input type="text" name="ip_address[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nama Uker</label>
+                    <input type="text" name="nama_uker[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Provide Jarkom</label>
+                    <input type="text" name="provider_jarkom[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Permasalahan</label>
+                    <input type="text" name="permasalahan[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Action</label>
+                    <input type="text" name="action[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Pool</label>
+                    <input type="text" name="pool[]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>PIC</label>
+                    <input type="text" name="pic[]" class="form-control">
+                </div>
+            </div>
+        `;
+        $("#formCounter").val(2);
+        $("#appendData2").append(cloneElement2);
+        $("#deleteForm").show();
+        $("#deleteForm2").show();
+        $(this).hide();
+        $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
     $("#submitTiketRemedy").click(function (e) { 
@@ -1120,13 +1218,48 @@ a {
                                             <input type="hidden" id="formCounter" name="formCounter">
                                             <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Branch</label>
+                                            <input type="text" name="branch[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>IP Address</label>
+                                            <input type="text" name="ip_address[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama Uker</label>
+                                            <input type="text" name="nama_uker[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Provide Jarkom</label>
+                                            <input type="text" name="provider_jarkom[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Permasalahan</label>
+                                            <input type="text" name="permasalahan[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Action</label>
+                                            <input type="text" name="action[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Pool</label>
+                                            <input type="text" name="pool[]" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PIC</label>
+                                            <input type="text" name="pic[]" class="form-control">
+                                        </div>
                                         <div id="appendData"></div>
+                                        <div id="appendData2"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="deleteForm" class="btn btn-danger" style="display: none;">Delete Notes</button>
+                                <button id="deleteForm" class="btn btn-danger" style="display: none;">Delete Notes 1</button>
+                                <button id="deleteForm2" class="btn btn-danger" style="display: none;">Delete Notes 2</button>
                                 <button id="addForm" class="btn btn-success">Add Notes</button>
+                                <button id="addFormSecond" class="btn btn-success">Add Notes 2</button>
                                 <input id="createTicket" type="submit" class="btn btn-primary" value="Create Ticket">
                             </div>
                         </form>

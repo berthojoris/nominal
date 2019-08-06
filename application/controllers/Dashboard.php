@@ -64,21 +64,15 @@ class Dashboard extends CI_Controller {
 				'incident_number' => $this->input->post('incident_number')[$key],
 				'description' => $this->input->post('remote_ticket_description')[$key],
 				'notes' => $this->input->post('remote_ticket_description')[$key],
-				'ip' => $this->input->ip_address()
-			]);
-		}
-
-		if($this->input->post('formCounter') == 1) {
-			EloquentRemoteTicketDetail::create([
-				'remote_ticket_uuid' => $uuid,
-				'branch' => $this->input->post('branch'),
-				'ip_address' => $this->input->post('ip_address'),
-				'nama_uker' => $this->input->post('nama_uker'),
-				'provider_jarkom' => $this->input->post('provider_jarkom'),
-				'permasalahan' => $this->input->post('permasalahan'),
-				'action' => $this->input->post('action'),
-				'pool' => $this->input->post('pool'),
-				'pic' => $this->input->post('pic'),
+				'ip' => $this->input->ip_address(),
+				'branch' => $this->input->post('branch')[$key],
+				'ip_address' => $this->input->post('ip_address')[$key],
+				'nama_uker' => $this->input->post('nama_uker')[$key],
+				'provider_jarkom' => $this->input->post('provider_jarkom')[$key],
+				'permasalahan' => $this->input->post('permasalahan')[$key],
+				'action' => $this->input->post('action')[$key],
+				'pool' => $this->input->post('pool')[$key],
+				'pic' => $this->input->post('pic')[$key]
 			]);
 		}
 
