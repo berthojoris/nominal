@@ -12,13 +12,14 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		$this->load->model(array('m_dashboard'));
 		$this->load->model('EloquentRemoteTicket');
-		$this->load->model('EloquentRemoteTicketDetail');
+		$this->load->model('EloquentJenisJarkom');
+		$this->load->model('EloquentProvider');
 
         $this->load->library('session');
 		$this->load->library('curl');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
-        }
+		}
 	}
 
 	public function tiketapi()
@@ -46,7 +47,12 @@ class Dashboard extends CI_Controller {
             ]);
 		}
         echo $jsonOutput;
-    }
+	}
+	
+	public function getNetworkDetail()
+	{
+		echo json_encode($this->session->userdata('data_combo'));
+	}
 
 	public function insertTicket()
 	{
@@ -56,6 +62,7 @@ class Dashboard extends CI_Controller {
 			EloquentRemoteTicket::create([
 				'uuid' => $uuid,
 				'type' => $this->input->post('type')[$key],
+				'network_status' => ($this->input->post('type')[$key] == 'jarkom') ? $this->input->post('network_status')[$key] : '',
 				'id_remote' => $this->input->post('remote_id')[$key],
 				'created_at' => date('Y-m-d H:i:s'),
 				'user_creator' => $this->session->id,
@@ -71,7 +78,6 @@ class Dashboard extends CI_Controller {
 				'provider_jarkom' => $this->input->post('provider_jarkom')[$key],
 				'permasalahan' => $this->input->post('permasalahan')[$key],
 				'action' => $this->input->post('action')[$key],
-				'pool' => $this->input->post('pool')[$key],
 				'pic' => $this->input->post('pic')[$key]
 			]);
 		}
@@ -609,7 +615,22 @@ class Dashboard extends CI_Controller {
 						->get()->result(); 
 		//for ($i=0; $i < count($data['data']) ; $i++) { 
 			$remote = $data['data'][0];
+
 			$data['jarkom'][$remote->id_remote] = $this->m_dashboard->getjarkom($remote->id_remote);
+
+			unset($_SESSION['data_combo']);
+
+			$arr = [];
+			if(!empty($data['jarkom'][$remote->id_remote])) {
+				foreach($data['jarkom'][$remote->id_remote] as $config) {
+					$jenis = EloquentJenisJarkom::where('kode_jenis_jarkom', $config->kode_jenis_jarkom)->first()->jenis_jarkom;
+					$provider = EloquentProvider::where('kode_provider', $config->kode_provider)->first()->nickname_provider;
+					array_push($arr, $jenis."/".$provider);
+				}
+			}
+
+			$this->session->set_userdata('data_combo', $arr);
+
 			if($remote->kode_tipe_uker==7){
 				$data['tid_atm'][$remote->id_remote] = $this->m_dashboard->get_tid($remote->id_remote);
 			}

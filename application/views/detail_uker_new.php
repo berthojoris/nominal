@@ -7,208 +7,164 @@ function isOdd(n) {
    return Math.abs(n % 2) == 1;
 }
 
+function increaseForm() {
+    var counterForm = $("#counterForm").val();
+    var counterNow = parseInt(counterForm) + parseInt(1);
+    $("#counterForm").val(counterNow);
+    return counterNow;
+}
+
+function decreaseForm() {
+    var counterForm = $("#counterForm").val();
+    var counterNow = parseInt(counterForm) - parseInt(1);
+    $("#counterForm").val(counterNow);
+    return counterNow;
+}
+
+$(document).on("click", ".deleteForm", function(e) {
+    e.preventDefault();
+    var id = $(this).data('button');
+    $('*[data-satu="'+id+'"]').remove();
+    $('*[data-dua="'+id+'"]').remove();
+    decreaseForm();
+});
+
+$(document).on('change', '.jenis', function(e) {
+    if($(this).val() == 'remote') {
+        $(this).parent().next().addClass('visibleOff');
+    } else {
+        $(this).parent().next().removeClass('visibleOff');
+    }
+});
+
 $(document).ready(function() {
     // initialize();
     var formData = $("#formTicketRemedy").serialize();
     var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
     var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi/"+$("#txtIPLan").val();
-    $("#formCounter").val(0);
+    var getSession = "<?php echo base_url(); ?>index.php/Dashboard/getNetworkDetail";
     $("#appendData").empty();
-    $("#appendData2").empty();
     $("#createTicket").prop("disabled", false);
     $("#addForm").prop("disabled", false);
-    $("#addFormSecond").prop("disabled", false);
-    $("#addFormSecond").hide();
 
     $('#tiketRemedy').on('hide.bs.modal', function (e) {
         $("#appendData").empty();
-        $("#appendData2").empty();
-        $("#formCounter").val(0);
         $("#addForm").show();
         $("#deleteForm").hide();
-        $("#deleteForm2").hide();
-        $("#addFormSecond").hide();
     });
 
-    $("#deleteForm").click(function (e) { 
-        e.preventDefault();
-        $("#formCounter").val(0);
-        $("#appendData").empty();
-        $("#addForm").show();
-        $(this).hide();
-        $("#addFormSecond").hide();
-    });
-
-    $("#deleteForm2").click(function (e) { 
-        e.preventDefault();
-        $("#formCounter").val(1);
-        $("#appendData2").empty();
-        $("#addForm").show();
-        $(this).hide();
-        $("#addForm").hide();
-        $("#addFormSecond").show();
-        $("#deleteForm2").hide();
+    $.ajax({
+        type: "GET",
+        url: getSession,
+        dataType: "json",
+        success: function (response) {
+            var toAppend = '';
+            $.each(response, function(key, val) {
+                toAppend += '<option value="'+val+'">'+val+'</option>';
+            });
+            $(".networkStatus").append(toAppend);
+        }
     });
 
     $("#addForm").click(function (e) {
         e.preventDefault();
-        var cloneElement = `
-            <div class="panelGanjil">
-                <div class="form-group">
-                    <label>Jenis</label>
-                    <select class="form-control" id="type" name="type[]">
-                        <option value="remote">Remote</option>
-                        <option value="jarkom">Jarkom</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>ID Remote</label>
-                    <input type="text" name="remote_id[]" id="remote_id_2" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>User Creator</label>
-                    <input type="text" name="created_by[]" id="created_by_2" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Last Check</label>
-                    <input type="text" name="last_check[]" id="last_check_2" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Status Ticket</label>
-                    <input type="text" name="status_ticket[]" id="status_ticket_2" value="`+$("#status_ticket").val()+`" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Incident Number</label>
-                    <input type="text" name="incident_number[]" id="incident_number_2" value="`+$("#incident_number").val()+`" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="remote_ticket_description[]" id="remote_ticket_description_2" class="form-control">`+$("#remote_ticket_description").val()+`</textarea>
-                </div>
-                <div class="form-group">
-                    <label>Notes</label>
-                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_2" class="form-control">`+$("#remote_ticket_notes").val()+`</textarea>
-                </div>
-                <div class="form-group">
-                    <label>Branch</label>
-                    <input type="text" name="branch[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>IP Address</label>
-                    <input type="text" name="ip_address[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Nama Uker</label>
-                    <input type="text" name="nama_uker[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Provide Jarkom</label>
-                    <input type="text" name="provider_jarkom[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Permasalahan</label>
-                    <input type="text" name="permasalahan[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Action</label>
-                    <input type="text" name="action[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Pool</label>
-                    <input type="text" name="pool[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>PIC</label>
-                    <input type="text" name="pic[]" class="form-control">
-                </div>
-            </div>
-        `;
-        $("#formCounter").val(1);
-        $("#appendData").append(cloneElement);
-        $("#deleteForm").show();
-        $(this).hide();
-        $("#addFormSecond").show();
-        $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
-    });
+        increaseForm();
 
-    $("#addFormSecond").click(function (e) {
-        e.preventDefault();
-        var cloneElement2 = `
-            <div class="panelGenap">
-                <div class="form-group">
-                    <label>Jenis</label>
-                    <select class="form-control" id="type" name="type[]">
-                        <option value="remote">Remote</option>
-                        <option value="jarkom">Jarkom</option>
-                    </select>
+        var cf = $("#counterForm").val();
+
+        if(isOdd(cf) == true) {
+            var style = "panelGanjil";
+        } else {
+            var style = "panelGenap";
+        }
+
+        var cloneElement = `
+            <div class="row `+style+`" data-satu="`+cf+`">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Jenis</label>
+                        <select class="form-control jenis" id="type_`+cf+`" name="type[]">
+                            <option value="remote">Remote</option>
+                            <option value="jarkom">Jarkom</option>
+                        </select>
+                    </div>
+                    <div class="form-group visibleOff">
+                        <label>Network Status</label>
+                        <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>ID Remote</label>
+                        <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>User Creator</label>
+                        <input type="text" name="created_by[]" id="created_by_`+cf+`" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Check</label>
+                        <input type="text" name="last_check[]" id="last_check_`+cf+`" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Status Ticket</label>
+                        <input type="text" name="status_ticket[]" id="status_ticket_`+cf+`" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Incident Number</label>
+                        <input type="text" name="incident_number[]" id="incident_number_`+cf+`" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_`+cf+`" class="form-control"></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>ID Remote</label>
-                    <input type="text" name="remote_id[]" id="remote_id_2" class="form-control">
+            </div>
+            <div class="row `+style+`" data-dua="`+cf+`">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Branch</label>
+                        <input type="text" id="branch_`+cf+`" name="branch[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>IP Address</label>
+                        <input type="text" id="ip_address_`+cf+`" name="ip_address[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Uker</label>
+                        <input type="text" id="nama_uker_`+cf+`" name="nama_uker[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Provide Jarkom</label>
+                        <input type="text" id="provider_jarkom_`+cf+`" name="provider_jarkom[]" class="form-control">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>User Creator</label>
-                    <input type="text" name="created_by[]" id="created_by_3" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Last Check</label>
-                    <input type="text" name="last_check[]" id="last_check_3" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Status Ticket</label>
-                    <input type="text" name="status_ticket[]" id="status_ticket_3" value="`+$("#status_ticket").val()+`" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Incident Number</label>
-                    <input type="text" name="incident_number[]" id="incident_number_2" value="`+$("#incident_number").val()+`" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="remote_ticket_description[]" id="remote_ticket_description_3" class="form-control">`+$("#remote_ticket_description").val()+`</textarea>
-                </div>
-                <div class="form-group">
-                    <label>Notes</label>
-                    <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_3" class="form-control">`+$("#remote_ticket_notes").val()+`</textarea>
-                </div>
-                <div class="form-group">
-                    <label>Branch</label>
-                    <input type="text" name="branch[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>IP Address</label>
-                    <input type="text" name="ip_address[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Nama Uker</label>
-                    <input type="text" name="nama_uker[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Provide Jarkom</label>
-                    <input type="text" name="provider_jarkom[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Permasalahan</label>
-                    <input type="text" name="permasalahan[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Action</label>
-                    <input type="text" name="action[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Pool</label>
-                    <input type="text" name="pool[]" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>PIC</label>
-                    <input type="text" name="pic[]" class="form-control">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Permasalahan</label>
+                        <input type="text" id="permasalahan_`+cf+`" name="permasalahan[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Action</label>
+                        <input type="text" id="action_`+cf+`" name="action[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>PIC</label>
+                        <input type="text" id="pic_`+cf+`" name="pic[]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Delete Form</label>
+                        <button data-button="`+cf+`" class="form-control btn btn-danger deleteForm">Delete</button>
+                    </div>
                 </div>
             </div>
         `;
-        $("#formCounter").val(2);
-        $("#appendData2").append(cloneElement2);
-        $("#deleteForm").show();
-        $("#deleteForm2").show();
-        $(this).hide();
+
+        $("#appendData").append(cloneElement);
+        var $options = $("#networkStatus > option").clone(); 
+        $('#networkStatus_'+$("#counterForm").val()).append($options);
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
@@ -286,11 +242,12 @@ a {
 }
 .panelGanjil {
     background-color: #D6F2FF;
-    padding: 20px;
 }
 .panelGenap {
     background-color: #FFE8D6;
-    padding: 20px;
+}
+.visibleOff {
+    display: none;
 }
 </style>
 <script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
@@ -1170,6 +1127,8 @@ a {
         </div>
 
         <div class="modal fade" id="tiketRemedy">
+            <input type="hidden" id="total_network_detail" name="total_network_detail" value="<?php echo count($jarkom[$data[0]->id_remote]); ?>">
+            <input type="hidden" id="counterForm" value="1">
             <div class="modal-dialog" style="width: 800px">
                 <div class="modal-content" >
                     <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
@@ -1180,18 +1139,22 @@ a {
                     <div class="modal-body">
                         <form role="form" id="formTicketRemedy" action="<?php echo base_url(); ?>index.php/Dashboard/insertTicket" method='post'>
                             <div class="box-body">
-                                <div class="row">
+                                <div class="row" data-satu="1">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Jenis</label>
-                                            <select class="form-control" id="type" name="type[]">
+                                            <select class="form-control jenis" id="type" name="type[]">
                                                 <option value="remote">Remote</option>
                                                 <option value="jarkom">Jarkom</option>
                                             </select>
                                         </div>
+                                        <div class="form-group visibleOff">
+                                            <label>Network Status</label>
+                                            <select class="form-control networkStatus" id="networkStatus" name="network_status[]"></select>
+                                        </div>
                                         <div class="form-group">
                                             <label>ID Remote</label>
-                                            <input type="text" name="remote_id[]" id="remote_id" class="form-control">
+                                            <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>User Creator</label>
@@ -1215,9 +1178,12 @@ a {
                                         </div>
                                         <div class="form-group">
                                             <label>Notes</label>
-                                            <input type="hidden" id="formCounter" name="formCounter">
                                             <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row" data-dua="1">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Branch</label>
                                             <input type="text" name="branch[]" class="form-control">
@@ -1234,6 +1200,8 @@ a {
                                             <label>Provide Jarkom</label>
                                             <input type="text" name="provider_jarkom[]" class="form-control">
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Permasalahan</label>
                                             <input type="text" name="permasalahan[]" class="form-control">
@@ -1243,23 +1211,16 @@ a {
                                             <input type="text" name="action[]" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>Pool</label>
-                                            <input type="text" name="pool[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
                                             <label>PIC</label>
                                             <input type="text" name="pic[]" class="form-control">
                                         </div>
-                                        <div id="appendData"></div>
-                                        <div id="appendData2"></div>
                                     </div>
                                 </div>
+                                <div id="appendData"></div>
                             </div>
                             <div class="modal-footer">
                                 <button id="deleteForm" class="btn btn-danger" style="display: none;">Delete Notes 1</button>
-                                <button id="deleteForm2" class="btn btn-danger" style="display: none;">Delete Notes 2</button>
                                 <button id="addForm" class="btn btn-success">Add Notes</button>
-                                <button id="addFormSecond" class="btn btn-success">Add Notes 2</button>
                                 <input id="createTicket" type="submit" class="btn btn-primary" value="Create Ticket">
                             </div>
                         </form>
