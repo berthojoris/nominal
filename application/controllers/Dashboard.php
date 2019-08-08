@@ -623,10 +623,9 @@ class Dashboard extends CI_Controller {
 			$arr = [];
 			if(!empty($data['jarkom'][$remote->id_remote])) {
 				foreach($data['jarkom'][$remote->id_remote] as $config) {
-					$jenis = EloquentJenisJarkom::where('kode_jenis_jarkom', $config->kode_jenis_jarkom)->first()->jenis_jarkom;
-					$provider = EloquentProvider::where('kode_provider', $config->kode_provider)->first()->nickname_provider;
-					array_push($arr, $jenis."/".$provider);
+					array_push($arr, $config->jenis_jarkom."/".$config->nickname_provider);
 				}
+				$arr = array_unique($arr);
 			}
 
 			$this->session->set_userdata('data_combo', $arr);
@@ -669,6 +668,11 @@ class Dashboard extends CI_Controller {
 		$data['type_alarm'] = $this->db->select('*')->from('tb_alarm_type')->get()->result();
 		$data['page'] = 'kanwil';
 		$data['title'] = 'Remote Detail';
+
+		// echo "<pre>";
+		// var_dump($data['provider']);
+		// die();
+
 		//$this->template->views('detail_uker',$data);
 		
 		//begin get data from librenms

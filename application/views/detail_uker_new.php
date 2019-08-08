@@ -24,16 +24,15 @@ function decreaseForm() {
 $(document).on("click", ".deleteForm", function(e) {
     e.preventDefault();
     var id = $(this).data('button');
-    $('*[data-satu="'+id+'"]').remove();
-    $('*[data-dua="'+id+'"]').remove();
+    $('*[data-row="'+id+'"]').remove();
     decreaseForm();
 });
 
 $(document).on('change', '.jenis', function(e) {
     if($(this).val() == 'remote') {
-        $(this).parent().next().addClass('visibleOff');
+        $(this).parent().parent().parent().next().addClass('visibleOff');
     } else {
-        $(this).parent().next().removeClass('visibleOff');
+        $(this).parent().parent().parent().next().removeClass('visibleOff');
     }
 });
 
@@ -78,93 +77,152 @@ $(document).ready(function() {
             var style = "panelGenap";
         }
 
+        var ticketStatus = $("#status_ticket").val();
+        var incidentNumber = $("#incident_number").val();
+        var remoteDesc = $("#remote_ticket_description").val();
+        var remoteNotes = $("#remote_ticket_notes").val();
+
         var cloneElement = `
-            <div class="row `+style+`" data-satu="`+cf+`">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Jenis</label>
-                        <select class="form-control jenis" id="type_`+cf+`" name="type[]">
-                            <option value="remote">Remote</option>
-                            <option value="jarkom">Jarkom</option>
-                        </select>
+            <div data-row="`+cf+`">
+                <div class="row `+style+`">
+                    <div class="col-md-6 spasiAtas">
+                        <div class="form-group">
+                            <label>Jenis</label>
+                            <select class="form-control jenis" id="type_`+cf+`" name="type[]">
+                                <option value="remote">Remote</option>
+                                <option value="jarkom">Jarkom</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group visibleOff">
-                        <label>Network Status</label>
-                        <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]"></select>
-                    </div>
-                    <div class="form-group">
-                        <label>ID Remote</label>
-                        <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>User Creator</label>
-                        <input type="text" name="created_by[]" id="created_by_`+cf+`" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>Last Check</label>
-                        <input type="text" name="last_check[]" id="last_check_`+cf+`" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Status Ticket</label>
-                        <input type="text" name="status_ticket[]" id="status_ticket_`+cf+`" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Incident Number</label>
-                        <input type="text" name="incident_number[]" id="incident_number_`+cf+`" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Notes</label>
-                        <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_`+cf+`" class="form-control"></textarea>
+                    <div class="col-md-6 spasiAtas">
+                        <div class="form-group">
+                            <label>IP LAN</label>
+                            <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row `+style+`" data-dua="`+cf+`">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Branch</label>
-                        <input type="text" id="branch_`+cf+`" name="branch[]" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>IP Address</label>
-                        <input type="text" id="ip_address_`+cf+`" name="ip_address[]" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Uker</label>
-                        <input type="text" id="nama_uker_`+cf+`" name="nama_uker[]" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Provide Jarkom</label>
-                        <input type="text" id="provider_jarkom_`+cf+`" name="provider_jarkom[]" class="form-control">
+                <div class="row `+style+` visibleOff">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Network Status</label>
+                            <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]"></select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Permasalahan</label>
-                        <input type="text" id="permasalahan_`+cf+`" name="permasalahan[]" class="form-control">
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>IP LAN</label>
+                            <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Action</label>
-                        <input type="text" id="action_`+cf+`" name="action[]" class="form-control">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ticket Status</label>
+                            <input type="text" name="status_ticket[]" value="`+ticketStatus+`" id="status_ticket_`+cf+`" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>PIC</label>
-                        <input type="text" id="pic_`+cf+`" name="pic[]" class="form-control">
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User Creator</label>
+                            <input type="text" name="created_by[]" id="created_by_`+cf+`" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Delete Form</label>
-                        <button data-button="`+cf+`" class="form-control btn btn-danger deleteForm">Delete</button>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Incident Number</label>
+                            <input type="text" name="incident_number[]" value="`+incidentNumber+`" id="incident_number_`+cf+`" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Last Check</label>
+                            <input type="text" name="last_check[]" id="last_check_`+cf+`" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control">`+remoteDesc+`</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_`+cf+`" class="form-control">`+remoteNotes+`</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Branch</label>
+                            <input type="text" id="branch_`+cf+`" name="branch[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>IP Address</label>
+                            <input type="text" id="ip_address_`+cf+`" name="ip_address[]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nama Uker</label>
+                            <input type="text" id="nama_uker_`+cf+`" name="nama_uker[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Provide Jarkom</label>
+                            <input type="text" id="provider_jarkom_`+cf+`" name="provider_jarkom[]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Permasalahan</label>
+                            <input type="text" id="permasalahan_`+cf+`" name="permasalahan[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Action</label>
+                            <input type="text" id="action_`+cf+`" name="action[]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row `+style+`">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>PIC</label>
+                            <input type="text" id="pic_`+cf+`" name="pic[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Action</label>
+                            <button data-button="`+cf+`" class="form-control btn btn-danger deleteForm">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
 
         $("#appendData").append(cloneElement);
-        var $options = $("#networkStatus > option").clone(); 
-        $('#networkStatus_'+$("#counterForm").val()).append($options);
+        var $options = $("#networkStatus > option").clone();
+        $('#networkStatus_'+cf).append($options);
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
@@ -244,9 +302,18 @@ a {
     background-color: #D6F2FF;
 }
 .panelGenap {
-    background-color: #FFE8D6;
+    background-color: #D6FFE0;
+}
+.atas {
+    padding-top: 7px;
+}
+.spasiAtas {
+    margin-top: 7px;
 }
 .visibleOff {
+    display: none;
+}
+.hideAll {
     display: none;
 }
 </style>
@@ -1139,8 +1206,8 @@ a {
                     <div class="modal-body">
                         <form role="form" id="formTicketRemedy" action="<?php echo base_url(); ?>index.php/Dashboard/insertTicket" method='post'>
                             <div class="box-body">
-                                <div class="row" data-satu="1">
-                                    <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Jenis</label>
                                             <select class="form-control jenis" id="type" name="type[]">
@@ -1148,71 +1215,123 @@ a {
                                                 <option value="jarkom">Jarkom</option>
                                             </select>
                                         </div>
-                                        <div class="form-group visibleOff">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>IP LAN</label>
+                                            <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row visibleOff">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label>Network Status</label>
                                             <select class="form-control networkStatus" id="networkStatus" name="network_status[]"></select>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>ID Remote</label>
+                                            <label>IP LAN</label>
                                             <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Ticket Status</label>
+                                            <input type="text" name="status_ticket[]" id="status_ticket" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>User Creator</label>
                                             <input type="text" name="created_by[]" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Last Check</label>
-                                            <input type="text" name="last_check[]" id="last_check" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Status Ticket</label>
-                                            <input type="text" name="status_ticket[]" id="status_ticket" class="form-control">
-                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Incident Number</label>
                                             <input type="text" name="incident_number[]" id="incident_number" class="form-control">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Last Check</label>
+                                            <input type="text" name="last_check[]" id="last_check" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
                                             <textarea name="remote_ticket_description[]" id="remote_ticket_description" class="form-control"></textarea>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Notes</label>
                                             <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" data-dua="1">
+
+
+                                <div class="row hideAll">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Branch</label>
-                                            <input type="text" name="branch[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>IP Address</label>
-                                            <input type="text" name="ip_address[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nama Uker</label>
-                                            <input type="text" name="nama_uker[]" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Provide Jarkom</label>
-                                            <input type="text" name="provider_jarkom[]" class="form-control">
+                                            <input type="text" id="branch" name="branch[]" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Permasalahan</label>
-                                            <input type="text" name="permasalahan[]" class="form-control">
+                                            <label>IP Address</label>
+                                            <input type="text" id="ip_address" name="ip_address[]" class="form-control">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row hideAll">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nama Uker</label>
+                                            <input type="text" id="nama_uker" name="nama_uker[]" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Provide Jarkom</label>
+                                            <input type="text" id="provider_jarkom" name="provider_jarkom[]" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row hideAll">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Permasalahan</label>
+                                            <input type="text" id="permasalahan" name="permasalahan[]" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Action</label>
-                                            <input type="text" name="action[]" class="form-control">
+                                            <input type="text" id="action" name="action[]" class="form-control">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row hideAll">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>PIC</label>
-                                            <input type="text" name="pic[]" class="form-control">
+                                            <input type="text" id="pic" name="pic[]" class="form-control">
                                         </div>
                                     </div>
                                 </div>
