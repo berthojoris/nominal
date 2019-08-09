@@ -112,32 +112,24 @@ $(document).ready(function() {
                 <div class="row `+style+`">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>IP LAN</label>
-                            <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <label>Ticket Status</label>
                             <input type="text" name="status_ticket[]" value="`+ticketStatus+`" id="status_ticket_`+cf+`" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="row `+style+`">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>User Creator</label>
                             <input type="text" name="created_by[]" id="created_by_`+cf+`" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
                         </div>
                     </div>
+                </div>
+                <div class="row `+style+`">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Incident Number</label>
                             <input type="text" name="incident_number[]" value="`+incidentNumber+`" id="incident_number_`+cf+`" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="row `+style+`">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Last Check</label>
@@ -162,57 +154,8 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="row `+style+`">
-                    <div class="col-md-6">
+                    <div class="col-md-2 col-sm-offset-10">
                         <div class="form-group">
-                            <label>Branch</label>
-                            <input type="text" id="branch_`+cf+`" name="branch[]" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>IP Address</label>
-                            <input type="text" id="ip_address_`+cf+`" name="ip_address[]" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row `+style+`">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Nama Uker</label>
-                            <input type="text" id="nama_uker_`+cf+`" name="nama_uker[]" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Provide Jarkom</label>
-                            <input type="text" id="provider_jarkom_`+cf+`" name="provider_jarkom[]" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row `+style+`">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Permasalahan</label>
-                            <input type="text" id="permasalahan_`+cf+`" name="permasalahan[]" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Action</label>
-                            <input type="text" id="action_`+cf+`" name="action[]" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row `+style+`">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>PIC</label>
-                            <input type="text" id="pic_`+cf+`" name="pic[]" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Action</label>
                             <button data-button="`+cf+`" class="form-control btn btn-danger deleteForm">Delete</button>
                         </div>
                     </div>
@@ -1234,32 +1177,24 @@ a {
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>IP LAN</label>
-                                            <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label>Ticket Status</label>
                                             <input type="text" name="status_ticket[]" id="status_ticket" class="form-control">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>User Creator</label>
                                             <input type="text" name="created_by[]" id="created_by" value="<?php echo $this->session->userdata('nama'); ?>" class="form-control" disabled>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Incident Number</label>
                                             <input type="text" name="incident_number[]" id="incident_number" class="form-control">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Last Check</label>

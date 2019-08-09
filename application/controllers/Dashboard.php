@@ -72,13 +72,13 @@ class Dashboard extends CI_Controller {
 				'description' => $this->input->post('remote_ticket_description')[$key],
 				'notes' => $this->input->post('remote_ticket_description')[$key],
 				'ip' => $this->input->ip_address(),
-				'branch' => $this->input->post('branch')[$key],
-				'ip_address' => $this->input->post('ip_address')[$key],
-				'nama_uker' => $this->input->post('nama_uker')[$key],
-				'provider_jarkom' => $this->input->post('provider_jarkom')[$key],
-				'permasalahan' => $this->input->post('permasalahan')[$key],
-				'action' => $this->input->post('action')[$key],
-				'pic' => $this->input->post('pic')[$key]
+				'branch' => '-',
+				'ip_address' => '-',
+				'nama_uker' => '-',
+				'provider_jarkom' => '-',
+				'permasalahan' => '-',
+				'action' => '-',
+				'pic' => '-',
 			]);
 		}
 
