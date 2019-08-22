@@ -22,9 +22,21 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	public function newapi()
+	{
+		$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=HPD_IncidentInterface_Create_WS', 'wsdl');
+		$header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
+		$client->setHeaders($header);
+		$result = $client->call("HelpDesk_Submit_Service");
+		echo "<pre>";
+		var_dump($result);
+		die();
+	}
+
 	public function tiketapi()
     {
-		$ip = (empty($this->uri->segment(3))) ? '127.0.0.1' : $this->uri->segment(3);
+		// $ip = (empty($this->uri->segment(3))) ? '127.0.0.1' : $this->uri->segment(3);
+		$ip = '55.25.70.1';
     	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/'.$ip.'/BRI:INC:GetInfoFromIPAddress', 'wsdl');
         $header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
         $client->setHeaders($header);
