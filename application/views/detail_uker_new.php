@@ -39,9 +39,9 @@ $(document).on('change', '.jenis', function(e) {
 $(document).ready(function() {
     // initialize();
     var formData = $("#formTicketRemedy").serialize();
-    var urlCreateTicket="<?php echo base_url(); ?>index.php/Dashboard/insertTicket";
-    var ticketApi = "<?php echo base_url(); ?>index.php/Dashboard/tiketapi/"+$("#txtIPLan").val();
-    var getSession = "<?php echo base_url(); ?>index.php/Dashboard/getNetworkDetail";
+    var urlCreateTicket="<?php echo base_url(); ?>index.php/ApiSimcard/insertTicket";
+    var ticketApi = "<?php echo base_url(); ?>index.php/ApiSimcard/tiketapi/"+$("#txtIPLan").val();
+    var getSession = "<?php echo base_url(); ?>index.php/ApiSimcard/getNetworkDetail";
     $("#appendData").empty();
     $("#createTicket").prop("disabled", false);
     $("#addForm").prop("disabled", false);
