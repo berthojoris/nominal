@@ -105,7 +105,9 @@ $(document).ready(function() {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Network Status</label>
-                            <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]"></select>
+                            <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]">
+                                <option>- PILIH -</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -166,6 +168,9 @@ $(document).ready(function() {
         $("#appendData").append(cloneElement);
         var $options = $("#networkStatus > option").clone();
         $('#networkStatus_'+cf).append($options);
+        $('.networkStatus').find('option:selected').each(function(i, obj) {
+            $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
+        });
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
@@ -1170,7 +1175,8 @@ a {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Network Status</label>
-                                            <select class="form-control networkStatus" id="networkStatus" name="network_status[]"></select>
+                                            <select class="form-control networkStatus" id="networkStatus" name="network_status[]">
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
