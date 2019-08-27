@@ -61,6 +61,9 @@ class Remoteticket extends CI_Controller {
 			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
 			exit();
 		}
+
+		$client->setUseCurl($useCURL);
+
 		$login_parameters = array(
 			'user_auth' => array(
 				'user_name' => $username,
@@ -70,6 +73,7 @@ class Remoteticket extends CI_Controller {
 			'application_name' => 'SoapTest',
 			'name_value_list' => array(),
 		);
+		
 		$login_result = $client->call('login', $login_parameters);
 		echo '<pre>';
 		print_r($login_result);
