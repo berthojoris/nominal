@@ -18,9 +18,8 @@
         "jenssegers/blade": "^1.2",
         "monolog/monolog": "^1.24",
         "phpro/soap-client": "^1.0",
-        "econea/nusoap": "^0.9.6",
         "ramsey/uuid": "^3.8",
-        "codecasts/nusoap-php7": "^0.9.7"
+        "zendframework/zend-soap": "^2.8"
 	},
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"

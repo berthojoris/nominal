@@ -47,6 +47,18 @@ class Remoteticket extends CI_Controller {
 		redirect('Dashboard/new_list_all');
 	}
 
+	public function zendsoap()
+	{
+		$client = new Zend\Soap\Client("http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress?wsdl");
+		try {
+			echo "<pre>" . $client->Get_ticket_info() . "</pre>";
+		} catch (SoapFault $fault) {
+			echo $fault->getMessage();
+		} catch (Exception $exception) {
+			echo $exception->getMessage();
+		}
+    }
+
 	public function newapi()
 	{
 		$url = "http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress";
@@ -73,7 +85,7 @@ class Remoteticket extends CI_Controller {
 			'application_name' => 'SoapTest',
 			'name_value_list' => array(),
 		);
-		
+
 		$login_result = $client->call('login', $login_parameters);
 		echo '<pre>';
 		print_r($login_result);
