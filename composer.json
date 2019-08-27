@@ -19,7 +19,8 @@
         "monolog/monolog": "^1.24",
         "phpro/soap-client": "^1.0",
         "econea/nusoap": "~0.9.5.1",
-        "ramsey/uuid": "^3.8"
+        "ramsey/uuid": "^3.8",
+        "codecasts/nusoap-php7": "^0.9.7"
 	},
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"
