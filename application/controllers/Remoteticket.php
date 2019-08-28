@@ -50,6 +50,10 @@ class Remoteticket extends CI_Controller {
 	public function zendsoap()
 	{
 		$client = new Zend\Soap\Client("http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress?wsdl");
+
+		$header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
+        $client->setHeaders($header);
+
 		try {
 			echo "<pre>" . $client->Get_ticket_info() . "</pre>";
 		} catch (SoapFault $fault) {
