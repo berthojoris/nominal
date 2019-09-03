@@ -31,8 +31,26 @@ $(document).on("click", ".deleteForm", function(e) {
 $(document).on('change', '.jenis', function(e) {
     if($(this).val() == 'remote') {
         $(this).parent().parent().parent().next().addClass('visibleOff');
+        $(".deskripsi").val('');
     } else {
         $(this).parent().parent().parent().next().removeClass('visibleOff');
+    }
+});
+
+$(document).on('change', '.networkStatus', function(e) {
+    var nilai = $(this).val();
+    var codeID = $(this).attr("code");
+    if(nilai == '-') {
+        $("#remote_ticket_description_"+codeID).val('');
+    } else {
+        var branch = $("#txt_branch").val();
+        var kode_uker = $("#txt_kode_uker").val();
+        var nama_uker = $("#txt_nama_uker").val();
+        var pic = $("#txt_pic").val();
+        var ip = $('[netstat="'+nilai+'"]').val();
+        
+        var isinya = "BRANCH : "+branch+", IP WAN : "+ip+", NAMA UKER : "+nama_uker+", PROVIDER JARKOM : "+nilai+", PIC : "+pic;
+        $("#remote_ticket_description_"+codeID).val(isinya);
     }
 });
 
@@ -43,8 +61,6 @@ $(document).ready(function() {
     var ticketApi = "<?php echo base_url(); ?>index.php/remoteticket/tiketapi/"+$("#txtIPLan").val();
     var getSession = "<?php echo base_url(); ?>index.php/remoteticket/getNetworkDetail";
     $("#appendData").empty();
-    $("#createTicket").prop("disabled", false);
-    $("#addForm").prop("disabled", false);
 
     $('#tiketRemedy').on('hide.bs.modal', function (e) {
         $("#appendData").empty();
@@ -58,6 +74,7 @@ $(document).ready(function() {
         dataType: "json",
         success: function (response) {
             var toAppend = '';
+            toAppend += '<option value="-">- PILIH -</option>';
             $.each(response, function(key, val) {
                 toAppend += '<option value="'+val+'">'+val+'</option>';
             });
@@ -79,7 +96,6 @@ $(document).ready(function() {
 
         var ticketStatus = $("#status_ticket").val();
         var incidentNumber = $("#incident_number").val();
-        var remoteDesc = $("#remote_ticket_description").val();
         var remoteNotes = $("#remote_ticket_notes").val();
 
         var cloneElement = `
@@ -105,8 +121,8 @@ $(document).ready(function() {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Network Status</label>
-                            <select class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]">
-                                <option>- PILIH -</option>
+                            <select code="`+cf+`" class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]">
+                                <option value="remote">- PILIH -</option>
                             </select>
                         </div>
                     </div>
@@ -143,7 +159,7 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control">`+remoteDesc+`</textarea>
+                            <textarea code="`+cf+`" name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control deskripsi"></textarea>
                         </div>
                     </div>
                 </div>
@@ -166,7 +182,7 @@ $(document).ready(function() {
         `;
 
         $("#appendData").append(cloneElement);
-        var $options = $("#networkStatus > option").clone();
+        var $options = $("#networkStatus_1 > option").clone();
         $('#networkStatus_'+cf).append($options);
         $('.networkStatus').find('option:selected').each(function(i, obj) {
             $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
@@ -188,15 +204,13 @@ $(document).ready(function() {
     });
 
     $('#tiketRemedy').on('show.bs.modal', function (e) {
-        $("#createTicket").prop("disabled", true);
-        $("#addForm").prop("disabled", true);
+        $("#remote_ticket_description_1").val('');
+        $(".jenis")[0].selectedIndex = 0;
         $.ajax({
             type: "GET",
             url: ticketApi,
             dataType: "json",
             success: function (response) {
-                $("#createTicket").prop("disabled", false);
-                $("#addForm").prop("disabled", false);
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
                 $("#remote_ticket_description").val(response.description);
@@ -437,6 +451,13 @@ a {
         <div class="panel panel-default" style="float: left;width:49%;">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">PROFILE REMOTE DETAIL</div>
             <div style="width:100%;height:100%;position:relative;">
+                
+                <input type="hidden" id="txt_branch" value="<?= strtoupper($data[0]->kode_kanca);?>">
+                <input type="hidden" id="txt_kode_uker" value="<?= $data[0]->kode_uker ?>">
+                <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker.' '.$data[0]->nama_remote ?>">
+                <input type="hidden" id="txt_pic" value="<?= $data[0]->pic_kanwil ?>">
+                <input type="hidden" id="txt_ip" value="<?= $data[0]->ip_lan ?>">
+
                 <table class="table table-hover">
                     <tr>
                         <th colspan="3">PROFILE REMOTE : <?php echo $data[0]->tipe_uker.' '.$data[0]->nama_remote;?></th>
@@ -1175,7 +1196,7 @@ a {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Network Status</label>
-                                            <select class="form-control networkStatus" id="networkStatus" name="network_status[]">
+                                            <select code="1" class="form-control networkStatus" id="networkStatus_1" name="network_status[]">
                                             </select>
                                         </div>
                                     </div>
@@ -1212,7 +1233,7 @@ a {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="remote_ticket_description[]" id="remote_ticket_description" class="form-control"></textarea>
+                                            <textarea code="1" name="remote_ticket_description[]" id="remote_ticket_description_1" class="form-control deskripsi"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -1365,7 +1386,7 @@ a {
                                                $time = $jar->status_fail_date_l;
                                              }
                                            // }
-                                         
+                                           echo '<input type="text" netstat="'.$jar->jenis_jarkom.'/'.$jar->nickname_provider.'" value="'.$jar->ip_wan.'">';
                                         ?>
                                 </td>
                             </tr>
