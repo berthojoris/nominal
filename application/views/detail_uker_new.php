@@ -29,7 +29,9 @@ $(document).on("click", ".deleteForm", function(e) {
 });
 
 $(document).on('change', '.jenis', function(e) {
+    var codeID = $("#counterForm").val();
     if($(this).val() == 'remote') {
+        $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().find(".networkStatus").prop('selectedIndex', 0);
         $(this).parent().parent().parent().next().addClass('visibleOff');
         var branch = $("#txt_branch").val();
@@ -38,7 +40,9 @@ $(document).on('change', '.jenis', function(e) {
         var pic = $("#txt_pic").val();
         var br = "\n";
         var isinya = "BRANCH : "+branch+br+"NAMA UKER : "+nama_uker+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        $("#remote_ticket_description_"+codeID).val(isinya);
     } else {
+        $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().removeClass('visibleOff');
     }
 });
@@ -212,6 +216,13 @@ $(document).ready(function() {
     $('#tiketRemedy').on('show.bs.modal', function (e) {
         $("#remote_ticket_description_1").val('');
         $(".jenis")[0].selectedIndex = 0;
+        var branch = $("#txt_branch").val();
+        var kode_uker = $("#txt_kode_uker").val();
+        var nama_uker = $("#txt_nama_uker").val();
+        var pic = $("#txt_pic").val();
+        var br = "\n";
+        var isinya = "BRANCH : "+branch+br+"NAMA UKER : "+nama_uker+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        $("#remote_ticket_description_1").val(isinya);
         $.ajax({
             type: "GET",
             url: ticketApi,
