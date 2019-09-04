@@ -34,8 +34,7 @@ $(document).on('change', '.jenis', function(e) {
         $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().find(".networkStatus").prop('selectedIndex', 0);
         $(this).parent().parent().parent().next().addClass('visibleOff');
-        var branch = $("#txt_branch").val();
-        var kode_uker = $("#txt_kode_uker").val();
+        var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip").val();
@@ -59,8 +58,7 @@ $(document).on('change', '.networkStatus', function(e) {
     if(nilai == '-') {
         $("#remote_ticket_description_"+codeID).val('');
     } else {
-        var branch = $("#txt_branch").val();
-        var kode_uker = $("#txt_kode_uker").val();
+        var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip = $('[netstat="'+nilai+'"]').val();
@@ -222,8 +220,7 @@ $(document).ready(function() {
     $('#tiketRemedy').on('show.bs.modal', function (e) {
         $("#remote_ticket_description_1").val('');
         $(".jenis")[0].selectedIndex = 0;
-        var branch = $("#txt_branch").val();
-        var kode_uker = $("#txt_kode_uker").val();
+        var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip").val();
@@ -480,9 +477,7 @@ a {
         <div class="panel panel-default" style="float: left;width:49%;">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">PROFILE REMOTE DETAIL</div>
             <div style="width:100%;height:100%;position:relative;">
-                
-                <input type="hidden" id="txt_branch" value="<?= strtoupper($data[0]->kode_kanca);?>">
-                <input type="hidden" id="txt_kode_uker" value="<?= $data[0]->kode_uker ?>">
+
                 <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker.' '.$data[0]->nama_remote ?>">
                 <input type="hidden" id="txt_pic" value="<?= $data[0]->pic_kanwil ?>">
                 <input type="hidden" id="txt_ip" value="<?= $data[0]->ip_lan ?>">
@@ -559,12 +554,15 @@ a {
                         <td style="width: 10px">:</td>
                         <td><?php 
                             if ($data[0]->kode_tipe_uker==7) {
-                             //echo $data[0]->tid_atm;
-                             foreach ($tid_atm[$data[0]->id_remote] as $tid_atms) {
-                            echo $tid_atms->tid_atm." ";
-                             }
-                            }else{
-                             echo $data[0]->kode_uker;
+                                $temp = '';
+                                foreach ($tid_atm[$data[0]->id_remote] as $tid_atms) {
+                                    $temp += $tid_atms->tid_atm." ";
+                                    echo $tid_atms->tid_atm." ";
+                                }
+                                echo '<input type="hidden" id="txt_kode_branch" value="'.$temp.'">';
+                            } else {
+                                echo $data[0]->kode_uker;
+                                echo '<input type="hidden" id="txt_kode_branch" value="'.$data[0]->kode_uker.'">';
                             }
                             ?>
                         </td>
