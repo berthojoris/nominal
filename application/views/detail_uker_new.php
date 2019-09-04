@@ -30,8 +30,14 @@ $(document).on("click", ".deleteForm", function(e) {
 
 $(document).on('change', '.jenis', function(e) {
     if($(this).val() == 'remote') {
+        $(this).parent().parent().parent().next().find(".networkStatus").prop('selectedIndex', 0);
         $(this).parent().parent().parent().next().addClass('visibleOff');
-        $(".deskripsi").val('');
+        var branch = $("#txt_branch").val();
+        var kode_uker = $("#txt_kode_uker").val();
+        var nama_uker = $("#txt_nama_uker").val();
+        var pic = $("#txt_pic").val();
+        var br = "\n";
+        var isinya = "BRANCH : "+branch+br+"NAMA UKER : "+nama_uker+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
     } else {
         $(this).parent().parent().parent().next().removeClass('visibleOff');
     }
@@ -48,8 +54,8 @@ $(document).on('change', '.networkStatus', function(e) {
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip = $('[netstat="'+nilai+'"]').val();
-        
-        var isinya = "BRANCH : "+branch+", IP WAN : "+ip+", NAMA UKER : "+nama_uker+", PROVIDER JARKOM : "+nilai+", PIC : "+pic;
+        var br = "\n";
+        var isinya = "BRANCH : "+branch+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
     }
 });
@@ -831,7 +837,7 @@ a {
                                         </div>
                                         <div class="form-group">
                                             <label>ADDRESS</label>
-                                            <textarea  name="alamat" class="form-control" rows=""><?php echo $data[0]->alamat_uker;?></textarea>
+                                            <textarea name="alamat" class="form-control"><?php echo $data[0]->alamat_uker;?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -1233,7 +1239,7 @@ a {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea code="1" name="remote_ticket_description[]" id="remote_ticket_description_1" class="form-control deskripsi"></textarea>
+                                            <textarea rows="7" code="1" name="remote_ticket_description[]" id="remote_ticket_description_1" class="form-control deskripsi"></textarea>
                                         </div>
                                     </div>
                                 </div>
