@@ -1386,7 +1386,7 @@ a {
                                                $time = $jar->status_fail_date_l;
                                              }
                                            // }
-                                           echo '<input type="text" netstat="'.$jar->jenis_jarkom.'/'.$jar->nickname_provider.'" value="'.$jar->ip_wan.'">';
+                                           echo '<input type="hidden" netstat="'.$jar->jenis_jarkom.'/'.$jar->nickname_provider.'" value="'.$jar->ip_wan.'">';
                                         ?>
                                 </td>
                             </tr>
