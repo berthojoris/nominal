@@ -38,8 +38,14 @@ $(document).on('change', '.jenis', function(e) {
         var kode_uker = $("#txt_kode_uker").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
+        var ip_lan = $("#txt_ip").val();
         var br = "\n";
-        var isinya = "BRANCH : "+branch+br+"NAMA UKER : "+nama_uker+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        var isinya = "BRANCH : "+kode_uker+br;
+        isinya += "IP LAN : "+ip_lan+br;
+        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "PERMASALAHAN : "+br;
+        isinya += "ACTION : "+br;
+        isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
     } else {
         $("#remote_ticket_description_"+codeID).val('');
@@ -59,7 +65,7 @@ $(document).on('change', '.networkStatus', function(e) {
         var pic = $("#txt_pic").val();
         var ip = $('[netstat="'+nilai+'"]').val();
         var br = "\n";
-        var isinya = "BRANCH : "+branch+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        var isinya = "BRANCH : "+kode_uker+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
     }
 });
@@ -220,8 +226,14 @@ $(document).ready(function() {
         var kode_uker = $("#txt_kode_uker").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
+        var ip_lan = $("#txt_ip").val();
         var br = "\n";
-        var isinya = "BRANCH : "+branch+br+"NAMA UKER : "+nama_uker+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        var isinya = "BRANCH : "+kode_uker+br;
+        isinya += "IP LAN : "+ip_lan+br;
+        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "PERMASALAHAN : "+br;
+        isinya += "ACTION : "+br;
+        isinya += "PIC : "+pic;
         $("#remote_ticket_description_1").val(isinya);
         $.ajax({
             type: "GET",
