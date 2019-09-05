@@ -554,12 +554,17 @@ a {
                         <td style="width: 10px">:</td>
                         <td><?php 
                             if ($data[0]->kode_tipe_uker==7) {
-                                $temp = '';
+                                $string = '';
+                                $lastElement = end($tid_atm[$data[0]->id_remote]);
                                 foreach ($tid_atm[$data[0]->id_remote] as $tid_atms) {
-                                    $temp += $tid_atms->tid_atm." ";
+                                    if($tid_atms == $lastElement) {
+                                        $string .= $tid_atms->tid_atm;
+                                    } else {
+                                        $string .= $tid_atms->tid_atm.", ";
+                                    }
                                     echo $tid_atms->tid_atm." ";
                                 }
-                                echo '<input type="hidden" id="txt_kode_branch" value="'.$temp.'">';
+                                echo '<input type="hidden" id="txt_kode_branch" value="'.$string.'">';
                             } else {
                                 echo $data[0]->kode_uker;
                                 echo '<input type="hidden" id="txt_kode_branch" value="'.$data[0]->kode_uker.'">';
