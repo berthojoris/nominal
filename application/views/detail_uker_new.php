@@ -21,6 +21,16 @@ function decreaseForm() {
     return counterNow;
 }
 
+function showType(data) {
+    var type = "";
+    if(data == "ATM") {
+        type = "ATM TID";
+    } else {
+        type = "BRANCH";
+    }
+    return type;
+}
+
 $(document).on("click", ".deleteForm", function(e) {
     e.preventDefault();
     var id = $(this).data('button');
@@ -34,12 +44,13 @@ $(document).on('change', '.jenis', function(e) {
         $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().find(".networkStatus").prop('selectedIndex', 0);
         $(this).parent().parent().parent().next().addClass('visibleOff');
+        var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip").val();
         var br = "\n";
-        var isinya = "BRANCH : "+kode_uker+br;
+        var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker+br;
         isinya += "PERMASALAHAN : "+br;
@@ -58,12 +69,27 @@ $(document).on('change', '.networkStatus', function(e) {
     if(nilai == '-') {
         $("#remote_ticket_description_"+codeID).val('');
     } else {
+        // var kode_uker = $("#txt_kode_branch").val();
+        // var nama_uker = $("#txt_nama_uker").val();
+        // var pic = $("#txt_pic").val();
+        // var ip = $('[netstat="'+nilai+'"]').val();
+        // var br = "\n";
+        // var isinya = "BRANCH : "+kode_uker+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        // $("#remote_ticket_description_"+codeID).val(isinya);
+
+        var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip = $('[netstat="'+nilai+'"]').val();
         var br = "\n";
-        var isinya = "BRANCH : "+kode_uker+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
+        var isinya = type+" : "+kode_uker+br;
+        isinya += "IP WAN : "+ip+br;
+        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "PROVIDER JARKOM : "+nilai+br;
+        isinya += "PERMASALAHAN : "+br;
+        isinya += "ACTION : "+br;
+        isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
     }
 });
@@ -220,12 +246,13 @@ $(document).ready(function() {
     $('#tiketRemedy').on('show.bs.modal', function (e) {
         $("#remote_ticket_description_1").val('');
         $(".jenis")[0].selectedIndex = 0;
+        var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip").val();
         var br = "\n";
-        var isinya = "BRANCH : "+kode_uker+br;
+        var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker+br;
         isinya += "PERMASALAHAN : "+br;
@@ -247,7 +274,6 @@ $(document).ready(function() {
             }
         });
     });
-
 });
 </script>
 <style type="text/css">
@@ -565,9 +591,11 @@ a {
                                     echo $tid_atms->tid_atm." ";
                                 }
                                 echo '<input type="hidden" id="txt_kode_branch" value="'.$string.'">';
+                                echo '<input type="hidden" id="txt_type" value="ATM">';
                             } else {
                                 echo $data[0]->kode_uker;
                                 echo '<input type="hidden" id="txt_kode_branch" value="'.$data[0]->kode_uker.'">';
+                                echo '<input type="hidden" id="txt_type" value="BRANCH">';
                             }
                             ?>
                         </td>
