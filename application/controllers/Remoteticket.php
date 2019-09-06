@@ -99,10 +99,14 @@ class Remoteticket extends CI_Controller {
 	public function tiketapi()
     {
 		// $ip = (empty($this->uri->segment(3))) ? '127.0.0.1' : $this->uri->segment(3);
-		$ip = '55.25.70.1';
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/'.$ip.'/BRI:INC:GetInfoFromIPAddress', 'wsdl');
+		// $ip = '55.25.70.1';
+    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/55.25.70.1/BRI:INC:GetInfoFromIPAddress', 'wsdl');
         $header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
-        $client->setHeaders($header);
+		$client->setHeaders($header);
+		$err = $client->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+		}
         $result = $client->call("Get_ticket_info");
         if(!empty($result)) {
             $jsonOutput = json_encode([
