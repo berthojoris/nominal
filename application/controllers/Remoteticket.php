@@ -100,7 +100,7 @@ class Remoteticket extends CI_Controller {
     {
 		$root = $_SERVER['DOCUMENT_ROOT']; // SET DOCUMENT ROOT
 		require_once($root . "/nominal/application/libraries/nusoap.php"); //INCLUDE LIBRARY NUSOAP
-		
+
 		$proxyhost = isset($_POST['proxyhost']) ? $_POST['proxyhost'] : '';
 		$proxyport = isset($_POST['proxyport']) ? $_POST['proxyport'] : '';
 		$proxyusername = isset($_POST['proxyusername']) ? $_POST['proxyusername'] : '';
@@ -113,7 +113,8 @@ class Remoteticket extends CI_Controller {
 		}
 		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
 		$client->setHeaders($headers);
-		$param = array('IPAddress' =>'55.25.4.1');
+		$param = array('IPAddress' => '55.25.4.1');
+		// $param = array('IPAddress' => $this->uri->segment(3));
 		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
 
 		if ($client->fault) {

@@ -110,7 +110,7 @@ $(document).ready(function() {
             $.each(response, function(key, val) {
                 toAppend += '<option value="'+val+'">'+val+'</option>';
             });
-            $(".networkStatus").append(toAppend);
+            $("#networkStatus_1").append(toAppend);
         }
     });
 
@@ -154,7 +154,6 @@ $(document).ready(function() {
                         <div class="form-group">
                             <label>Network Status</label>
                             <select code="`+cf+`" class="form-control networkStatus" id="networkStatus_`+cf+`" name="network_status[]">
-                                <option value="remote">- PILIH -</option>
                             </select>
                         </div>
                     </div>
@@ -214,10 +213,12 @@ $(document).ready(function() {
         `;
 
         $("#appendData").append(cloneElement);
-        var $options = $("#networkStatus_1 > option").clone();
-        $('#networkStatus_'+cf).append($options);
+        var networkStatusFirst = $("#networkStatus_1 > option").clone();
+        $('#networkStatus_'+cf).append(networkStatusFirst);
         $('.networkStatus').find('option:selected').each(function(i, obj) {
-            $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
+            if($(this).val() != '-') {
+                $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
+            }
         });
         $("#remote_ticket_description_"+cf).val($("#remote_ticket_description_1").val());
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
