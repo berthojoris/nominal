@@ -149,7 +149,7 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </div>
-                <div class="row `+style+` visibleOff">
+                <div network="hideshow" class="row `+style+` visibleOff">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Network Status</label>
@@ -219,6 +219,7 @@ $(document).ready(function() {
         $('.networkStatus').find('option:selected').each(function(i, obj) {
             $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
         });
+        $("#remote_ticket_description_"+cf).val($("#remote_ticket_description_1").val());
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
@@ -237,6 +238,8 @@ $(document).ready(function() {
 
     $('#tiketRemedy').on('show.bs.modal', function (e) {
         $("#remote_ticket_description_1").val('');
+        $(".networkStatus").prop('selectedIndex', 0);
+        $('[network="hideshow"]').removeClass("visibleOff").addClass("visibleOff");
         $(".jenis")[0].selectedIndex = 0;
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
@@ -1244,7 +1247,7 @@ a {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row visibleOff">
+                                <div network="hideshow" class="row visibleOff">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Network Status</label>
