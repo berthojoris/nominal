@@ -98,34 +98,55 @@ class Remoteticket extends CI_Controller {
 
 	public function tiketapi()
     {
-		// $ip = (empty($this->uri->segment(3))) ? '127.0.0.1' : $this->uri->segment(3);
-		// $ip = '55.25.70.1';
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/55.25.70.1/BRI:INC:GetInfoFromIPAddress', 'wsdl');
-        $header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
-		$client->setHeaders($header);
+		$root = $_SERVER['DOCUMENT_ROOT']; // SET DOCUMENT ROOT
+		require_once($root . "/nominal/application/libraries/nusoap.php"); //INCLUDE LIBRARY NUSOAP
+		
+		$proxyhost = isset($_POST['proxyhost']) ? $_POST['proxyhost'] : '';
+		$proxyport = isset($_POST['proxyport']) ? $_POST['proxyport'] : '';
+		$proxyusername = isset($_POST['proxyusername']) ? $_POST['proxyusername'] : '';
+		$proxypassword = isset($_POST['proxypassword']) ? $_POST['proxypassword'] : '';
+
+    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
 		}
-        $result = $client->call("Get_ticket_info");
-        if(!empty($result)) {
-            $jsonOutput = json_encode([
-                'incident_number' => $result['IncidentNumber'],
-                'description' => $result['Description'],
-                'notes' => $result['Notes'],
-                'status' => $result['Status'],
-                'code' => 200
-            ]);
-        } else {
-            $jsonOutput = json_encode([
+		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
+		$client->setHeaders($headers);
+		$param = array('IPAddress' =>'55.25.4.1');
+		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
+
+		if ($client->fault) {
+		    $jsonOutput = json_encode([
                 'incident_number' => '-',
                 'description' => '-',
                 'notes' => '-',
                 'status' => '-',
-                'code' => 404
+				'code' => 500,
+				'msg' => 'Soap Client Fault'
             ]);
+		} else {
+			$err = $client->getError();
+			if($err) {
+				$jsonOutput = json_encode([
+					'incident_number' => '-',
+					'description' => '-',
+					'notes' => '-',
+					'status' => '-',
+					'code' => 500,
+					'msg' => 'Soap Client Error'
+				]);
+			} else {
+			    $jsonOutput = json_encode([
+			        'incident_number' => $result['IncidentNumber'],
+			        'description' => $result['Description'],
+			        'status' => $result['Status'],
+			        'code' => 200
+			    ]);
+			}
 		}
-        echo $jsonOutput;
+
+		echo $jsonOutput;
     }
     
     public function getNetworkDetail()

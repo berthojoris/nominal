@@ -69,14 +69,6 @@ $(document).on('change', '.networkStatus', function(e) {
     if(nilai == '-') {
         $("#remote_ticket_description_"+codeID).val('');
     } else {
-        // var kode_uker = $("#txt_kode_branch").val();
-        // var nama_uker = $("#txt_nama_uker").val();
-        // var pic = $("#txt_pic").val();
-        // var ip = $('[netstat="'+nilai+'"]').val();
-        // var br = "\n";
-        // var isinya = "BRANCH : "+kode_uker+br+"IP WAN : "+ip+br+"NAMA UKER : "+nama_uker+br+"PROVIDER JARKOM : "+nilai+br+"PERMASALAHAN : "+br+"ACTION : "+br+"PIC : "+pic;
-        // $("#remote_ticket_description_"+codeID).val(isinya);
-
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
@@ -199,7 +191,7 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea code="`+cf+`" name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control deskripsi"></textarea>
+                            <textarea rows="7" code="`+cf+`" name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control deskripsi"></textarea>
                         </div>
                     </div>
                 </div>
