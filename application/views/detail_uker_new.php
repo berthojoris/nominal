@@ -251,9 +251,10 @@ $(document).ready(function() {
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker+br;
-        isinya += "PERMASALAHAN : "+br;
-        isinya += "ACTION : "+br;
+        isinya += "PERMASALAHAN : Lampu modem lost merah nyala"+br;
+        isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
         isinya += "PIC : "+pic;
+        isinya += "Terima kasih";
         $("#remote_ticket_description_1").val(isinya);
         $.ajax({
             type: "GET",
