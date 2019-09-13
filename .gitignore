@@ -23,6 +23,8 @@ application/views/cache/*
 application/libraries/html2pdf/*
 application/libraries/mpdf60/*
 application/libraries/PHPExcel/*
+application/libraries/nusoap/*
+application/libraries/nusoap.php
 application/libraries/index.html
 application/third_party/*
 code/*

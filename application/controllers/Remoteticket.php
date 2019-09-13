@@ -8,7 +8,8 @@ class Remoteticket extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('EloquentRemoteTicket');
+		$this->load->model('EloquentRemoteTicket');
+		$this->load->library('customsoap');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
 		}
@@ -49,56 +50,7 @@ class Remoteticket extends CI_Controller {
 
 	public function tiketapi()
     {
-		$root = $_SERVER['DOCUMENT_ROOT']; // SET DOCUMENT ROOT
-		require_once($root . "/nominal/application/libraries/nusoap.php"); //INCLUDE LIBRARY NUSOAP
-
-		$proxyhost = isset($_POST['proxyhost']) ? $_POST['proxyhost'] : '';
-		$proxyport = isset($_POST['proxyport']) ? $_POST['proxyport'] : '';
-		$proxyusername = isset($_POST['proxyusername']) ? $_POST['proxyusername'] : '';
-		$proxypassword = isset($_POST['proxypassword']) ? $_POST['proxypassword'] : '';
-
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
-		$err = $client->getError();
-		if ($err) {
-			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
-		}
-		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
-		$client->setHeaders($headers);
-		$param = array('IPAddress' => '55.25.4.1');
-		// $param = array('IPAddress' => $this->uri->segment(3));
-		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
-
-		if ($client->fault) {
-		    $jsonOutput = json_encode([
-                'incident_number' => '-',
-                'description' => '-',
-                'notes' => '-',
-                'status' => '-',
-				'code' => 500,
-				'msg' => 'Soap Client Fault'
-            ]);
-		} else {
-			$err = $client->getError();
-			if($err) {
-				$jsonOutput = json_encode([
-					'incident_number' => '-',
-					'description' => '-',
-					'notes' => '-',
-					'status' => '-',
-					'code' => 500,
-					'msg' => 'Soap Client Error'
-				]);
-			} else {
-			    $jsonOutput = json_encode([
-			        'incident_number' => $result['IncidentNumber'],
-			        'description' => $result['Description'],
-			        'status' => $result['Status'],
-			        'code' => 200
-			    ]);
-			}
-		}
-
-		echo $jsonOutput;
+		echo $this->customsoap->getDataFromSoap($this->uri->segment(3));
     }
     
     public function getNetworkDetail()
