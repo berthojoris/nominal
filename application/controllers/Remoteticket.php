@@ -47,55 +47,6 @@ class Remoteticket extends CI_Controller {
 		redirect('Dashboard/new_list_all');
 	}
 
-	public function zendsoap()
-	{
-		$client = new Zend\Soap\Client("http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress?wsdl");
-
-		$header = "<AuthenticationInfo><userName>int_nominal</userName><password>123456</password></AuthenticationInfo>";
-        $client->setHeaders($header);
-
-		try {
-			echo "<pre>" . $client->Get_ticket_info() . "</pre>";
-		} catch (SoapFault $fault) {
-			echo $fault->getMessage();
-		} catch (Exception $exception) {
-			echo $exception->getMessage();
-		}
-    }
-
-	public function newapi()
-	{
-		$url = "http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress";
-		$username = "int_nominal";
-		$password = "123456";
-
-		$client = new nusoap_client($url, 'wsdl');
-
-		$err = $client->getError();
-		if ($err) {
-			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
-			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
-			exit();
-		}
-
-		$client->setUseCurl($useCURL);
-
-		$login_parameters = array(
-			'user_auth' => array(
-				'user_name' => $username,
-				'password' => md5($password),
-				'version' => '1'
-			),
-			'application_name' => 'SoapTest',
-			'name_value_list' => array(),
-		);
-
-		$login_result = $client->call('login', $login_parameters);
-		echo '<pre>';
-		print_r($login_result);
-		echo '</pre>';
-	}
-
 	public function tiketapi()
     {
 		$root = $_SERVER['DOCUMENT_ROOT']; // SET DOCUMENT ROOT

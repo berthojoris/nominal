@@ -20,7 +20,10 @@ user_guide/*
 bower_components/*
 system/*
 application/views/cache/*
-application/libraries/*
+application/libraries/html2pdf/*
+application/libraries/mpdf60/*
+application/libraries/PHPExcel/*
+application/libraries/index.html
 application/third_party/*
 code/*
 plugins/*
