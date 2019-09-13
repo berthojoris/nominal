@@ -240,7 +240,13 @@ $(document).ready(function() {
         });
     });
 
-    $('#tiketRemedy').on('show.bs.modal', function (e) {
+    $("#openForm").click(function (e) { 
+        e.preventDefault();
+        $('body').loading({
+            stoppable: false,
+            message: 'checking ticket'
+        });
+
         $("#remote_ticket_description_1").val('');
         $(".networkStatus").prop('selectedIndex', 0);
         $('[network="hideshow"]').removeClass("visibleOff").addClass("visibleOff");
@@ -258,6 +264,7 @@ $(document).ready(function() {
         isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
         isinya += "PIC : "+pic;
         isinya += "Terima kasih";
+
         $.ajax({
             type: "GET",
             url: ticketApi,
@@ -273,12 +280,15 @@ $(document).ready(function() {
                     $("#tiketReady").val('ready');
                     $("#remote_ticket_description_1").val(response.description);
                 }
+                $('body').loading('stop');
+                $("#tiketRemedy").modal('show');
             },
             error: function(response) {
-                
+                $('body').loading('stop');
             }
         });
     });
+
 });
 </script>
 <style type="text/css">
@@ -703,7 +713,7 @@ a {
                                 </button>
                                 <?php
                                     if($data[0]->kode_op==1) {
-                                        echo '<button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#tiketRemedy">Tiket Remedy</button>';
+                                        echo '<button type="button" id="openForm" class="btn-xs btn-primary">Tiket Remedy</button>';
                                     }
                                 ?>
                             </div>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/sweetalert2.scss">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/ilmudetil.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sumoselect/sumoselect.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/loader/loading.css">
 <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/multiselect/css/bootstrap-multiselect.css">-->
 
 <!-- Ajax loader style -->

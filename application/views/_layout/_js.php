@@ -18,6 +18,7 @@
 <!--<script src="<?php echo base_url(); ?>assets/sweetalert2.js"></script>-->
 
 <script src="<?php echo base_url(); ?>assets/plugins/sumoselect/jquery.sumoselect.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/loader/loading.js"></script>
 <!--<script src="<?php echo base_url(); ?>assets/plugins/multiselect/js/bootstrap-multiselect.js"></script>-->
 
 <!-- My Ajax -->
