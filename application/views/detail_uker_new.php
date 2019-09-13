@@ -129,6 +129,7 @@ $(document).ready(function() {
         var ticketStatus = $("#status_ticket").val();
         var incidentNumber = $("#incident_number").val();
         var remoteNotes = $("#remote_ticket_notes").val();
+        var remoteDesc = $("#remote_ticket_description_1").val();
 
         var cloneElement = `
             <div data-row="`+cf+`">
@@ -190,7 +191,7 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea rows="7" code="`+cf+`" name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control deskripsi"></textarea>
+                            <textarea rows="7" code="`+cf+`" name="remote_ticket_description[]" id="remote_ticket_description_`+cf+`" class="form-control deskripsi">`+remoteDesc+`</textarea>
                         </div>
                     </div>
                 </div>
@@ -220,7 +221,9 @@ $(document).ready(function() {
                 $("#networkStatus_"+cf+" option[value='"+$(this).val()+"']").remove();
             }
         });
-        $("#remote_ticket_description_"+cf).val($("#remote_ticket_description_1").val());
+        if($("#tiketReady").val() != 'ready') {
+            $("#remote_ticket_description_"+cf).val($("#remote_ticket_description_1").val());
+        }
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
@@ -255,7 +258,6 @@ $(document).ready(function() {
         isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
         isinya += "PIC : "+pic;
         isinya += "Terima kasih";
-        $("#remote_ticket_description_1").val(isinya);
         $.ajax({
             type: "GET",
             url: ticketApi,
@@ -263,8 +265,14 @@ $(document).ready(function() {
             success: function (response) {
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
-                $("#remote_ticket_description").val(response.description);
                 $("#remote_ticket_notes").val(response.notes);
+                if(response.notes == '-') {
+                    $("#tiketReady").val('notready');
+                    $("#remote_ticket_description_1").val(isinya);
+                } else {
+                    $("#tiketReady").val('ready');
+                    $("#remote_ticket_description_1").val(response.description);
+                }
             },
             error: function(response) {
                 
@@ -1222,6 +1230,7 @@ a {
         <div class="modal fade" id="tiketRemedy">
             <input type="hidden" id="total_network_detail" name="total_network_detail" value="<?php echo count($jarkom[$data[0]->id_remote]); ?>">
             <input type="hidden" id="counterForm" value="1">
+            <input type="hidden" id="tiketReady" value="">
             <div class="modal-dialog" style="width: 800px">
                 <div class="modal-content" >
                     <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
