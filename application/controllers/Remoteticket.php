@@ -9,7 +9,7 @@ class Remoteticket extends CI_Controller {
     {
         parent::__construct();
 		$this->load->model('EloquentRemoteTicket');
-		$this->load->library('customsoap');
+		$this->load->library('ticketremedy');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
 		}
@@ -50,7 +50,7 @@ class Remoteticket extends CI_Controller {
 
 	public function tiketapi()
     {
-		echo $this->customsoap->getDataFromSoap($this->uri->segment(3));
+		echo $this->ticketremedy->getTicketRemedy($this->uri->segment(3));
     }
     
     public function getNetworkDetail()

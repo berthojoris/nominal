@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customsoap {
+class Ticketremedy {
 
 	function postDataToSoap($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
 		$root = $_SERVER['DOCUMENT_ROOT'];
-		$ipServer = $_SERVER['SERVER_ADDR'];
+		$serverIP = $_SERVER['SERVER_ADDR'];
 
-		if($ipServer == "127.0.0.1") {
+		if($serverIP == "127.0.0.1") {
 			require_once($root . "/application/libraries/nusoap.php");
 		} else {
 			require_once($root . "/nominal/application/libraries/nusoap.php");
@@ -39,7 +39,7 @@ class Customsoap {
 			'Urgency' => '3-Medium',
 			'HPD_CI' => $dynamicIP,
 		];
-		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
+		$result = $client->call('create_ticket',  $param, '', '', false, true);
 
 		if ($client->fault) {
 		    $jsonOutput = json_encode([
@@ -64,10 +64,10 @@ class Customsoap {
 		echo $jsonOutput;
 	}
 
-    function getDataFromSoap($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
+    function getTicketRemedy($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
 		$root = $_SERVER['DOCUMENT_ROOT'];
-		$ipServer = $_SERVER['SERVER_ADDR'];
-		if($ipServer == "127.0.0.1") {
+		$serverIP = $_SERVER['SERVER_ADDR'];
+		if($serverIP == "127.0.0.1") {
 			require_once($root . "/application/libraries/nusoap.php");
 		} else {
 			require_once($root . "/nominal/application/libraries/nusoap.php");
