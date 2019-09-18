@@ -25,20 +25,21 @@ class Ticketremedy {
 		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
         $client->setHeaders($headers);
 		$param = [
-			'IPAddress' => $dynamicIP,
-			'Assigned_Group' => 'IOC Operator',
 			'Assigned_Support_Company' => 'Bank BRI',
-			'Assigned_Support_Organization' => '',
-			'First_Name' => 'Integrasi',
-			'Impact' => '4-Minor/Localized',
-			'Last_Name' => 'Nominal',
-			'Reported_Source' => 'Nominal',
+			'Assigned_Support_Organization' => 'Divisi Satelit',
+			'CI_Name' => '55.25.70.1',
+			'First_Name' => 'Jordan',
+			'Impact' => '2-Significant/Large',
+			'Last_Name' => 'Timothy',
+			'Reported_Source' => 'Phone',
 			'Service_Type' => 'User Service Restoration',
-			'Status' => 'New',
-			'Summary' => 'TEST BB',
-			'Notes' => 'TEST BB',
-			'Urgency' => '3-Medium',
-			'HPD_CI' => $dynamicIP,
+			'Status' => 'Assigned',
+			'Summary' => 'test 2',
+			'Notes' => 'test 2 3 4 5',
+			'Urgency' =>  '2-High',
+			'Work_Info_Locked' => 'No',
+			'Work_Info_View_Access' => 'Internal',
+			'Action' => '',
 		];
 		$result = $client->call('HelpDesk_Submit_Service',  $param, '', '', false, true);
 
@@ -57,8 +58,8 @@ class Ticketremedy {
 			} else {
 			    $jsonOutput = json_encode([
 					'code' => 200,
-					'output' => $jsonOutput
-			    ]);
+					'output' => $result
+				]);
 			}
 		}
 

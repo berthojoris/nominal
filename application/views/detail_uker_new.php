@@ -103,12 +103,20 @@ $(document).ready(function() {
 
     $("#createTicket").click(function (e) {
         e.preventDefault();
+        $("#addForm").attr("disabled", true);
+        $("#createTicket").attr("disabled", true);
         $.ajax({
             type: "POST",
             url: postTicket,
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                if(response.code == 200) {
+                    $("#formTicketRemedy").submit();
+                } else {
+                    errorAlert("Gagal", "Tiket gagal dibuat. Silahkan refresh dan coba lagi", "Ok")
+                    $("#addForm").attr("disabled", false);
+                    $("#createTicket").attr("disabled", false);
+                }
             }
         });
     });
