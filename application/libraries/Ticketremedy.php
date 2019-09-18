@@ -2,7 +2,7 @@
 
 class Ticketremedy {
 
-	function postDataToSoap($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
+	function postTicketRemedy($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
 		$root = $_SERVER['DOCUMENT_ROOT'];
 		$serverIP = $_SERVER['SERVER_ADDR'];
 
@@ -25,6 +25,7 @@ class Ticketremedy {
 		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
         $client->setHeaders($headers);
 		$param = [
+			'IPAddress' => $dynamicIP,
 			'Assigned_Group' => 'IOC Operator',
 			'Assigned_Support_Company' => 'Bank BRI',
 			'Assigned_Support_Organization' => '',
@@ -39,7 +40,7 @@ class Ticketremedy {
 			'Urgency' => '3-Medium',
 			'HPD_CI' => $dynamicIP,
 		];
-		$result = $client->call('create_ticket',  $param, '', '', false, true);
+		$result = $client->call('HelpDesk_Submit_Service',  $param, '', '', false, true);
 
 		if ($client->fault) {
 		    $jsonOutput = json_encode([

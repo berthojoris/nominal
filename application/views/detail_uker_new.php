@@ -90,6 +90,7 @@ $(document).ready(function() {
     // initialize();
     var formData = $("#formTicketRemedy").serialize();
     var urlCreateTicket="<?php echo base_url(); ?>index.php/remoteticket/insertTicket";
+    var postTicket = "<?php echo base_url(); ?>index.php/remoteticket/createticket";
     var ticketApi = "<?php echo base_url(); ?>index.php/remoteticket/tiketapi/"+$("#txtIPLan").val();
     var getSession = "<?php echo base_url(); ?>index.php/remoteticket/getNetworkDetail";
     $("#appendData").empty();
@@ -98,6 +99,18 @@ $(document).ready(function() {
         $("#appendData").empty();
         $("#addForm").show();
         $("#deleteForm").hide();
+    });
+
+    $("#createTicket").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: postTicket,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
     });
 
     $.ajax({
@@ -273,15 +286,22 @@ $(document).ready(function() {
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
                 $("#remote_ticket_notes").val(response.notes);
-                if(response.notes == '-') {
-                    $("#tiketReady").val('notready');
-                    $("#remote_ticket_description_1").val(isinya);
-                } else {
-                    $("#tiketReady").val('ready');
-                    $("#remote_ticket_description_1").val(response.description);
-                }
                 $('body').loading('stop');
-                $("#tiketRemedy").modal('show');
+                if(response.notes == '-') {
+                    var r = confirm("Data tiket tidak ditemukan. Apakah ingin dibuatkan tiket?");
+                    if (r == true) {
+                        $("#tiketReady").val('notready');
+                        $("#remote_ticket_description_1").val(isinya);
+                        $("#tiketRemedy").modal('show');
+                    }
+                } else {
+                    var r = confirm("Data tiket ditemukan. Apakah ingin melakukan perubahan?");
+                    if (r == true) {
+                        $("#tiketReady").val('ready');
+                        $("#remote_ticket_description_1").val(response.description);
+                        $("#tiketRemedy").modal('show');
+                    }
+                }
             },
             error: function(response) {
                 $('body').loading('stop');
@@ -1378,7 +1398,7 @@ a {
                             <div class="modal-footer">
                                 <button id="deleteForm" class="btn btn-danger" style="display: none;">Delete Notes 1</button>
                                 <button id="addForm" class="btn btn-success">Add Notes</button>
-                                <input id="createTicket" type="submit" class="btn btn-primary" value="Create Ticket">
+                                <input id="createTicket" type="button" class="btn btn-primary" value="Save All">
                             </div>
                         </form>
                     </div>
