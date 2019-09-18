@@ -288,19 +288,21 @@ $(document).ready(function() {
                 $("#remote_ticket_notes").val(response.notes);
                 $('body').loading('stop');
                 if(response.notes == '-') {
-                    var r = confirm("Data tiket tidak ditemukan. Apakah ingin dibuatkan tiket?");
-                    if (r == true) {
-                        $("#tiketReady").val('notready');
-                        $("#remote_ticket_description_1").val(isinya);
-                        $("#tiketRemedy").modal('show');
-                    }
+                    confirmAlert("Data tiket tidak ditemukan", "Apakah ingin dibuatkan tiket?", "Create Ticket").then((result) => {
+                        if (result.value) {
+                            $("#tiketReady").val('notready');
+                            $("#remote_ticket_description_1").val(isinya);
+                            $("#tiketRemedy").modal('show');
+                        }
+                    })
                 } else {
-                    var r = confirm("Data tiket ditemukan. Apakah ingin melakukan perubahan?");
-                    if (r == true) {
-                        $("#tiketReady").val('ready');
-                        $("#remote_ticket_description_1").val(response.description);
-                        $("#tiketRemedy").modal('show');
-                    }
+                    confirmAlert("Data tiket ditemukan", "Apakah ingin melakukan perubahan?", "Update Ticket").then((result) => {
+                        if (result.value) {
+                            $("#tiketReady").val('ready');
+                            $("#remote_ticket_description_1").val(response.description);
+                            $("#tiketRemedy").modal('show');
+                        }
+                    })
                 }
             },
             error: function(response) {
@@ -310,6 +312,36 @@ $(document).ready(function() {
     });
 
 });
+
+function successAlert(strTitle, strBody, okButton) {
+    Swal.fire({
+        title: strTitle,
+        text: strBody,
+        type: 'success',
+        confirmButtonText: okButton
+    })
+}
+
+function errorAlert(strTitle, strBody, okButton) {
+    Swal.fire({
+        title: strTitle,
+        text: strBody,
+        type: 'error',
+        confirmButtonText: okButton
+    })
+}
+
+function confirmAlert(strQuestion, strBody, okButton) {
+    return Swal.fire({
+        title: strQuestion,
+        text: strBody,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: okButton
+    })
+}
 </script>
 <style type="text/css">
 th {
