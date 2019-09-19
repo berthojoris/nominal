@@ -127,7 +127,7 @@ $(document).ready(function() {
         dataType: "json",
         success: function (response) {
             var toAppend = '';
-            toAppend += '<option value="-">- PILIH -</option>';
+            toAppend += '<option value="-">- Choose -</option>';
             $.each(response, function(key, val) {
                 toAppend += '<option value="'+val+'">'+val+'</option>';
             });
@@ -160,7 +160,7 @@ $(document).ready(function() {
                             <label>Jenis</label>
                             <select class="form-control jenis" id="type_`+cf+`" name="type[]">
                                 <option value="remote">Remote</option>
-                                <option value="jarkom">Jarkom</option>
+                                <option value="jarkom">Network</option>
                             </select>
                         </div>
                     </div>
@@ -1317,7 +1317,7 @@ a {
                                             <label>Jenis</label>
                                             <select class="form-control jenis" id="type" name="type[]">
                                                 <option value="remote">Remote</option>
-                                                <option value="jarkom">Jarkom</option>
+                                                <option value="jarkom">Network</option>
                                             </select>
                                         </div>
                                     </div>
