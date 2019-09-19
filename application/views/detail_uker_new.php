@@ -157,7 +157,7 @@ $(document).ready(function() {
                 <div class="row `+style+`">
                     <div class="col-md-6 spasiAtas">
                         <div class="form-group">
-                            <label>Jenis</label>
+                            <label>Type</label>
                             <select class="form-control jenis" id="type_`+cf+`" name="type[]">
                                 <option value="remote">Remote</option>
                                 <option value="jarkom">Network</option>
@@ -1314,7 +1314,7 @@ a {
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Jenis</label>
+                                            <label>Type</label>
                                             <select class="form-control jenis" id="type" name="type[]">
                                                 <option value="remote">Remote</option>
                                                 <option value="jarkom">Network</option>
@@ -1323,7 +1323,7 @@ a {
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>IP LAN</label>
+                                            <label>IP LAN/IP WAN</label>
                                             <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
                                         </div>
                                     </div>
@@ -1437,7 +1437,7 @@ a {
                             </div>
                             <div class="modal-footer">
                                 <button id="deleteForm" class="btn btn-danger" style="display: none;">Delete Notes 1</button>
-                                <button id="addForm" class="btn btn-success">Add Notes</button>
+                                <button id="addForm" class="btn btn-success">More ticket</button>
                                 <input id="createTicket" type="button" class="btn btn-primary" value="Save All">
                             </div>
                         </form>
