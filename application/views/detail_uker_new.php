@@ -85,6 +85,7 @@ $(document).on('change', '.networkStatus', function(e) {
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
         var isiNote = nilai+"_"+ip_lan+"_";
+        $("#remote_ticket_notes").val(isiNote);
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
 });
