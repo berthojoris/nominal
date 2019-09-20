@@ -116,17 +116,28 @@ class Ticketremedy {
 				'notes' => '-',
 				'status' => '-',
 				'code' => 404,
-				'msg' => 'Data not found on server'
+				'msg' => 'Result from soap is empty'
 			]);
 		} else {
-			$jsonOutput = json_encode([
-				'incident_number' => $result['IncidentNumber'],
-				'description' => $result['Description'],
-				'notes' => '-',
-				'status' => $result['Status'],
-				'code' => 200,
-				'msg' => 'Data found'
-			]);
+			if(isset($result['faultcode']) || !empty($result['faultcode'])) {
+				$jsonOutput = json_encode([
+					'incident_number' => '-',
+					'description' => '-',
+					'notes' => '-',
+					'status' => '-',
+					'code' => 404,
+					'msg' => 'Data not found'
+				]);
+			} else {
+				$jsonOutput = json_encode([
+					'incident_number' => $result['IncidentNumber'],
+					'description' => $result['Description'],
+					'notes' => $result['Notes'],
+					'status' => $result['Status'],
+					'code' => 200,
+					'msg' => 'Data found'
+				]);
+			}
 		}
 
 		echo $jsonOutput;

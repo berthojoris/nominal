@@ -263,6 +263,7 @@ $(document).ready(function() {
 
     $("#openForm").click(function (e) { 
         e.preventDefault();
+        
         $('body').loading({
             stoppable: false,
             message: 'checking ticket'
@@ -283,8 +284,8 @@ $(document).ready(function() {
         isinya += "NAMA UKER : "+nama_uker+br;
         isinya += "PERMASALAHAN : Lampu modem lost merah nyala"+br;
         isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
-        isinya += "PIC : "+pic;
-        isinya += "Terima kasih";
+        isinya += "PIC : "+pic+br;
+        isinya += "Terima Kasih";
 
         $.ajax({
             type: "GET",
@@ -304,13 +305,9 @@ $(document).ready(function() {
                         }
                     })
                 } else {
-                    confirmAlert("Data tiket ditemukan", "Apakah ingin melakukan perubahan?", "Update Ticket").then((result) => {
-                        if (result.value) {
-                            $("#tiketReady").val('ready');
-                            $("#remote_ticket_description_1").val(response.description);
-                            $("#tiketRemedy").modal('show');
-                        }
-                    })
+                    $("#tiketReady").val('ready');
+                    $("#remote_ticket_description_1").val(response.description);
+                    $("#tiketRemedy").modal('show');
                 }
             },
             error: function(response) {
