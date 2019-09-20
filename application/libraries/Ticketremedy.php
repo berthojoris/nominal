@@ -100,28 +100,40 @@ class Ticketremedy {
 				'code' => 500,
 				'msg' => 'Soap Client Fault'
             ]);
+		} else if($client->getError()) {
+			$jsonOutput = json_encode([
+				'incident_number' => '-',
+				'description' => '-',
+				'notes' => '-',
+				'status' => '-',
+				'code' => 500,
+				'msg' => 'Soap Client Error'
+			]);
+		} else if(empty($result)) {
+			$jsonOutput = json_encode([
+				'incident_number' => '-',
+				'description' => '-',
+				'notes' => '-',
+				'status' => '-',
+				'code' => 404,
+				'msg' => 'Data not found on server'
+			]);
 		} else {
-			$err = $client->getError();
-			if($err) {
-				$jsonOutput = json_encode([
-					'incident_number' => '-',
-					'description' => '-',
-					'notes' => '-',
-					'status' => '-',
-					'code' => 500,
-					'msg' => 'Soap Client Error'
-				]);
-			} else {
-			    $jsonOutput = json_encode([
-			        'incident_number' => $result['IncidentNumber'],
-			        'description' => $result['Description'],
-			        'status' => $result['Status'],
-			        'code' => 200
-			    ]);
-			}
+			$jsonOutput = json_encode([
+				'incident_number' => $result['IncidentNumber'],
+				'description' => $result['Description'],
+				'notes' => '-',
+				'status' => $result['Status'],
+				'code' => 200,
+				'msg' => 'Data found'
+			]);
 		}
 
 		echo $jsonOutput;
+	}
+
+	function beforeSubmit() {
+		
 	}
 
 }

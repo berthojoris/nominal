@@ -21,7 +21,6 @@ class Remoteticket extends CI_Controller {
 		
 		foreach ($this->input->post('type') as $key => $val) {
 			EloquentRemoteTicket::create([
-				'uuid' => $uuid,
 				'type' => $this->input->post('type')[$key],
 				'network_status' => ($this->input->post('type')[$key] == 'jarkom') ? $this->input->post('network_status')[$key] : '',
 				'id_remote' => $this->input->post('remote_id')[$key],
