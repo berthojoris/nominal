@@ -87,7 +87,6 @@ class Ticketremedy {
 		}
 		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
         $client->setHeaders($headers);
-        $staticIP = "55.25.4.1";
 		$param = array('IPAddress' => $dynamicIP);
 		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
 
@@ -143,8 +142,35 @@ class Ticketremedy {
 		echo $jsonOutput;
 	}
 
-	function beforeSubmit() {
-		
+	function beforeSubmit($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
+		$root = $_SERVER['DOCUMENT_ROOT'];
+		$serverIP = $_SERVER['SERVER_ADDR'];
+		if($serverIP == "127.0.0.1") {
+			require_once($root . "/application/libraries/nusoap.php");
+		} else {
+			require_once($root . "/nominal/application/libraries/nusoap.php");
+		}
+        
+        $proxyhost = !is_null($proxyHost) ? $proxyHost : '';
+		$proxyport = !is_null($proxyPort) ? $proxyPort : '';
+		$proxyusername = !is_null($proxyUsername) ? $proxyUsername : '';
+		$proxypassword = !is_null($proxyPassword) ? $proxyPassword : '';
+
+    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
+		$err = $client->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+		}
+		$headers = array('AuthenticationInfo' => array('userName' => 'int_nominal', 'password' => '123456'));
+        $client->setHeaders($headers);
+		$param = array('IPAddress' => $dynamicIP);
+		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
+
+		if(isset($result['faultcode']) || !empty($result['faultcode'])) {
+			echo "EMPTY";
+		} else {
+			echo "CREATED";
+		}
 	}
 
 }

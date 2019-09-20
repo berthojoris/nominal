@@ -43,6 +43,9 @@ a {color : #777777;}
 if(!empty($this->session->userdata('notif_success'))) {
     echo '<div class="alert alert-success" role="alert">Success create ticket</div>';
 }
+if(!empty($this->session->userdata('ticket_created'))) {
+  echo '<div class="alert alert-danger" role="alert">Ticket has been created before</div>';
+}
 ?>
     <div class="panel panel-default">
         <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">List Remote - All Region</div>
