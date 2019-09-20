@@ -57,6 +57,8 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
+        var isiNote = nilai+"_"+ip_lan+"_VANDALISME";
+        $("#remote_ticket_notes_"+codeID).val(isiNote);
     } else {
         $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().removeClass('visibleOff');
@@ -74,6 +76,7 @@ $(document).on('change', '.networkStatus', function(e) {
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
         var ip = $('[netstat="'+nilai+'"]').val();
+        var ip_lan = $("#txt_ip").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP WAN : "+ip+br;
@@ -83,6 +86,8 @@ $(document).on('change', '.networkStatus', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
+        var isiNote = nilai+"_"+ip_lan+"_VANDALISME";
+        $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
 });
 
