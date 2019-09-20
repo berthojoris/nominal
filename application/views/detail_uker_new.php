@@ -89,7 +89,6 @@ $(document).on('change', '.networkStatus', function(e) {
 $(document).ready(function() {
     // initialize();
     var formData = $("#formTicketRemedy").serialize();
-    var urlCreateTicket="<?php echo base_url(); ?>index.php/remoteticket/insertTicket";
     var postTicket = "<?php echo base_url(); ?>index.php/remoteticket/createticket";
     var ticketApi = "<?php echo base_url(); ?>index.php/remoteticket/tiketapi/"+$("#txtIPLan").val();
     var getSession = "<?php echo base_url(); ?>index.php/remoteticket/getNetworkDetail";
@@ -246,19 +245,6 @@ $(document).ready(function() {
             $("#remote_ticket_description_"+cf).val($("#remote_ticket_description_1").val());
         }
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
-    });
-
-    $("#submitTiketRemedy").click(function (e) { 
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: urlCreateTicket,
-            data: formData,
-            dataType: "json",
-            success: function (response) {
-                console.log(response)
-            }
-        });
     });
 
     $("#openForm").click(function (e) { 
