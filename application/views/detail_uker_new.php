@@ -57,8 +57,6 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
-        var isiNote = nilai+"_"+ip_lan+"_VANDALISME";
-        $("#remote_ticket_notes_"+codeID).val(isiNote);
     } else {
         $("#remote_ticket_description_"+codeID).val('');
         $(this).parent().parent().parent().next().removeClass('visibleOff');
@@ -86,7 +84,7 @@ $(document).on('change', '.networkStatus', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
-        var isiNote = nilai+"_"+ip_lan+"_VANDALISME";
+        var isiNote = nilai+"_"+ip_lan+"_";
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
 });
