@@ -108,9 +108,15 @@ $(document).ready(function() {
         e.preventDefault();
         $("#addForm").attr("disabled", true);
         $("#createTicket").attr("disabled", true);
+        // var serializedData = $("#tiketRemedy").serialize();
+        var passData = {
+            description: $("#remote_ticket_description_1").val(), 
+            notes: $("#remote_ticket_notes").val()
+        };
         $.ajax({
             type: "POST",
             url: postTicket,
+            data: passData,
             dataType: "json",
             success: function (response) {
                 if(response.code == 200) {

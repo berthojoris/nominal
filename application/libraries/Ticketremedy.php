@@ -2,7 +2,7 @@
 
 class Ticketremedy {
 
-	function postTicketRemedy($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
+	function postTicketRemedy($dynamicIP, $description, $notes, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
 		$root = $_SERVER['DOCUMENT_ROOT'];
 		$serverIP = $_SERVER['SERVER_ADDR'];
 
@@ -27,15 +27,15 @@ class Ticketremedy {
 		$param = [
 			'Assigned_Support_Company' => 'Bank BRI',
 			'Assigned_Support_Organization' => 'Divisi Satelit',
-			'CI_Name' => '55.25.70.1',
+			'CI_Name' => $dynamicIP,
 			'First_Name' => 'Jordan',
 			'Impact' => '2-Significant/Large',
 			'Last_Name' => 'Timothy',
 			'Reported_Source' => 'Phone',
 			'Service_Type' => 'User Service Restoration',
 			'Status' => 'Assigned',
-			'Summary' => 'test 2',
-			'Notes' => 'test 2 3 4 5',
+			'Summary' => $description,
+			'Notes' => $notes,
 			'Urgency' =>  '2-High',
 			'Work_Info_Locked' => 'No',
 			'Work_Info_View_Access' => 'Internal',

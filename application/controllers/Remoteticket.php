@@ -55,7 +55,9 @@ class Remoteticket extends CI_Controller {
 	
 	public function createticket()
     {
-		echo $this->ticketremedy->postTicketRemedy($this->uri->segment(3));
+		$description = $_POST['description'];
+		$notes = $_POST['notes'];
+		echo $this->ticketremedy->postTicketRemedy($this->uri->segment(3), $description, $notes);
     }
     
     public function getNetworkDetail()
