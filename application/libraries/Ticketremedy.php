@@ -17,7 +17,7 @@ class Ticketremedy {
 		$proxyusername = !is_null($proxyUsername) ? $proxyUsername : '';
 		$proxypassword = !is_null($proxyPassword) ? $proxyPassword : '';
 
-		$client = new nusoap_client('http://10.35.65.11:8080/arsys/WSDL/public/10.35.65.10/HPD_IncidentInterface_Create_WS', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
+		$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=HPD_IncidentInterface_Create_WS', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -90,25 +90,7 @@ class Ticketremedy {
 		$param = array('IPAddress' => $dynamicIP);
 		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
 
-		if ($client->fault) {
-		    $jsonOutput = json_encode([
-                'incident_number' => '-',
-                'description' => '-',
-                'notes' => '-',
-                'status' => '-',
-				'code' => 500,
-				'msg' => 'Soap Client Fault'
-            ]);
-		} else if($client->getError()) {
-			$jsonOutput = json_encode([
-				'incident_number' => '-',
-				'description' => '-',
-				'notes' => '-',
-				'status' => '-',
-				'code' => 500,
-				'msg' => 'Soap Client Error'
-			]);
-		} else if(empty($result)) {
+		if(isset($result['faultcode'])) {
 			$jsonOutput = json_encode([
 				'incident_number' => '-',
 				'description' => '-',
@@ -118,25 +100,14 @@ class Ticketremedy {
 				'msg' => 'Result from soap is empty'
 			]);
 		} else {
-			if(isset($result['faultcode']) || !empty($result['faultcode'])) {
-				$jsonOutput = json_encode([
-					'incident_number' => '-',
-					'description' => '-',
-					'notes' => '-',
-					'status' => '-',
-					'code' => 404,
-					'msg' => 'Data not found'
-				]);
-			} else {
-				$jsonOutput = json_encode([
-					'incident_number' => $result['IncidentNumber'],
-					'description' => $result['Description'],
-					'notes' => $result['Notes'],
-					'status' => $result['Status'],
-					'code' => 200,
-					'msg' => 'Data found'
-				]);
-			}
+			$jsonOutput = json_encode([
+				'incident_number' => $result['IncidentNumber'],
+				'description' => $result['Description'],
+				'notes' => $result['Notes'],
+				'status' => $result['Status'],
+				'code' => 200,
+				'msg' => 'Data found'
+			]);
 		}
 
 		echo $jsonOutput;
