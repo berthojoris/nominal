@@ -48,7 +48,7 @@ $(document).on('change', '.jenis', function(e) {
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
-        var ip_lan = $("#txt_ip").val();
+        var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
@@ -57,8 +57,13 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
+
+        var isiNote = nama_uker+"_"+ip_lan+"_";
+        $("#remote_ticket_notes").val('');
+        $("#remote_ticket_notes_"+codeID).val('');
     } else {
         $("#remote_ticket_description_"+codeID).val('');
+        $("#remote_ticket_notes_"+codeID).val('');
         $(this).parent().parent().parent().next().removeClass('visibleOff');
     }
 });
@@ -68,23 +73,25 @@ $(document).on('change', '.networkStatus', function(e) {
     var codeID = $(this).attr("code");
     if(nilai == '-') {
         $("#remote_ticket_description_"+codeID).val('');
+        $("#remote_ticket_notes").val('');
+        $("#remote_ticket_notes_"+codeID).val('');
     } else {
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
-        var ip = $('[netstat="'+nilai+'"]').val();
-        var ip_lan = $("#txt_ip").val();
+        var ip_wan = $('[netstat="'+nilai+'"]').val();
+        var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
-        isinya += "IP WAN : "+ip+br;
+        isinya += "IP WAN : "+ip_wan+br;
         isinya += "NAMA UKER : "+nama_uker+br;
         isinya += "PROVIDER JARKOM : "+nilai+br;
         isinya += "PERMASALAHAN : "+br;
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
-        var isiNote = nilai+"_"+ip_lan+"_";
+        var isiNote = nilai.replace("/", "_")+"_"+nama_uker+"_"+ip_wan+"_";
         $("#remote_ticket_notes").val(isiNote);
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
@@ -111,7 +118,8 @@ $(document).ready(function() {
         // var serializedData = $("#tiketRemedy").serialize();
         var passData = {
             description: $("#remote_ticket_description_1").val(), 
-            notes: $("#remote_ticket_notes").val()
+            notes: $("#remote_ticket_notes").val(),
+            newnotes: $("#remote_ticket_notes").val()
         };
         $.ajax({
             type: "POST",
@@ -273,7 +281,7 @@ $(document).ready(function() {
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
         var pic = $("#txt_pic").val();
-        var ip_lan = $("#txt_ip").val();
+        var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
@@ -574,7 +582,7 @@ a {
 
                 <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker.' '.$data[0]->nama_remote ?>">
                 <input type="hidden" id="txt_pic" value="<?= $data[0]->pic_kanwil ?>">
-                <input type="hidden" id="txt_ip" value="<?= $data[0]->ip_lan ?>">
+                <input type="hidden" id="txt_ip_lan" value="<?= $data[0]->ip_lan ?>">
 
                 <table class="table table-hover">
                     <tr>
