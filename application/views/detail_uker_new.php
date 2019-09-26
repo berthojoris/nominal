@@ -278,12 +278,13 @@ $(document).ready(function() {
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
+        var nama_uker_detail = $("#txt_nama_uker_detail").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
-        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "NAMA UKER : "+nama_uker_detail+br;
         isinya += "PERMASALAHAN : Lampu modem lost merah nyala"+br;
         isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
         isinya += "PIC : "+pic+br;
