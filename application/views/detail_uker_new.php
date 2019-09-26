@@ -58,9 +58,8 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
 
-        var isiNote = nama_uker+"_"+ip_lan+"_";
-        $("#remote_ticket_notes").val('');
-        $("#remote_ticket_notes_"+codeID).val('');
+        var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_";
+        $("#remote_ticket_notes_"+codeID).val(isiNote);
     } else {
         $("#remote_ticket_description_"+codeID).val('');
         $("#remote_ticket_notes_"+codeID).val('');
@@ -73,7 +72,6 @@ $(document).on('change', '.networkStatus', function(e) {
     var codeID = $(this).attr("code");
     if(nilai == '-') {
         $("#remote_ticket_description_"+codeID).val('');
-        $("#remote_ticket_notes").val('');
         $("#remote_ticket_notes_"+codeID).val('');
     } else {
         var type = showType($("#txt_type").val());
@@ -92,7 +90,6 @@ $(document).on('change', '.networkStatus', function(e) {
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
         var isiNote = nilai.replace("/", "_")+"_"+nama_uker+"_"+ip_wan+"_";
-        $("#remote_ticket_notes").val(isiNote);
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
 });
@@ -118,8 +115,7 @@ $(document).ready(function() {
         // var serializedData = $("#tiketRemedy").serialize();
         var passData = {
             description: $("#remote_ticket_description_1").val(), 
-            notes: $("#remote_ticket_notes").val(),
-            newnotes: $("#remote_ticket_notes").val()
+            notes: $("#remote_ticket_notes_1").val()
         };
         $.ajax({
             type: "POST",
@@ -166,7 +162,7 @@ $(document).ready(function() {
 
         var ticketStatus = $("#status_ticket").val();
         var incidentNumber = $("#incident_number").val();
-        var remoteNotes = $("#remote_ticket_notes").val();
+        var remoteNotes = $("#remote_ticket_notes_1").val();
         var remoteDesc = $("#remote_ticket_description_1").val();
 
         var cloneElement = `
@@ -298,7 +294,7 @@ $(document).ready(function() {
             success: function (response) {
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
-                $("#remote_ticket_notes").val(response.notes);
+                $("#remote_ticket_notes_1").val(response.notes);
                 $('body').loading('stop');
                 if(response.notes == '-') {
                     confirmAlert("Data tiket tidak ditemukan", "Apakah ingin dibuatkan tiket?", "Create Ticket").then((result) => {
@@ -313,6 +309,8 @@ $(document).ready(function() {
                     $("#remote_ticket_description_1").val(response.description);
                     $("#tiketRemedy").modal('show');
                 }
+                var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_";
+                $("#remote_ticket_notes_1").val(isiNote);
             },
             error: function(response) {
                 $('body').loading('stop');
@@ -580,7 +578,7 @@ a {
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">PROFILE REMOTE DETAIL</div>
             <div style="width:100%;height:100%;position:relative;">
 
-                <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker.' '.$data[0]->nama_remote ?>">
+                <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker ?>">
                 <input type="hidden" id="txt_pic" value="<?= $data[0]->pic_kanwil ?>">
                 <input type="hidden" id="txt_ip_lan" value="<?= $data[0]->ip_lan ?>">
 
@@ -1378,7 +1376,7 @@ a {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Notes</label>
-                                            <textarea name="remote_ticket_notes[]" id="remote_ticket_notes" class="form-control"></textarea>
+                                            <textarea name="remote_ticket_notes[]" id="remote_ticket_notes_1" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
