@@ -47,12 +47,13 @@ $(document).on('change', '.jenis', function(e) {
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
+        var nama_uker_detail = $("#txt_nama_uker_detail").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
-        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "NAMA UKER : "+nama_uker_detail+br;
         isinya += "PERMASALAHAN : "+br;
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
@@ -77,13 +78,14 @@ $(document).on('change', '.networkStatus', function(e) {
         var type = showType($("#txt_type").val());
         var kode_uker = $("#txt_kode_branch").val();
         var nama_uker = $("#txt_nama_uker").val();
+        var nama_uker_detail = $("#txt_nama_uker_detail").val();
         var pic = $("#txt_pic").val();
         var ip_wan = $('[netstat="'+nilai+'"]').val();
         var ip_lan = $("#txt_ip_lan").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP WAN : "+ip_wan+br;
-        isinya += "NAMA UKER : "+nama_uker+br;
+        isinya += "NAMA UKER : "+nama_uker_detail+br;
         isinya += "PROVIDER JARKOM : "+nilai+br;
         isinya += "PERMASALAHAN : "+br;
         isinya += "ACTION : "+br;
@@ -579,6 +581,7 @@ a {
             <div style="width:100%;height:100%;position:relative;">
 
                 <input type="hidden" id="txt_nama_uker" value="<?= $data[0]->tipe_uker ?>">
+                <input type="hidden" id="txt_nama_uker_detail" value="<?= $data[0]->tipe_uker.' '.$data[0]->nama_remote ?>">
                 <input type="hidden" id="txt_pic" value="<?= $data[0]->pic_kanwil ?>">
                 <input type="hidden" id="txt_ip_lan" value="<?= $data[0]->ip_lan ?>">
 
