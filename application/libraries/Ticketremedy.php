@@ -17,7 +17,7 @@ class Ticketremedy {
 		$proxyusername = !is_null($proxyUsername) ? $proxyUsername : '';
 		$proxypassword = !is_null($proxyPassword) ? $proxyPassword : '';
 
-		$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=HPD_IncidentInterface_Create_WS', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
+		$client = new nusoap_client('http://web.brisolutions.bri.co.id/arsys/services/ARService?server=10.35.65.10&webService=HPD_IncidentInterface_Create_WS', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -80,7 +80,7 @@ class Ticketremedy {
 		$proxyusername = !is_null($proxyUsername) ? $proxyUsername : '';
 		$proxypassword = !is_null($proxyPassword) ? $proxyPassword : '';
 
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
+    	$client = new nusoap_client('http://web.brisolutions.bri.co.id/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
@@ -127,7 +127,7 @@ class Ticketremedy {
 		$proxyusername = !is_null($proxyUsername) ? $proxyUsername : '';
 		$proxypassword = !is_null($proxyPassword) ? $proxyPassword : '';
 
-    	$client = new nusoap_client('http://10.35.65.11:8080/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
+    	$client = new nusoap_client('http://web.brisolutions.bri.co.id/arsys/services/ARService?server=10.35.65.10&webService=BRI:INC:GetInfoFromIPAddress', '', $proxyhost, $proxyport, $proxyusername, $proxypassword);
 		$err = $client->getError();
 		if ($err) {
 			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';

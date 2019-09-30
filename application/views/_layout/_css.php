@@ -16,4 +16,3 @@
 
 <!-- Ajax loader style -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/ajax_loader.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
