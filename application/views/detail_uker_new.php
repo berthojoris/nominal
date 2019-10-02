@@ -97,10 +97,12 @@ $(document).on('change', '.networkStatus', function(e) {
 });
 
 $(document).ready(function() {
-    // initialize();
+    var txtIPLanVal = $("#txtIPLan").val();
+    var txtIDAlarmVal = $("#id_alarm2").val();
+
     var formData = $("#formTicketRemedy").serialize();
     var postTicket = "<?php echo base_url(); ?>index.php/remoteticket/createticket";
-    var ticketApi = "<?php echo base_url(); ?>index.php/remoteticket/tiketapi/"+$("#txtIPLan").val();
+    var ticketApi = "<?php echo base_url(); ?>index.php/remoteticket/tiketapi/"+txtIPLanVal+"/"+txtIDAlarmVal;
     var getSession = "<?php echo base_url(); ?>index.php/remoteticket/getNetworkDetail";
     $("#appendData").empty();
 
@@ -312,7 +314,7 @@ $(document).ready(function() {
                     $("#remote_ticket_description_1").val(response.description);
                     $("#tiketRemedy").modal('show');
                 }
-                var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_";
+                var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_"+response.id_alarm;
                 $("#remote_ticket_notes_1").val(isiNote);
             },
             error: function(response) {

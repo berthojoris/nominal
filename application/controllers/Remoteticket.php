@@ -9,6 +9,8 @@ class Remoteticket extends CI_Controller {
     {
         parent::__construct();
 		$this->load->model('EloquentRemoteTicket');
+		$this->load->model('EloquentAlarm');
+		$this->load->model('EloquentAlarmType');
 		$this->load->library('ticketremedy');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
@@ -50,7 +52,24 @@ class Remoteticket extends CI_Controller {
 
 	public function tiketapi()
     {
-		echo $this->ticketremedy->getTicketRemedy($this->uri->segment(3));
+		$sesIdAlarm = $this->session->userdata('id_alarm');
+		$idAlarm = (empty($sesIdAlarm) || is_null($sesIdAlarm)) ? 'EMPTY' : $sesIdAlarm;
+		
+		if($idAlarm != 'EMPTY') {
+			$alarmNotes = EloquentAlarm::where('id', $idAlarm)->first();
+			if(!empty($alarmNotes)) {
+				if($alarmNotes->id_alarm_type != 0) {
+					$output = $alarmNotes->id_alarm_type;
+					$alarmType = EloquentAlarmType::where('id', $output)->first()->alarm_type; // Ambil alarm typenya
+				} else {
+					$output = 'EMPTY'; //Jika di tabel tb_alarm, id_alarm_type = 0
+				}
+			} else {
+				$output = 'EMPTY'; //Jika di tabel tb_alarm, data tidak ditemukan
+			}	
+		} else {
+			echo $this->ticketremedy->getTicketRemedy($this->uri->segment(3), 'EMPTY');
+		}
 	}
 	
 	public function createticket()

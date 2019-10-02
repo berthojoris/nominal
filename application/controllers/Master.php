@@ -1148,6 +1148,8 @@ class Master extends CI_Controller
 			
 		);
 
+		$this->session->set_userdata('id_alarm', $id);
+
 		$return = $this->db->insert('tb_alarm_notes', $data);
 
 		$cek = $this->db->select('*')->from('tb_alarm')->where('id',$id)->get()->result();

@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class EloquentJarkomTicket extends Eloquent {
-    protected $table = 'tb_jarkom_ticket';
+class EloquentAlarmType extends Eloquent {
+    protected $table = 'tb_alarm_type';
     public $timestamps = false;
     public $guarded = ['id'];
 }

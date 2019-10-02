@@ -66,7 +66,7 @@ class Ticketremedy {
 		echo $jsonOutput;
 	}
 
-    function getTicketRemedy($dynamicIP, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
+    function getTicketRemedy($dynamicIP, $idAlarm, $proxyHost=null, $proxyPort=null, $proxyUsername=null, $proxyPassword=null) {
 		$root = $_SERVER['DOCUMENT_ROOT'];
 		$serverIP = $_SERVER['SERVER_ADDR'];
 		if($serverIP == "127.0.0.1") {
@@ -89,6 +89,7 @@ class Ticketremedy {
         $client->setHeaders($headers);
 		$param = array('IPAddress' => $dynamicIP);
 		$result = $client->call('Get_ticket_info',  $param, '', '', false, true);
+		$idAlarmOutput = ($idAlarm == 'EMPTY') ? '' : $idAlarm;
 
 		if(isset($result['faultcode'])) {
 			$jsonOutput = json_encode([
@@ -97,6 +98,7 @@ class Ticketremedy {
 				'notes' => '-',
 				'status' => '-',
 				'code' => 404,
+				'id_alarm' => $idAlarmOutput,
 				'msg' => 'Result from soap is empty'
 			]);
 		} else {
@@ -106,6 +108,7 @@ class Ticketremedy {
 				'notes' => $result['Notes'],
 				'status' => $result['Status'],
 				'code' => 200,
+				'id_alarm' => $idAlarmOutput,
 				'msg' => 'Data found'
 			]);
 		}
