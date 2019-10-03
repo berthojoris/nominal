@@ -50,6 +50,7 @@ $(document).on('change', '.jenis', function(e) {
         var nama_uker_detail = $("#txt_nama_uker_detail").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip_lan").val();
+        var dinamic_alarm = $("#dinamic_alarm").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
@@ -59,7 +60,7 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
 
-        var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_";
+        var isiNote = "REMOTE_"+nama_uker+"_"+ip_lan+"_"+dinamic_alarm;
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     } else {
         $("#remote_ticket_description_"+codeID).val('');
@@ -82,6 +83,7 @@ $(document).on('change', '.networkStatus', function(e) {
         var pic = $("#txt_pic").val();
         var ip_wan = $('[netstat="'+nilai+'"]').val();
         var ip_lan = $("#txt_ip_lan").val();
+        var dinamic_alarm = $("#dinamic_alarm").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP WAN : "+ip_wan+br;
@@ -91,7 +93,7 @@ $(document).on('change', '.networkStatus', function(e) {
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
-        var isiNote = nilai.replace("/", "_")+"_"+nama_uker+"_"+ip_wan+"_";
+        var isiNote = nilai.replace("/", "_")+"_"+nama_uker+"_"+ip_wan+"_"+dinamic_alarm;
         $("#remote_ticket_notes_"+codeID).val(isiNote);
     }
 });
@@ -265,7 +267,7 @@ $(document).ready(function() {
         $('#tiketRemedy').animate({ scrollTop: $(document).height() }, 1);
     });
 
-    $("#openForm").click(function (e) { 
+    $("#openForm").click(function (e) {
         e.preventDefault();
         
         $('body').loading({
@@ -296,6 +298,12 @@ $(document).ready(function() {
             url: ticketApi,
             dataType: "json",
             success: function (response) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    id: 'dinamic_alarm',
+                    name: 'dinamic_alarm'
+                }).appendTo('#tiketRemedy');
+
                 $("#incident_number").val(response.incident_number);
                 $("#status_ticket").val(response.status);
                 $("#remote_ticket_notes_1").val(response.notes);
