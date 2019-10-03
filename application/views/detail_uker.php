@@ -130,7 +130,7 @@ $(document).ready(function() {
                 if(response.code == 200) {
                     $("#formTicketRemedy").submit();
                 } else {
-                    errorAlert("Gagal", "Tiket gagal dibuat. Silahkan refresh dan coba lagi", "Ok")
+                    errorAlert("Failed", "Ticket failed. Please refresh and try again", "Ok")
                     $("#addForm").attr("disabled", false);
                     $("#createTicket").attr("disabled", false);
                 }
@@ -287,10 +287,9 @@ $(document).ready(function() {
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker_detail+br;
-        isinya += "PERMASALAHAN : Lampu modem lost merah nyala"+br;
-        isinya += "ACTION : Mohon bantuan pengecekan dan open tiket telkom"+br;
-        isinya += "PIC : "+pic+br;
-        isinya += "Terima Kasih";
+        isinya += "PERMASALAHAN : "+br;
+        isinya += "ACTION : "+br;
+        isinya += "PIC : "+pic;
 
         $.ajax({
             type: "GET",
@@ -302,7 +301,7 @@ $(document).ready(function() {
                 $("#remote_ticket_notes_1").val(response.notes);
                 $('body').loading('stop');
                 if(response.notes == '-') {
-                    confirmAlert("Data tiket tidak ditemukan", "Apakah ingin dibuatkan tiket?", "Create Ticket").then((result) => {
+                    confirmAlert("Ticket data not found","Do you want to make a ticket?","Create Ticket").then((result) => {
                         if (result.value) {
                             $("#tiketReady").val('notready');
                             $("#remote_ticket_description_1").val(isinya);
@@ -778,7 +777,7 @@ a {
                                 </button>
                                 <?php
                                     if($data[0]->kode_op==1) {
-                                        echo '<button type="button" id="openForm" class="btn-xs btn-primary">Tiket Remedy</button>';
+                                        echo '<button type="button" id="openForm" class="btn-xs btn-primary">Ticket Remedy</button>';
                                     }
                                 ?>
                             </div>
@@ -1311,7 +1310,7 @@ a {
                     <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Tiket Remedy</h4>
+                        <h4 class="modal-title">Ticket Remedy</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form" id="formTicketRemedy" action="<?php echo base_url(); ?>index.php/remoteticket/insertTicket" method='post'>
