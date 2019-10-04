@@ -301,7 +301,8 @@ $(document).ready(function() {
                 $('<input>').attr({
                     type: 'hidden',
                     id: 'dinamic_alarm',
-                    name: 'dinamic_alarm'
+                    name: 'dinamic_alarm',
+                    value: response.id_alarm
                 }).appendTo('#tiketRemedy');
 
                 $("#incident_number").val(response.incident_number);
