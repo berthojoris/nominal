@@ -1,16 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
-
 class Remoteticket extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
-		$this->load->model('EloquentRemoteTicket');
-		$this->load->model('EloquentAlarm');
-		$this->load->model('EloquentAlarmType');
 		$this->load->library('ticketremedy');
 		if ($this->session->userdata('username')==null) {
             redirect('login');
@@ -21,7 +15,7 @@ class Remoteticket extends CI_Controller {
 	{
 		if($this->ticketremedy->beforeSubmit($this->input->post('txtIPLan')) == "EMPTY") {
 			foreach ($this->input->post('type') as $key => $val) {
-				EloquentRemoteTicket::create([
+				$dataToInsert = [
 					'type' => $this->input->post('type')[$key],
 					'network_status' => ($this->input->post('type')[$key] == 'jarkom') ? $this->input->post('network_status')[$key] : '',
 					'id_remote' => $this->input->post('remote_id')[$key],
@@ -40,7 +34,8 @@ class Remoteticket extends CI_Controller {
 					'permasalahan' => '-',
 					'action' => '-',
 					'pic' => '-',
-				]);
+				];
+				$this->db->insert('tb_remote_ticket', $dataToInsert);
 			}
 			$this->session->set_userdata('notif_success', 'done');
 		} else {
@@ -56,11 +51,11 @@ class Remoteticket extends CI_Controller {
 		$idAlarm = (empty($sesIdAlarm) || is_null($sesIdAlarm)) ? 'EMPTY' : $sesIdAlarm;
 		
 		if($idAlarm != 'EMPTY') {
-			$alarmNotes = EloquentAlarm::where('id', $idAlarm)->first();
+			$alarmNotes = $this->db->select('*')->from('tb_alarm')->where('id', $idAlaram)->get()->row();
 			if(!empty($alarmNotes)) {
 				if($alarmNotes->id_alarm_type != 0) {
-					$output = $alarmNotes->id_alarm_type;
-					$alarmType = EloquentAlarmType::where('id', $output)->first()->alarm_type; // Ambil alarm typenya
+					$at = $alarmNotes->id_alarm_type;
+            		$output = $this->db->select('*')->from('tb_alarm_type')->where('id', $at)->get()->row();
 				} else {
 					$output = 'EMPTY'; //Jika di tabel tb_alarm, id_alarm_type = 0
 				}
