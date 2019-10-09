@@ -527,6 +527,61 @@
                 </ul>
             </li>
             <!-- menu untuk reporting [end]-->
+            <?php if(in_array( $this->session->userdata('role'), array(1,5) )) {?>
+                <li class="treeview  <?php if ($page == 'adm-operation/relokasi' || $page == 'adm-operation/upgrade-bw' || $page == 'adm-operation/dismantle' || $page == 'adm-operation/psb' || $page == 'adm-operation/realokasi' || $page == 'adm-operation/reaktifasi' || $page == 'adm-operation/baol') {echo 'active';} ?>">
+                    <a href="#">
+                        <i class="fa fa-desktop"></i>
+                        <span>Adm Operation</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-down pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li <?php if ($page == 'adm-operation/relokasi') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('adm_operation/relokasi'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Relokasi</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/upgrade-bw') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Upgrade BW</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/dismantle') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Dismantle</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/psb') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>PSB</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/realokasi') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Realokasi</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/reaktifasi') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Reaktifasi</span>
+                            </a>
+                        </li>
+                        <li <?php if ($page == 'adm-operation/baol') {echo 'class="active"';} ?>>
+                            <a href="<?php echo base_url('#'); ?>">
+                            <i class="fa fa-desktop"></i>
+                            <span>Baol</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php }?>
         </ul>
     </section>
     <!-- /.sidebar -->
