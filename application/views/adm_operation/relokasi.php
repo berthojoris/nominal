@@ -30,11 +30,45 @@ $(document).ready(function() {
 
 <section class="content" id="full" style="margin-top: -20px">
     <div class="row">
+        <?php 
+        if(!empty($this->session->userdata('notif_success'))) {
+            echo '<div class="alert alert-success" role="alert">Success create ticket</div>';
+        }
+        if(!empty($this->session->userdata('ticket_created'))) {
+            echo '<div class="alert alert-danger" role="alert">Ticket has been created before</div>';
+        }
+        ?>
+
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">Add SIK</div>
             <div class="buttonXtra">
                 <button id="add_form_btn" class="btn btn-primary">Add</button>
                 <button id="filter_form_btn" class="btn btn-primary">Filter</button>
+            </div>
+
+            <div class="panel-body">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-bordered table-striped table-hover" id="table_relokasi">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Jarkom</th>
+                                <th>ID Remote Old</th>
+                                <th>ID Remote New</th>
+                                <th>Alamat</th>
+                                <th>File Path</th>
+                                <th>No.SIK</th>
+                                <th>No.Doc Pendukung</th>
+                                <th>Alasan Relokasi</th>
+                                <th>Status Relokasi</th>
+                                <th>Tanggal Live</th>
+                                <th>Order Date</th>
+                                <th>PIC</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </row>
