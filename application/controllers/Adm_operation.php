@@ -6,7 +6,7 @@ class Adm_operation extends CI_Controller {
     {
 		parent::__construct();
         $this->load->library('session');
-		if ($this->session->userdata('username')==null) {
+		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
     }
