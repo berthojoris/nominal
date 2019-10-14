@@ -24,12 +24,13 @@ $(document).ready(function() {
 
     $("#ip_address_network_id").change(function (e) { 
         e.preventDefault();
+        var ip = $(this).val();
         $.ajax({
             type: "GET",
-            url: "<?=base_url()?>index.php/Api/getremote",
+            url: "<?=base_url()?>index.php/Api/getremote/"+ip,
             dataType: "json",
             success: function (response) {
-                
+                console.log(response);
             }
         });
     });
