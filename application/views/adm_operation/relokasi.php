@@ -2,12 +2,13 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/swal/sweetalert.min.css">
 <link href="<?php echo base_url(); ?>assets/bootstrap-select.min.css" rel="stylesheet" />
 <script src="<?php echo base_url(); ?>assets/bootstrap-select.min.js"></script>
+<script src="<?=base_url()?>assets/plugins/select2/select2.full.min.js"></script>
 <style>
 .buttonXtra {
     margin: 20px 0px 20px 20px;
 }
 .modal-dialog {
-    width: 1200px;
+    width: 700px;
     margin: 30px auto;
 }
 </style>
@@ -15,6 +16,38 @@
 $(document).ready(function() {
     $("#add_form_btn").click(function (e) {
         $("#add_form_relokasi").modal('show');
+    });
+
+    // $("#filter_form_btn").click(function (e) {
+    //     $("#search_modal").modal('show');
+    // });
+
+    $("#ip_address_network_id").change(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "<?=base_url()?>index.php/Api/getremote",
+            dataType: "json",
+            success: function (response) {
+                
+            }
+        });
+    });
+
+    $("#searchFilter").select2({
+        minimumInputLength:6,
+        placeholder:"Type at least 6 charachter",
+        ajax:{
+            url:"<?=base_url()?>index.php/ApiSimcard/findIccid",
+            type:"post",
+            dataType:"json",
+            data: function(param) {
+                return{search:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
     });
 });
 </script>
@@ -74,6 +107,25 @@ $(document).ready(function() {
     </row>
 </section>
 
+<div class="modal fade" id="search_modal">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content" >
+
+            <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Relokasi</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <input type="text" name="searchFilter" id="searchFilter">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="add_form_relokasi">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" >
@@ -96,7 +148,7 @@ $(document).ready(function() {
                                 </tr>
                                 <tr>
                                     <th>No SPK</th>
-                                    <td><input type="text" class="form-control input-sm" name="no_spk" id="no_spk"></td>
+                                    <td><input type="text" class="form-control input-sm" name="no_spk" id="no_spk" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Reason</th>
@@ -134,27 +186,31 @@ $(document).ready(function() {
                             <table class="table table-hover">
                                 <tr>
                                     <th>Network Type</th>
-                                    <td><input type="text" class="form-control input-sm" name="network_type" id="network_type"></td>
+                                    <td><input type="text" class="form-control input-sm" name="network_type" id="network_type" readonly></td>
                                 </tr>
                                 <tr>
-                                    <th>IP Address</th>
-                                    <td><input type="text" class="form-control input-sm" name="ip_address" id="ip_address"></td>
+                                    <th>IP LAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_lan" id="ip_lan" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP WAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_wan" id="ip_wan" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Remote Name</th>
-                                    <td><input type="text" class="form-control input-sm" name="remote_name" id="remote_name"></td>
+                                    <td><input type="text" class="form-control input-sm" name="remote_name" id="remote_name" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Remote Type</th>
-                                    <td><input type="text" class="form-control input-sm" name="remote_type" id="remote_type"></td>
+                                    <td><input type="text" class="form-control input-sm" name="remote_type" id="remote_type" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Region</th>
-                                    <td><input type="text" class="form-control input-sm" name="region" id="region"></td>
+                                    <td><input type="text" class="form-control input-sm" name="region" id="region" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Remote Address</th>
-                                    <td><textarea name="remote_address" id="remote_address" class="form-control input-sm" rows="3"></textarea></td>
+                                    <td><textarea name="remote_address" id="remote_address" class="form-control input-sm" rows="3" readonly></textarea></td>
                                 </tr>
                             </table>
                         </div>
@@ -166,8 +222,12 @@ $(document).ready(function() {
                                     <td><input type="text" class="form-control input-sm" name="network_type_new" id="network_type_new" disabled></td>
                                 </tr>
                                 <tr>
-                                    <th>IP Address</th>
-                                    <td><input type="text" class="form-control input-sm" name="ip_address_new" id="ip_address_new"></td>
+                                    <th>IP LAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_lan_new" id="ip_lan_new" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP WAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_wan_new" id="ip_wan_new"></td>
                                 </tr>
                                 <tr>
                                     <th>Remote Name</th>
