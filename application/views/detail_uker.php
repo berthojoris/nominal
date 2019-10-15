@@ -117,30 +117,32 @@ $(document).ready(function() {
     });
 
     $("#createTicket").click(function (e) {
-        $("#formTicketRemedy").submit();
-        // e.preventDefault();
-        // $("#addForm").attr("disabled", true);
-        // $("#createTicket").attr("disabled", true);
-        // // var serializedData = $("#tiketRemedy").serialize();
-        // var passData = {
-        //     description: $("#remote_ticket_description_1").val(), 
-        //     notes: $("#remote_ticket_notes_1").val()
-        // };
-        // $.ajax({
-        //     type: "POST",
-        //     url: postTicket,
-        //     data: passData,
-        //     dataType: "json",
-        //     success: function (response) {
-        //         if(response.code == 200) {
-        //             $("#formTicketRemedy").submit();
-        //         } else {
-        //             errorAlert("Failed", "Ticket failed. Please refresh and try again", "Ok")
-        //             $("#addForm").attr("disabled", false);
-        //             $("#createTicket").attr("disabled", false);
-        //         }
-        //     }
-        // });
+        e.preventDefault();
+        $("#addForm").attr("disabled", true);
+        $("#createTicket").attr("disabled", true);
+        var passData = {
+            description: $("#remote_ticket_description_1").val(), 
+            notes: $("#remote_ticket_notes_1").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: postTicket,
+            data: passData,
+            dataType: "json",
+            success: function (response) {
+                if(response.code == 200) {
+                    confirmAlertNoCancel("Finish Submit", "Your incident number is "+response.output, "Done!").then((result) => {
+                        if (result.value) {
+                            $("#formTicketRemedy").submit();
+                        }
+                    })
+                } else {
+                    errorAlert("Failed", "Ticket failed. Please refresh and try again", "Ok")
+                    $("#addForm").attr("disabled", false);
+                    $("#createTicket").attr("disabled", false);
+                }
+            }
+        });
     });
 
     $.ajax({
@@ -371,6 +373,18 @@ function confirmAlert(strQuestion, strBody, okButton) {
         text: strBody,
         type: 'warning',
         showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: okButton
+    })
+}
+
+function confirmAlertNoCancel(strQuestion, strBody, okButton) {
+    return Swal.fire({
+        title: strQuestion,
+        text: strBody,
+        type: 'warning',
+        showCancelButton: false,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: okButton
