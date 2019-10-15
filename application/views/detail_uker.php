@@ -51,11 +51,12 @@ $(document).on('change', '.jenis', function(e) {
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip_lan").val();
         var dinamic_alarm = $("#dinamic_alarm").val();
+        var dinamic_notes = $("#dinamic_notes").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker_detail+br;
-        isinya += "PERMASALAHAN : "+br;
+        isinya += "PERMASALAHAN : "+dinamic_alarm+br;
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
@@ -115,29 +116,30 @@ $(document).ready(function() {
     });
 
     $("#createTicket").click(function (e) {
-        e.preventDefault();
-        $("#addForm").attr("disabled", true);
-        $("#createTicket").attr("disabled", true);
-        // var serializedData = $("#tiketRemedy").serialize();
-        var passData = {
-            description: $("#remote_ticket_description_1").val(), 
-            notes: $("#remote_ticket_notes_1").val()
-        };
-        $.ajax({
-            type: "POST",
-            url: postTicket,
-            data: passData,
-            dataType: "json",
-            success: function (response) {
-                if(response.code == 200) {
-                    $("#formTicketRemedy").submit();
-                } else {
-                    errorAlert("Failed", "Ticket failed. Please refresh and try again", "Ok")
-                    $("#addForm").attr("disabled", false);
-                    $("#createTicket").attr("disabled", false);
-                }
-            }
-        });
+        $("#formTicketRemedy").submit();
+        // e.preventDefault();
+        // $("#addForm").attr("disabled", true);
+        // $("#createTicket").attr("disabled", true);
+        // // var serializedData = $("#tiketRemedy").serialize();
+        // var passData = {
+        //     description: $("#remote_ticket_description_1").val(), 
+        //     notes: $("#remote_ticket_notes_1").val()
+        // };
+        // $.ajax({
+        //     type: "POST",
+        //     url: postTicket,
+        //     data: passData,
+        //     dataType: "json",
+        //     success: function (response) {
+        //         if(response.code == 200) {
+        //             $("#formTicketRemedy").submit();
+        //         } else {
+        //             errorAlert("Failed", "Ticket failed. Please refresh and try again", "Ok")
+        //             $("#addForm").attr("disabled", false);
+        //             $("#createTicket").attr("disabled", false);
+        //         }
+        //     }
+        // });
     });
 
     $.ajax({
@@ -186,7 +188,7 @@ $(document).ready(function() {
                     <div class="col-md-6 spasiAtas">
                         <div class="form-group">
                             <label>IP LAN</label>
-                            <input type="text" name="remote_id[]" id="remote_id_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                            <input type="text" name="ip_lan_wan[]" id="ip_lan_wan_`+cf+`" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -285,6 +287,8 @@ $(document).ready(function() {
         var nama_uker_detail = $("#txt_nama_uker_detail").val();
         var pic = $("#txt_pic").val();
         var ip_lan = $("#txt_ip_lan").val();
+        var dinamic_alarm = $("#dinamic_alarm").val();
+        var dinamic_notes = $("#dinamic_notes").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP LAN : "+ip_lan+br;
@@ -292,6 +296,8 @@ $(document).ready(function() {
         isinya += "PERMASALAHAN : "+br;
         isinya += "ACTION : "+br;
         isinya += "PIC : "+pic;
+        
+        $("#remote_ticket_description_1").val(isinya);
 
         $.ajax({
             type: "GET",
@@ -303,6 +309,13 @@ $(document).ready(function() {
                     id: 'dinamic_alarm',
                     name: 'dinamic_alarm',
                     value: response.id_alarm
+                }).appendTo('#tiketRemedy');
+
+                $('<input>').attr({
+                    type: 'hidden',
+                    id: 'dinamic_notes',
+                    name: 'dinamic_notes',
+                    value: response.notes
                 }).appendTo('#tiketRemedy');
 
                 $("#incident_number").val(response.incident_number);
@@ -587,6 +600,15 @@ a {
 </section>
 <section class="content" id="full" style="margin-top: -20px">
     <div class="row">
+    
+    <?php if ($this->session->flashdata('notif_success')) { ?>
+        <div class="alert alert-success"> <?= $this->session->flashdata('notif_success') ?> </div>
+    <?php } ?>
+
+    <?php if ($this->session->flashdata('ticket_created')) { ?>
+        <div class="alert alert-danger"> <?= $this->session->flashdata('ticket_created') ?> </div>
+    <?php } ?>
+
         <div class="panel panel-default" style="float: left;width:49%;">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">PROFILE REMOTE DETAIL</div>
             <div style="width:100%;height:100%;position:relative;">
@@ -1337,7 +1359,7 @@ a {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>IP LAN/IP WAN</label>
-                                            <input type="text" name="remote_id[]" id="remote_id" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
+                                            <input type="text" name="ip_lan_wan[]" id="ip_lan_wan" value="<?php echo $data[0]->ip_lan;?>" class="form-control">
                                         </div>
                                     </div>
                                 </div>

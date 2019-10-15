@@ -550,6 +550,9 @@ class Dashboard extends CI_Controller {
 
 			unset($_SESSION['data_combo']);
 
+			$this->session->set_userdata('idRemote', $this->uri->segment(3));
+			$this->session->set_userdata('redirectBack', current_url());
+
 			$arr = [];
 			if(!empty($data['jarkom'][$remote->id_remote])) {
 				foreach($data['jarkom'][$remote->id_remote] as $config) {
@@ -600,7 +603,7 @@ class Dashboard extends CI_Controller {
 		$data['title'] = 'Remote Detail';
 
 		// echo "<pre>";
-		// var_dump($data['provider']);
+		// var_dump($data);
 		// die();
 
 		//$this->template->views('detail_uker',$data);

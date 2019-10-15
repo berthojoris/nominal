@@ -13,20 +13,25 @@ class Remoteticket extends CI_Controller {
 
     public function insertTicket()
 	{
-		if($this->ticketremedy->beforeSubmit($this->input->post('txtIPLan')) == "EMPTY") {
-			foreach ($this->input->post('type') as $key => $val) {
+		// if($this->ticketremedy->beforeSubmit($this->input->post('txtIPLan')) == "EMPTY") {
+			
+		// } else {
+		// 	$this->session->set_flashdata('ticket_created', 'Ticket have been made before');
+		// }
+
+		foreach ($this->input->post('type') as $key => $val) {
+			if($this->input->post('type')[$key] == 'remote') {
 				$dataToInsert = [
-					'type' => $this->input->post('type')[$key],
-					'network_status' => ($this->input->post('type')[$key] == 'jarkom') ? $this->input->post('network_status')[$key] : '',
-					'id_remote' => $this->input->post('remote_id')[$key],
+					'network_status' => $this->input->post('type')[$key],
+					'id_remote' => $this->session->idRemote,
 					'created_at' => date('Y-m-d H:i:s'),
 					'user_creator' => $this->session->userdata('nama'),
 					'last_check' => $this->input->post('last_check')[$key],
 					'status_ticket' => $this->input->post('status_ticket')[$key],
 					'incident_number' => $this->input->post('incident_number')[$key],
 					'description' => $this->input->post('remote_ticket_description')[$key],
-					'notes' => $this->input->post('remote_ticket_description')[$key],
-					'ip' => $this->input->post('remote_id')[$key],
+					'notes' => $this->input->post('remote_ticket_notes')[$key],
+					'ip_lan' => $this->input->post('ip_lan_wan')[$key],
 					'branch' => '-',
 					'ip_address' => '-',
 					'nama_uker' => '-',
@@ -36,13 +41,32 @@ class Remoteticket extends CI_Controller {
 					'pic' => '-',
 				];
 				$this->db->insert('tb_remote_ticket', $dataToInsert);
+			} else {
+				$dataToInsert = [
+					'network_status' => $this->input->post('type')[$key],
+					'id_remote' => $this->session->idRemote,
+					'created_at' => date('Y-m-d H:i:s'),
+					'user_creator' => $this->session->userdata('nama'),
+					'last_check' => $this->input->post('last_check')[$key],
+					'status_ticket' => $this->input->post('status_ticket')[$key],
+					'incident_number' => $this->input->post('incident_number')[$key],
+					'description' => $this->input->post('remote_ticket_description')[$key],
+					'notes' => $this->input->post('remote_ticket_notes')[$key],
+					'ip_wan' => $this->input->post('ip_lan_wan')[$key],
+					'branch' => '-',
+					'ip_address' => '-',
+					'nama_uker' => '-',
+					'provider_jarkom' => '-',
+					'permasalahan' => '-',
+					'action' => '-',
+					'pic' => '-',
+				];
+				$this->db->insert('tb_network_ticket', $dataToInsert);
 			}
-			$this->session->set_userdata('notif_success', 'done');
-		} else {
-			$this->session->set_userdata('ticket_created', 'error');
 		}
+		$this->session->set_flashdata('notif_success', 'Success create ticket');
 
-		redirect('Dashboard/new_list_all');
+		redirect($this->session->redirectBack, 'refresh');
 	}
 
 	public function tiketapi()
