@@ -57,7 +57,7 @@ $(document).on('change', '.jenis', function(e) {
         isinya += "IP LAN : "+ip_lan+br;
         isinya += "NAMA UKER : "+nama_uker_detail+br;
         isinya += "PERMASALAHAN : "+dinamic_alarm+br;
-        isinya += "ACTION : "+br;
+        isinya += "ACTION : "+dinamic_notes+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
 
@@ -85,13 +85,14 @@ $(document).on('change', '.networkStatus', function(e) {
         var ip_wan = $('[netstat="'+nilai+'"]').val();
         var ip_lan = $("#txt_ip_lan").val();
         var dinamic_alarm = $("#dinamic_alarm").val();
+        var dinamic_notes = $("#dinamic_notes").val();
         var br = "\n";
         var isinya = type+" : "+kode_uker+br;
         isinya += "IP WAN : "+ip_wan+br;
         isinya += "NAMA UKER : "+nama_uker_detail+br;
         isinya += "PROVIDER JARKOM : "+nilai+br;
         isinya += "PERMASALAHAN : "+br;
-        isinya += "ACTION : "+br;
+        isinya += "ACTION : "+dinamic_notes+br;
         isinya += "PIC : "+pic;
         $("#remote_ticket_description_"+codeID).val(isinya);
         var isiNote = nilai.replace("/", "_")+"_"+nama_uker+"_"+ip_wan+"_"+dinamic_alarm;
@@ -600,7 +601,7 @@ a {
 </section>
 <section class="content" id="full" style="margin-top: -20px">
     <div class="row">
-    
+
     <?php if ($this->session->flashdata('notif_success')) { ?>
         <div class="alert alert-success"> <?= $this->session->flashdata('notif_success') ?> </div>
     <?php } ?>
