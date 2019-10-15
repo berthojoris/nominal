@@ -44,7 +44,7 @@ class Remoteticket extends CI_Controller {
 			} else {
 				$dataToInsert = [
 					'network_status' => $this->input->post('type')[$key],
-					'id_remote' => $this->session->idRemote,
+					'id_jarkom' => $this->session->idRemote,
 					'created_at' => date('Y-m-d H:i:s'),
 					'user_creator' => $this->session->userdata('nama'),
 					'last_check' => $this->input->post('last_check')[$key],
