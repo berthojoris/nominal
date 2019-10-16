@@ -15,20 +15,20 @@ class Api extends CI_Controller
             `tb_tipe_uker`.`tipe_uker`,
             `tb_remote`.`alamat_uker`
         FROM
-            `nominal`.`tb_jarkom`
-            INNER JOIN `nominal`.`tb_remote`
+            `tb_jarkom`
+            INNER JOIN `tb_remote`
             ON (
                 `tb_jarkom`.`id_remote` = `tb_remote`.`id_remote`
             )
-            INNER JOIN `nominal`.`tb_spk`
+            INNER JOIN `tb_spk`
             ON (
                 `tb_jarkom`.`id_spk` = `tb_spk`.`id_spk`
             )
-            INNER JOIN `nominal`.`tb_jenis_jarkom`
+            INNER JOIN `tb_jenis_jarkom`
             ON (
                 `tb_jarkom`.`kode_jenis_jarkom` = `tb_jenis_jarkom`.`kode_jenis_jarkom`
             )
-            INNER JOIN `nominal`.`tb_tipe_uker`
+            INNER JOIN `tb_tipe_uker`
             ON (
                 `tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`
             )
