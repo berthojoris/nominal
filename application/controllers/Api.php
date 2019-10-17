@@ -3,8 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller 
 {
-    public function getremotebyname($strName)
+    public function getremotebyname()
     {
+        $strName = $_POST['name'];
         $sql = "SELECT
             `tb_remote`.`id_remote`,
             `tb_remote`.`nama_remote`,

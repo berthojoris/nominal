@@ -29,9 +29,12 @@ $(document).ready(function() {
         $("#region_new").val('');
         $("#remote_address_new").val('');
         $.ajax({
-            type: "GET",
-            url: "<?=base_url()?>index.php/Api/getremotebyname/"+name,
+            type: "POST",
+            url: "<?=base_url()?>index.php/Api/getremotebyname",
             dataType: "json",
+            data: {
+                name: name
+            },
             success: function (response) {
                 if(response.code == 200) {
                     $("#remote_type_new").val(response.data[0].tipe_uker);
