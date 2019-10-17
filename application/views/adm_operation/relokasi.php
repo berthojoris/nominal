@@ -22,6 +22,30 @@ $(document).ready(function() {
     //     $("#search_modal").modal('show');
     // });
 
+    $("#remote_name_new").change(function (e) { 
+        e.preventDefault();
+        var name = $(this).val();
+        $("#remote_type_new").val('');
+        $("#region_new").val('');
+        $("#remote_address_new").val('');
+        $.ajax({
+            type: "GET",
+            url: "<?=base_url()?>index.php/Api/getremotebyname/"+name,
+            dataType: "json",
+            success: function (response) {
+                if(response.code == 200) {
+                    $("#remote_type_new").val(response.data[0].tipe_uker);
+                    $("#region_new").val(response.data[0].nama_kanwil);
+                    $("#remote_address_new").val(response.data[0].alamat_uker);
+                } else if(response.code == 404) {
+                    swal("Oops", "Data not found for "+name, "success");
+                }  else {
+                    swal("Oops", "Search failed. Please reload the page", "error");
+                }
+            }
+        });
+    });
+
     $("#ip_address_network_id").change(function (e) { 
         e.preventDefault();
         var ip = $(this).val();
@@ -220,7 +244,7 @@ $(document).ready(function() {
                             <table class="table table-hover">
                                 <tr>
                                     <th>Network Type</th>
-                                    <td><input type="text" class="form-control input-sm" name="network_type_new" id="network_type_new" disabled></td>
+                                    <td><input type="text" class="form-control input-sm" name="network_type_new" id="network_type_new" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>IP LAN</th>
@@ -241,19 +265,11 @@ $(document).ready(function() {
                                 </tr>
                                 <tr>
                                     <th>Remote Type</th>
-                                    <td>
-                                        <select name="remote_type_new" id="remote_type_new" class="form-control input-sm">
-                                            <option value="">- Choose Remote Type -</option>
-                                        </select>
-                                    </td>
+                                    <td><input type="text" class="form-control input-sm" name="remote_type_new" id="remote_type_new" readonly></td>
                                 </tr>
                                 <tr>
                                     <th>Region</th>
-                                    <td>
-                                        <div class="form-group has-feedback">
-                                            <input type="text" class="form-control" name="region_new" id="region_new" placeholder="Search" />
-                                            <i class="glyphicon glyphicon-search form-control-feedback"></i>
-                                        </div>
+                                    <td><input type="text" class="form-control input-sm" name="region_new" id="region_new" readonly></td>
                                     </td>
                                 </tr>
                                 <tr>
