@@ -37,6 +37,6 @@
 
     <!-- js -->
     <?php echo @$_js; ?>
-    <script src="<?php echo $conditionjs; ?>"></script>
+    <script src="<?php echo base_url(); ?>assets/js/relokasi.js"></script>
   </body>
 </html>
