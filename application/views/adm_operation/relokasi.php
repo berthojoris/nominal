@@ -32,6 +32,16 @@
         <div class="alert alert-danger"> <?= $this->session->flashdata('notif_error') ?> </div>
     <?php } ?>
 
+    <?php 
+    function showHide($name) {
+        if($name == "default.jpg") {
+            return "-";
+        } else {
+            return anchor(base_url()."/adm_operation/downloadFile/".$name, "Download File", "");
+        }
+    }
+    ?>
+
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">Add SIK</div>
             <div class="buttonXtra">
@@ -61,11 +71,11 @@
                                 $no = $this->uri->segment('3') + 1;
                                 foreach($relokasi as $d) {
                                     echo "<tr>";
-                                        echo "<td>".$no++."</td>";
+                                        echo "<td>".$no++.".</td>";
                                         echo "<td>".$d->ip_address_network_id."</td>";
                                         echo "<td>".$d->reason."</td>";
                                         echo "<td>".$d->doc_number."</td>";
-                                        echo "<td>".anchor(base_url()."/adm_operation/downloadFile/".$d->file_upload, "Download File", "")."</td>";
+                                        echo "<td>".showHide($d->file_upload)."</td>";
                                         echo "<td>".$d->pic."</td>";
                                         echo "<td>".$d->live_target."</td>";
                                         echo "<td>".$d->ip_wan."</td>";
