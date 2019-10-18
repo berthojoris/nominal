@@ -16,18 +16,15 @@ MySQL - 5.7.19 : Database - nominal
 
 CREATE TABLE `tb_relokasi` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `id_jarkom` int(10) NOT NULL,
-  `id_remote_old` int(10) NOT NULL,
-  `id_remote_new` int(10) NOT NULL,
-  `alamat` text,
-  `file_url` varchar(100) DEFAULT NULL,
-  `no_sik` varchar(100) DEFAULT NULL,
-  `no_doc_pendukung` varchar(100) DEFAULT NULL,
-  `alasan_relokasi` text,
-  `status_relokasi` varchar(100) DEFAULT NULL,
-  `target_live` date DEFAULT NULL,
-  `order_date` date DEFAULT NULL,
+  `ip_address_network_id` varchar(100) NOT NULL,
+  `reason` text,
+  `doc_number` varchar(100) DEFAULT NULL,
+  `file_upload` varchar(100) DEFAULT NULL,
   `pic` varchar(100) DEFAULT NULL,
+  `live_target` date DEFAULT NULL,
+  `ip_wan` varchar(100) DEFAULT NULL,
+  `remote_name` varchar(100) DEFAULT NULL,
+  `remote_address` text,
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

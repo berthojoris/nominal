@@ -37,5 +37,6 @@
 
     <!-- js -->
     <?php echo @$_js; ?>
+    <script src="<?php echo $conditionjs; ?>"></script>
   </body>
 </html>
