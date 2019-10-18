@@ -47,7 +47,9 @@ assets/fonts/*
 assets/img/*
 assets/icon/*
 assets/jquery-ui-1.11.0/*
-assets/js/*
+assets/js/AdminLTE/*
+assets/js/old/*
+assets/js/plugins/*
 assets/phpexcel/*
 assets/plugins/*
 assets/swal/*
