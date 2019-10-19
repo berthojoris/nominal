@@ -10,6 +10,7 @@
 
     <!-- jQuery 2.2.3 -->
     <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <meta name="baseURL" content="<?php echo base_url(); ?>">
   </head>
 
   <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
