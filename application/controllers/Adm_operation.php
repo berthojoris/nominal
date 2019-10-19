@@ -15,7 +15,7 @@ class Adm_operation extends CI_Controller {
         }
     }
 
-    public function downloadFile($fileName)
+    public function download($fileName)
     {
         force_download('./filesUpload/'.$fileName, NULL);
     }
@@ -116,7 +116,7 @@ class Adm_operation extends CI_Controller {
     
                     $this->session->set_flashdata('notif_success', 'Relokasi has been created');
                 } else {
-                    $this->session->set_flashdata('notif_error', 'Failed to save. Reload page and try again');
+                    $this->session->set_flashdata('notif_error', 'Validation fail. Please check your input');
                 }
             }
 		} else {

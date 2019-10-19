@@ -1,7 +1,8 @@
-<script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/swal/sweetalert.min.css">
-<script src="<?php echo base_url('assets/js/plugins/daterangepicker/daterangepicker.js'); ?>" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/plugins/datepicker/datepicker3.css">
+<script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
 <script src="<?php echo base_url('assets/js/plugins/datepicker/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url()?>assets/plugins/select2/select2.full.min.js"></script>
 <style>
 .buttonXtra {
     margin: 20px 0px 20px 20px;
@@ -9,6 +10,29 @@
 .modal-dialog {
     width: 800px;
     margin: 30px auto;
+}
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 0px;
+    width: 100%;
+}
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 32px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 0px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 </style>
 
@@ -37,7 +61,7 @@
         if($name == "default.jpg") {
             return "-";
         } else {
-            return anchor(base_url()."adm_operation/downloadFile/".$name, "Download File", "");
+            return anchor(base_url()."adm_operation/download/".$name, "Download File", "");
         }
     }
     ?>
@@ -130,7 +154,9 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>IP Address / Network ID</th>
-                                    <td><input type="text" autocomplete="off" class="form-control input-sm" name="ip_address_network_id" id="ip_address_network_id"></td>
+                                    <td>
+                                        <select id="ip_address_network_id" name="ip_address_network_id"></select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>No SPK</th>
@@ -218,10 +244,7 @@
                                 <tr>
                                     <th>Remote Name</th>
                                     <td>
-                                        <div class="form-group has-feedback">
-                                            <input type="text" autocomplete="off" class="form-control" name="remote_name_new" id="remote_name_new" placeholder="Search" />
-                                            <i class="glyphicon glyphicon-search form-control-feedback"></i>
-                                        </div>
+                                        <select id="remote_name_new" name="remote_name_new" style="width: 100%;"></select>
                                     </td>
                                 </tr>
                                 <tr>
