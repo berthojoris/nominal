@@ -61,7 +61,7 @@
         if($name == "default.jpg") {
             return "-";
         } else {
-            return anchor(base_url()."adm_operation/download/".$name, "Download File", "");
+            return anchor(base_url()."index.php/adm_operation/download/".$name, "Download File", "");
         }
     }
     ?>
