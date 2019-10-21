@@ -36,7 +36,7 @@ $config['base_url'] = 'http://nominal.con';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
