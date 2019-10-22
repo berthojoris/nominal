@@ -8,14 +8,13 @@
     margin: 20px 0px 20px 20px;
 }
 .modal-dialog {
-    width: 800px;
+    width: 900px;
     margin: 30px auto;
 }
 .select2-container--default .select2-selection--single {
     background-color: #fff;
     border: 1px solid #aaa;
     border-radius: 0px;
-    width: 100%;
 }
 .select2-container .select2-selection--single {
     box-sizing: border-box;
@@ -32,7 +31,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 100%;
 }
 </style>
 
@@ -119,19 +117,100 @@
     </row>
 </section>
 
-<div class="modal fade" id="search_modal">
+<div class="modal fade" id="filter_modal">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" >
 
             <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">New Relokasi</h4>
+                <h4 class="modal-title">Filter Data</h4>
             </div>
 
             <div class="modal-body">
-                <div class="col-md-12">
-                    <input type="text" name="searchFilter" id="searchFilter">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>IP Address / Network ID</th>
+                                <td>
+                                    <select id="filter_ip" name="filter_ip" style="width: 100%;"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Remote Name</th>
+                                <td>
+                                    <select id="filter_remote_name" name="filter_remote_name" style="width: 100%;"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>
+                                    <select id="filter_status" name="filter_status" class="form-control input-sm">
+                                        <option value="relokasi">Relokasi</option>
+                                        <option value="upgrade_bw">Upgrade BW</option>
+                                        <option value="dismantle">Dismantle</option>
+                                        <option value="psb">PSB</option>
+                                        <option value="realokasi">Realokasi</option>
+                                        <option value="reaktivasi">Reaktvasi</option>
+                                        <option value="baol">Baol</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Order Date</th>
+                                <td>
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="filter_order_date" id="filter_order_date">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Provider</th>
+                                <td>
+                                    <select id="filter_provider" name="filter_provider" class="form-control input-sm"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Doc Number</th>
+                                <td>
+                                    <select id="filter_doc_number" name="filter_doc_number" style="width: 100%;"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>PIC In Charge</th>
+                                <td>
+                                    <select id="filter_pic" name="filter_pic" style="width: 100%;"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Live Target</th>
+                                <td>
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="filter_live_target" id="filter_live_target">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" id="searchNow" class="btn btn-primary" style="margin-bottom: 20px;">Search</button>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>IP Address/Network ID</th>
+                                    <th>Remote Name</th>
+                                    <th>Status</th>
+                                    <th>Order Date</th>
+                                    <th>Provider</th>
+                                    <th>Doc Number</th>
+                                    <th>PIC In Charge</th>
+                                    <th>Live Target</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody id="filter_table_Data"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,7 +234,7 @@
                                 <tr>
                                     <th>IP Address / Network ID</th>
                                     <td>
-                                        <select id="ip_address_network_id" name="ip_address_network_id"></select>
+                                        <select id="ip_address_network_id" name="ip_address_network_id" style="width: 100%;"></select>
                                     </td>
                                 </tr>
                                 <tr>

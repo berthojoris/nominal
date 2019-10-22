@@ -4,6 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller 
 {
 
+    public function getProvider()
+    {
+        $sql = "SELECT kode_provider, nama_provider FROM tb_provider";
+        $query = $this->db->query($sql)->result();
+        echo json_encode($query);
+    }
+
     public function getRemoteByNameSelect2()
     {
         $strName = $_POST['name'];

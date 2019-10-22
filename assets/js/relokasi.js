@@ -1,13 +1,26 @@
 $(document).ready(function() {
+
+    getProvider();
     
     $("#add_form_btn").click(function (e) {
         resetForm();
+        $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target").datepicker({ 
+    $("#live_target, #filter_order_date, #filter_live_target").datepicker({ 
         startDate: new Date(),
         todayHighlight: true,
         autoclose: true
+    });
+
+    $("#filter_form_btn").click(function (e) { 
+        e.preventDefault();
+        $("#filter_modal").modal('show');
+        $("#filter_table_Data").empty();
+    });
+
+    $("#searchNow").click(function (e) { 
+        e.preventDefault();
     });
 
     $("#remote_name_new").change(function (e) { 
@@ -61,6 +74,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                 if(response.code == 200) {
+                    $("#value_jarkom").val(ip_network);
                     $("#no_spk").val(response.data.no_spk);
                     $("#network_type").val(response.data.network_type);
                     $("#ip_lan").val(response.data.ip_lan);
@@ -69,7 +83,6 @@ $(document).ready(function() {
                     $("#remote_type").val(response.data.remote_type);
                     $("#region").val(response.data.region);
                     $("#remote_address").val(response.data.remote_address);
-
                     $("#network_type_new").val(response.data.network_type);
                     $("#ip_lan_new").val(response.data.ip_lan);
                     $("#ip_wan_new").val(response.data.ip_wan);
@@ -113,6 +126,74 @@ $(document).ready(function() {
             }
         }
     });
+
+    $("#filter_ip").select2({
+        dropdownParent: $("#filter_modal"),
+        minimumInputLength:3,
+        placeholder:"Type at least 3 charachter",
+        ajax:{
+            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            type:"POST",
+            dataType:"json",
+            data: function(param) {
+                return{name:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
+    });
+
+    $("#filter_remote_name").select2({
+        dropdownParent: $("#filter_modal"),
+        minimumInputLength:3,
+        placeholder:"Type at least 3 charachter",
+        ajax:{
+            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            type:"POST",
+            dataType:"json",
+            data: function(param) {
+                return{name:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
+    });
+
+    $("#filter_doc_number").select2({
+        dropdownParent: $("#filter_modal"),
+        minimumInputLength:3,
+        placeholder:"Type at least 3 charachter",
+        ajax:{
+            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            type:"POST",
+            dataType:"json",
+            data: function(param) {
+                return{name:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
+    });
+
+    $("#filter_pic").select2({
+        dropdownParent: $("#filter_modal"),
+        minimumInputLength:3,
+        placeholder:"Type at least 3 charachter",
+        ajax:{
+            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            type:"POST",
+            dataType:"json",
+            data: function(param) {
+                return{name:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
+    });
 });
 
 function resetForm() {
@@ -136,9 +217,23 @@ function resetForm() {
     $("#remote_type_new").val('');
     $("#region_new").val('');
     $("#remote_address_new").val('');
-    $("#add_form_relokasi").modal('show');
 }
 
 function getBaseUrl() {
     return $('meta[name=baseURL]').attr("content");
+}
+
+function getProvider() {
+    $.ajax({
+        type: "GET",
+        url: getBaseUrl()+"index.php/Api/getProvider",
+        dataType: "json",
+        success: function (response) {
+            var toAppend = '';
+            $.each(response, function(i, o) {
+                toAppend += '<option id="'+o.kode_provider+'">'+o.nama_provider+'</option>';
+            });
+            $('#filter_provider').append(toAppend);
+        }
+    });
 }
