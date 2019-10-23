@@ -32,6 +32,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.table-responsive {
+    min-height: .01%;
+    overflow-x: hidden;
+}
 </style>
 
 <section>
@@ -73,11 +77,10 @@
 
             <div class="panel-body">
                 <div class="box-body table-responsive no-padding">
-                    <table class="table table-bordered table-striped table-hover" id="table_relokasi">
+                    <table id="filter_table_Data" class="table table-bordered table-striped table-hover" id="table_relokasi">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>IP Address/Network ID</th>
+                                <th>IP/Network</th>
                                 <th>Reason</th>
                                 <th>Doc Number</th>
                                 <th>File Upload</th>
@@ -88,33 +91,12 @@
                                 <th>Remote Address</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                                $no = $this->uri->segment('3') + 1;
-                                foreach($relokasi as $d) {
-                                    echo "<tr>";
-                                        echo "<td>".$no++.".</td>";
-                                        echo "<td>".$d->ip_address_network_id."</td>";
-                                        echo "<td>".$d->reason."</td>";
-                                        echo "<td>".$d->doc_number."</td>";
-                                        echo "<td>".showHide($d->file_upload)."</td>";
-                                        echo "<td>".$d->pic."</td>";
-                                        echo "<td>".$d->live_target."</td>";
-                                        echo "<td>".$d->ip_wan."</td>";
-                                        echo "<td>".$d->remote_name."</td>";
-                                        echo "<td>".$d->remote_address."</td>";
-                                    echo "</tr>";
-                                }
-                            ?>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
-                    <?php 
-                        echo $this->pagination->create_links();
-                    ?>
                 </div>
             </div>
         </div>
-    </row>
+    </div>
 </section>
 
 <div class="modal fade" id="filter_modal">

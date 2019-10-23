@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     getProvider();
+    loadDataTable();
     
     $("#add_form_btn").click(function (e) {
         resetForm();
@@ -235,5 +236,61 @@ function getProvider() {
             });
             $('#filter_provider').append(toAppend);
         }
+    });
+}
+
+function loadDataTable() {
+    $('#filter_table_Data').DataTable({ 
+        "processing": true,
+        "serverSide": false,
+        "paging": true,
+        "responsive": false,
+        "ajax": {
+            "url": getBaseUrl()+"index.php/Api/getRelokasiData",
+            "type": "POST"
+        },
+        "columns": [
+            {
+                "data": "ip_address_network_id",
+                "name": "tb_relokasi.ip_address_network_id"
+            },
+            {
+                "data": "reason",
+                "name": "tb_relokasi.reason"
+            },
+            {
+                "data": "doc_number",
+                "name": "tb_relokasi.doc_number"
+            },
+            {
+                "data": "file_upload",
+                "name": "tb_relokasi.file_upload",
+                "render": function(data, type, row, meta) {
+                    var isian = ""
+                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
+                    return isian;
+                 }
+            },
+            {
+                "data": "pic",
+                "name": "tb_relokasi.pic"
+            },
+            {
+                "data": "live_target",
+                "name": "tb_relokasi.live_target"
+            },
+            {
+                "data": "ip_wan",
+                "name": "tb_relokasi.ip_wan"
+            },
+            {
+                "data": "remote_name",
+                "name": "tb_relokasi.remote_name"
+            },
+            {
+                "data": "remote_address",
+                "name": "tb_relokasi.remote_address"
+            }
+        ],
     });
 }

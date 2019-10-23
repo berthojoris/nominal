@@ -4,6 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller 
 {
 
+    public function __construct() {
+
+		parent::__construct();
+        $this->load->library('session');
+    }
+
+    public function getRelokasiData()
+    {
+        $this->load->library('datatables');
+        $this->datatables->select('*');
+        $this->datatables->from('tb_relokasi');
+        echo $this->datatables->generate();
+    }
+
     public function getProvider()
     {
         $sql = "SELECT kode_provider, nama_provider FROM tb_provider";
