@@ -40,8 +40,20 @@ $(document).ready(function() {
         $("#filter_modal").modal('show');
     });
 
-    $("#searchNow").click(function (e) { 
+    $("#searchNow").click(function (e) {
         e.preventDefault();
+        var formData = $("#filterForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: getBaseUrl()+"index.php/Api/tabelFilter",
+            data: {
+                formdata: formData
+            },
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
     });
 
     $("#remote_name_new").change(function (e) { 
