@@ -42,7 +42,7 @@ class Adm_operation extends CI_Controller {
             $originalSize   = $_FILES['file_upload']['size'];
             $extension      = array_map('strrev', explode(".", strrev($originalName)));
 
-            $allowedExt = ["image/jpeg","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/zip","application/x-rar-compressed","application/pdf","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv"];
+            $allowedExt = ["image/jpeg","image/png","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/zip","application/x-rar-compressed","application/pdf","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv"];
 
             if(in_array($originalType, $allowedExt)) {
 
@@ -74,7 +74,7 @@ class Adm_operation extends CI_Controller {
                     'no_sik' => '-',
                 ];
                 
-                $this->db->insert('tb_relokasi_update', $insert);
+                $this->db->insert('tb_relokasi', $insert);
 
                 $this->session->set_flashdata('notif_success', 'Relokasi has been created');
             } else {

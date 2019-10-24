@@ -2,12 +2,28 @@ $(document).ready(function() {
 
     getProvider();
     loadDataTable();
-    
+
     $("#form_add").validate({
+        rules: {
+            file_upload: {
+                required: true,
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            }
+        },
+        messages: {
+            file_upload: {
+                required: 'This field is required.',
+                extension: 'Only allowed ext (pdf,jpg,jpeg,png,doc,docx,zip,rar,pdf,xls,xlsx,csv)'
+            }
+        },
+        success: function(label, element) {
+            
+        },
         submitHandler: function(form) {
             form.submit();
         }
     });
+      
     
     $("#add_form_btn").click(function (e) {
         resetForm();
@@ -101,8 +117,9 @@ $(document).ready(function() {
     });
 
     $("#id_jarkom").select2({
+        width: '100%',
         dropdownParent: $("#add_form_relokasi"),
-        minimumInputLength:5,
+        minimumInputLength:2,
         placeholder:"Type at least 5 charachter",
         ajax:{
             url:getBaseUrl()+"index.php/Api/searchByIpAddressSelect2",
@@ -118,7 +135,8 @@ $(document).ready(function() {
     });
 
     $("#remote_name_new").select2({
-        dropdownParent: $("#add_form_relokasi"),
+        width: '100%',
+        dropdownParent: $("#remotePanel"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
@@ -204,6 +222,8 @@ $(document).ready(function() {
 });
 
 function resetForm() {
+    var validator = $("#form_add").validate();
+    validator.resetForm();
     $("#id_jarkom").empty();
     $("#remote_name_new").empty();
     $("#no_spk").val('');
@@ -250,27 +270,29 @@ function loadDataTable() {
         "processing": true,
         "serverSide": false,
         "paging": true,
-        "responsive": false,
+        "responsive": true,
+        "order": [[0, 'desc']],
         "ajax": {
             "url": getBaseUrl()+"index.php/Api/getRelokasiData",
             "type": "POST"
         },
         "columns": [
             {
-                "data": "ip_address_network_id",
-                "name": "tb_relokasi.ip_address_network_id"
+                "data": "id",
+                "visible": false,
+                "searchable": false
             },
             {
-                "data": "reason",
-                "name": "tb_relokasi.reason"
+                "data": "nama_remote_old",
             },
             {
-                "data": "doc_number",
-                "name": "tb_relokasi.doc_number"
+                "data": "nama_remote_new",
             },
             {
-                "data": "file_upload",
-                "name": "tb_relokasi.file_upload",
+                "data": "alamat",
+            },
+            {
+                "data": "file_url",
                 "render": function(data, type, row, meta) {
                     var isian = ""
                     isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
@@ -278,25 +300,23 @@ function loadDataTable() {
                  }
             },
             {
+                "data": "status",
+            },
+            {
+                "data": "due_date",
+            },
+            {
                 "data": "pic",
-                "name": "tb_relokasi.pic"
             },
             {
-                "data": "live_target",
-                "name": "tb_relokasi.live_target"
+                "data": "id",
+                "sortable": false,
+                "render": function(data, type, row, meta) {
+                    var idnya = ""
+                    idnya = '<button id="'+data+'" class="btn btn-success btn-xs">Show</button>';
+                    return idnya;
+                 }
             },
-            {
-                "data": "ip_wan",
-                "name": "tb_relokasi.ip_wan"
-            },
-            {
-                "data": "remote_name",
-                "name": "tb_relokasi.remote_name"
-            },
-            {
-                "data": "remote_address",
-                "name": "tb_relokasi.remote_address"
-            }
         ],
     });
 }

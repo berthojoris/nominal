@@ -12,10 +12,39 @@ class Api extends CI_Controller
 
     public function getRelokasiData()
     {
-        $this->load->library('datatables');
-        $this->datatables->select('*');
-        $this->datatables->from('tb_relokasi');
-        echo $this->datatables->generate();
+        header('Content-Type: application/json');
+        $sql = "SELECT * FROM tb_relokasi ORDER BY id DESC";
+        $query = $this->db->query($sql)->result();
+        $temp = [];
+        foreach($query as $data) {
+            $sql2 = "SELECT nama_remote FROM tb_remote WHERE id_remote = ".$data->id_remote_old;
+            $remote_old = $this->db->query($sql2)->row();
+            $sql3 = "SELECT nama_remote FROM tb_remote WHERE id_remote = ".$data->id_remote_new;
+            $remote_new = $this->db->query($sql3)->row();
+            array_push($temp, [
+                'id' => $data->id,
+                'id_jarkom' => $data->id_jarkom,
+                'id_remote_old' => $data->id_remote_old,
+                'nama_remote_old' => $remote_old->nama_remote,
+                'id_remote_new' => $data->id_remote_new,
+                'nama_remote_new' => $remote_new->nama_remote,
+                'alamat' => $data->alamat,
+                'file_url' => $data->file_url,
+                'no_doc' => $data->no_doc,
+                'reason' => $data->reason,
+                'status' => $data->status,
+                'due_date' => $data->due_date,
+                'pic' => $data->pic,
+                'no_sik' => $data->no_sik,
+            ]);
+        }
+        $output = [
+            'draw' => 0,
+            'recordsTotal' => count($query),
+            'recordsFiltered' => count($query),
+            'data' => $temp
+        ];
+        echo json_encode($output);
     }
 
     public function getProvider()
@@ -81,7 +110,8 @@ class Api extends CI_Controller
             `tb_tipe_uker`.`tipe_uker` AS `remote_type`,
             `tb_remote`.`nama_remote` AS `remote_name`,
             `tb_kanwil`.`nama_kanwil` AS `region`,
-            `tb_remote`.`alamat_uker` AS `remote_address`
+            `tb_remote`.`alamat_uker` AS `remote_address`,
+            `tb_provider`.`nickname_provider`
         FROM
             `tb_jarkom`
             INNER JOIN `tb_jenis_jarkom`
@@ -113,14 +143,14 @@ class Api extends CI_Controller
                     `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
                 )
         WHERE (
-                `tb_jarkom`.`ip_wan` like '%$ip_network%' or `tb_jarkom`.`kode_jarkom` like '%$ip_network%'
+                `tb_jarkom`.`ip_wan` like '%$ip_network%' or `tb_jarkom`.`kode_jarkom` like '%$ip_network%' or `tb_provider`.`nickname_provider` like '%$ip_network%'
             )";
         $query = $this->db->query($sql);
         $data = [];
         foreach ($query->result() as $key ) {
             $newdata = [
                 "id" => $key->kode_jarkom,
-				"text" => $key->kode_jarkom." - ".$key->ip_wan
+				"text" => $key->kode_jarkom." - ".$key->ip_wan." - ".$key->nickname_provider
             ];
             array_push($data, $newdata);
         }
