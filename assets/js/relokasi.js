@@ -153,10 +153,10 @@ $(document).ready(function() {
     $("#filter_ip").select2({
         width: '100%',
         dropdownParent: $("#filter_modal"),
-        minimumInputLength:3,
-        placeholder:"Type at least 3 charachter",
+        minimumInputLength:2,
+        placeholder:"Type at least 2 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api/filterIp",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -174,7 +174,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api/filterRemote",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -192,7 +192,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api/filterNoDoc",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -206,11 +206,11 @@ $(document).ready(function() {
 
     $("#filter_pic").select2({
         width: '100%',
-        dropdownParent: $("#filter_modal"),
+        dropdownParent: $("#panelPic"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api/filterPIC",
             type:"POST",
             dataType:"json",
             data: function(param) {

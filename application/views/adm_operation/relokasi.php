@@ -362,7 +362,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="panelPic">
                         <div class="form-group">
                             <label>PIC In Charge</label>
                             <select id="filter_pic" name="filter_pic"></select>

@@ -96,6 +96,70 @@ class Api extends CI_Controller
         echo json_encode($data);
     }
 
+    public function filterIp()
+    {
+        $strFind = $_POST['name'];
+        $sql = "SELECT * FROM v_filter_sik WHERE `kode_jarkom` like '%$strFind%' or `ip_wan` like '%$strFind%' or `nama_remote` like '%$strFind%'";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->id_jarkom,
+				"text" => $key->ip_wan." / ".$key->kode_jarkom." / ".$key->nickname_provider
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
+    public function filterRemote()
+    {
+        $strFind = $_POST['name'];
+        $sql = "SELECT * FROM v_filter_sik WHERE `nama_remote` like '%$strFind%'";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->id_remote_new,
+				"text" => $key->nama_remote
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
+    public function filterNoDoc()
+    {
+        $strFind = $_POST['name'];
+        $sql = "SELECT * FROM v_filter_sik WHERE `no_doc` like '%$strFind%'";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->no_doc,
+				"text" => $key->no_doc
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
+    public function filterPIC()
+    {
+        $strFind = $_POST['name'];
+        $sql = "SELECT * FROM v_filter_sik WHERE `pic` like '%$strFind%'";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->pic,
+				"text" => $key->pic
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
     public function searchByIpAddressSelect2()
     {
         $ip_network = $_POST['ip_network'];
