@@ -3,6 +3,12 @@ $(document).ready(function() {
     getProvider();
     loadDataTable();
     
+    $("#form_add").validate({
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    
     $("#add_form_btn").click(function (e) {
         resetForm();
         $("#add_form_relokasi").modal('show');
@@ -52,7 +58,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#ip_address_network_id").change(function (e) { 
+    $("#id_jarkom").change(function (e) { 
         e.preventDefault();
         var ip_network = $(this).val();
         $("#no_spk").val('');
@@ -75,7 +81,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                 if(response.code == 200) {
-                    $("#value_jarkom").val(ip_network);
+                    $("#id_remote_old").val(response.data.id_remote);
                     $("#no_spk").val(response.data.no_spk);
                     $("#network_type").val(response.data.network_type);
                     $("#ip_lan").val(response.data.ip_lan);
@@ -94,7 +100,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#ip_address_network_id").select2({
+    $("#id_jarkom").select2({
         dropdownParent: $("#add_form_relokasi"),
         minimumInputLength:5,
         placeholder:"Type at least 5 charachter",
@@ -198,7 +204,7 @@ $(document).ready(function() {
 });
 
 function resetForm() {
-    $("#ip_address_network_id").empty();
+    $("#id_jarkom").empty();
     $("#remote_name_new").empty();
     $("#no_spk").val('');
     $("#network_type").val('');

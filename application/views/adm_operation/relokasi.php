@@ -3,6 +3,7 @@
 <script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
 <script src="<?php echo base_url('assets/js/plugins/datepicker/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url()?>assets/plugins/select2/select2.full.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
 <style>
 .buttonXtra {
     margin: 20px 0px 20px 20px;
@@ -35,6 +36,9 @@
 .table-responsive {
     min-height: .01%;
     overflow-x: hidden;
+}
+.error {
+    color: red;
 }
 </style>
 
@@ -134,7 +138,7 @@
                                         <option value="dismantle">Dismantle</option>
                                         <option value="psb">PSB</option>
                                         <option value="realokasi">Realokasi</option>
-                                        <option value="reaktivasi">Reaktvasi</option>
+                                        <option value="reaktifasi">Reaktifasi</option>
                                         <option value="baol">Baol</option>
                                     </select>
                                 </td>
@@ -209,6 +213,9 @@
                     <h4 class="modal-title">New Relokasi</h4>
                 </div>
 
+                <input type="hidden" id="form_type" name="form_type" value="CREATE">
+                <input type="hidden" id="id_remote_old" name="id_remote_old" value="">
+
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -216,7 +223,7 @@
                                 <tr>
                                     <th>IP Address / Network ID</th>
                                     <td>
-                                        <select id="ip_address_network_id" name="ip_address_network_id" style="width: 100%;"></select>
+                                        <select id="id_jarkom" name="id_jarkom" style="width: 100%;"></select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -227,10 +234,24 @@
                                     <th>Reason</th>
                                     <td><textarea name="reason" id="reason" class="form-control input-sm" rows="3"></textarea></td>
                                 </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>
+                                        <select id="status" name="status" class="form-control input-sm">
+                                            <option value="relokasi">Relokasi</option>
+                                            <option value="upgrade_bw">Upgrade BW</option>
+                                            <option value="dismantle">Dismantle</option>
+                                            <option value="psb">PSB</option>
+                                            <option value="realokasi">Realokasi</option>
+                                            <option value="reaktifasi">Reaktifasi</option>
+                                            <option value="baol">Baol</option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="margin-bottom: 55px;">
                             <table class="table table-hover">
                                 <tr>
                                     <th>Doc Number</th>
@@ -248,9 +269,153 @@
                                     <th>Live Target</th>
                                     <td><input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="live_target" autocomplete="off" id="live_target"></td>
                                 </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-6">
+                            <table class="table table-hover">
                                 <tr>
-                                    <th></th>
-                                    <td></td>
+                                    <th>Network Type</th>
+                                    <td><input type="text" class="form-control input-sm" name="network_type" id="network_type" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP LAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_lan" id="ip_lan" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP WAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_wan" id="ip_wan" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Name</th>
+                                    <td><input type="text" class="form-control input-sm" name="remote_name" id="remote_name" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Type</th>
+                                    <td><input type="text" class="form-control input-sm" name="remote_type" id="remote_type" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Region</th>
+                                    <td><input type="text" class="form-control input-sm" name="region" id="region" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Address</th>
+                                    <td><textarea name="remote_address" id="remote_address" class="form-control input-sm" rows="3" readonly></textarea></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-6">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Network Type</th>
+                                    <td><input type="text" class="form-control input-sm" name="network_type_new" id="network_type_new" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP LAN</th>
+                                    <td><input type="text" class="form-control input-sm" name="ip_lan_new" id="ip_lan_new" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>IP WAN</th>
+                                    <td><input type="text" autocomplete="off" class="form-control input-sm" name="ip_wan_new" id="ip_wan_new"></td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Name</th>
+                                    <td>
+                                        <select id="remote_name_new" name="remote_name_new" style="width: 100%;"></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Type</th>
+                                    <td><input type="text" class="form-control input-sm" name="remote_type_new" id="remote_type_new" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Region</th>
+                                    <td><input type="text" class="form-control input-sm" name="region_new" id="region_new" readonly></td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Remote Address</th>
+                                    <td><textarea name="remote_address_new" id="remote_address_new" class="form-control input-sm" rows="3"></textarea></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_form_relokasi">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content" >
+            <form role="form" id="form_update" action="<?php echo base_url(); ?>index.php/adm_operation/saverelokasi" method='POST' enctype="multipart/form-data">
+                <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Relokasi</h4>
+                </div>
+
+                <input type="hidden" id="form_type" name="form_type" value="UPDATE">
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>IP Address / Network ID</th>
+                                    <td>
+                                        <select id="id_jarkom" name="id_jarkom" style="width: 100%;"></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>No SPK</th>
+                                    <td><input type="text" class="form-control input-sm" name="no_spk" id="no_spk" readonly></td>
+                                </tr>
+                                <tr>
+                                    <th>Reason</th>
+                                    <td><textarea name="reason" id="reason" class="form-control input-sm" rows="3"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>
+                                        <select id="status" name="status" class="form-control input-sm">
+                                            <option value="relokasi">Relokasi</option>
+                                            <option value="upgrade_bw">Upgrade BW</option>
+                                            <option value="dismantle">Dismantle</option>
+                                            <option value="psb">PSB</option>
+                                            <option value="realokasi">Realokasi</option>
+                                            <option value="reaktifasi">Reaktifasi</option>
+                                            <option value="baol">Baol</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-6" style="margin-bottom: 55px;">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Doc Number</th>
+                                    <td><input type="text" autocomplete="off" class="form-control input-sm" name="doc_number" id="doc_number"></td>
+                                </tr>
+                                <tr>
+                                    <th>File Upload</th>
+                                    <td><input type="file" class="form-control input-sm"  name="file_upload" id="file_upload"></td>
+                                </tr>
+                                <tr>
+                                    <th>PIC In Charge</th>
+                                    <td><input type="text" autocomplete="off" class="form-control input-sm" name="pic_in_charge" id="pic_in_charge"></td>
+                                </tr>
+                                <tr>
+                                    <th>Live Target</th>
+                                    <td><input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="live_target" autocomplete="off" id="live_target"></td>
                                 </tr>
                             </table>
                         </div>

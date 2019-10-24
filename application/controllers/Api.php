@@ -139,6 +139,7 @@ class Api extends CI_Controller
             `tb_spk`.`no_spk`,
             `tb_remote`.`ip_lan`,
             `tb_tipe_uker`.`tipe_uker` AS `remote_type`,
+            `tb_remote`.`id_remote`,
             `tb_remote`.`nama_remote` AS `remote_name`,
             `tb_kanwil`.`nama_kanwil` AS `region`,
             `tb_remote`.`alamat_uker` AS `remote_address`
