@@ -150,7 +150,7 @@ class Api extends CI_Controller
         foreach ($query->result() as $key ) {
             $newdata = [
                 "id" => $key->kode_jarkom,
-				"text" => $key->kode_jarkom." - ".$key->ip_wan." - ".$key->nickname_provider
+				"text" => $key->ip_wan." - ".$key->kode_jarkom." - ".$key->nickname_provider
             ];
             array_push($data, $newdata);
         }

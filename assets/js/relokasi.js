@@ -311,12 +311,28 @@ function loadDataTable() {
             {
                 "data": "id",
                 "sortable": false,
-                "render": function(data, type, row, meta) {
-                    var idnya = ""
-                    idnya = '<button id="'+data+'" class="btn btn-success btn-xs">Show</button>';
-                    return idnya;
-                 }
+                 "render": function(data, type, row) {
+                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id+'" data-nama_remote_old="'+row.nama_remote_old+'" data-nama_remote_new="'+row.nama_remote_new+'" data-alamat="'+row.alamat+'" data-file_url="'+row.file_url+'" data-status="'+row.status+'" data-due_date="'+row.due_date+'" data-pic="'+row.pic+'" data-target="#open_detail_modal">Show</button>'
+                }
             },
         ],
     });
 }
+
+$("#open_detail_modal").on('show.bs.modal', function (e) {
+    var passData     = $(e.relatedTarget);
+    var nama_remote_new = passData.data("nama_remote_new");
+    var nama_remote_old = passData.data("nama_remote_old");
+    var alamat = passData.data("alamat");
+    var file_url = passData.data("file_url");
+    var status = passData.data("status");
+    var due_date = passData.data("due_date");
+    var pic = passData.data("pic");
+    $("#nama_remote_new").html(nama_remote_new);
+    $("#nama_remote_old").html(nama_remote_old);
+    $("#alamat").html(alamat);
+    $("#file_url").html(file_url);
+    $("#status_detail").html(status);
+    $("#due_date").html(due_date);
+    $("#pic").html(pic);
+});
