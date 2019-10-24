@@ -36,10 +36,8 @@ $(document).ready(function() {
         autoclose: true
     });
 
-    $("#filter_form_btn").click(function (e) { 
-        e.preventDefault();
+    $("#filter_form_btn").click(function (e) {
         $("#filter_modal").modal('show');
-        $("#filter_table_Data").empty();
     });
 
     $("#searchNow").click(function (e) { 
@@ -153,6 +151,7 @@ $(document).ready(function() {
     });
 
     $("#filter_ip").select2({
+        width: '100%',
         dropdownParent: $("#filter_modal"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
@@ -170,6 +169,7 @@ $(document).ready(function() {
     });
 
     $("#filter_remote_name").select2({
+        width: '100%',
         dropdownParent: $("#filter_modal"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
@@ -187,6 +187,7 @@ $(document).ready(function() {
     });
 
     $("#filter_doc_number").select2({
+        width: '100%',
         dropdownParent: $("#filter_modal"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
@@ -204,6 +205,7 @@ $(document).ready(function() {
     });
 
     $("#filter_pic").select2({
+        width: '100%',
         dropdownParent: $("#filter_modal"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
