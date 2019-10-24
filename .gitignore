@@ -39,7 +39,7 @@ log/*
 scheduler/*
 zzz/*
 assets/bootstrap/*
-assets/css/*
+assets/css/skins/*
 assets/dist/*
 assets/eksternal/*
 assets/excel/*
