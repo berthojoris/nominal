@@ -22,9 +22,7 @@ class Adm_operation extends CI_Controller {
 
     public function relokasi()
     {
-        $data = [
-            'conditionjs'  => site_url()."/custom/relokasi.js"
-        ];
+        add_js('relokasi.js');
         $data['title'] = 'Relokasi';
         $data['page'] = 'Relokasi';
         $this->template->views('adm_operation/relokasi', $data);

@@ -26,6 +26,8 @@ date_default_timezone_set('Asia/Jakarta');
 // $config['base_url'] = 'http://nominal.bri.co.id/nominal/';
 $config['base_url'] = 'http://nominal.local';
 
+$config['bottom_js'] = array();
+
 /*
 |--------------------------------------------------------------------------
 | Index File

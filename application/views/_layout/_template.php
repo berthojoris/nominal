@@ -38,6 +38,6 @@
 
     <!-- js -->
     <?php echo @$_js; ?>
-    <script src="<?php echo base_url(); ?>assets/js/relokasi.js"></script>
+    <?php echo put_bottom(); ?>
   </body>
 </html>
