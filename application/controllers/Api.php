@@ -12,14 +12,14 @@ class Api extends CI_Controller
 
     public function getRelokasiDataCustom()
     {
-        $filter_ip = $_POST['filter_ip'];
-        $filter_provider = $_POST['filter_provider'];
-        $filter_remote_name = $_POST['filter_remote_name'];
-        $filter_doc_number = $_POST['filter_doc_number'];
-        $filter_status = $_POST['filter_status'];
-        $filter_pic = $_POST['filter_pic'];
-        $filter_order_date = $_POST['filter_order_date'];
-        $filter_live_target = $_POST['filter_live_target'];
+        $filter_ip = (isset($_POST['filter_ip'])) ? $_POST['filter_ip'] : '-';
+        $filter_provider = (isset($_POST['filter_provider'])) ? $_POST['filter_provider'] : '-';
+        $filter_remote_name = (isset($_POST['filter_remote_name'])) ? $_POST['filter_remote_name'] : '-';
+        $filter_doc_number = (isset($_POST['filter_doc_number'])) ? $_POST['filter_doc_number'] : '-';
+        $filter_status = (isset($_POST['filter_status'])) ? $_POST['filter_status'] : '-';
+        $filter_pic = (isset($_POST['filter_pic'])) ? $_POST['filter_pic'] : '-';
+        $filter_order_date = (isset($_POST['filter_order_date'])) ? $_POST['filter_order_date'] : '-';
+        $filter_live_target = (isset($_POST['filter_live_target'])) ? $_POST['filter_live_target'] : '-';
     }
 
     public function getRelokasiData()

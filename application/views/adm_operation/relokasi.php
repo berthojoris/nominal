@@ -61,6 +61,7 @@
                                 <th>Due Date</th>
                                 <th>PIC</th>
                                 <td>Detail</td>
+                                <td>Action</td>
                             </tr>
                         </thead>
                         <tbody></tbody>

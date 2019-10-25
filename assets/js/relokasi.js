@@ -322,7 +322,14 @@ function loadDataTable() {
                 "data": "id",
                 "sortable": false,
                  "render": function(data, type, row) {
-                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id+'" data-nama_remote_old="'+row.nama_remote_old+'" data-nama_remote_new="'+row.nama_remote_new+'" data-alamat="'+row.alamat+'" data-file_url="'+row.file_url+'" data-status="'+row.status+'" data-due_date="'+row.due_date+'" data-pic="'+row.pic+'" data-target="#open_detail_modal">Show</button>'
+                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id+'" data-nama_remote_old="'+row.nama_remote_old+'" data-nama_remote_new="'+row.nama_remote_new+'" data-alamat="'+row.alamat+'" data-file_url="'+row.file_url+'" data-status="'+row.status+'" data-due_date="'+row.due_date+'" data-pic="'+row.pic+'" data-target="#open_detail_modal">View</button>'
+                }
+            },
+            {
+                "data": "id",
+                "sortable": false,
+                 "render": function(data, type, row) {
+                     return '<button class="btn btn-warning btn-xs" data-toggle="modal" data-id="'+row.id+'">Edit</button>'
                 }
             },
         ],
