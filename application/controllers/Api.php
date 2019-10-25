@@ -10,9 +10,8 @@ class Api extends CI_Controller
         $this->load->library('session');
     }
 
-    public function tabelFilter()
+    public function getRelokasiDataCustom()
     {
-        header('Content-Type: application/json');
         $filter_ip = $_POST['filter_ip'];
         $filter_provider = $_POST['filter_provider'];
         $filter_remote_name = $_POST['filter_remote_name'];
@@ -21,8 +20,6 @@ class Api extends CI_Controller
         $filter_pic = $_POST['filter_pic'];
         $filter_order_date = $_POST['filter_order_date'];
         $filter_live_target = $_POST['filter_live_target'];
-        
-        echo json_encode($formdata);
     }
 
     public function getRelokasiData()

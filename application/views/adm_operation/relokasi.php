@@ -45,6 +45,9 @@
             </div>
 
             <div class="panel-body">
+
+                <?php $this->view('adm_operation/filter'); ?>
+
                 <div class="box-body table-responsive no-padding">
                     <table id="filter_table_Data" class="table table-bordered table-striped table-hover" id="table_relokasi">
                         <thead>
@@ -409,7 +412,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
