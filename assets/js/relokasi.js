@@ -43,7 +43,17 @@ $(document).ready(function() {
     $("#searchNow").click(function (e) {
         e.preventDefault();
         var formData = $("#filterForm").serialize();
-        reloadTable(formData);
+        $.ajax({
+            type: "POST",
+            url: getBaseUrl()+"index.php/Api/getRelokasiDataCustom",
+            data: {
+                formdata: formData
+            },
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
     });
 
     $("#remote_name_new").change(function (e) { 
@@ -265,10 +275,6 @@ function getProvider() {
     });
 }
 
-function reloadTable(data) {
-    console.log(data);
-}
-
 function loadDataTable() {
     // table.reload(); for reload dataTable
     var table = $('#filter_table_Data').DataTable({ 
@@ -278,9 +284,6 @@ function loadDataTable() {
         "responsive": true,
         "order": [[0, 'desc']],
         "ajax": {
-            "data": {
-                "user_id": 451
-            },
             "url": getBaseUrl()+"index.php/Api/getRelokasiData",
             "type": "POST"
         },
