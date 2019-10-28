@@ -72,20 +72,6 @@ $(document).ready(function() {
         ],
     });
 
-    // $('#filter_ip').keyup(function() {
-    //     var datanya = $(this).val();
-    //     $.fn.dataTable.ext.search.push(
-    //         function( settings, data, dataIndex ) {
-    //             // var kode_jarkom = data[1] || "";
-    //             if(datanya != "") {
-    //                 return true;
-    //             }
-    //             return false;
-    //         }     
-    //     );
-    //     table.draw();
-    // });
-
     $("#form_add").validate({
         rules: {
             file_upload: {

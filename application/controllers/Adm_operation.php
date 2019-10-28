@@ -56,6 +56,7 @@ class Adm_operation extends CI_Controller {
 
     public function relokasi()
     {
+        add_js('relokasi.js');
         $data['title'] = 'Relokasi';
         $data['page'] = 'Relokasi';
         $this->template->views('adm_operation/relokasi', $data);
