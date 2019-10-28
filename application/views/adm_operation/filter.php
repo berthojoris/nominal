@@ -1,10 +1,10 @@
 <div class="panelFilter" id="panelFilter" style="display: none;">
-    <form action="" id="filterForm">
+    <form action="<?= site_url('adm_operation/advancedsearch')  ?>" id="filterForm" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Network ID / IP Address / Provider</label>
-                    <select id="filter_ip" name="filter_ip"></select>
+                    <input type="text" name="filter_ip" id="filter_ip" class="form-control input-sm">
                 </div>
             </div>
             <div class="col-md-6">
@@ -16,19 +16,20 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Remote Name</label>
-                    <select id="filter_remote_name" name="filter_remote_name"></select>
+                    <input type="text" name="filter_remote_name" id="filter_remote_name" class="form-control input-sm">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Doc Number</label>
-                    <select id="filter_doc_number" name="filter_doc_number"></select>
+                    <input type="text" name="filter_doc_number" id="filter_doc_number" class="form-control input-sm">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Status</label>
                         <select id="filter_status" name="filter_status" class="form-control input-sm">
+                            <option value="">- Pilih -</option>
                             <option value="relokasi">Relokasi</option>
                             <option value="upgrade_bw">Upgrade BW</option>
                             <option value="dismantle">Dismantle</option>
@@ -42,7 +43,7 @@
             <div class="col-md-6" id="panelPic">
                 <div class="form-group">
                     <label>PIC In Charge</label>
-                    <select id="filter_pic" name="filter_pic"></select>
+                    <input type="text" name="filter_pic" id="filter_pic" class="form-control input-sm">
                 </div>
             </div>
         </div>
@@ -60,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <button type="button" id="searchNow" class="btn btn-primary" style="margin-bottom: 20px;">Filter Now</button>
+                <input type="submit" id="searchNow" class="btn btn-primary" style="margin-bottom: 20px;" value="Filter Now">
             </div>
         </div>
     </form>

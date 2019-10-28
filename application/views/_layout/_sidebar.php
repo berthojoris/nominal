@@ -538,7 +538,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li <?php if ($page == 'adm-operation/relokasi') {echo 'class="active"';} ?>>
-                            <a href="<?php echo base_url('adm_operation/relokasi'); ?>">
+                            <a href="<?php echo base_url('index.php/adm_operation/relokasi'); ?>">
                             <i class="fa fa-desktop"></i>
                             <span>Relokasi</span>
                             </a>

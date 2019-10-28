@@ -20,11 +20,42 @@ class Adm_operation extends CI_Controller {
         force_download('./filesUpload/'.$fileName, NULL);
     }
 
+    public function advancedsearch()
+    {
+        $this->session->unset_userdata('filter_ip');
+        $this->session->unset_userdata('filter_provider');
+        $this->session->unset_userdata('filter_remote_name');
+        $this->session->unset_userdata('filter_doc_number');
+        $this->session->unset_userdata('filter_status');
+        $this->session->unset_userdata('filter_pic');
+        $this->session->unset_userdata('filter_order_date');
+        $this->session->unset_userdata('filter_live_target');
+
+        $filter_ip = (!empty($_POST['filter_ip'])) ? $_POST['filter_ip'] : '-';
+        $filter_remote_name = (!empty($_POST['filter_remote_name'])) ? $_POST['filter_remote_name'] : '-';
+        $filter_provider = (!empty($_POST['filter_provider'])) ? $_POST['filter_provider'] : '-';
+        $filter_doc_number = (!empty($_POST['filter_doc_number'])) ? $_POST['filter_doc_number'] : '-';
+        $filter_status = (!empty($_POST['filter_status'])) ? $_POST['filter_status'] : '-';
+        $filter_pic = (!empty($_POST['filter_pic'])) ? $_POST['filter_pic'] : '-';
+        $filter_order_date = (!empty($_POST['filter_order_date'])) ? $_POST['filter_order_date'] : '-';
+        $filter_live_target = (!empty($_POST['filter_live_target'])) ? $_POST['filter_live_target'] : '-';
+
+        $this->session->set_userdata('filter_ip', $filter_ip);
+        $this->session->set_userdata('filter_provider', $filter_provider);
+        $this->session->set_userdata('filter_remote_name', $filter_remote_name);
+        $this->session->set_userdata('filter_doc_number', $filter_doc_number);
+        $this->session->set_userdata('filter_status', $filter_status);
+        $this->session->set_userdata('filter_pic', $filter_pic);
+        $this->session->set_userdata('filter_order_date', $filter_order_date);
+        $this->session->set_userdata('filter_live_target', $filter_live_target);
+
+        $data['title'] = 'Relokasi';
+        $data['page'] = 'Relokasi';
+        $this->template->views('adm_operation/relokasi_filter', $data);
+    }
+
     public function relokasi()
     {
-        $data = [
-            'conditionjs'  => site_url()."/custom/relokasi.js"
-        ];
         $data['title'] = 'Relokasi';
         $data['page'] = 'Relokasi';
         $this->template->views('adm_operation/relokasi', $data);

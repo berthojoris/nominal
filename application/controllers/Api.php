@@ -8,55 +8,62 @@ class Api extends CI_Controller
 
 		parent::__construct();
         $this->load->library('session');
+        $this->load->library('datatables');
     }
 
-    public function getRelokasiDataCustom()
+    public function getRelokasiDataFilter()
     {
-        $filter_ip = (isset($_POST['filter_ip'])) ? $_POST['filter_ip'] : '-';
-        $filter_provider = (isset($_POST['filter_provider'])) ? $_POST['filter_provider'] : '-';
-        $filter_remote_name = (isset($_POST['filter_remote_name'])) ? $_POST['filter_remote_name'] : '-';
-        $filter_doc_number = (isset($_POST['filter_doc_number'])) ? $_POST['filter_doc_number'] : '-';
-        $filter_status = (isset($_POST['filter_status'])) ? $_POST['filter_status'] : '-';
-        $filter_pic = (isset($_POST['filter_pic'])) ? $_POST['filter_pic'] : '-';
-        $filter_order_date = (isset($_POST['filter_order_date'])) ? $_POST['filter_order_date'] : '-';
-        $filter_live_target = (isset($_POST['filter_live_target'])) ? $_POST['filter_live_target'] : '-';
+        header('Content-Type: application/json');
+
+        $filter_ip = $this->session->userdata('filter_ip');
+        $filter_provider = $this->session->userdata('filter_provider');
+        $filter_remote_name = $this->session->userdata('filter_remote_name');
+        $filter_doc_number = $this->session->userdata('filter_doc_number');
+        $filter_status = $this->session->userdata('filter_status');
+        $filter_pic = $this->session->userdata('filter_pic');
+        $filter_order_date = $this->session->userdata('filter_order_date');
+        $filter_live_target = $this->session->userdata('filter_live_target');
+
+        $this->datatables->select('*');
+
+        if($filter_ip != '-') {
+            $this->datatables->like('kode_jarkom', $filter_ip)->or_like('ip_wan', $filter_ip);
+        }
+
+        if($filter_provider != '-') {
+            $this->datatables->like('status', $filter_provider);
+        }
+        
+        if($filter_remote_name != '-') {
+            $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
+        }
+
+        if($filter_doc_number != '-') {
+            $this->datatables->like('no_doc', $filter_doc_number);
+        }
+
+        if($filter_status != '-') {
+            $this->datatables->like('status', $filter_status);
+        }
+
+        if($filter_pic != '-') {
+            $this->datatables->like('pic', $filter_pic);
+        }
+
+        if($filter_order_date != '-') {
+            $this->datatables->like('due_date', $filter_order_date);
+        }
+        
+        $this->datatables->from('v_combine_filter');
+        echo $this->datatables->generate();
     }
 
     public function getRelokasiData()
     {
         header('Content-Type: application/json');
-        $sql = "SELECT * FROM tb_relokasi ORDER BY id DESC";
-        $query = $this->db->query($sql)->result();
-        $temp = [];
-        foreach($query as $data) {
-            $sql2 = "SELECT nama_remote FROM tb_remote WHERE id_remote = ".$data->id_remote_old;
-            $remote_old = $this->db->query($sql2)->row();
-            $sql3 = "SELECT nama_remote FROM tb_remote WHERE id_remote = ".$data->id_remote_new;
-            $remote_new = $this->db->query($sql3)->row();
-            array_push($temp, [
-                'id' => $data->id,
-                'id_jarkom' => $data->id_jarkom,
-                'id_remote_old' => $data->id_remote_old,
-                'nama_remote_old' => $remote_old->nama_remote,
-                'id_remote_new' => $data->id_remote_new,
-                'nama_remote_new' => $remote_new->nama_remote,
-                'alamat' => $data->alamat,
-                'file_url' => $data->file_url,
-                'no_doc' => $data->no_doc,
-                'reason' => $data->reason,
-                'status' => $data->status,
-                'due_date' => $data->due_date,
-                'pic' => $data->pic,
-                'no_sik' => $data->no_sik,
-            ]);
-        }
-        $output = [
-            'draw' => 0,
-            'recordsTotal' => count($query),
-            'recordsFiltered' => count($query),
-            'data' => $temp
-        ];
-        echo json_encode($output);
+        $this->datatables->select('*');
+        $this->datatables->from('v_combine_filter');
+        echo $this->datatables->generate();
     }
 
     public function getProvider()

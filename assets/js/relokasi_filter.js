@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-    $( document ).on( 'focus', ':input', function(){
-        $( this ).attr( 'autocomplete', 'off' );
-    });
-
     getProvider();
     
     $('#filter_table_Data').DataTable({ 
@@ -13,7 +9,7 @@ $(document).ready(function() {
         "responsive": true,
         "order": [[0, 'desc']],
         "ajax": {
-            "url": getBaseUrl()+"index.php/Api/getRelokasiData",
+            "url": getBaseUrl()+"index.php/Api/getRelokasiDataFilter",
             "type": "POST"
         },
         "columns": [
@@ -71,20 +67,6 @@ $(document).ready(function() {
             },
         ],
     });
-
-    // $('#filter_ip').keyup(function() {
-    //     var datanya = $(this).val();
-    //     $.fn.dataTable.ext.search.push(
-    //         function( settings, data, dataIndex ) {
-    //             // var kode_jarkom = data[1] || "";
-    //             if(datanya != "") {
-    //                 return true;
-    //             }
-    //             return false;
-    //         }     
-    //     );
-    //     table.draw();
-    // });
 
     $("#form_add").validate({
         rules: {
@@ -266,9 +248,9 @@ function getProvider() {
         dataType: "json",
         success: function (response) {
             var toAppend = '';
-            toAppend += '<option value="">- Pilih -</option>';
+            toAppend += '<option id="">- Pilih -</option>';
             $.each(response, function(i, o) {
-                toAppend += '<option value="'+o.kode_provider+'">'+o.nama_provider+'</option>';
+                toAppend += '<option id="'+o.kode_provider+'">'+o.nama_provider+'</option>';
             });
             $('#filter_provider').append(toAppend);
         }
