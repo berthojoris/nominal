@@ -22,6 +22,7 @@ class Adm_operation extends CI_Controller {
 
     public function advancedsearch()
     {
+        add_js('relokasi_filter.js');
         $this->session->unset_userdata('filter_ip');
         $this->session->unset_userdata('filter_provider');
         $this->session->unset_userdata('filter_remote_name');
@@ -74,7 +75,17 @@ class Adm_operation extends CI_Controller {
             $originalSize   = $_FILES['file_upload']['size'];
             $extension      = array_map('strrev', explode(".", strrev($originalName)));
 
-            $allowedExt = ["image/jpeg","image/png","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/zip","application/x-rar-compressed","application/pdf","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv"];
+            $allowedExt = [
+                "image/jpeg",
+                "image/png",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "text/csv",
+                "application/octet-stream"
+            ];
 
             if(in_array($originalType, $allowedExt)) {
 

@@ -27,7 +27,11 @@ class Api extends CI_Controller
         $this->datatables->select('*');
 
         if($filter_ip != '-') {
-            $this->datatables->like('kode_jarkom', $filter_ip)->or_like('ip_wan', $filter_ip);
+            $this->datatables->like('kode_jarkom', $filter_ip);
+        }
+
+        if($filter_ip != '-') {
+            $this->datatables->like('ip_wan', $filter_ip);
         }
 
         if($filter_provider != '-') {
@@ -35,7 +39,11 @@ class Api extends CI_Controller
         }
         
         if($filter_remote_name != '-') {
-            $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
+            $this->datatables->like('nama_remote_old', $filter_remote_name);
+        }
+
+        if($filter_remote_name != '-') {
+            $this->datatables->like('nama_remote_new', $filter_remote_name);
         }
 
         if($filter_doc_number != '-') {
