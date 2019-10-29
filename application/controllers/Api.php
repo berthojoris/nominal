@@ -27,52 +27,31 @@ class Api extends CI_Controller
         $this->datatables->select('*');
 
         if($filter_ip != '-') {
-            log_message('debug', 'IF IP');
             $this->datatables->like('kode_jarkom', $filter_ip)->or_like('ip_wan', $filter_ip);
-        } else {
-            log_message('debug', 'ELSE IP');
         }
 
         if($filter_provider != '-') {
-            log_message('debug', 'IF PROVIDER');
             $this->datatables->like('status', $filter_provider);
-        } else {
-            log_message('debug', 'ELSE PROVIDER');
         }
         
         if($filter_remote_name != '-') {
-            log_message('debug', 'IF REMOTE NAME');
             $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
-        } else {
-            log_message('debug', 'ELSE REMOTE NAME');
         }
 
         if($filter_doc_number != '-') {
-            log_message('debug', 'IF DOC NUMBER');
             $this->datatables->like('no_doc', $filter_doc_number);
-        } else {
-            log_message('debug', 'ELSE DOC NUMBER');
         }
 
         if($filter_status != '-') {
-            log_message('debug', 'IF STATUS');
             $this->datatables->like('status', $filter_status);
-        } else {
-            log_message('debug', 'ELSE STATUS');
         }
 
         if($filter_pic != '-') {
-            log_message('debug', 'IF PIC');
             $this->datatables->like('pic', $filter_pic);
-        } else {
-            log_message('debug', 'ELSE PIC');
         }
 
         if($filter_order_date != '-') {
-            log_message('debug', 'IF ORDER DATE');
             $this->datatables->like('due_date', $filter_order_date);
-        } else {
-            log_message('debug', 'ELSE ORDER DATE');
         }
         
         $this->datatables->from('v_combine_filter');
