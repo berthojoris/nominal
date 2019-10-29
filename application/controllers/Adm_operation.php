@@ -42,8 +42,6 @@ class Adm_operation extends CI_Controller {
             $filter_order_date = (!empty($_POST['filter_order_date'])) ? $_POST['filter_order_date'] : '-';
             $filter_live_target = (!empty($_POST['filter_live_target'])) ? $_POST['filter_live_target'] : '-';
 
-            // die($filter_provider);
-
             $this->session->set_userdata('filter_ip', $filter_ip);
             $this->session->set_userdata('filter_provider', $filter_provider);
             $this->session->set_userdata('filter_remote_name', $filter_remote_name);
