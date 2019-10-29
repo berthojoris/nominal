@@ -99,8 +99,13 @@ $(document).ready(function() {
         $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target, #filter_order_date, #filter_live_target").datepicker({ 
+    $("#live_target").datepicker({ 
         startDate: new Date(),
+        todayHighlight: true,
+        autoclose: true
+    });
+
+    $("#filter_order_date, #filter_live_target").datepicker({ 
         todayHighlight: true,
         autoclose: true
     });
