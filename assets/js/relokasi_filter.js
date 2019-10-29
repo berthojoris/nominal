@@ -37,6 +37,11 @@ $(document).ready(function() {
             },
             {
                 "data": "alamat",
+                "render": function(data, type, row, meta) {
+                    var str = data;
+                    if(str.length > 30) str = str.substring(0, 30);
+                    return str+"...";
+                 }
             },
             {
                 "data": "file_url",
