@@ -192,6 +192,12 @@ class Datatables {
         return $this;
     }
 
+    public function or_like($key_condition, $val = NULL, $backtick_protect = TRUE) {
+        $this->or_like[] = array($key_condition, $val, $backtick_protect);
+        $this->ci->db->or_like($key_condition, $val, $backtick_protect);
+        return $this;
+    }
+
     /**
      * Sets additional column variables for adding custom columns
      *

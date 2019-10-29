@@ -252,9 +252,9 @@ function getProvider() {
         dataType: "json",
         success: function (response) {
             var toAppend = '';
-            toAppend += '<option id="">- Pilih -</option>';
+            toAppend += '<option value="">- Pilih -</option>';
             $.each(response, function(i, o) {
-                toAppend += '<option id="'+o.kode_provider+'">'+o.nama_provider+'</option>';
+                toAppend += '<option value="'+o.kode_provider+'">'+o.nama_provider+'</option>';
             });
             $('#filter_provider').append(toAppend);
         }

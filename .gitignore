@@ -57,3 +57,4 @@ assets/tinymce/*
 assets/*.js
 assets/*.css
 assets/*.scss
+composer.json

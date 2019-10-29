@@ -1,5 +1,5 @@
 <div class="panelFilter" id="panelFilter" style="display: none;">
-    <form action="<?= site_url('adm_operation/advancedsearch')  ?>" id="filterForm" method="post">
+    <form action="<?= site_url('adm_operation/relokasi')  ?>" id="filterForm" method="POST">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
