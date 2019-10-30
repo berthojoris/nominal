@@ -104,6 +104,8 @@ class Adm_operation extends CI_Controller {
                 
                 $insert = [
                     'id_jarkom' => $this->input->post('id_jarkom'),
+                    'kode_jarkom' => $this->input->post('kode_jarkom'),
+                    'ip_wan' => $this->input->post('ip_wan_new'),
                     'id_remote_old' => $this->input->post('id_remote_old'),
                     'id_remote_new' => $this->input->post('remote_name_new'),
                     'alamat' => $this->input->post('remote_address'),
