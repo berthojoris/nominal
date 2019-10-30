@@ -1,0 +1,219 @@
+<div class="modal fade" id="add_form_relokasi">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <form role="form" id="form_add" action="<?php echo base_url(); ?>index.php/adm_operation/saverelokasi" method='POST' enctype="multipart/form-data">
+                <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Relokasi</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="form_type" name="form_type" value="CREATE">
+                    <input type="hidden" id="id_remote_old" name="id_remote_old" value="">
+                    <input type="hidden" id="kode_jarkom" name="kode_jarkom" value="">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">IP Address / Network ID</label>
+                                <div class="col-sm-7">
+                                    <select id="id_jarkom" name="id_jarkom" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">No.SPK</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="no_spk" id="no_spk" readonly required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">SPK Serial No</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="no_serial_spk" id="no_serial_spk" readonly required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Reason</label>
+                                <div class="col-sm-7">
+                                    <textarea name="reason" id="reason" class="form-control input-sm" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Type</label>
+                                <div class="col-sm-7">
+                                    <select id="type" name="type" class="form-control input-sm">
+                                        <option value="RELOKASI">Relokasi</option>
+                                        <option value="RELAYOUT">Relayout</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Status</label>
+                                <div class="col-sm-7">
+                                    <select id="status" name="status" class="form-control input-sm">
+                                        <option value="RELOKASI">Relokasi</option>
+                                        <option value="UPGRADE_BW">Upgrade BW</option>
+                                        <option value="DISMANTLE">Dismantle</option>
+                                        <option value="PSB">PSB</option>
+                                        <option value="REALOKASI">Realokasi</option>
+                                        <option value="REAKTIFASI">Reaktifasi</option>
+                                        <option value="BAOL">Baol</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Req Doc File</label>
+                                <div class="col-sm-7">
+                                    <input type="file" class="form-control input-sm"  name="rec_doc_file" id="rec_doc_file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Rec Doc No.</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="req_doc_no" id="req_doc_no" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Work Order File</label>
+                                <div class="col-sm-7">
+                                    <input type="file" class="form-control input-sm"  name="work_order_file" id="work_order_file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Work Order No.</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="work_order_no" id="work_order_no" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Persons In Charge</label>
+                                <div class="col-sm-7">
+                                    <input type="text" autocomplete="off" class="form-control input-sm" name="pic_in_charge" id="pic_in_charge" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Live Target</label>
+                                <div class="col-sm-7">
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="live_target" autocomplete="off" id="live_target" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Network Type</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="network_type_old" id="network_type_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Network ID</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="network_id_old" id="network_id_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">IP LAN</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="ip_lan_old" id="ip_lan_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">IP WAN</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="ip_wan_old" id="ip_wan_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Rempte Name</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_name_old" id="remote_name_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Remote Type</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_type" id="remote_type" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Region</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="region_old" id="region_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Remote Address</label>
+                                <div class="col-sm-7">
+                                    <textarea name="remote_address_old" id="remote_address_old" class="form-control input-sm" rows="3" required readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Network Type</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="network_type_new" id="network_type_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Network ID</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="network_id_new" id="network_id_new" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">IP LAN</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="ip_lan_new" id="ip_lan_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">IP WAN</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="ip_wan_new" id="ip_wan_new" required>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="remotePanel">
+                                <label class="col-sm-5 col-form-label">Remote Name</label>
+                                <div class="col-sm-7">
+                                    <select id="remote_name_new" name="remote_name_new" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Remote Type</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_type_new" id="remote_type_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Region</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="region_new" id="region_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Remote Address</label>
+                                <div class="col-sm-7">
+                                    <textarea name="remote_address_new" id="remote_address_new" class="form-control input-sm" rows="3" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
