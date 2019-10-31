@@ -30,7 +30,7 @@ class M_admoperation extends CI_Model {
         ];
         
         if($this->db->insert('tb_relokasi_update', $insert)) {
-            return "inserted";
+            return "created";
         } else {
             return "failed";
         }

@@ -123,7 +123,7 @@ class Adm_operation extends CI_Controller {
 
                 $post = $this->m_admoperation->insert($this->input->post(NULL, TRUE));
                 
-                if($post == "inserted") {
+                if($post == "created") {
                     $this->session->set_flashdata('notif_success', 'Relokasi has been created');
                 } else {
                     $this->session->set_flashdata('notif_error', 'Data has not been created');
