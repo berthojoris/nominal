@@ -23,13 +23,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">No.SPK</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="no_spk" id="no_spk" readonly required>
+                                    <input type="text" class="form-control input-sm" name="no_spk" id="no_spk" required readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-5 col-form-label">SPK Serial No</label>
+                                <label class="col-sm-5 col-form-label">SPK Serial No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="no_serial_spk" id="no_serial_spk" readonly required>
+                                    <input type="text" class="form-control input-sm" name="no_serial_spk" id="no_serial_spk" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -62,12 +62,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Req Doc File</label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="form-control input-sm"  name="rec_doc_file" id="rec_doc_file">
+                                    <input type="file" class="form-control input-sm"  name="rec_doc_file" id="rec_doc_file" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -79,7 +78,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="form-control input-sm"  name="work_order_file" id="work_order_file">
+                                    <input type="file" class="form-control input-sm"  name="work_order_file" id="work_order_file" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -132,7 +131,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-5 col-form-label">Rempte Name</label>
+                                <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="remote_name_old" id="remote_name_old" readonly>
                                 </div>
@@ -140,7 +139,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Remote Type</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="remote_type" id="remote_type" readonly>
+                                    <input type="text" class="form-control input-sm" name="remote_type_old" id="remote_type_old" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">

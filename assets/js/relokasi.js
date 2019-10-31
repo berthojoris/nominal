@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $( document ).on( 'focus', ':input', function(){
+    $( document ).on( 'focus', ':input', function() {
         $( this ).attr( 'autocomplete', 'off' );
     });
 
@@ -99,7 +99,7 @@ $(document).ready(function() {
     });
       
     $("#add_form_btn").click(function (e) {
-        resetForm();
+        resetAllForm();
         $("#add_form_relokasi").modal('show');
     });
 
@@ -155,17 +155,6 @@ $(document).ready(function() {
     $("#id_jarkom").change(function (e) {
         e.preventDefault();
         var ip_network = $(this).val();
-        $("#no_spk").val('');
-        $("#network_type").val('');
-        $("#ip_lan").val('');
-        $("#ip_wan").val('');
-        $("#remote_name").val('');
-        $("#remote_type").val('');
-        $("#region").val('');
-        $("#remote_address").val('');
-        $("#network_type_new").val('');
-        $("#ip_lan_new").val('');
-        $("#ip_wan_new").val('');
         $.ajax({
             type: "POST",
             url: getBaseUrl()+"index.php/Api/searchByIpAddress",
@@ -178,16 +167,15 @@ $(document).ready(function() {
                     $("#id_remote_old").val(response.data.id_remote);
                     $("#kode_jarkom").val(response.data.kode_jarkom);
                     $("#no_spk").val(response.data.no_spk);
-                    $("#network_type").val(response.data.network_type);
-                    $("#ip_lan").val(response.data.ip_lan);
-                    $("#ip_wan").val(response.data.ip_wan);
-                    $("#remote_name").val(response.data.remote_name);
-                    $("#remote_type").val(response.data.remote_type);
-                    $("#region").val(response.data.region);
-                    $("#remote_address").val(response.data.remote_address);
-                    $("#network_type_new").val(response.data.network_type);
-                    $("#ip_lan_new").val(response.data.ip_lan);
-                    $("#ip_wan_new").val(response.data.ip_wan);
+                    $("#network_type_old").val(response.data.network_type);
+                    $("#ip_lan_old").val(response.data.ip_lan);
+                    $("#ip_wan_old").val(response.data.ip_wan);
+                    $("#remote_name_old").val(response.data.remote_name);
+                    $("#remote_type_old").val(response.data.remote_type);
+                    $("#region_old").val(response.data.region);
+                    $("#remote_address_old").val(response.data.remote_address);
+                    $("#network_id_old").val(response.data.kode_jarkom);
+                    $("#reason").focus();
                 } else {
                     swal("Oops", "Data not found for "+ip_network, "success");
                 }
@@ -268,31 +256,6 @@ $(document).ready(function() {
     });
 });
 
-function resetForm() {
-    var validator = $("#form_add").validate();
-    validator.resetForm();
-    $("#id_jarkom").empty();
-    $("#remote_name_new").empty();
-    $("#no_spk").val('');
-    $("#network_type").val('');
-    $("#ip_lan").val('');
-    $("#ip_wan").val('');
-    $("#remote_name").val('');
-    $("#remote_type").val('');
-    $("#region").val('');
-    $("#remote_address").val('');
-    $("#network_type_new").val('');
-    $("#ip_lan_new").val('');
-    $("#ip_wan_new").val('');
-    $("#doc_number").val('');
-    $("#pic_in_charge").val('');
-    $("#live_target").val('');
-    $("#remote_address_new").val('');
-    $("#remote_type_new").val('');
-    $("#region_new").val('');
-    $("#remote_address_new").val('');
-}
-
 function getBaseUrl() {
     return $('meta[name=baseURL]').attr("content");
 }
@@ -311,6 +274,16 @@ function getProvider() {
             $('#filter_provider').append(toAppend);
         }
     });
+}
+
+function resetAllForm() {
+    $("input[type='text'], textarea, input[type='password']").each(
+        function() {
+            $(this).val('');
+        }
+    );
+    $("label.error").hide();
+    $("input.error").removeClass("error");
 }
 
 $("#open_detail_modal").on('show.bs.modal', function (e) {
