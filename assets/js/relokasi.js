@@ -13,7 +13,7 @@ $(document).ready(function() {
         "responsive": true,
         "order": [[0, 'desc']],
         "ajax": {
-            "url": getBaseUrl()+"index.php/Api/getRelokasiData",
+            "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiData",
             "type": "POST"
         },
         "columns": [
@@ -133,7 +133,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: getBaseUrl()+"index.php/Api/getremotebyname",
+            url: getBaseUrl()+"index.php/Api_relokasi/getremotebyname",
             dataType: "json",
             data: {
                 name: name
@@ -157,7 +157,7 @@ $(document).ready(function() {
         var ip_network = $(this).val();
         $.ajax({
             type: "POST",
-            url: getBaseUrl()+"index.php/Api/searchByIpAddress",
+            url: getBaseUrl()+"index.php/Api_relokasi/searchByIpAddress",
             dataType: "json",
             data: {
                 ip_network: ip_network
@@ -189,7 +189,7 @@ $(document).ready(function() {
         minimumInputLength:2,
         placeholder:"Type at least 2 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/searchByIpAddressSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/searchByIpAddressSelect2",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -207,7 +207,7 @@ $(document).ready(function() {
         minimumInputLength:2,
         placeholder:"Type at least 5 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/searchByIpAddressSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/searchByIpAddressSelect2",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -225,7 +225,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -243,7 +243,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -263,7 +263,7 @@ function getBaseUrl() {
 function getProvider() {
     $.ajax({
         type: "GET",
-        url: getBaseUrl()+"index.php/Api/getProvider",
+        url: getBaseUrl()+"index.php/Api_relokasi/getProvider",
         dataType: "json",
         success: function (response) {
             var toAppend = '';
@@ -311,7 +311,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var id          = passData.data("id");
     $.ajax({
         type: "POST",
-        url: getBaseUrl()+"index.php/Api/searchById",
+        url: getBaseUrl()+"index.php/Api_relokasi/searchById",
         dataType: "json",
         data: {
             id: id

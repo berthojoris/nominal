@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Api extends CI_Controller 
+class Api_relokasi extends CI_Controller 
 {
 
     public function __construct() {
