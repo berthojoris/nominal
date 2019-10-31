@@ -51,13 +51,11 @@
                                 <label class="col-sm-5 col-form-label">Status</label>
                                 <div class="col-sm-7">
                                     <select id="status" name="status" class="form-control input-sm">
-                                        <option value="RELOKASI">Relokasi</option>
-                                        <option value="UPGRADE_BW">Upgrade BW</option>
-                                        <option value="DISMANTLE">Dismantle</option>
-                                        <option value="PSB">PSB</option>
-                                        <option value="REALOKASI">Realokasi</option>
-                                        <option value="REAKTIFASI">Reaktifasi</option>
-                                        <option value="BAOL">Baol</option>
+                                        <option value="Draft">Draft</option>
+                                        <option value="Pending Approval">Pending Approval</option>
+                                        <option value="in Progress">in Progress</option>
+                                        <option value="Done">Done</option>
+                                        <option value="Cancel">Cancel</option>
                                     </select>
                                 </div>
                             </div>
@@ -201,7 +199,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Remote Address</label>
                                 <div class="col-sm-7">
-                                    <textarea name="remote_address_new" id="remote_address_new" class="form-control input-sm" rows="3" required></textarea>
+                                    <textarea name="remote_address_new" id="remote_address_new" class="form-control input-sm" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>

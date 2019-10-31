@@ -79,19 +79,24 @@ $(document).ready(function() {
 
     $("#form_add").validate({
         rules: {
-            file_upload: {
+            rec_doc_file: {
+                required: true,
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            },
+            work_order_file: {
                 required: true,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },
         messages: {
-            file_upload: {
+            rec_doc_file: {
                 required: 'This field is required.',
-                extension: 'Only allowed ext (pdf,jpg,jpeg,png,doc,docx,zip,rar,pdf,xls,xlsx,csv)'
+                extension: 'File extension not permitted.'
+            },
+            work_order_file: {
+                required: 'This field is required.',
+                extension: 'File extension not permitted.'
             }
-        },
-        success: function(label, element) {
-            
         },
         submitHandler: function(form) {
             form.submit();
