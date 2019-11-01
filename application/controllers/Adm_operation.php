@@ -122,7 +122,7 @@ class Adm_operation extends CI_Controller {
             'remote_type' => $this->input->post('remote_type_new')
         ];
 
-        if($this->db->insert('tb_relokasi_update', $insert)) {
+        if($this->db->insert('tb_relokasi', $insert)) {
             $this->session->set_flashdata('notif_success', 'Relokasi has been created');
         } else {
             $this->session->set_flashdata('notif_error', 'Data has not been created');
