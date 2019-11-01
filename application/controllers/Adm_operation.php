@@ -10,6 +10,7 @@ class Adm_operation extends CI_Controller {
         $this->load->helper(array('url'));
         $this->load->model('m_admoperation');
         $this->load->helper('download');
+        $this->load->helper('form');
 		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
@@ -67,73 +68,67 @@ class Adm_operation extends CI_Controller {
         $reqDocName = $this->randomString();
         $woName     = $this->randomString();
 
-        $originalName   = $_FILES['rec_doc_file']['name'];
-        $originalType   = $_FILES['rec_doc_file']['type'];
-        $originalSize   = $_FILES['rec_doc_file']['size'];
-        $extension      = array_map('strrev', explode(".", strrev($originalName)));
+        $config['upload_path']      = './filesUpload/sik/';
+        $config['allowed_types']    = 'pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv';
+        $config['max_size']         = '10240';
+        $config['overwrite']        = true;
+        $config['file_ext_tolower'] = true;
+        $config['encrypt_name']     = true;
+        $config['remove_spaces']    = true;
 
-        $WOFile   = $_FILES['work_order_file']['name'];
-        $WOType   = $_FILES['work_order_file']['type'];
-        $WOSize   = $_FILES['work_order_file']['size'];
-        $WOExt    = array_map('strrev', explode(".", strrev($WOFile)));
+        $this->load->library('upload',$config);
 
-        $allowedExt = [
-            "image/jpeg",
-            "image/png",
-            "application/msword",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            "application/pdf",
-            "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "text/csv",
-            "application/octet-stream"
+        $data = [];
+
+        for ($i=1; $i <=2 ; $i++) {
+            if(!empty($_FILES['file_upload_'.$i]['name'])){
+                if(!$this->upload->do_upload('file_upload_'.$i)) {
+                    array_push($data, [
+                        'error' => $this->upload->display_errors(),
+                        'file_name' => $this->upload->data()['file_name']
+                    ]);
+                } else {
+                    array_push($data, [
+                        'error' => null,
+                        'file_name' => $this->upload->data()['file_name']
+                    ]);
+                }
+            }
+        }
+
+        $insert = [
+            'id_jarkom' => $this->input->post('id_jarkom'),
+            'id_remote_old' => $this->input->post('id_remote_old'),
+            'id_remote_new' => $this->input->post('remote_name_new'),
+            'reason' => $this->input->post('reason'),
+            'status' => $this->input->post('status'),
+            'due_date' => $this->input->post('live_target'),
+            'pic' => $this->input->post('pic'),
+            'ip_wan_old' => $this->input->post('ip_wan_old'),
+            'ip_wan_new' => $this->input->post('ip_wan_new'),
+            'req_doc_file' => $data[0]['file_name'],
+            'req_doc_no' => $this->input->post('req_doc_no'),
+            'work_order_file' => $data[1]['file_name'],
+            'work_order_no' => $this->input->post('work_order_no'),
+            'type_relocate' => $this->input->post('type'),
+            'network_id_old' => $this->input->post('network_id_old'),
+            'network_id_new' => $this->input->post('network_id_new'),
+            'ip_lan_old' => $this->input->post('ip_lan_old'),
+            'ip_lan_new' => $this->input->post('ip_lan_new'),
+            'remote_name_old' => $this->input->post('remote_name_old'),
+            'remote_name_new' => $this->input->post('remote_name_new_val'),
+            'address_old' => $this->input->post('remote_address_old'),
+            'address_new' => $this->input->post('remote_address_new'),
+            'remote_type' => $this->input->post('remote_type_new')
         ];
 
-        if(in_array($originalType, $allowedExt)) {
-
-            $config['upload_path']      = './filesUpload/sik/';
-            $config['allowed_types']    = 'pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv';
-            $config['max_size']         = 10240;
-            $config['overwrite']        = true;
-            $config['file_name']        = $reqDocName;
-            $config['file_ext_tolower'] = true;
-            $this->load->library('upload', $config);
-            $reqDocNewName = $reqDocName.".".$extension[0];
-
-            if (!$this->upload->do_upload('rec_doc_file')) {
-                $this->session->set_flashdata('notif_error', 'Upload Req Doc file error. Reload page and try again');
-                redirect($_SERVER['HTTP_REFERER']);
-            }
-
-            if(in_array($WOType, $allowedExt)) {
-
-                $config['upload_path']      = './filesUpload/sik/';
-                $config['allowed_types']    = 'pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv';
-                $config['max_size']         = 10240;
-                $config['overwrite']        = true;
-                $config['file_name']        = $woName;
-                $config['file_ext_tolower'] = true;
-                $this->load->library('upload', $config);
-                $WONewName = $woName.".".$extension[0];
-
-                if (!$this->upload->do_upload('work_order_file')) {
-                    $this->session->set_flashdata('notif_error', 'Upload WO file error. Reload page and try again');
-                    redirect($_SERVER['HTTP_REFERER']);
-                }
-
-                $post = $this->m_admoperation->insert($this->input->post(NULL, TRUE));
-                
-                if($post == "created") {
-                    $this->session->set_flashdata('notif_success', 'Relokasi has been created');
-                } else {
-                    $this->session->set_flashdata('notif_error', 'Data has not been created');
-                }
-            } else {
-                $this->session->set_flashdata('notif_error', 'WO file validation error. Please check this upload file');
-            }            
+        if($this->db->insert('tb_relokasi_update', $insert)) {
+            $this->session->set_flashdata('notif_success', 'Relokasi has been created');
         } else {
-            $this->session->set_flashdata('notif_error', 'Req Doc file validation error. Please check this upload file');
+            $this->session->set_flashdata('notif_error', 'Data has not been created');
         }
+
+        $this->session->set_flashdata('notif_success', 'Relokasi has been created');
 
         redirect($_SERVER['HTTP_REFERER']);
     }

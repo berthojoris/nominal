@@ -148,6 +148,7 @@ $(document).ready(function() {
                     $("#remote_type_new").val(response.data.tipe_uker);
                     $("#region_new").val(response.data.nama_kanwil);
                     $("#remote_address_new").val(response.data.alamat_uker);
+                    $("#remote_name_new_val").val(response.data.nama_remote);
                 } else if(response.code == 404) {
                     swal("Oops", "Data not found for "+name, "success");
                 }  else {
@@ -173,7 +174,9 @@ $(document).ready(function() {
                     $("#kode_jarkom").val(response.data.kode_jarkom);
                     $("#no_spk").val(response.data.no_spk);
                     $("#network_type_old").val(response.data.network_type);
+                    $("#network_type_new").val(response.data.network_type);
                     $("#ip_lan_old").val(response.data.ip_lan);
+                    $("#ip_lan_new").val(response.data.ip_lan);
                     $("#ip_wan_old").val(response.data.ip_wan);
                     $("#remote_name_old").val(response.data.remote_name);
                     $("#remote_type_old").val(response.data.remote_type);
@@ -346,7 +349,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $("#edit_status").val(response.data.status).change();
                 $("#edit_doc_number").val(response.data.no_doc);
-                $("#edit_pic_in_charge").val(response.data.pic);
+                $("#edit_pic").val(response.data.pic);
                 $("#edit_live_target").val(response.data.due_date);
                 $("#edit_file_upload_current").val(response.data.file_url);
                 $("#edit_id_remote_old").val(response.data.id_remote);

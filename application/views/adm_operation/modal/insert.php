@@ -1,7 +1,10 @@
 <div class="modal fade" id="add_form_relokasi">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
-            <form role="form" id="form_add" action="<?php echo base_url(); ?>index.php/adm_operation/saverelokasi" method='POST' enctype="multipart/form-data">
+                <?php
+                $attributes = array('role' => 'form', 'id' => 'form_add', 'method' => 'POST');
+                echo form_open_multipart('adm_operation/saverelokasi', $attributes);
+                ?>
                 <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
@@ -9,7 +12,6 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="form_type" name="form_type" value="CREATE">
-                    <input type="hidden" id="id_remote_old" name="id_remote_old" value="">
                     <input type="hidden" id="kode_jarkom" name="kode_jarkom" value="">
                     
                     <div class="row">
@@ -64,7 +66,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Req Doc File</label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="form-control input-sm"  name="rec_doc_file" id="rec_doc_file" required>
+                                    <input type="file" class="form-control input-sm"  name="file_upload_1" id="rec_doc_file">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -76,7 +78,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="form-control input-sm"  name="work_order_file" id="work_order_file" required>
+                                    <input type="file" class="form-control input-sm"  name="file_upload_2" id="work_order_file">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -88,7 +90,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Persons In Charge</label>
                                 <div class="col-sm-7">
-                                    <input type="text" autocomplete="off" class="form-control input-sm" name="pic_in_charge" id="pic_in_charge" required>
+                                    <input type="text" autocomplete="off" class="form-control input-sm" name="pic" id="pic" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -131,6 +133,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
+                                    <input type="hidden" class="form-control input-sm" name="id_remote_old" id="id_remote_old">
                                     <input type="text" class="form-control input-sm" name="remote_name_old" id="remote_name_old" readonly>
                                 </div>
                             </div>
@@ -182,6 +185,7 @@
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
                                     <select id="remote_name_new" name="remote_name_new" required></select>
+                                    <input type="hidden" name="remote_name_new_val" id="remote_name_new_val">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -210,7 +214,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <input type="submit" value="Save" class="btn btn-primary">
                 </div>
-            </form>
+            <?php echo form_close() ?>
         </div>
     </div>
 </div>
