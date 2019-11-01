@@ -175,11 +175,13 @@ $(document).ready(function() {
                     $("#ip_lan_old").val(response.data.ip_lan);
                     $("#ip_lan_new").val(response.data.ip_lan);
                     $("#ip_wan_old").val(response.data.ip_wan);
+                    $("#ip_wan_new").val(response.data.ip_wan);
                     $("#remote_name_old").val(response.data.remote_name);
                     $("#remote_type_old").val(response.data.remote_type);
                     $("#region_old").val(response.data.region);
                     $("#remote_address_old").val(response.data.remote_address);
                     $("#network_id_old").val(response.data.kode_jarkom);
+                    $("#network_id_new").val(response.data.kode_jarkom);
                     $("#reason").focus();
                 } else {
                     swal("Oops", "Data not found for "+ip_network, "success");
