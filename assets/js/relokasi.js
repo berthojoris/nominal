@@ -62,7 +62,7 @@ $(document).ready(function() {
                 "data": "id_relokasi",
                 "sortable": false,
                  "render": function(data, type, row) {
-                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id_relokasi+'" data-nama_remote_old="'+row.nama_remote_old+'" data-nama_remote_new="'+row.nama_remote_new+'" data-alamat="'+row.alamat+'" data-file_url="'+row.file_url+'" data-status="'+row.status+'" data-due_date="'+row.due_date+'" data-pic="'+row.pic+'" data-ip_wan="'+row.ip_wan+'" data-target="#open_detail_modal">View</button>'
+                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id_relokasi+'" data-target="#open_detail_modal">View</button>'
                 }
             },
             {
@@ -294,22 +294,43 @@ function resetAllForm() {
 
 $("#open_detail_modal").on('show.bs.modal', function (e) {
     var passData     = $(e.relatedTarget);
-    var nama_remote_new = passData.data("nama_remote_new");
-    var nama_remote_old = passData.data("nama_remote_old");
-    var alamat = passData.data("alamat");
-    var file_url = passData.data("file_url");
-    var status = passData.data("status");
-    var due_date = passData.data("due_date");
-    var pic = passData.data("pic");
-    var ip_wan = passData.data("ip_wan");
-    $("#nama_remote_new").html(nama_remote_new);
-    $("#nama_remote_old").html(nama_remote_old);
-    $("#alamat").html(alamat);
-    $("#file_url").html(file_url);
-    $("#status_detail").html(status);
-    $("#due_date").html(due_date);
-    $("#pic").html(pic);
-    $("#ip_wan_detail").html(ip_wan);
+    var id = passData.data("id");
+    $("#loadingPanel").show();
+    $("#dataPanel").hide();
+    $("#notFoundPanel").hide();
+    $.ajax({
+        type: "GET",
+        url: getBaseUrl()+"index.php/Api_relokasi/getDetail/"+id,
+        dataType: "json",
+        success: function (response) {
+            $("#loadingPanel").hide();
+            if(response.code == 200) {
+                $("#detail_kode_jarkom").html(response.data.kode_jarkom);
+                $("#detail_reason").html(response.data.reason);
+                $("#detail_status").html(response.data.status);
+                $("#detail_due_date").html(response.data.due_date);
+                $("#detail_pic").html(response.data.pic);
+                $("#detail_ip_wan_old").html(response.data.ip_wan_old);
+                $("#detail_ip_wan_new").html(response.data.ip_wan_new);
+                $("#detail_req_doc_no").html(response.data.req_doc_no);
+                $("#detail_work_order_no").html(response.data.work_order_no);
+                $("#detail_type_relocate").html(response.data.type_relocate);
+                $("#detail_network_id_old").html(response.data.network_id_old);
+                $("#detail_network_id_new").html(response.data.network_id_new);
+                $("#detail_ip_lan_old").html(response.data.ip_lan_old);
+                $("#detail_ip_lan_new").html(response.data.ip_lan_new);
+                $("#detail_remote_name_old").html(response.data.remote_name_old);
+                $("#detail_remote_name_new").html(response.data.remote_name_new);
+                $("#detail_address_old").html(response.data.address_old);
+                $("#detail_address_new").html(response.data.address_new);
+                $("#detail_remote_type").html(response.data.remote_type);
+                $("#detail_provider").html(response.data.nickname_provider);
+                $("#dataPanel").show();
+            } else {
+                $("#notFoundPanel").show();
+            }
+        }
+    });
 });
 
 $("#edit_form_relokasi").on('show.bs.modal', function (e) {

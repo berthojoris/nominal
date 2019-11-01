@@ -75,3 +75,4 @@
 </section>
 
 <?php $this->view('adm_operation/modal/insert'); ?>
+<?php $this->view('adm_operation/modal/detail'); ?>

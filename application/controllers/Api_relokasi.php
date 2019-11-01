@@ -66,6 +66,24 @@ class Api_relokasi extends CI_Controller
         echo $this->datatables->generate();
     }
 
+    public function getDetail($id)
+    {
+        header('Content-Type: application/json');
+        $sql = "SELECT * FROM v_relokasi_list WHERE id_relokasi = ?";
+        $query = $this->db->query($sql, [$id]);
+        if(empty($query->row())) {
+            echo json_encode([
+                'code' => 404,
+                'data' => null
+            ]);
+        } else {
+            echo json_encode([
+                'code' => 200,
+                'data' => $query->row()
+            ]);
+        }
+    }
+
     public function getProvider()
     {
         $sql = "SELECT kode_provider, nama_provider FROM tb_provider";
