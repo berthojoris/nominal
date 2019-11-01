@@ -18,7 +18,7 @@ class Adm_operation extends CI_Controller {
 
     public function download($fileName)
     {
-        force_download('./filesUpload/'.$fileName, NULL);
+        force_download('./filesUpload/sik/'.$fileName, NULL);
     }
 
     public function relokasi()

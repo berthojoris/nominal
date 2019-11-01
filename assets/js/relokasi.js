@@ -42,9 +42,8 @@ $(document).ready(function() {
                  }
             },
             {
-                "data": "rec_doc_file",
+                "data": "req_doc_file",
                 "render": function(data, type, row, meta) {
-                    var isian = ""
                     isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
                     return isian;
                  }
