@@ -62,7 +62,7 @@ class Api_relokasi extends CI_Controller
     {
         header('Content-Type: application/json');
         $this->datatables->select('*');
-        $this->datatables->from('v_combine_filter');
+        $this->datatables->from('v_relokasi_list');
         echo $this->datatables->generate();
     }
 

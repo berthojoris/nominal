@@ -26,25 +26,23 @@ $(document).ready(function() {
                 "data": "kode_jarkom",
             },
             {
-                "data": "ip_wan",
+                "data": "ip_wan_new",
                 "visible": false,
             },
             {
-                "data": "nama_remote_old",
+                "data": "remote_name_old",
             },
             {
-                "data": "nama_remote_new",
+                "data": "remote_name_new",
             },
             {
-                "data": "alamat",
+                "data": "address_new",
                 "render": function(data, type, row, meta) {
-                    var str = data;
-                    if(str.length > 30) str = str.substring(0, 30);
-                    return str+"...";
+                    return (data.length >= 40) ? data.substring(0, 40)+"..." : data;
                  }
             },
             {
-                "data": "file_url",
+                "data": "rec_doc_file",
                 "render": function(data, type, row, meta) {
                     var isian = ""
                     isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
