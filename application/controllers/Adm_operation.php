@@ -11,6 +11,7 @@ class Adm_operation extends CI_Controller {
         $this->load->model('m_admoperation');
         $this->load->helper('download');
         $this->load->helper('form');
+        $this->load->helper('directory');
 		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
@@ -18,7 +19,8 @@ class Adm_operation extends CI_Controller {
 
     public function download($fileName)
     {
-        force_download('./filesUpload/sik/'.$fileName, NULL);
+        $year = date('Y');
+        force_download('./filesUpload/sik/'.$year.'/'.$fileName, NULL);
     }
 
     public function relokasi()
@@ -65,10 +67,14 @@ class Adm_operation extends CI_Controller {
 
     public function saverelokasi()
     {
-        $reqDocName = $this->randomString();
-        $woName     = $this->randomString();
+        $year = date('Y');
+        
+        $checkFolder = directory_map('./filesUpload/sik/'.$year);
+        if(!is_array($checkFolder)) {
+            mkdir('./filesUpload/sik/'.$year, 0777, TRUE);
+        }
 
-        $config['upload_path']      = './filesUpload/sik/';
+        $config['upload_path']      = './filesUpload/sik/'.$year.'/';
         $config['allowed_types']    = 'pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv';
         $config['max_size']         = '10240';
         $config['overwrite']        = true;

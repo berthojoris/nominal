@@ -58,7 +58,8 @@
                                 <th>Remote Old</th>
                                 <th>Remote New</th>
                                 <th>Alamat</th>
-                                <th>File</th>
+                                <th>Req Doc</th>
+                                <th>WO</th>
                                 <th>Status</th>
                                 <th>Due Date</th>
                                 <th>PIC</th>

@@ -49,6 +49,13 @@ $(document).ready(function() {
                  }
             },
             {
+                "data": "work_order_file",
+                "render": function(data, type, row, meta) {
+                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
+                    return wo;
+                 }
+            },
+            {
                 "data": "status",
             },
             {
