@@ -5,6 +5,7 @@ CREATE
     `tb_relokasi`.`id` AS `id_relokasi`,
     `tb_relokasi`.`id_jarkom`,
     `tb_jarkom`.`kode_jarkom`,
+    `tb_jarkom`.`id_contract`,
     `tb_relokasi`.`reason`,
     `tb_relokasi`.`status`,
     `tb_relokasi`.`due_date`,

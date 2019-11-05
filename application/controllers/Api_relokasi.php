@@ -375,77 +375,7 @@ class Api_relokasi extends CI_Controller
     public function searchById()
     {
         $id = $_POST['id'];
-        $sql = "SELECT
-            `tb_jarkom`.`id` AS `id_jarkom`,
-            `tb_jarkom`.`kode_jarkom`,
-            `tb_jarkom`.`ip_wan`,
-            `tb_jarkom`.`kode_jenis_jarkom`,
-            `tb_jenis_jarkom`.`jenis_jarkom` AS `network_type`,
-            `tb_spk`.`no_spk`,
-            `tb_remote`.`ip_lan`,
-            `tb_tipe_uker`.`tipe_uker` AS `remote_type`,
-            `tb_remote`.`id_remote`,
-            `tb_remote`.`nama_remote` AS `remote_name`,
-            `tb_kanwil`.`nama_kanwil` AS `region`,
-            `tb_remote`.`alamat_uker` AS `remote_address`,
-            `tb_relokasi`.`id` AS `id_relokasi`,
-            `tb_relokasi`.`id_jarkom`,
-            `tb_relokasi`.`id_remote_old`,
-            `tb_relokasi`.`id_remote_new`,
-            `tb_relokasi`.`alamat`,
-            `tb_relokasi`.`file_url`,
-            `tb_relokasi`.`no_doc`,
-            `tb_relokasi`.`reason`,
-            `tb_relokasi`.`status`,
-            `tb_relokasi`.`due_date`,
-            `tb_relokasi`.`pic`,
-            `tb_relokasi`.`no_sik`,
-            `tb_provider`.`nickname_provider`,
-            `v_all_remote`.`nama_remote` AS `nama_remote_new`,
-            `v_all_remote`.`alamat_uker` AS `alamat_uker_new`,
-            `v_all_remote`.`tipe_uker` AS `tipe_uker_new`,
-            `v_all_remote`.`nama_kanwil` AS `nama_kanwil_new`
-        FROM
-            `tb_jarkom`
-        INNER JOIN `tb_jenis_jarkom`
-            ON (
-                `tb_jarkom`.`kode_jenis_jarkom` = `tb_jenis_jarkom`.`kode_jenis_jarkom`
-            )
-        INNER JOIN `tb_spk`
-            ON (
-                `tb_jarkom`.`id_spk` = `tb_spk`.`id_spk`
-            )
-        INNER JOIN `tb_remote`
-            ON (
-                `tb_jarkom`.`id_remote` = `tb_remote`.`id_remote`
-            )
-        INNER JOIN `tb_provider`
-            ON (
-                `tb_jarkom`.`kode_provider` = `tb_provider`.`kode_provider`
-            )
-        INNER JOIN `tb_tipe_uker`
-            ON (
-                `tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`
-            )
-        INNER JOIN `tb_kanca`
-            ON (
-                `tb_remote`.`kode_kanca` = `tb_kanca`.`kode_kanca`
-            )
-        INNER JOIN `tb_relokasi`
-            ON (
-                `tb_relokasi`.`id_jarkom` = `tb_jarkom`.`id`
-            )
-        INNER JOIN `v_all_remote`
-            ON (
-                `tb_relokasi`.`id_remote_new` = `v_all_remote`.`id_remote`
-            )
-        INNER JOIN `tb_kanwil`
-            ON (
-                `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
-            )    
-        WHERE (
-                `id_jarkom` = ?
-            )";
+        $sql = "SELECT * FROM v_relokasi_edit WHERE id_jarkom = ?";
         $query = $this->db->query($sql, [$id]);
         if ($query->num_rows() > 0) {
             $output = [
