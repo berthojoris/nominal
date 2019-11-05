@@ -19,8 +19,8 @@ class Adm_operation extends CI_Controller {
 
     public function download($fileName)
     {
-        $year = date('Y');
-        force_download('./filesUpload/sik/'.$year.'/'.$fileName, NULL);
+        $separate = explode("-", $fileName);
+        force_download('./filesUpload/sik/'.$separate[0].'/'.$separate[1], NULL);
     }
 
     public function relokasi()
@@ -91,12 +91,12 @@ class Adm_operation extends CI_Controller {
                 if(!$this->upload->do_upload('file_upload_'.$i)) {
                     array_push($data, [
                         'error' => $this->upload->display_errors(),
-                        'file_name' => $this->upload->data()['file_name']
+                        'file_name' => $year."-".$this->upload->data()['file_name']
                     ]);
                 } else {
                     array_push($data, [
                         'error' => null,
-                        'file_name' => $this->upload->data()['file_name']
+                        'file_name' => $year."-".$this->upload->data()['file_name']
                     ]);
                 }
             }
