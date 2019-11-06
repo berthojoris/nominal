@@ -251,7 +251,7 @@ class Api_relokasi extends CI_Controller
         $data = [];
         foreach ($query->result() as $key ) {
             $newdata = [
-                "id" => $key->kode_jarkom,
+                "id" => $key->id_jarkom,
 				"text" => $key->ip_wan." / ".$key->kode_jarkom." / ".$key->nickname_provider." / ".$key->singkatan
             ];
             array_push($data, $newdata);
@@ -261,7 +261,7 @@ class Api_relokasi extends CI_Controller
 
     public function searchByIpAddress()
     {
-        $ip_network = $_POST['ip_network'];
+        $id_jarkom = $_POST['id_jarkom'];
         $sql = "SELECT
             `tb_jarkom`.`id` AS `id_jarkom`,
             `tb_jarkom`.`kode_jarkom`,
@@ -306,9 +306,9 @@ class Api_relokasi extends CI_Controller
                     `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
                 )
         WHERE (
-                `tb_jarkom`.`ip_wan` = ? or `tb_jarkom`.`kode_jarkom` = ?
+                `tb_jarkom`.`ip_wan` = ? or `tb_jarkom`.`id` = ?
             )";
-        $query = $this->db->query($sql, [$ip_network, $ip_network]);
+        $query = $this->db->query($sql, [$id_jarkom, $id_jarkom]);
         if ($query->num_rows() > 0) {
             $output = [
                 'code' => 200,

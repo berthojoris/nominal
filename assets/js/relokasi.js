@@ -1,7 +1,39 @@
 $(document).ready(function() {
 
-    $( document ).on( 'focus', ':input', function() {
+    $(document).on('focus', ':input', function() {
         $( this ).attr( 'autocomplete', 'off' );
+    });
+
+    $(document).on('change', '#edit_id_jarkom',function (e) {
+        $("#edit_id_jarkom_val").val(this.value);
+    });
+
+    $(document).on('change', '#edit_remote_name_new',function (e) {
+        $("#edit_remote_name_new_id").val(this.value);
+        $("#edit_remote_name_new_val").val(this.innerText);
+        $("#remote_type_new").val('');
+        $("#region_new").val('');
+        $("#remote_address_new").val('');
+
+        $.ajax({
+            type: "POST",
+            url: getBaseUrl()+"index.php/Api_relokasi/getremotebyname",
+            dataType: "json",
+            data: {
+                name: this.value
+            },
+            success: function (response) {
+                if(response.code == 200) {
+                    $("#edit_remote_type_new").val(response.data.tipe_uker);
+                    $("#edit_region_new").val(response.data.nama_kanwil);
+                    $("#edit_remote_address_new").val(response.data.alamat_uker);
+                } else if(response.code == 404) {
+                    swal("Oops", "Data not found for "+name, "success");
+                }  else {
+                    swal("Oops", "Search failed. Please reload the page", "error");
+                }
+            }
+        });
     });
 
     getProvider();
@@ -81,49 +113,51 @@ $(document).ready(function() {
         ],
     });
 
-    $("#form_edit").validate({
-        rules: {
-            edit_rec_doc_file: {
-                required: true,
-                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+    $(document).on("click", "#updateRelokasi", function (e) {
+        $("#form_edit").validate({
+            rules: {
+                edit_file_upload_1: {
+                    required: true,
+                    extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+                },
+                edit_file_upload_2: {
+                    required: true,
+                    extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+                }
             },
-            edit_work_order_file: {
-                required: true,
-                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
-            }
-        },
-        messages: {
-            edit_rec_doc_file: {
-                required: 'This field is required.',
-                extension: 'File extension not permitted.'
+            messages: {
+                edit_file_upload_1: {
+                    required: 'This field is required.',
+                    extension: 'File extension not permitted.'
+                },
+                edit_file_upload_2: {
+                    required: 'This field is required.',
+                    extension: 'File extension not permitted.'
+                }
             },
-            edit_work_order_file: {
-                required: 'This field is required.',
-                extension: 'File extension not permitted.'
+            submitHandler: function(form) {
+                form.submit();
             }
-        },
-        submitHandler: function(form) {
-            form.submit();
-        }
+        });
     });
 
     $("#form_add").validate({
         rules: {
-            rec_doc_file: {
+            file_upload_1: {
                 required: true,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
-            work_order_file: {
+            file_upload_2: {
                 required: true,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },
         messages: {
-            rec_doc_file: {
+            file_upload_1: {
                 required: 'This field is required.',
                 extension: 'File extension not permitted.'
             },
-            work_order_file: {
+            file_upload_1: {
                 required: 'This field is required.',
                 extension: 'File extension not permitted.'
             }
@@ -190,13 +224,13 @@ $(document).ready(function() {
 
     $("#id_jarkom").change(function (e) {
         e.preventDefault();
-        var ip_network = $(this).val();
+        var id_jarkom = $(this).val();
         $.ajax({
             type: "POST",
             url: getBaseUrl()+"index.php/Api_relokasi/searchByIpAddress",
             dataType: "json",
             data: {
-                ip_network: ip_network
+                id_jarkom: id_jarkom
             },
             success: function (response) {
                 if(response.code == 200) {
@@ -234,40 +268,6 @@ $(document).ready(function() {
             dataType:"json",
             data: function(param) {
                 return{ip_network:param.term}
-            },
-            processResults:function(data) {
-                return{results:data}
-            }
-        }
-    });
-
-    $("#edit_id_jarkom").select2({
-        width: '100%',
-        minimumInputLength:2,
-        placeholder:"Type at least 2 charachter",
-        ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/searchByIpAddressSelect2",
-            type:"POST",
-            dataType:"json",
-            data: function(param) {
-                return{ip_network:param.term}
-            },
-            processResults:function(data) {
-                return{results:data}
-            }
-        }
-    });
-
-    $("#edit_remote_name_new").select2({
-        width: '100%',
-        minimumInputLength:3,
-        placeholder:"Type at least 3 charachter",
-        ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
-            type:"POST",
-            dataType:"json",
-            data: function(param) {
-                return{name:param.term}
             },
             processResults:function(data) {
                 return{results:data}
@@ -368,6 +368,7 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
 $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var passData    = $(e.relatedTarget);
     var id          = passData.data("id");
+    resetAllForm();
     $.ajax({
         type: "POST",
         url: getBaseUrl()+"index.php/Api_relokasi/searchById",
@@ -377,25 +378,33 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         },
         success: function (response) {
             if(response.code == 200) {
-                
-                $('#edit_id_jarkom').select2({
-                    width: '100%',
-                    minimumInputLength:3,
-                    placeholder:"Type at least 3 charachter",
-                    initSelection : function (element, callback) {
-                        var data = {id: response.data.kode_jarkom, text: response.data.ip_wan_new+" / "+response.data.kode_jarkom+" / "+response.data.nickname_provider};
-                        callback(data);
-                    }
-                });
+
+                $("#edit_id_jarkom").val(response.data.ip_wan_new+" / "+response.data.kode_jarkom+" / "+response.data.nickname_provider +" / "+response.data.singkatan);
+                $("#edit_id_jarkom_val").val(response.data.id_jarkom);
 
                 $('#edit_remote_name_new').select2({
                     width: '100%',
                     dropdownParent: $("#remoteNamePanel"),
                     minimumInputLength:3,
                     placeholder:"Type at least 3 charachter",
+                    ajax:{
+                        url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
+                        type:"POST",
+                        dataType:"json",
+                        data: function(param) {
+                            return{name:param.term}
+                        },
+                        processResults:function(data) {
+                            return{results:data}
+                        }
+                    },
                     initSelection : function (element, callback) {
-                        var data = {id: response.data.remote_name_new, text: response.data.remote_name_new};
+                        var data = {
+                            id: response.data.remote_name_new, 
+                            text: response.data.remote_name_new
+                        };
                         callback(data);
+                        $("#edit_remote_name_new_val").val(data.id);
                     }
                 });
 
@@ -404,6 +413,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_type").val(response.data.type_relocate).change();
                 $("#edit_status").val(response.data.status).change();
                 $("#edit_reason").val(response.data.reason);
+                $("#edit_no_spk").val(response.data.no_spk);
                 $("#edit_no_serial_spk").val('');
 
                 $("#edit_req_doc_no").val(response.data.req_doc_no);

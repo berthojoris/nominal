@@ -28,7 +28,9 @@ CREATE
     `v_relokasi_list`.`remote_type`,
     `v_relokasi_list`.`nickname_provider`,
     `tb_jenis_jarkom`.`jenis_jarkom` AS `network_type`,
-    `tb_kanwil`.`nama_kanwil` AS `region`
+    `tb_kanwil`.`nama_kanwil` AS `region`,
+    `tb_spk`.`no_spk`,
+    `tb_tipe_uker`.`singkatan`
 FROM
     `tb_jarkom`
     INNER JOIN `v_relokasi_list`
@@ -54,4 +56,9 @@ FROM
     INNER JOIN `tb_kanwil`
         ON (
             `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
-        ));
+        )
+    INNER JOIN `tb_tipe_uker`
+        ON (
+            `tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`
+        )
+);

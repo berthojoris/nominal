@@ -161,8 +161,8 @@ class Adm_operation extends CI_Controller {
         $data = [];
 
         for ($i=1; $i <=2 ; $i++) {
-            if(!empty($_FILES['file_upload_'.$i]['name'])){
-                if(!$this->upload->do_upload('file_upload_'.$i)) {
+            if(!empty($_FILES['edit_file_upload_'.$i]['name'])){
+                if(!$this->upload->do_upload('edit_file_upload_'.$i)) {
                     array_push($data, [
                         'error' => $this->upload->display_errors(),
                         'file_name' => $year."-".$this->upload->data()['file_name']
@@ -177,29 +177,20 @@ class Adm_operation extends CI_Controller {
         }
 
         $update = [
-            'id_jarkom' => $this->input->post('id_jarkom'),
-            'id_remote_old' => $this->input->post('id_remote_old'),
-            'id_remote_new' => $this->input->post('remote_name_new'),
-            'reason' => $this->input->post('reason'),
-            'status' => $this->input->post('status'),
-            'due_date' => $this->input->post('live_target'),
-            'pic' => $this->input->post('pic'),
-            'ip_wan_old' => $this->input->post('ip_wan_old'),
-            'ip_wan_new' => $this->input->post('ip_wan_new'),
+            'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
+            'reason' => $this->input->post('edit_reason'),
+            'type_relocate' => $this->input->post('edit_type'),
+            'status' => $this->input->post('edit_status'),
+            'req_doc_no' => $this->input->post('edit_req_doc_no'),
+            'work_order_no' => $this->input->post('edit_work_order_no'),
+            'pic' => $this->input->post('edit_pic'),
+            'due_date' => $this->input->post('edit_live_target'),
+            'network_id_new' => $this->input->post('edit_network_id_new'),
+            'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
+            'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+            'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
             'req_doc_file' => $data[0]['file_name'],
-            'req_doc_no' => $this->input->post('req_doc_no'),
             'work_order_file' => $data[1]['file_name'],
-            'work_order_no' => $this->input->post('work_order_no'),
-            'type_relocate' => $this->input->post('type'),
-            'network_id_old' => $this->input->post('network_id_old'),
-            'network_id_new' => $this->input->post('network_id_new'),
-            'ip_lan_old' => $this->input->post('ip_lan_old'),
-            'ip_lan_new' => $this->input->post('ip_lan_new'),
-            'remote_name_old' => $this->input->post('remote_name_old'),
-            'remote_name_new' => $this->input->post('remote_name_new_val'),
-            'address_old' => $this->input->post('remote_address_old'),
-            'address_new' => $this->input->post('remote_address_new'),
-            'remote_type' => $this->input->post('remote_type_new')
         ];
 
         $this->db->where('id', $this->input->post('id_relokasi'));

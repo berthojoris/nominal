@@ -8,7 +8,7 @@
                 <div class="modal-header" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">New Relokasi</h4>
+                    <h4 class="modal-title">Edit New Relokasi</h4>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="form_type" name="form_type" value="UPDATE">
@@ -19,7 +19,8 @@
                             <div class="form-group row" id="panelIdEdit">
                                 <label class="col-sm-5 col-form-label">IP Address / Network ID</label>
                                 <div class="col-sm-7">
-                                    <select id="edit_id_jarkom" name="edit_id_jarkom" required></select>
+                                    <input type="text" class="form-control input-sm" name="edit_id_jarkom" id="edit_id_jarkom" readonly>
+                                    <input type="hidden" name="edit_id_jarkom_val" id="edit_id_jarkom_val">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -78,7 +79,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="edit_form-control input-sm"  name="edit_file_upload_2" id="work_order_file">
+                                    <input type="file" class="form-control input-sm"  name="edit_file_upload_2" id="edit_work_order_file">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -133,8 +134,8 @@
                             <div class="form-group row" id="remoteNamePanel">
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
-                                    <input type="hidden" class="form-control input-sm" name="edit_id_remote_old" id="edit_id_remote_old">
                                     <input type="text" class="form-control input-sm" name="edit_remote_name_old" id="edit_remote_name_old" readonly>
+                                    <input type="hidden" class="form-control input-sm" name="edit_id_remote_old" id="edit_id_remote_old">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -184,7 +185,8 @@
                             <div class="form-group row" id="remotePanel">
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
-                                    <select id="edit_remote_name_new" name="edit_remote_name_new" required></select>
+                                    <select id="edit_remote_name_new" name="edit_remote_name_new"></select>
+                                    <input type="hidden" name="edit_remote_name_new_id" id="edit_remote_name_new_id">
                                     <input type="hidden" name="edit_remote_name_new_val" id="edit_remote_name_new_val">
                                 </div>
                             </div>
@@ -212,7 +214,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" value="Update" class="btn btn-primary">
+                    <input type="submit" value="Update" class="btn btn-primary" id="updateRelokasi">
                 </div>
             <?php echo form_close() ?>
         </div>
