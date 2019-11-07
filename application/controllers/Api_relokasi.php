@@ -331,6 +331,7 @@ class Api_relokasi extends CI_Controller
             `tb_remote`.`id_remote`,
             `tb_remote`.`nama_remote`,
             `tb_remote`.`kode_tipe_uker`,
+            `tb_remote`.`ip_lan`,
             `tb_tipe_uker`.`tipe_uker`,
             `tb_remote`.`alamat_uker`,
             `tb_remote`.`kode_kanca`,

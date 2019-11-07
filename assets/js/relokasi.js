@@ -24,6 +24,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                 if(response.code == 200) {
+                    $("#edit_ip_lan_new").val(response.data.ip_lan);
                     $("#edit_remote_type_new").val(response.data.tipe_uker);
                     $("#edit_region_new").val(response.data.nama_kanwil);
                     $("#edit_remote_address_new").val(response.data.alamat_uker);
@@ -209,6 +210,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                 if(response.code == 200) {
+                    $("#ip_lan_new").val(response.data.ip_lan);
                     $("#remote_type_new").val(response.data.tipe_uker);
                     $("#region_new").val(response.data.nama_kanwil);
                     $("#remote_address_new").val(response.data.alamat_uker);
