@@ -173,7 +173,7 @@ $(document).ready(function() {
         $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target").datepicker({ 
+    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({ 
         startDate: new Date(),
         todayHighlight: true,
         autoclose: true
@@ -438,6 +438,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_no_serial_spk").val('');
 
                 $("#edit_req_doc_no").val(response.data.req_doc_no);
+                $("#edit_req_doc_date").val(response.data.req_doc_date);
                 $("#edit_pic").val(response.data.pic);
                 $("#edit_work_order_no").val(response.data.work_order_no);
                 $("#edit_live_target").val(response.data.due_date);

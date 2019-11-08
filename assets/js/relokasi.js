@@ -297,7 +297,7 @@ $(document).ready(function() {
 
     $("#filter_remote_name").select2({
         width: '100%',
-        dropdownParent: $("#remotePanel"),
+        dropdownParent: $("#filterPanelRemoteName"),
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
