@@ -301,7 +301,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameFilter",
             type:"POST",
             dataType:"json",
             data: function(param) {

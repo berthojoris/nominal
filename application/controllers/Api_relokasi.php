@@ -105,6 +105,48 @@ class Api_relokasi extends CI_Controller
         echo json_encode($query);
     }
 
+    public function getRemoteByNameFilter()
+    {
+        $strName = $_POST['name'];
+        $sql = "SELECT
+            `tb_remote`.`id_remote`,
+            `tb_remote`.`nama_remote`,
+            `tb_remote`.`kode_tipe_uker`,
+            `tb_tipe_uker`.`tipe_uker`,
+            `tb_remote`.`alamat_uker`,
+            `tb_remote`.`kode_kanca`,
+            `tb_kanca`.`nama_kanca`,
+            `tb_kanwil`.`kode_kanwil`,
+            `tb_kanwil`.`nama_kanwil`
+        FROM
+            `tb_remote`
+            INNER JOIN `tb_tipe_uker`
+                ON (
+                    `tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`
+                )
+            INNER JOIN `tb_kanca`
+                ON (
+                    `tb_remote`.`kode_kanca` = `tb_kanca`.`kode_kanca`
+                )
+            INNER JOIN `tb_kanwil`
+                ON (
+                    `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
+                )
+        WHERE (
+                `tb_remote`.`nama_remote` like '%$strName%'
+            )";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->nama_remote,
+				"text" => $key->nama_remote
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
     public function getRemoteByNameSelect2()
     {
         $strName = $_POST['name'];
