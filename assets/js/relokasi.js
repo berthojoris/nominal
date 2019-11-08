@@ -71,7 +71,7 @@ $(document).ready(function() {
             {
                 "data": "address_new",
                 "render": function(data, type, row, meta) {
-                    return (data.length >= 40) ? data.substring(0, 40)+"..." : data;
+                    return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
                  }
             },
             {

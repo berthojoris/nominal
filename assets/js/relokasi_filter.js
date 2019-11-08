@@ -71,7 +71,7 @@ $(document).ready(function() {
             {
                 "data": "address_new",
                 "render": function(data, type, row, meta) {
-                    return (data.length >= 40) ? data.substring(0, 40)+"..." : data;
+                    return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
                  }
             },
             {
@@ -459,6 +459,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_remote_type_new").val(response.data.remote_type);
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
+                $("#edit_distance").val(response.data.distance);
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
