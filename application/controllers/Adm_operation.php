@@ -132,6 +132,7 @@ class Adm_operation extends CI_Controller {
             'remote_name_new' => $this->input->post('remote_name_new_val'),
             'address_old' => $this->input->post('remote_address_old'),
             'address_new' => $this->input->post('remote_address_new'),
+            'distance' => $this->input->post('distance'),
             'remote_type' => $this->input->post('remote_type_new')
         ];
 
@@ -199,6 +200,7 @@ class Adm_operation extends CI_Controller {
             'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
             'req_doc_file' => $data[0]['file_name'],
             'work_order_file' => $data[1]['file_name'],
+            'distance' => $this->input->post('edit_distance')
         ];
 
         $this->db->where('id', $this->input->post('id_relokasi'));

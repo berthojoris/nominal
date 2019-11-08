@@ -26,6 +26,7 @@ CREATE
     `tb_relokasi`.`remote_name_new`,
     `tb_relokasi`.`address_old`,
     `tb_relokasi`.`address_new`,
+    `tb_relokasi`.`distance`,
     `tb_relokasi`.`remote_type`,
     `tb_provider`.`nickname_provider`
 FROM

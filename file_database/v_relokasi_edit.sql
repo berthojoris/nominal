@@ -26,6 +26,7 @@ CREATE
     `v_relokasi_list`.`remote_name_new`,
     `v_relokasi_list`.`address_old`,
     `v_relokasi_list`.`address_new`,
+    `v_relokasi_list`.`distance`,
     `v_relokasi_list`.`remote_type`,
     `v_relokasi_list`.`nickname_provider`,
     `tb_jenis_jarkom`.`jenis_jarkom` AS `network_type`,

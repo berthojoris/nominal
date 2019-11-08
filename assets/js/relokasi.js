@@ -459,6 +459,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_remote_type_new").val(response.data.remote_type);
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
+                $("#edit_distance").val(response.data.distance);
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }

@@ -214,6 +214,12 @@
                                     <textarea name="edit_remote_address_new" id="edit_remote_address_new" class="form-control input-sm" rows="3"></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Distance</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="edit_distance" id="edit_distance" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
