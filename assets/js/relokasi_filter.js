@@ -365,6 +365,7 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
                 $("#detail_ip_wan_old").html(response.data.ip_wan_old);
                 $("#detail_ip_wan_new").html(response.data.ip_wan_new);
                 $("#detail_req_doc_no").html(response.data.req_doc_no);
+                $("#detail_req_date").html(response.data.req_doc_date);
                 $("#detail_work_order_no").html(response.data.work_order_no);
                 $("#detail_type_relocate").html(response.data.type_relocate);
                 $("#detail_network_id_old").html(response.data.network_id_old);
