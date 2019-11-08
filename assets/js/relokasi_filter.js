@@ -294,6 +294,24 @@ $(document).ready(function() {
             }
         }
     });
+
+    $("#filter_remote_name").select2({
+        width: '100%',
+        dropdownParent: $("#filterPanelRemoteName"),
+        minimumInputLength:3,
+        placeholder:"Type at least 3 charachter",
+        ajax:{
+            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
+            type:"POST",
+            dataType:"json",
+            data: function(param) {
+                return{name:param.term}
+            },
+            processResults:function(data) {
+                return{results:data}
+            }
+        }
+    });
 });
 
 function getBaseUrl() {

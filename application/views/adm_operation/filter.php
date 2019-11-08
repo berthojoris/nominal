@@ -28,7 +28,7 @@
             <div class="col-md-6" id="filterPanelRemoteName">
                 <div class="form-group">
                     <label>Remote Name</label>
-                    <select id="filter_remote_name" name="filter_remote_name" required></select>
+                    <select id="filter_remote_name" name="filter_remote_name"></select>
                 </div>
             </div>
             <div class="col-md-6">
@@ -71,5 +71,6 @@
                 </div>
             </div>
         </div>
+        <input type="submit" value="Filter now" class="btn btn-primary">
     </form>
 </div>

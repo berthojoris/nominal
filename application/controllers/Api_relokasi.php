@@ -15,11 +15,12 @@ class Api_relokasi extends CI_Controller
     {
         header('Content-Type: application/json');
 
-        $filter_ip = $this->session->userdata('filter_ip');
-        $filter_network_id = $this->session->userdata('filter_network_id');
+        $filter_ip_wan = $this->session->userdata('filter_ip_wan');
         $filter_provider = $this->session->userdata('filter_provider');
+        $filter_ip_lan = $this->session->userdata('filter_ip_lan');
+        $filter_wo_no = $this->session->userdata('filter_wo_no');
         $filter_remote_name = $this->session->userdata('filter_remote_name');
-        $filter_doc_number = $this->session->userdata('filter_doc_number');
+        $filter_req_doc_no = $this->session->userdata('filter_req_doc_no');
         $filter_status = $this->session->userdata('filter_status');
         $filter_pic = $this->session->userdata('filter_pic');
         $filter_order_date = $this->session->userdata('filter_order_date');
@@ -27,37 +28,29 @@ class Api_relokasi extends CI_Controller
 
         $this->datatables->select('*');
 
-        if($filter_ip != '-') {
-            $this->datatables->like('kode_jarkom', $filter_ip);
-        }
-
-        if($filter_network_id != '-') {
-            $this->datatables->like('ip_wan', $filter_network_id);
-        }
-
-        if($filter_provider != '-') {
-            $this->datatables->like('status', $filter_provider);
+        if($filter_ip_wan != '-') {
+            $this->datatables->like('ip_wan_new', $filter_ip_wan)->or_like('ip_wan_old', $filter_ip_wan);
         }
         
-        if($filter_remote_name != '-') {
-            $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
-        }
+        // if($filter_remote_name != '-') {
+        //     $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
+        // }
 
-        if($filter_doc_number != '-') {
-            $this->datatables->like('no_doc', $filter_doc_number);
-        }
+        // if($filter_doc_number != '-') {
+        //     $this->datatables->like('no_doc', $filter_doc_number);
+        // }
 
-        if($filter_status != '-') {
-            $this->datatables->like('status', $filter_status);
-        }
+        // if($filter_status != '-') {
+        //     $this->datatables->like('status', $filter_status);
+        // }
 
-        if($filter_pic != '-') {
-            $this->datatables->like('pic', $filter_pic);
-        }
+        // if($filter_pic != '-') {
+        //     $this->datatables->like('pic', $filter_pic);
+        // }
 
-        if($filter_order_date != '-') {
-            $this->datatables->like('due_date', $filter_order_date);
-        }
+        // if($filter_order_date != '-') {
+        //     $this->datatables->like('due_date', $filter_order_date);
+        // }
         
         $this->datatables->from('v_relokasi_edit');
         echo $this->datatables->generate();
