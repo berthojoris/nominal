@@ -32,25 +32,41 @@ class Api_relokasi extends CI_Controller
             $this->datatables->like('ip_wan_new', $filter_ip_wan)->or_like('ip_wan_old', $filter_ip_wan);
         }
         
-        // if($filter_remote_name != '-') {
-        //     $this->datatables->like('nama_remote_old', $filter_remote_name)->or_like('nama_remote_new', $filter_remote_name);
-        // }
+        if($filter_provider != '-') {
+            $this->datatables->like('nickname_provider', $filter_provider);
+        }
 
-        // if($filter_doc_number != '-') {
-        //     $this->datatables->like('no_doc', $filter_doc_number);
-        // }
+        if($filter_ip_lan != '-') {
+            $this->datatables->like('ip_lan_new', $filter_ip_lan)->or_like('ip_lan_old', $filter_ip_lan);
+        }
 
-        // if($filter_status != '-') {
-        //     $this->datatables->like('status', $filter_status);
-        // }
+        if($filter_wo_no != '-') {
+            $this->datatables->like('work_order_no', $filter_wo_no);
+        }
 
-        // if($filter_pic != '-') {
-        //     $this->datatables->like('pic', $filter_pic);
-        // }
+        if($filter_remote_name != '-') {
+            $this->datatables->like('remote_name_new', $filter_remote_name)->or_like('remote_name_old', $filter_remote_name);
+        }
 
-        // if($filter_order_date != '-') {
-        //     $this->datatables->like('due_date', $filter_order_date);
-        // }
+        if($filter_req_doc_no != '-') {
+            $this->datatables->like('req_doc_no', $filter_req_doc_no);
+        }
+
+        if($filter_status != '-') {
+            $this->datatables->like('status', $filter_status);
+        }
+
+        if($filter_pic != '-') {
+            $this->datatables->like('pic', $filter_pic);
+        }
+
+        if($filter_order_date != '-') {
+            $this->datatables->like('req_doc_date', $filter_order_date);
+        }
+
+        if($filter_live_target != '-') {
+            $this->datatables->like('due_date', $filter_live_target);
+        }
         
         $this->datatables->from('v_relokasi_edit');
         echo $this->datatables->generate();
@@ -84,7 +100,7 @@ class Api_relokasi extends CI_Controller
 
     public function getProvider()
     {
-        $sql = "SELECT kode_provider, nama_provider FROM tb_provider";
+        $sql = "SELECT kode_provider, nama_provider, nickname_provider FROM tb_provider";
         $query = $this->db->query($sql)->result();
         echo json_encode($query);
     }

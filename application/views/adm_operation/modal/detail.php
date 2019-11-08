@@ -68,6 +68,11 @@
                             <td><label id="detail_req_doc_no" class="detail"></label></td>
                         </tr>
                         <tr>
+                            <td>Rec Doc Date</td>
+                            <td class="detail">:</td>
+                            <td><label id="detail_req_date" class="detail"></label></td>
+                        </tr>
+                        <tr>
                             <td>Work Order No</td>
                             <td class="detail">:</td>
                             <td><label id="detail_work_order_no" class="detail"></label></td>

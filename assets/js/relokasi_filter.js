@@ -327,7 +327,7 @@ function getProvider() {
             var toAppend = '';
             toAppend += '<option value="">- Pilih -</option>';
             $.each(response, function(i, o) {
-                toAppend += '<option value="'+o.kode_provider+'">'+o.nama_provider+'</option>';
+                toAppend += '<option value="'+o.nickname_provider+'">'+o.nickname_provider+'</option>';
             });
             $('#filter_provider').append(toAppend);
         }
