@@ -7,7 +7,7 @@
 }
 .select2-container--default .select2-selection--single {
     background-color: #fff;
-    border: 1px solid #aaa;
+    border: 1px solid #d2d6de;
     border-radius: 0px;
 }
 .select2-container .select2-selection--single {
@@ -51,4 +51,8 @@ select.input-sm {
 }
 .col-form-label {
     margin-top: 5px;
+}
+.panelFilter {
+    display: none;
+    margin-bottom: 30px;
 }

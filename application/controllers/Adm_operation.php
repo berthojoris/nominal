@@ -27,28 +27,34 @@ class Adm_operation extends CI_Controller {
     {
         if($this->input->method(TRUE) == "POST") {
             add_js('relokasi_filter.js');
-            $this->session->unset_userdata('filter_ip');
+            $this->session->unset_userdata('filter_ip_wan');
             $this->session->unset_userdata('filter_provider');
+            $this->session->unset_userdata('filter_ip_lan');
+            $this->session->unset_userdata('filter_wo_no');
             $this->session->unset_userdata('filter_remote_name');
-            $this->session->unset_userdata('filter_doc_number');
+            $this->session->unset_userdata('filter_req_doc_no');
             $this->session->unset_userdata('filter_status');
             $this->session->unset_userdata('filter_pic');
             $this->session->unset_userdata('filter_order_date');
             $this->session->unset_userdata('filter_live_target');
 
-            $filter_ip = (!empty($_POST['filter_ip'])) ? $_POST['filter_ip'] : '-';
-            $filter_remote_name = (!empty($_POST['filter_remote_name'])) ? $_POST['filter_remote_name'] : '-';
+            $filter_ip_wan = (!empty($_POST['filter_ip_wan'])) ? $_POST['filter_ip_wan'] : '-';
             $filter_provider = (!empty($_POST['filter_provider'])) ? $_POST['filter_provider'] : '-';
-            $filter_doc_number = (!empty($_POST['filter_doc_number'])) ? $_POST['filter_doc_number'] : '-';
+            $filter_ip_lan = (!empty($_POST['filter_ip_lan'])) ? $_POST['filter_ip_lan'] : '-';
+            $filter_wo_no = (!empty($_POST['filter_wo_no'])) ? $_POST['filter_wo_no'] : '-';
+            $filter_remote_name = (!empty($_POST['filter_remote_name'])) ? $_POST['filter_remote_name'] : '-';
+            $filter_req_doc_no = (!empty($_POST['filter_req_doc_no'])) ? $_POST['filter_req_doc_no'] : '-';
             $filter_status = (!empty($_POST['filter_status'])) ? $_POST['filter_status'] : '-';
             $filter_pic = (!empty($_POST['filter_pic'])) ? $_POST['filter_pic'] : '-';
             $filter_order_date = (!empty($_POST['filter_order_date'])) ? $_POST['filter_order_date'] : '-';
             $filter_live_target = (!empty($_POST['filter_live_target'])) ? $_POST['filter_live_target'] : '-';
 
-            $this->session->set_userdata('filter_ip', $filter_ip);
+            $this->session->set_userdata('filter_ip_wan', $filter_ip_wan);
             $this->session->set_userdata('filter_provider', $filter_provider);
+            $this->session->set_userdata('filter_ip_lan', $filter_ip_lan);
+            $this->session->set_userdata('filter_wo_no', $filter_wo_no);
             $this->session->set_userdata('filter_remote_name', $filter_remote_name);
-            $this->session->set_userdata('filter_doc_number', $filter_doc_number);
+            $this->session->set_userdata('filter_req_doc_no', $filter_req_doc_no);
             $this->session->set_userdata('filter_status', $filter_status);
             $this->session->set_userdata('filter_pic', $filter_pic);
             $this->session->set_userdata('filter_order_date', $filter_order_date);
@@ -114,6 +120,7 @@ class Adm_operation extends CI_Controller {
             'ip_wan_new' => $this->input->post('ip_wan_new'),
             'req_doc_file' => $data[0]['file_name'],
             'req_doc_no' => $this->input->post('req_doc_no'),
+            'req_doc_date' => $this->input->post('req_doc_date'),
             'work_order_file' => $data[1]['file_name'],
             'work_order_no' => $this->input->post('work_order_no'),
             'type_relocate' => $this->input->post('type'),
@@ -182,6 +189,7 @@ class Adm_operation extends CI_Controller {
             'type_relocate' => $this->input->post('edit_type'),
             'status' => $this->input->post('edit_status'),
             'req_doc_no' => $this->input->post('edit_req_doc_no'),
+            'req_doc_date' => $this->input->post('req_doc_date'),
             'work_order_no' => $this->input->post('edit_work_order_no'),
             'pic' => $this->input->post('edit_pic'),
             'due_date' => $this->input->post('edit_live_target'),

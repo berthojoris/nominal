@@ -16,6 +16,7 @@ class Api_relokasi extends CI_Controller
         header('Content-Type: application/json');
 
         $filter_ip = $this->session->userdata('filter_ip');
+        $filter_network_id = $this->session->userdata('filter_network_id');
         $filter_provider = $this->session->userdata('filter_provider');
         $filter_remote_name = $this->session->userdata('filter_remote_name');
         $filter_doc_number = $this->session->userdata('filter_doc_number');
@@ -27,7 +28,11 @@ class Api_relokasi extends CI_Controller
         $this->datatables->select('*');
 
         if($filter_ip != '-') {
-            $this->datatables->like('kode_jarkom', $filter_ip)->or_like('ip_wan', $filter_ip);
+            $this->datatables->like('kode_jarkom', $filter_ip);
+        }
+
+        if($filter_network_id != '-') {
+            $this->datatables->like('ip_wan', $filter_network_id);
         }
 
         if($filter_provider != '-') {
@@ -54,7 +59,7 @@ class Api_relokasi extends CI_Controller
             $this->datatables->like('due_date', $filter_order_date);
         }
         
-        $this->datatables->from('v_combine_filter');
+        $this->datatables->from('v_relokasi_edit');
         echo $this->datatables->generate();
     }
 

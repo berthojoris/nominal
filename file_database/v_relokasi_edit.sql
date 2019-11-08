@@ -14,6 +14,7 @@ CREATE
     `v_relokasi_list`.`ip_wan_new`,
     `v_relokasi_list`.`req_doc_file`,
     `v_relokasi_list`.`req_doc_no`,
+    `v_relokasi_list`.`req_doc_date`,
     `v_relokasi_list`.`work_order_file`,
     `v_relokasi_list`.`work_order_no`,
     `v_relokasi_list`.`type_relocate`,

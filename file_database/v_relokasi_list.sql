@@ -14,6 +14,7 @@ CREATE
     `tb_relokasi`.`ip_wan_new`,
     `tb_relokasi`.`req_doc_file`,
     `tb_relokasi`.`req_doc_no`,
+    `tb_relokasi`.`req_doc_date`,
     `tb_relokasi`.`work_order_file`,
     `tb_relokasi`.`work_order_no`,
     `tb_relokasi`.`type_relocate`,

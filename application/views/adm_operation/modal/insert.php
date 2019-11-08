@@ -76,6 +76,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Rec Doc Date</label>
+                                <div class="col-sm-7">
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="req_doc_date" id="req_doc_date" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="file_upload_2" id="work_order_file">
