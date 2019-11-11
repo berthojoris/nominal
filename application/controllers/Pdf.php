@@ -1,8 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-use Spipu\Html2Pdf\Html2Pdf;
-use Spipu\Html2Pdf\Exception\Html2PdfException;
-use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use Dompdf\Dompdf;
 
 class Pdf extends CI_Controller {
     
@@ -16,7 +14,7 @@ class Pdf extends CI_Controller {
         }
     }
 
-    public function test()
+    public function fpdf()
     {
         $pdf = new FPDF();
         $pdf->AddPage();
@@ -25,23 +23,18 @@ class Pdf extends CI_Controller {
         $pdf->Output();
     }
 
-    public function relokasi()
+    public function dompdf()
     {
-        $path = APPPATH."/views/pdf/about.php";
-        try {
-            $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', array(0, 0, 0, 0));
-            $html2pdf->pdf->SetDisplayMode('fullpage');
-            ob_start();
-            include $path;
-            $content = ob_get_clean();
-            $html2pdf->writeHTML($content);
-            $html2pdf->createIndex('Sommaire', 30, 12, false, true, 2, null, '10mm');
-            $html2pdf->output('about.pdf');
-        } catch (Html2PdfException $e) {
-            $html2pdf->clean();
-            $formatter = new ExceptionFormatter($e);
-            echo $formatter->getHtmlMessage();
-        }
+        $cssPath = realpath(FCPATH.'assets/pdf/');
+        $fileUrl = base_url()."index.php/showpdf/viewdetail";
+        $fileContent = file_get_contents($fileUrl) ;
+
+        $dompdf = new Dompdf();
+        // $dompdf->set_base_path($cssPath);
+        $dompdf->loadHtml($fileContent);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("detail_".date("Y-m-d H:i:s").".pdf");
     }
 
 }
