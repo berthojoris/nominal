@@ -323,6 +323,7 @@ class Api_relokasi extends CI_Controller
             `tb_jarkom`.`kode_jarkom`,
             `tb_jarkom`.`ip_wan`,
             `tb_jarkom`.`kode_jenis_jarkom`,
+            `tb_jarkom`.`id_contract`,
             `tb_jenis_jarkom`.`jenis_jarkom` AS `network_type`,
             `tb_spk`.`no_spk`,
             `tb_remote`.`ip_lan`,

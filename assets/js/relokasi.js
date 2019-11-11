@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    $(document).on('click', '.print', function() {
+        PopupCenter("http://nominal.local/index.php/adm_operation/showdetail/"+$(this).data('open'), "Print", 900, 600);
+    });
+
     $(document).on('focus', ':input', function() {
         $( this ).attr( 'autocomplete', 'off' );
     });
@@ -101,7 +105,7 @@ $(document).ready(function() {
                 "data": "id_relokasi",
                 "sortable": false,
                  "render": function(data, type, row) {
-                     return '<button class="btn btn-success btn-xs" data-toggle="modal" data-id="'+row.id_relokasi+'" data-target="#open_detail_modal">View</button>'
+                     return '<button class="btn btn-success btn-xs print" data-open="'+row.id_relokasi+'">View</button>'
                 }
             },
             {
@@ -251,6 +255,7 @@ $(document).ready(function() {
                     $("#remote_address_old").val(response.data.remote_address);
                     $("#network_id_old").val(response.data.kode_jarkom);
                     $("#network_id_new").val(response.data.kode_jarkom);
+                    $("#no_serial_spk").val(response.data.id_contract);
                     $("#reason").focus();
                 } else {
                     swal("Oops", "Data not found for "+ip_network, "success");
@@ -344,6 +349,18 @@ function resetAllForm() {
     $("input.error").removeClass("error");
 }
 
+$("#add_form_relokasi").on('show.bs.modal', function (e) {
+    // $("#id_jarkom").select2({
+    //     dropdownParent: $("#add_form_relokasi"),
+    //     minimumInputLength:2,
+    //     width: '100%',
+    //     placeholder: "Type at least 2 charachter",
+    //     initSelection: function(element, callback) {
+
+    //     }
+    // });
+});
+
 $("#open_detail_modal").on('show.bs.modal', function (e) {
     var passData     = $(e.relatedTarget);
     var id = passData.data("id");
@@ -435,7 +452,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_status").val(response.data.status).change();
                 $("#edit_reason").val(response.data.reason);
                 $("#edit_no_spk").val(response.data.no_spk);
-                $("#edit_no_serial_spk").val('');
+                $("#edit_no_serial_spk").val(response.data.id_contract);
 
                 $("#edit_req_doc_no").val(response.data.req_doc_no);
                 $("#edit_req_doc_date").val(response.data.req_doc_date);
@@ -466,3 +483,20 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         }
     });
 });
+
+function PopupCenter(url, title, w, h) {
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
+
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var systemZoom = width / window.screen.availWidth;
+    var left = (width - w) / 2 / systemZoom + dualScreenLeft
+    var top = (height - h) / 2 / systemZoom + dualScreenTop
+    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
+
+    // Puts focus on the newWindow
+    if (window.focus) newWindow.focus();
+}

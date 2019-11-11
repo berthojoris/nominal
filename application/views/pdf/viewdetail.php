@@ -28,7 +28,7 @@
 <body>
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <p class="lead">Berdasarkan [Req Doc No.] tanggal [Req Doc Date] dengan ini kami berikan izin kerja kepada:</p>
+        <p class="lead">Berdasarkan <b><?= $req_doc_no ?></b> tanggal <b><?= $req_doc_date ?></b> dengan ini kami berikan izin kerja kepada:</p>
     </div>
 
     <div class="container">
@@ -92,22 +92,22 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>Rincian pekerjaan adalah: - Relokasi indoor dan outdoor media komunikasi [Network type Old] pada [Remote Name Old] TID 50633 ([IP LAN Old])</p>
+                <p>Rincian pekerjaan adalah: - Relokasi indoor dan outdoor media komunikasi <b><?= $network_type ?></b> pada <b><?= $remote_name_old ?></b> TID 50633 (<b><?= $ip_lan_old ?></b>)</p>
             </div>
             <div class="col-md-12 mb-5">
-                <p>Site ID : [Network ID Old] ke [Remote Name New] TID 50633 Site ID : [Network ID New]</p>
+                <p>Site ID : <?= $network_id_old ?> ke <b><?= $remote_name_new ?></b> TID 50633 Site ID : <b><?= $network_id_new ?></b></p>
             </div>
             <div class="col-md-12">
-                <p>No SPK [No. SPK] no urut : [SPK Serial No.]</p>
-                <p>Target Live : [Live Target]</p>
-                <p>PIC : [Persons in Charges]</p>
+                <p>No SPK <b><?= $no_spk ?></b> no urut : <?= $id_contract ?></p>
+                <p>Target Live : <b><?= $due_date ?></b></p>
+                <p>PIC : <b><?= $pic ?></b></p>
             </div>
         </div>
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>- Media komunikasi [Remote Type old] setelah relokasi dilakukan repointing ke arah [Remote type new].</p>
-                <p>- Menggunakan IP Address [IP WAN New] pada modem di lokasi baru</p>
+                <p>- Media komunikasi <?= $remote_type_old ?> setelah relokasi dilakukan repointing ke arah <b></b>.</p>
+                <p>- Menggunakan IP Address <b><?= $ip_wan_new ?></b> pada modem di lokasi baru</p>
                 <p>- Pemasangan dan instalasi grounding pada Antena, BUC, dan Modem di lokasi.</p>
                 <p>- Pengecekan ketersediaan UPS di lokasi.</p>
                 <p>- Melengkapi data task pada aplikasi GITS setelah instalasi jarkom di http://103.63.96.110:30080/panel/public/v2</p>
@@ -116,8 +116,8 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>Alamat Lama : [Remote Address Old] [Region Old]</p>
-                <p>Alamat Baru : [Remote Address New] [Region New]</p>
+                <p>Alamat Lama : <b><?= $address_old ?></b> <?= $region_name_old ?></p>
+                <p>Alamat Baru : <b><?= $address_new ?></b> <?= $region_name_new ?></p>
                 <p class="textRed">Ket : (Jarak pindah -+ 11 kM)</p>
             </div>
         </div>

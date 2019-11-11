@@ -17,6 +17,13 @@ class Adm_operation extends CI_Controller {
         }
     }
 
+    public function showdetail($id)
+    {
+        $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
+        $query = $this->db->query($sql, [$id]);
+        $this->load->view('pdf/viewdetail', $query->row());
+    }
+
     public function download($fileName)
     {
         $separate = explode("-", $fileName);
@@ -133,7 +140,10 @@ class Adm_operation extends CI_Controller {
             'address_old' => $this->input->post('remote_address_old'),
             'address_new' => $this->input->post('remote_address_new'),
             'distance' => $this->input->post('distance'),
-            'remote_type' => $this->input->post('remote_type_new')
+            'remote_type_old' => $this->input->post('remote_type_old'),
+            'remote_type_new' => $this->input->post('remote_type_new'),
+            'region_name_old' => $this->input->post('region_old'),
+            'region_name_new' => $this->input->post('region_new')
         ];
 
         if($this->db->insert('tb_relokasi', $insert)) {
@@ -200,7 +210,11 @@ class Adm_operation extends CI_Controller {
             'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
             'req_doc_file' => $data[0]['file_name'],
             'work_order_file' => $data[1]['file_name'],
-            'distance' => $this->input->post('edit_distance')
+            'distance' => $this->input->post('edit_distance'),
+            'region_name_old' => $this->input->post('region_old'),
+            'region_name_new' => $this->input->post('region_new'),
+            'remote_type_old' => $this->input->post('remote_type_old'),
+            'remote_type_new' => $this->input->post('remote_type_new')
         ];
 
         $this->db->where('id', $this->input->post('id_relokasi'));
