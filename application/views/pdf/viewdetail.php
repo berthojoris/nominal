@@ -98,7 +98,7 @@
                 <p>Site ID : <?= $network_id_old ?> ke <b><?= $remote_name_new ?></b> TID 50633 Site ID : <b><?= $network_id_new ?></b></p>
             </div>
             <div class="col-md-12">
-                <p>No SPK <b><?= $no_spk ?></b> no urut : <?= $id_contract ?></p>
+                <p>No SPK <b><?= $no_spk ?></b> no urut : <b><?= ($id_contract == '' || empty($id_contract)) ? '-' : $id_contract ?></b></p>
                 <p>Target Live : <b><?= $due_date ?></b></p>
                 <p>PIC : <b><?= $pic ?></b></p>
             </div>
