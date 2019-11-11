@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
     $(document).on('click', '.print', function() {
-        PopupCenter("http://nominal.local/index.php/adm_operation/showdetail/"+$(this).data('open'), "Print", 900, 600);
+        var id = $(this).data('open');
+        var url = getBaseUrl()+"index.php/adm_operation/showdetail/"+id;
+        PopupCenter(url, "Print", 900, 600);
     });
 
     $(document).on('focus', ':input', function() {
@@ -483,6 +485,12 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         }
     });
 });
+
+function openPrint(url) {
+    var newWin = window.frames[0];
+    newWin.document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="'+url+'"></body>');
+    newWin.document.close();
+}
 
 function PopupCenter(url, title, w, h) {
     // Fixes dual-screen position                         Most browsers      Firefox
