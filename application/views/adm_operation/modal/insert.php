@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-5 col-form-label">IP Address / Network ID</label>
+                                <label class="col-sm-5 col-form-label">IP LAN / Network ID</label>
                                 <div class="col-sm-7">
                                     <select id="id_jarkom" name="id_jarkom" required></select>
                                 </div>

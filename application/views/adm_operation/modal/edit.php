@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row" id="panelIdEdit">
-                                <label class="col-sm-5 col-form-label">IP Address / Network ID</label>
+                                <label class="col-sm-5 col-form-label">IP LAN / Network ID</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="edit_id_jarkom" id="edit_id_jarkom" readonly>
                                     <input type="hidden" name="edit_id_jarkom_val" id="edit_id_jarkom_val">
