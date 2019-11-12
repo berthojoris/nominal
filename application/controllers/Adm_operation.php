@@ -143,7 +143,9 @@ class Adm_operation extends CI_Controller {
             'remote_type_old' => $this->input->post('remote_type_old'),
             'remote_type_new' => $this->input->post('remote_type_new'),
             'region_name_old' => $this->input->post('region_old'),
-            'region_name_new' => $this->input->post('region_new')
+            'region_name_new' => $this->input->post('region_new'),
+            'network_type_old' => $this->input->post('network_type_old'),
+            'network_type_new' => $this->input->post('network_type_new')
         ];
 
         if($this->db->insert('tb_relokasi', $insert)) {
@@ -214,7 +216,9 @@ class Adm_operation extends CI_Controller {
             'region_name_old' => $this->input->post('region_old'),
             'region_name_new' => $this->input->post('region_new'),
             'remote_type_old' => $this->input->post('remote_type_old'),
-            'remote_type_new' => $this->input->post('remote_type_new')
+            'remote_type_new' => $this->input->post('remote_type_new'),
+            'network_type_old' => $this->input->post('network_type_old'),
+            'network_type_new' => $this->input->post('network_type_new')
         ];
 
         $this->db->where('id', $this->input->post('id_relokasi'));

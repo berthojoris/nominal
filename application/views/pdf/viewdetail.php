@@ -92,10 +92,10 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>Rincian pekerjaan adalah: - Relokasi indoor dan outdoor media komunikasi <b><?= $network_type ?></b> pada <b><?= $remote_name_old ?></b> TID 50633 (<b><?= $ip_lan_old ?></b>)</p>
+                <p>Rincian pekerjaan adalah: - Relokasi indoor dan outdoor media komunikasi <b><?= $network_type ?></b> pada <b><?= $remote_name_old ?></b> (<b><?= $ip_lan_old ?></b>)</p>
             </div>
             <div class="col-md-12 mb-5">
-                <p>Site ID : <?= $network_id_old ?> ke <b><?= $remote_name_new ?></b> TID 50633 Site ID : <b><?= $network_id_new ?></b></p>
+                <p>Site ID : <?= $network_id_old ?> ke <b><?= $remote_name_new ?></b> Site ID : <b><?= $network_id_new ?></b></p>
             </div>
             <div class="col-md-12">
                 <p>No SPK <b><?= $no_spk ?></b> no urut : <b><?= ($id_contract == '' || empty($id_contract)) ? '-' : $id_contract ?></b></p>
@@ -106,11 +106,12 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>- Media komunikasi <?= $remote_type_old ?> setelah relokasi dilakukan repointing ke arah <b></b>.</p>
+                <p>- Media komunikasi <b><?= $network_type_old ?></b> setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b>.</p>
                 <p>- Menggunakan IP Address <b><?= $ip_wan_new ?></b> pada modem di lokasi baru</p>
                 <p>- Pemasangan dan instalasi grounding pada Antena, BUC, dan Modem di lokasi.</p>
                 <p>- Pengecekan ketersediaan UPS di lokasi.</p>
                 <p>- Melengkapi data task pada aplikasi GITS setelah instalasi jarkom di http://103.63.96.110:30080/panel/public/v2</p>
+                <p>- Media komunikasi KANWIL/DIKLAT/Luar Negeri setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b>.</p>
             </div>
         </div>
 
