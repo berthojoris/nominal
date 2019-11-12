@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Detail Report</title>
-    <link type="text/css" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/4.css">
     <style>
     html {
         font-size: 14px;
@@ -25,7 +25,7 @@
     }
     </style>
 </head>
-<body>
+<body id="printPage">
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <p class="lead">Berdasarkan <b><?= $req_doc_no ?></b> tanggal <b><?= $req_doc_date ?></b> dengan ini kami berikan izin kerja kepada:</p>

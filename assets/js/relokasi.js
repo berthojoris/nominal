@@ -1,9 +1,27 @@
+function openPrint(url) {
+    document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
+    document.close();
+}
+
+function Popup(url) {
+    var mywindow = window.open(url, 'Print', 'height=400,width=600');
+    mywindow.document.write($("#printPage").html());
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
+function OpenDetailPrint(url) {
+    window.open(url);
+}
+
 $(document).ready(function() {
 
     $(document).on('click', '.print', function() {
         var id = $(this).data('open');
         var url = getBaseUrl()+"index.php/adm_operation/showdetail/"+id;
-        PopupCenter(url, "Print", 900, 600);
+        OpenDetailPrint(url);
     });
 
     $(document).on('focus', ':input', function() {
@@ -485,12 +503,6 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         }
     });
 });
-
-function openPrint(url) {
-    var newWin = window.frames[0];
-    newWin.document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="'+url+'"></body>');
-    newWin.document.close();
-}
 
 function PopupCenter(url, title, w, h) {
     // Fixes dual-screen position                         Most browsers      Firefox

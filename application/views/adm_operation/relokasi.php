@@ -75,8 +75,6 @@
     </div>
 </section>
 
-<!-- <iframe id="printArea"  name="printArea" scrolling="yes" style="display:none"></iframe> -->
-
 <?php $this->view('adm_operation/modal/insert'); ?>
 <?php $this->view('adm_operation/modal/detail'); ?>
 <?php $this->view('adm_operation/modal/edit'); ?>
