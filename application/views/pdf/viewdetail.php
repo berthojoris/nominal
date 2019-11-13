@@ -41,19 +41,19 @@
 
         <div class="row text-center">
             <div class="col-md-4">
-                <p>NAMA/NIP</p>
+                <p><b>NAMA/NIP</b></p>
             </div>
             <div class="col-md-4">
-                <p>JABATAN</p>
+                <p><b>JABATAN</b></p>
             </div>
             <div class="col-md-4">
-                <p>BAGIAN/PERUSAHAAN</p>
+                <p><b>BAGIAN/PERUSAHAAN</b></p>
             </div>
         </div>
 
         <div class="row text-center mb-5">
             <div class="col-md-12">
-                <p>NP <?= $nickname_provider ?> - <?= $network_type_new ?></p>
+                <p><b>NP <?= $nickname_provider ?> - <?= $network_type_new ?></b></p>
             </div>
         </div>
 
@@ -112,7 +112,7 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>- Media komunikasi KANWIL/DIKLAT/Luar Negeri setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b> diganti menjadi, Setelah <b><?= $type_relocate ?></b> dilakukan, VSAT akan dipointing kembali ke arah <b><?= $network_type_new ?></b>.</p>
+                <p>- Setelah <b><?= $type_relocate ?></b> dilakukan, VSAT akan dipointing kembali ke arah <b><?= $network_type_new ?></b>.</p>
                 <p>- Menggunakan IP Address <b><?= $ip_wan_new ?></b> pada modem di lokasi baru</p>
                 <p>- Pemasangan dan instalasi grounding pada Antena, BUC, dan Modem di lokasi.</p>
                 <p>- Pengecekan ketersediaan UPS di lokasi.</p>
