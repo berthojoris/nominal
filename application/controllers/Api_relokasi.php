@@ -301,14 +301,15 @@ class Api_relokasi extends CI_Controller
                     `tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`
                 )
         WHERE (
-                `tb_jarkom`.`ip_wan` like '%$ip_network%' or `tb_jarkom`.`kode_jarkom` like '%$ip_network%' or `tb_provider`.`nickname_provider` like '%$ip_network%' or `tb_tipe_uker`.`singkatan` like '%$ip_network%'
+                `tb_remote`.`ip_lan` like '%$ip_network%' or
+                `tb_jarkom`.`kode_jarkom` like '%$ip_network%'
             )";
         $query = $this->db->query($sql);
         $data = [];
         foreach ($query->result() as $key ) {
             $newdata = [
                 "id" => $key->id_jarkom,
-				"text" => $key->ip_wan." / ".$key->kode_jarkom." / ".$key->nickname_provider." / ".$key->singkatan
+				"text" => $key->ip_lan." / ".$key->kode_jarkom." / ".$key->network_type." / ".$key->remote_type
             ];
             array_push($data, $newdata);
         }

@@ -23,12 +23,18 @@
     .textRed {
         color: red;
     }
+    .boldText {
+        font-size: 1.3rem;
+        font-weight: bold;
+        line-height: 1.5;
+        color:#000000;
+    }
     </style>
 </head>
 <body id="printPage">
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <p class="lead">Berdasarkan <b><?= $req_doc_no ?></b> tanggal <b><?= $req_doc_date ?></b> dengan ini kami berikan izin kerja kepada:</p>
+        <p class="lead">Berdasarkan <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= $req_doc_date ?></span> dengan ini kami berikan izin kerja kepada:</p>
     </div>
 
     <div class="container">
@@ -47,7 +53,7 @@
 
         <div class="row text-center mb-5">
             <div class="col-md-12">
-                <p>NP BRISAT-PATRAKOM (Telkomsat)</p>
+                <p>NP <?= $nickname_provider ?> - <?= $network_type_new ?></p>
             </div>
         </div>
 
@@ -106,12 +112,11 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <p>- Media komunikasi <b><?= $network_type_old ?></b> setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b>.</p>
+                <p>- Media komunikasi KANWIL/DIKLAT/Luar Negeri setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b> diganti menjadi, Setelah <b><?= $type_relocate ?></b> dilakukan, VSAT akan dipointing kembali ke arah <b><?= $network_type_new ?></b>.</p>
                 <p>- Menggunakan IP Address <b><?= $ip_wan_new ?></b> pada modem di lokasi baru</p>
                 <p>- Pemasangan dan instalasi grounding pada Antena, BUC, dan Modem di lokasi.</p>
                 <p>- Pengecekan ketersediaan UPS di lokasi.</p>
-                <p>- Melengkapi data task pada aplikasi GITS setelah instalasi jarkom di http://103.63.96.110:30080/panel/public/v2</p>
-                <p>- Media komunikasi KANWIL/DIKLAT/Luar Negeri setelah relokasi dilakukan repointing ke arah <b><?= $network_type_new ?></b>.</p>
+                <p>- Melengkapi data task pada aplikasi GITS setelah instalasi jarkom di <b>http://103.63.96.110:30080/panel/public/v2</b></p>
             </div>
         </div>
 
@@ -132,7 +137,7 @@
 
         <div class="row mt-5 mb-3">
             <div class="col-md-12">
-                <p>* Usai relokasi, provider harap mengakses http://103.63.96.110:30080/panel/public/v2 untuk integrasi</p>
+                <p>* Usai relokasi, provider harap mengakses <b>http://103.63.96.110:30080/panel/public/v2</b> untuk integrasi</p>
             </div>
         </div>
 
