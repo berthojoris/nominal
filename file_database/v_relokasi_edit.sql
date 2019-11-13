@@ -32,6 +32,8 @@ CREATE
     `v_relokasi_list`.`nickname_provider`,
     `v_relokasi_list`.`region_name_old`,
     `v_relokasi_list`.`region_name_new`,
+    `v_relokasi_list`.`network_type_old`,
+    `v_relokasi_list`.`network_type_new`,
     `tb_jenis_jarkom`.`jenis_jarkom` AS `network_type`,
     `tb_kanwil`.`nama_kanwil` AS `region`,
     `tb_spk`.`no_spk`,
