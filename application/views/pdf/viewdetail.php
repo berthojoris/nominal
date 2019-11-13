@@ -29,6 +29,16 @@
         line-height: 1.5;
         color:#000000;
     }
+    .table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border: 2px solid #000000;
+    }
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid 
+        #000000;
+    }
     </style>
 </head>
 <body id="printPage">
@@ -64,7 +74,7 @@
         </div>
         
         <div class="row">
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
                     <tr class="text-center">
                         <th colspan="2">HARDWARE</th>
