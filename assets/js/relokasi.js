@@ -290,7 +290,7 @@ $(document).ready(function() {
         minimumInputLength:2,
         placeholder:"Type at least 2 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/searchByIpAddressSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/searchUpdate",
             type:"POST",
             dataType:"json",
             data: function(param) {

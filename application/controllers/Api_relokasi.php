@@ -253,6 +253,22 @@ class Api_relokasi extends CI_Controller
         echo json_encode($data);
     }
 
+    public function searchUpdate()
+    {
+        $param = $_POST['ip_network'];
+        $sql = "SELECT * FROM v_all_remote_jarkom WHERE `ip_lan` like '%$param%'";
+        $query = $this->db->query($sql);
+        $data = [];
+        foreach ($query->result() as $key ) {
+            $newdata = [
+                "id" => $key->id_jarkom,
+				"text" => $key->ip_lan." / ".$key->kode_jarkom." / ".$key->jenis_jarkom." / ".$key->tipe_uker
+            ];
+            array_push($data, $newdata);
+        }
+        echo json_encode($data);
+    }
+
     public function searchByIpAddressSelect2()
     {
         $ip_network = $_POST['ip_network'];
