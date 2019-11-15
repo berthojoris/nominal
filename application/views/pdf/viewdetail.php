@@ -137,7 +137,7 @@
             <div class="col-md-12">
                 <p>Alamat Lama : <b><?= $address_old ?></b> <?= $region_name_old ?></p>
                 <p>Alamat Baru : <b><?= $address_new ?></b> <?= $region_name_new ?></p>
-                <p class="textRed">Ket : (Jarak pindah -+ <b><?= $distance ?></b>)</p>
+                <p>Ket : (Jarak pindah -+ <b><?= $distance ?></b>)</p>
             </div>
         </div>
 
