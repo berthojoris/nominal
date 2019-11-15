@@ -50,20 +50,23 @@
     <div class="container">
 
         <div class="row text-center">
-            <div class="col-md-4">
-                <p><b>NAMA/NIP</b></p>
-            </div>
-            <div class="col-md-4">
-                <p><b>JABATAN</b></p>
-            </div>
-            <div class="col-md-4">
-                <p><b>BAGIAN/PERUSAHAAN</b></p>
-            </div>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th width="30%">NAMA/NIP</th>
+                        <th width="30%">JABATAN</th>
+                        <th width="30%">BAGIAN/PERUSAHAAN</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th colspan="3">NP <?= $nickname_provider ?> - <?= $network_type_new ?></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="row text-center mb-5">
             <div class="col-md-12">
-                <p><b>NP <?= $nickname_provider ?> - <?= $network_type_new ?></b></p>
+                <p><b></b></p>
             </div>
         </div>
 
