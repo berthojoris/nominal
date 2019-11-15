@@ -439,7 +439,18 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         success: function (response) {
             if(response.code == 200) {
 
-                console.log(response.data);
+                $.ajax({
+                    type: "POST",
+                    url: getBaseUrl()+"index.php/Api_relokasi/findAllRemoteJarkom",
+                    dataType: "json",
+                    data: {
+                        id_jarkom: id
+                    },
+                    success: function (response_second) {
+                        $("#edit_network_type_old").val(response_second.data.jenis_jarkom);
+                        $("#edit_network_type_new").val(response_second.data.jenis_jarkom);
+                    }
+                });
 
                 $("#edit_id_jarkom").val(response.data.ip_wan_new+" / "+response.data.kode_jarkom+" / "+response.data.nickname_provider +" / "+response.data.singkatan);
                 $("#edit_id_jarkom_val").val(response.data.id_jarkom);
@@ -484,17 +495,15 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_work_order_no").val(response.data.work_order_no);
                 $("#edit_live_target").val(response.data.due_date);
 
-                $("#edit_network_type_old").val(response.data.network_type);
                 $("#edit_network_id_old").val(response.data.kode_jarkom);
+                $("#edit_network_id_new").val(response.data.kode_jarkom);
+
                 $("#edit_ip_lan_old").val(response.data.ip_lan_old);
                 $("#edit_ip_wan_old").val(response.data.ip_wan_old);
                 $("#edit_remote_name_old").val(response.data.remote_name_old);
                 $("#edit_remote_type_old").val(response.data.remote_type_old);
                 $("#edit_region_old").val(response.data.region);
                 $("#edit_remote_address_old").val(response.data.address_old);
-
-                $("#edit_network_type_new").val(response.data.network_type);
-                $("#edit_network_id_new").val(response.data.kode_jarkom);
                 $("#edit_ip_lan_new").val(response.data.ip_lan_old);
                 $("#edit_ip_wan_new").val(response.data.ip_wan_old);
                 $("#edit_remote_type_new").val(response.data.remote_type_new);
