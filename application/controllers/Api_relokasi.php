@@ -332,6 +332,19 @@ class Api_relokasi extends CI_Controller
         echo json_encode($data);
     }
 
+    public function findAllRemoteJarkom()
+    {
+        $jarkomID = $_POST['id_jarkom'];
+        $sql = "SELECT * FROM v_all_remote_jarkom WHERE id_jarkom = ?";
+        $query = $this->db->query($sql, [$jarkomID]);
+        $output = [
+            'code' => 200,
+            'data' => $query->row()
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($output);
+    }
+
     public function searchByIpAddress()
     {
         $id_jarkom = $_POST['id_jarkom'];
