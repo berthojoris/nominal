@@ -142,11 +142,31 @@ $(document).ready(function() {
         $("#form_edit").validate({
             rules: {
                 edit_file_upload_1: {
-                    required: true,
+                    required: function(element) {
+                        if($("#edit_status").val() == "in Progress") {
+                            return true;
+                        } else if($("#edit_status").val() == "Done") {
+                            return true;
+                        } else if($("#edit_status").val() == "Cancel") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
                     extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
                 },
                 edit_file_upload_2: {
-                    required: true,
+                    required: function(element) {
+                        if($("#edit_status").val() == "in Progress") {
+                            return true;
+                        } else if($("#edit_status").val() == "Done") {
+                            return true;
+                        } else if($("#edit_status").val() == "Cancel") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
                     extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
                 }
             },
@@ -432,7 +452,6 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
 $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var passData    = $(e.relatedTarget);
     var id          = passData.data("id");
-    resetAllForm();
     $.ajax({
         type: "POST",
         url: getBaseUrl()+"index.php/Api_relokasi/searchById",
@@ -516,12 +535,9 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_distance").val(response.data.distance);
 
                 $('#file_req_doc').empty();
-                $('#file_req_doc').prepend('<img id="file_link_req_doc_no" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
-                $("#file_link_req_doc_no").wrap("<a href='"+download(response.data.req_doc_file)+"' </a>");
-
                 $('#file_work_order').empty();
-                $('#file_work_order').prepend('<img id="file_link_work_order" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
-                $("#file_link_work_order").wrap("<a href='"+download(response.data.work_order_file)+"' </a>");
+                $('#file_req_doc').html(response.data.req_doc_file);
+                $('#file_work_order').html(response.data.work_order_file);
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
