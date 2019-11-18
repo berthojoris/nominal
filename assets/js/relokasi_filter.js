@@ -1,7 +1,27 @@
+function openPrint(url) {
+    document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
+    document.close();
+}
+
+function Popup(url) {
+    var mywindow = window.open(url, 'Print', 'height=400,width=600');
+    mywindow.document.write($("#printPage").html());
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
+function OpenDetailPrint(url) {
+    window.open(url);
+}
+
 $(document).ready(function() {
 
     $(document).on('click', '.print', function() {
-        PopupCenter("http://nominal.local/index.php/adm_operation/showdetail/"+$(this).data('open'), "Print", 900, 600);
+        var id = $(this).data('open');
+        var url = getBaseUrl()+"index.php/adm_operation/showdetail/"+id;
+        OpenDetailPrint(url);
     });
 
     $(document).on('focus', ':input', function() {
@@ -177,21 +197,25 @@ $(document).ready(function() {
         $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({ 
-        startDate: new Date(),
+    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     });
 
     $("#edit_live_target").datepicker({ 
-        startDate: new Date(),
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     })
 
     $("#filter_order_date, #filter_live_target").datepicker({ 
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     });
 
     $("#filter_form_btn").click(function (e) {
@@ -243,8 +267,8 @@ $(document).ready(function() {
                     $("#id_remote_old").val(response.data.id_remote);
                     $("#kode_jarkom").val(response.data.kode_jarkom);
                     $("#no_spk").val(response.data.no_spk);
-                    $("#network_type_old").val(response.data.network_type);
-                    $("#network_type_new").val(response.data.network_type);
+                    // $("#network_type_old").val(response.data.network_type);
+                    // $("#network_type_new").val(response.data.network_type);
                     $("#ip_lan_old").val(response.data.ip_lan);
                     $("#ip_lan_new").val(response.data.ip_lan);
                     $("#ip_wan_old").val(response.data.ip_wan);
@@ -257,6 +281,18 @@ $(document).ready(function() {
                     $("#network_id_new").val(response.data.kode_jarkom);
                     $("#no_serial_spk").val(response.data.id_contract);
                     $("#reason").focus();
+                    $.ajax({
+                        type: "POST",
+                        url: getBaseUrl()+"index.php/Api_relokasi/findAllRemoteJarkom",
+                        dataType: "json",
+                        data: {
+                            id_jarkom: id_jarkom
+                        },
+                        success: function (response_second) {
+                            $("#network_type_old").val(response_second.data.jenis_jarkom);
+                            $("#network_type_new").val(response_second.data.jenis_jarkom);
+                        }
+                    });
                 } else {
                     swal("Oops", "Data not found for "+ip_network, "success");
                 }
@@ -269,8 +305,9 @@ $(document).ready(function() {
         dropdownParent: $("#add_form_relokasi"),
         minimumInputLength:2,
         placeholder:"Type at least 2 charachter",
+        allowClear: true,
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/searchByIpAddressSelect2",
+            url:getBaseUrl()+"index.php/Api_relokasi/searchUpdate",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -349,24 +386,13 @@ function resetAllForm() {
     $("input.error").removeClass("error");
 }
 
-$("#add_form_relokasi").on('show.bs.modal', function (e) {
-    // $("#id_jarkom").select2({
-    //     dropdownParent: $("#add_form_relokasi"),
-    //     minimumInputLength:2,
-    //     width: '100%',
-    //     placeholder: "Type at least 2 charachter",
-    //     initSelection: function(element, callback) {
-
-    //     }
-    // });
-});
-
 $("#open_detail_modal").on('show.bs.modal', function (e) {
     var passData     = $(e.relatedTarget);
     var id = passData.data("id");
     $("#loadingPanel").show();
     $("#dataPanel").hide();
     $("#notFoundPanel").hide();
+    $("#id_jarkom").val('').trigger('change');
     $.ajax({
         type: "GET",
         url: getBaseUrl()+"index.php/Api_relokasi/getDetail/"+id,
@@ -417,6 +443,19 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
         success: function (response) {
             if(response.code == 200) {
 
+                $.ajax({
+                    type: "POST",
+                    url: getBaseUrl()+"index.php/Api_relokasi/findAllRemoteJarkom",
+                    dataType: "json",
+                    data: {
+                        id_jarkom: id
+                    },
+                    success: function (response_second) {
+                        $("#edit_network_type_old").val(response_second.data.jenis_jarkom);
+                        $("#edit_network_type_new").val(response_second.data.jenis_jarkom);
+                    }
+                });
+
                 $("#edit_id_jarkom").val(response.data.ip_wan_new+" / "+response.data.kode_jarkom+" / "+response.data.nickname_provider +" / "+response.data.singkatan);
                 $("#edit_id_jarkom_val").val(response.data.id_jarkom);
 
@@ -460,20 +499,18 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_work_order_no").val(response.data.work_order_no);
                 $("#edit_live_target").val(response.data.due_date);
 
-                $("#edit_network_type_old").val(response.data.network_type);
                 $("#edit_network_id_old").val(response.data.kode_jarkom);
+                $("#edit_network_id_new").val(response.data.kode_jarkom);
+
                 $("#edit_ip_lan_old").val(response.data.ip_lan_old);
                 $("#edit_ip_wan_old").val(response.data.ip_wan_old);
                 $("#edit_remote_name_old").val(response.data.remote_name_old);
-                $("#edit_remote_type_old").val(response.data.remote_type);
+                $("#edit_remote_type_old").val(response.data.remote_type_old);
                 $("#edit_region_old").val(response.data.region);
                 $("#edit_remote_address_old").val(response.data.address_old);
-
-                $("#edit_network_type_new").val(response.data.network_type);
-                $("#edit_network_id_new").val(response.data.kode_jarkom);
                 $("#edit_ip_lan_new").val(response.data.ip_lan_old);
                 $("#edit_ip_wan_new").val(response.data.ip_wan_old);
-                $("#edit_remote_type_new").val(response.data.remote_type);
+                $("#edit_remote_type_new").val(response.data.remote_type_new);
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
