@@ -520,8 +520,10 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#file_link_req_doc_no").wrap("<a href='"+download(response.data.req_doc_file)+"' </a>");
 
                 $('#file_work_order').empty();
-                $('#file_work_order').prepend('<img id="file_link_work_order" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
-                $("#file_link_work_order").wrap("<a href='"+download(response.data.work_order_file)+"' </a>");
+                // $('#file_work_order').prepend('<img id="file_link_work_order" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
+                // $("#file_link_work_order").wrap("<a href='"+download(response.data.work_order_file)+"' </a>");
+                $('#file_work_order').html(response.data.work_order_file);
+                $('#file_req_doc').html(response.data.req_doc_file);
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }

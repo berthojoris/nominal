@@ -9,10 +9,10 @@ CREATE TABLE `tb_relokasi` (
   `pic` varchar(255) DEFAULT NULL,
   `ip_wan_old` varchar(45) DEFAULT NULL,
   `ip_wan_new` varchar(45) DEFAULT NULL,
-  `req_doc_file` varchar(255) DEFAULT NULL,
+  `req_doc_file` varchar(100) DEFAULT NULL,
   `req_doc_no` varchar(50) DEFAULT NULL,
   `req_doc_date` date DEFAULT NULL,
-  `work_order_file` varchar(255) DEFAULT NULL,
+  `work_order_file` varchar(100) DEFAULT NULL,
   `work_order_no` varchar(50) DEFAULT NULL,
   `type_relocate` varchar(45) DEFAULT NULL,
   `network_id_old` varchar(30) DEFAULT NULL,
@@ -33,4 +33,4 @@ CREATE TABLE `tb_relokasi` (
   PRIMARY KEY (`id`),
   KEY `id_jarkom` (`id_jarkom`),
   CONSTRAINT `tb_relokasi_ibfk_1` FOREIGN KEY (`id_jarkom`) REFERENCES `tb_jarkom` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -92,15 +92,15 @@ class Adm_operation extends CI_Controller {
         $config['max_size']         = '10240';
         $config['overwrite']        = true;
         $config['file_ext_tolower'] = true;
-        $config['encrypt_name']     = true;
-        $config['remove_spaces']    = true;
+        $config['encrypt_name']     = false;
+        $config['remove_spaces']    = false;
 
-        $this->load->library('upload',$config);
+        $this->load->library('upload', $config);
 
         $data = [];
 
         for ($i=1; $i <=2 ; $i++) {
-            if(!empty($_FILES['file_upload_'.$i]['name'])){
+            if(!empty($_FILES['file_upload_'.$i]['name'])) {
                 if(!$this->upload->do_upload('file_upload_'.$i)) {
                     array_push($data, [
                         'error' => $this->upload->display_errors(),
@@ -126,9 +126,11 @@ class Adm_operation extends CI_Controller {
             'ip_wan_old' => $this->input->post('ip_wan_old'),
             'ip_wan_new' => $this->input->post('ip_wan_new'),
             'req_doc_file' => $data[0]['file_name'],
+            'req_doc_file_asli' => '',
             'req_doc_no' => $this->input->post('req_doc_no'),
             'req_doc_date' => $this->input->post('req_doc_date'),
             'work_order_file' => $data[1]['file_name'],
+            'work_order_file_asli' => '',
             'work_order_no' => $this->input->post('work_order_no'),
             'type_relocate' => $this->input->post('type'),
             'network_id_old' => $this->input->post('network_id_old'),

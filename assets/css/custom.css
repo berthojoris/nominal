@@ -56,6 +56,13 @@ select.input-sm {
     display: none;
     margin-bottom: 50px;
 }
-.fileExist {
-    margin-top: 1px;
+.mbReduce {
+    margin-bottom: -20px;
+}
+.alert-biru {
+    text-align: center;
+    background-color: #46E4FF !important;
+    border-color: #46E4FF;
+    color: #fff;
+    padding: 1px;
 }
