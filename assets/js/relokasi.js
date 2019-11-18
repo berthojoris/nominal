@@ -514,6 +514,12 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
+
+                $('#file_req_doc').prepend('<img id="file_link_req_doc_no" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
+                $("#file_link_req_doc_no").wrap("<a href='"+download(response.data.req_doc_file)+"' </a>");
+
+                $('#file_work_order').prepend('<img id="file_link_work_order" src="'+getBaseUrl()+'assets/icon/office/'+checkExt(response.data.req_doc_file)+'"/>');
+                $("#file_link_work_order").wrap("<a href='"+download(response.data.work_order_file)+"' </a>");
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
@@ -521,8 +527,38 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     });
 });
 
+function download(data) {
+    return getBaseUrl()+'index.php/adm_operation/download/'+data;
+}
+
+function checkExt(data) {
+    var parsing = data.split('.').pop();
+    var output = "";
+    if(parsing == "png") {
+        output = "icons8-png-30.png";
+    } else if(parsing == "jpg" || output == "jpeg") {
+        output = "icons8-jpg-30.png";
+    } else if(parsing == "pdf") {
+        output = "icons8-pdf-30.png";
+    } else if(parsing == "xls" || output == "xlsx") {
+        output = "icons8-xls-30.png";
+    } else if(parsing == "doc" || output == "docs") {
+        output = "icons8-doc-30.png";
+    } else if(parsing == "csv") {
+        output = "icons8-csv-30.png";
+    } else if(parsing == "rar") {
+        output = "icons8-rar-30.png";
+    } else if(parsing == "zip") {
+        output = "icons8-save-archive-30.png";
+    } else if(parsing == "doc" || output == "docx") {
+        output = "icons8-word-30.png";
+    } else {
+        output = "icons8-document-30.png";
+    }
+    return output;
+}
+
 function PopupCenter(url, title, w, h) {
-    // Fixes dual-screen position                         Most browsers      Firefox
     var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
     var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
 
@@ -534,6 +570,5 @@ function PopupCenter(url, title, w, h) {
     var top = (height - h) / 2 / systemZoom + dualScreenTop
     var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
 
-    // Puts focus on the newWindow
     if (window.focus) newWindow.focus();
 }

@@ -66,9 +66,10 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Req Doc File</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-5">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_1" id="edit_rec_doc_file">
                                 </div>
+                                <div class="col-md-2 fileExist" id="file_req_doc"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc No.</label>
@@ -84,9 +85,10 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-5">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_2" id="edit_work_order_file">
                                 </div>
+                                <div class="col-md-2 fileExist" id="file_work_order"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order No.</label>
