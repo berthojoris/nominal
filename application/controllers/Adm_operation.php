@@ -93,7 +93,7 @@ class Adm_operation extends CI_Controller {
         $config['overwrite']        = true;
         $config['file_ext_tolower'] = true;
         $config['encrypt_name']     = false;
-        $config['remove_spaces']    = false;
+        $config['remove_spaces']    = true;
 
         $this->load->library('upload', $config);
 
@@ -175,7 +175,7 @@ class Adm_operation extends CI_Controller {
         $config['max_size']         = '10240';
         $config['overwrite']        = true;
         $config['file_ext_tolower'] = true;
-        $config['encrypt_name']     = true;
+        $config['encrypt_name']     = false;
         $config['remove_spaces']    = true;
 
         $this->load->library('upload',$config);
