@@ -197,21 +197,25 @@ $(document).ready(function() {
         $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({ 
-        startDate: new Date(),
+    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     });
 
     $("#edit_live_target").datepicker({ 
-        startDate: new Date(),
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     })
 
     $("#filter_order_date, #filter_live_target").datepicker({ 
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        changeMonth: true,
+        inline: true,
     });
 
     $("#filter_form_btn").click(function (e) {
