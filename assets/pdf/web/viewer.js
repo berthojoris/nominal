@@ -4094,9 +4094,18 @@ exports.OptionKind = OptionKind;
 
 var URL = window.location.href;
 var arr = URL.split('/');
-var datanya = arr[6].split('-');
-console.log(datanya[0]);
-console.log(datanya[1]);
+
+if(window.location.hostname == "nominal.local") {
+    var datanya = arr[6].split('-');
+} else {
+    var datanya = arr[7].split('-');
+}
+
+var year = datanya[0];
+var filename = datanya[1];
+
+console.log(year);
+console.log(filename);
 
 var defaultOptions = {
   cursorToolOnLoad: {
@@ -4104,7 +4113,7 @@ var defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   defaultUrl: {
-    value: '../../../filesUpload/sik/'+datanya[0]+'/'+datanya[1],
+    value: '../../../filesUpload/sik/'+year+'/'+filename,
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
