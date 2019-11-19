@@ -66,3 +66,7 @@ select.input-sm {
     color: #fff;
     padding: 1px;
 }
+.alert a {
+    color: #fff;
+    text-decoration: none;
+}

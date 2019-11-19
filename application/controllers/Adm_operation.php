@@ -7,7 +7,7 @@ class Adm_operation extends CI_Controller {
 		parent::__construct();
         $this->load->library('session');
         $this->load->library('form_validation');
-        $this->load->helper(array('url'));
+        $this->load->helper(array('url', 'path'));
         $this->load->model('m_admoperation');
         $this->load->helper('download');
         $this->load->helper('form');
@@ -15,6 +15,13 @@ class Adm_operation extends CI_Controller {
 		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+    }
+
+    public function viewpdf($name)
+    {
+        $exp = explode('-', $name);
+        $filepath = FCPATH."fileUpload/sik/2019/FILE_PDF.pdf";
+        $this->load->view('pdf/viewotf');
     }
 
     public function showdetail($id)

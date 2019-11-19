@@ -536,14 +536,18 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $('#file_req_doc').empty();
                 $('#file_work_order').empty();
-                $('#file_req_doc').html(response.data.req_doc_file);
-                $('#file_work_order').html(response.data.work_order_file);
+                $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
+                $('#file_work_order').html(openViewOtf(response.data.work_order_file));
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
         }
     });
 });
+
+function openViewOtf(filename) {
+    return "<a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+}
 
 function download(data) {
     return getBaseUrl()+'index.php/adm_operation/download/'+data;
