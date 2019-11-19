@@ -189,11 +189,31 @@ $(document).ready(function() {
     $("#form_add").validate({
         rules: {
             file_upload_1: {
-                required: true,
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else if($("#status").val() == "Cancel") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
             file_upload_2: {
-                required: true,
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else if($("#status").val() == "Cancel") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },

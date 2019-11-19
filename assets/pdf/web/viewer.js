@@ -4104,8 +4104,7 @@ if(window.location.hostname == "nominal.local") {
 var year = datanya[0];
 var filename = datanya[1];
 
-console.log(year);
-console.log(filename);
+console.log(arr);
 
 var defaultOptions = {
   cursorToolOnLoad: {

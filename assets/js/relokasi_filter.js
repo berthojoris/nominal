@@ -189,11 +189,31 @@ $(document).ready(function() {
     $("#form_add").validate({
         rules: {
             file_upload_1: {
-                required: true,
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else if($("#status").val() == "Cancel") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
             file_upload_2: {
-                required: true,
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else if($("#status").val() == "Cancel") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },
@@ -536,8 +556,8 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $('#file_req_doc').empty();
                 $('#file_work_order').empty();
-                $('#file_req_doc').html(response.data.req_doc_file);
-                $('#file_work_order').html(response.data.work_order_file);
+                $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
+                $('#file_work_order').html(openViewOtf(response.data.work_order_file));
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
@@ -545,8 +565,47 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     });
 });
 
+function openViewOtf(filename) {
+    var parsing = filename.split('.').pop();
+    if(parsing == "pdf") {
+        return "<a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+    } else {
+        return filename;
+    }
+}
+
+function download(data) {
+    return getBaseUrl()+'index.php/adm_operation/download/'+data;
+}
+
+function checkExt(data) {
+    var parsing = data.split('.').pop();
+    var output = "";
+    if(parsing == "png") {
+        output = "icons8-png-30.png";
+    } else if(parsing == "jpg" || output == "jpeg") {
+        output = "icons8-jpg-30.png";
+    } else if(parsing == "pdf") {
+        output = "icons8-pdf-30.png";
+    } else if(parsing == "xls" || output == "xlsx") {
+        output = "icons8-xls-30.png";
+    } else if(parsing == "doc" || output == "docs") {
+        output = "icons8-doc-30.png";
+    } else if(parsing == "csv") {
+        output = "icons8-csv-30.png";
+    } else if(parsing == "rar") {
+        output = "icons8-rar-30.png";
+    } else if(parsing == "zip") {
+        output = "icons8-save-archive-30.png";
+    } else if(parsing == "doc" || output == "docx") {
+        output = "icons8-word-30.png";
+    } else {
+        output = "icons8-document-30.png";
+    }
+    return output;
+}
+
 function PopupCenter(url, title, w, h) {
-    // Fixes dual-screen position                         Most browsers      Firefox
     var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
     var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
 
@@ -558,6 +617,5 @@ function PopupCenter(url, title, w, h) {
     var top = (height - h) / 2 / systemZoom + dualScreenTop
     var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
 
-    // Puts focus on the newWindow
     if (window.focus) newWindow.focus();
 }
