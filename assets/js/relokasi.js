@@ -546,7 +546,12 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 });
 
 function openViewOtf(filename) {
-    return "<a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+    var parsing = filename.split('.').pop();
+    if(parsing == "pdf") {
+        return "<a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+    } else {
+        return filename;
+    }
 }
 
 function download(data) {
