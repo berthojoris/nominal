@@ -186,47 +186,131 @@ class Adm_operation extends CI_Controller {
         $this->load->library('upload',$config);
 
         $data = [];
+        $notif = [];
 
         for ($i=1; $i <=2 ; $i++) {
-            if(!empty($_FILES['edit_file_upload_'.$i]['name'])){
+            if(!empty($_FILES['edit_file_upload_'.$i]['name'])) {
                 if(!$this->upload->do_upload('edit_file_upload_'.$i)) {
                     array_push($data, [
                         'error' => $this->upload->display_errors(),
                         'file_name' => $year."-".$this->upload->data()['file_name']
+                    ]);
+                    array_push($notif, [
+                        'notif' => 'upload'
                     ]);
                 } else {
                     array_push($data, [
                         'error' => null,
                         'file_name' => $year."-".$this->upload->data()['file_name']
                     ]);
+                    array_push($notif, [
+                        'notif' => 'upload'
+                    ]);
                 }
+            } else {
+                array_push($notif, [
+                    'notif' => 'noupload'
+                ]);
             }
         }
 
-        $update = [
-            'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
-            'reason' => $this->input->post('edit_reason'),
-            'type_relocate' => $this->input->post('edit_type'),
-            'status' => $this->input->post('edit_status'),
-            'req_doc_no' => $this->input->post('edit_req_doc_no'),
-            'req_doc_date' => $this->input->post('req_doc_date'),
-            'work_order_no' => $this->input->post('edit_work_order_no'),
-            'pic' => $this->input->post('edit_pic'),
-            'due_date' => $this->input->post('edit_live_target'),
-            'network_id_new' => $this->input->post('edit_network_id_new'),
-            'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
-            'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
-            'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
-            'req_doc_file' => $data[0]['file_name'],
-            'work_order_file' => $data[1]['file_name'],
-            'distance' => $this->input->post('edit_distance'),
-            'region_name_old' => $this->input->post('region_old'),
-            'region_name_new' => $this->input->post('region_new'),
-            'remote_type_old' => $this->input->post('remote_type_old'),
-            'remote_type_new' => $this->input->post('remote_type_new'),
-            'network_type_old' => $this->input->post('network_type_old'),
-            'network_type_new' => $this->input->post('network_type_new')
-        ];
+        if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "upload") {
+            $update = [
+                'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
+                'reason' => $this->input->post('edit_reason'),
+                'type_relocate' => $this->input->post('edit_type'),
+                'status' => $this->input->post('edit_status'),
+                'req_doc_no' => $this->input->post('edit_req_doc_no'),
+                'req_doc_date' => $this->input->post('edit_req_doc_date'),
+                'work_order_no' => $this->input->post('edit_work_order_no'),
+                'pic' => $this->input->post('edit_pic'),
+                'due_date' => $this->input->post('edit_live_target'),
+                'network_id_new' => $this->input->post('edit_network_id_new'),
+                'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
+                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
+                'work_order_file' => $data[1]['file_name'],
+                'distance' => $this->input->post('edit_distance'),
+                'region_name_old' => $this->input->post('region_old'),
+                'region_name_new' => $this->input->post('region_new'),
+                'remote_type_old' => $this->input->post('remote_type_old'),
+                'remote_type_new' => $this->input->post('remote_type_new'),
+                'network_type_old' => $this->input->post('network_type_old'),
+                'network_type_new' => $this->input->post('network_type_new')
+            ];
+        } else if($notif[0]['notif'] == "upload" && $notif[1]['notif'] == "noupload") {
+            $update = [
+                'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
+                'reason' => $this->input->post('edit_reason'),
+                'type_relocate' => $this->input->post('edit_type'),
+                'status' => $this->input->post('edit_status'),
+                'req_doc_no' => $this->input->post('edit_req_doc_no'),
+                'req_doc_date' => $this->input->post('edit_req_doc_date'),
+                'work_order_no' => $this->input->post('edit_work_order_no'),
+                'pic' => $this->input->post('edit_pic'),
+                'due_date' => $this->input->post('edit_live_target'),
+                'network_id_new' => $this->input->post('edit_network_id_new'),
+                'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
+                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
+                'req_doc_file' => $data[0]['file_name'],
+                'distance' => $this->input->post('edit_distance'),
+                'region_name_old' => $this->input->post('region_old'),
+                'region_name_new' => $this->input->post('region_new'),
+                'remote_type_old' => $this->input->post('remote_type_old'),
+                'remote_type_new' => $this->input->post('remote_type_new'),
+                'network_type_old' => $this->input->post('network_type_old'),
+                'network_type_new' => $this->input->post('network_type_new')
+            ];
+        } else if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "noupload") {
+            $update = [
+                'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
+                'reason' => $this->input->post('edit_reason'),
+                'type_relocate' => $this->input->post('edit_type'),
+                'status' => $this->input->post('edit_status'),
+                'req_doc_no' => $this->input->post('edit_req_doc_no'),
+                'req_doc_date' => $this->input->post('edit_req_doc_date'),
+                'work_order_no' => $this->input->post('edit_work_order_no'),
+                'pic' => $this->input->post('edit_pic'),
+                'due_date' => $this->input->post('edit_live_target'),
+                'network_id_new' => $this->input->post('edit_network_id_new'),
+                'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
+                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
+                'distance' => $this->input->post('edit_distance'),
+                'region_name_old' => $this->input->post('region_old'),
+                'region_name_new' => $this->input->post('region_new'),
+                'remote_type_old' => $this->input->post('remote_type_old'),
+                'remote_type_new' => $this->input->post('remote_type_new'),
+                'network_type_old' => $this->input->post('network_type_old'),
+                'network_type_new' => $this->input->post('network_type_new')
+            ];
+        } else {
+            $update = [
+                'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
+                'reason' => $this->input->post('edit_reason'),
+                'type_relocate' => $this->input->post('edit_type'),
+                'status' => $this->input->post('edit_status'),
+                'req_doc_no' => $this->input->post('edit_req_doc_no'),
+                'req_doc_date' => $this->input->post('edit_req_doc_date'),
+                'work_order_no' => $this->input->post('edit_work_order_no'),
+                'pic' => $this->input->post('edit_pic'),
+                'due_date' => $this->input->post('edit_live_target'),
+                'network_id_new' => $this->input->post('edit_network_id_new'),
+                'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
+                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
+                'req_doc_file' => $data[0]['file_name'],
+                'work_order_file' => $data[1]['file_name'],
+                'distance' => $this->input->post('edit_distance'),
+                'region_name_old' => $this->input->post('region_old'),
+                'region_name_new' => $this->input->post('region_new'),
+                'remote_type_old' => $this->input->post('remote_type_old'),
+                'remote_type_new' => $this->input->post('remote_type_new'),
+                'network_type_old' => $this->input->post('network_type_old'),
+                'network_type_new' => $this->input->post('network_type_new')
+            ];
+        }
 
         $this->db->where('id', $this->input->post('id_relokasi'));
 
