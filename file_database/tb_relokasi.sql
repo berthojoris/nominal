@@ -31,7 +31,9 @@ CREATE TABLE `tb_relokasi` (
   `network_type_old` varchar(50) DEFAULT NULL,
   `network_type_new` varchar(50) DEFAULT NULL,
   `remote_latitude_old` varchar(50) DEFAULT NULL,
+  `remote_longitude_old` varchar(50) DEFAULT NULL,
   `remote_latitude_new` varchar(50) DEFAULT NULL,
+  `remote_longitude_new` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_jarkom` (`id_jarkom`),
   CONSTRAINT `tb_relokasi_ibfk_1` FOREIGN KEY (`id_jarkom`) REFERENCES `tb_jarkom` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
