@@ -184,7 +184,7 @@ class Api_relokasi extends CI_Controller
         foreach ($query->result() as $key ) {
             $newdata = [
                 "id" => $key->id_remote,
-				"text" => $key->nama_remote." (".$key->latitude."-".$key->longitude.")"
+				"text" => $key->nama_remote
             ];
             array_push($data, $newdata);
         }
