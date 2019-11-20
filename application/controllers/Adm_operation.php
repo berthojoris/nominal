@@ -152,7 +152,11 @@ class Adm_operation extends CI_Controller {
             'region_name_old' => $this->input->post('region_old'),
             'region_name_new' => $this->input->post('region_new'),
             'network_type_old' => $this->input->post('network_type_old'),
-            'network_type_new' => $this->input->post('network_type_new')
+            'network_type_new' => $this->input->post('network_type_new'),
+            'remote_latitude_old' => $this->input->post('remote_latitude_old'),
+            'remote_longitude_old' => $this->input->post('remote_longitude_old'),
+            'remote_latitude_new' => $this->input->post('remote_latitude_new'),
+            'remote_longitude_new' => $this->input->post('remote_longitude_new')
         ];
 
         if($this->db->insert('tb_relokasi', $insert)) {
@@ -231,12 +235,16 @@ class Adm_operation extends CI_Controller {
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'work_order_file' => $data[1]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
-                'region_name_old' => $this->input->post('region_old'),
-                'region_name_new' => $this->input->post('region_new'),
-                'remote_type_old' => $this->input->post('remote_type_old'),
-                'remote_type_new' => $this->input->post('remote_type_new'),
-                'network_type_old' => $this->input->post('network_type_old'),
-                'network_type_new' => $this->input->post('network_type_new')
+                'region_name_old' => $this->input->post('edit_region_old'),
+                'region_name_new' => $this->input->post('edit_region_new'),
+                'remote_type_old' => $this->input->post('edit_remote_type_old'),
+                'remote_type_new' => $this->input->post('edit_remote_type_new'),
+                'network_type_old' => $this->input->post('edit_network_type_old'),
+                'network_type_new' => $this->input->post('edit_network_type_new'),
+                'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
+                'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
+                'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
             ];
         } else if($notif[0]['notif'] == "upload" && $notif[1]['notif'] == "noupload") {
             $update = [
@@ -255,12 +263,16 @@ class Adm_operation extends CI_Controller {
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'req_doc_file' => $data[0]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
-                'region_name_old' => $this->input->post('region_old'),
-                'region_name_new' => $this->input->post('region_new'),
-                'remote_type_old' => $this->input->post('remote_type_old'),
-                'remote_type_new' => $this->input->post('remote_type_new'),
-                'network_type_old' => $this->input->post('network_type_old'),
-                'network_type_new' => $this->input->post('network_type_new')
+                'region_name_old' => $this->input->post('edit_region_old'),
+                'region_name_new' => $this->input->post('edit_region_new'),
+                'remote_type_old' => $this->input->post('edit_remote_type_old'),
+                'remote_type_new' => $this->input->post('edit_remote_type_new'),
+                'network_type_old' => $this->input->post('edit_network_type_old'),
+                'network_type_new' => $this->input->post('edit_network_type_new'),
+                'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
+                'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
+                'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
             ];
         } else if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "noupload") {
             $update = [
@@ -278,12 +290,16 @@ class Adm_operation extends CI_Controller {
                 'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'distance' => $this->input->post('edit_distance'),
-                'region_name_old' => $this->input->post('region_old'),
-                'region_name_new' => $this->input->post('region_new'),
-                'remote_type_old' => $this->input->post('remote_type_old'),
-                'remote_type_new' => $this->input->post('remote_type_new'),
-                'network_type_old' => $this->input->post('network_type_old'),
-                'network_type_new' => $this->input->post('network_type_new')
+                'region_name_old' => $this->input->post('edit_region_old'),
+                'region_name_new' => $this->input->post('edit_region_new'),
+                'remote_type_old' => $this->input->post('edit_remote_type_old'),
+                'remote_type_new' => $this->input->post('edit_remote_type_new'),
+                'network_type_old' => $this->input->post('edit_network_type_old'),
+                'network_type_new' => $this->input->post('edit_network_type_new'),
+                'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
+                'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
+                'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
             ];
         } else {
             $update = [
@@ -303,12 +319,16 @@ class Adm_operation extends CI_Controller {
                 'req_doc_file' => $data[0]['file_name'],
                 'work_order_file' => $data[1]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
-                'region_name_old' => $this->input->post('region_old'),
-                'region_name_new' => $this->input->post('region_new'),
-                'remote_type_old' => $this->input->post('remote_type_old'),
-                'remote_type_new' => $this->input->post('remote_type_new'),
-                'network_type_old' => $this->input->post('network_type_old'),
-                'network_type_new' => $this->input->post('network_type_new')
+                'region_name_old' => $this->input->post('edit_region_old'),
+                'region_name_new' => $this->input->post('edit_region_new'),
+                'remote_type_old' => $this->input->post('edit_remote_type_old'),
+                'remote_type_new' => $this->input->post('edit_remote_type_new'),
+                'network_type_old' => $this->input->post('edit_network_type_old'),
+                'network_type_new' => $this->input->post('edit_network_type_new'),
+                'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
+                'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
+                'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
             ];
         }
 

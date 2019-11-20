@@ -150,6 +150,18 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Latitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_latitude_old" id="remote_latitude_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Longitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_longitude_old" id="remote_longitude_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Region</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="region_old" id="region_old" readonly>
@@ -198,6 +210,18 @@
                                 <label class="col-sm-5 col-form-label">Remote Type</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="remote_type_new" id="remote_type_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Latitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_latitude_new" id="remote_latitude_new" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Longitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="remote_longitude_new" id="remote_longitude_new" required>
                                 </div>
                             </div>
                             <div class="form-group row">

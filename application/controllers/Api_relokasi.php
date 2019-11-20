@@ -154,6 +154,8 @@ class Api_relokasi extends CI_Controller
             `tb_remote`.`id_remote`,
             `tb_remote`.`nama_remote`,
             `tb_remote`.`kode_tipe_uker`,
+            `tb_remote`.`latitude`,
+            `tb_remote`.`longitude`,
             `tb_tipe_uker`.`tipe_uker`,
             `tb_remote`.`alamat_uker`,
             `tb_remote`.`kode_kanca`,
@@ -182,7 +184,7 @@ class Api_relokasi extends CI_Controller
         foreach ($query->result() as $key ) {
             $newdata = [
                 "id" => $key->id_remote,
-				"text" => $key->nama_remote
+				"text" => $key->nama_remote." (".$key->latitude."-".$key->longitude.")"
             ];
             array_push($data, $newdata);
         }
@@ -419,6 +421,8 @@ class Api_relokasi extends CI_Controller
             `tb_remote`.`nama_remote`,
             `tb_remote`.`kode_tipe_uker`,
             `tb_remote`.`ip_lan`,
+            `tb_remote`.`latitude`,
+            `tb_remote`.`longitude`,
             `tb_tipe_uker`.`tipe_uker`,
             `tb_remote`.`alamat_uker`,
             `tb_remote`.`kode_kanca`,

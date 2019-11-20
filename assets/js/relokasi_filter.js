@@ -52,6 +52,8 @@ $(document).ready(function() {
                     $("#edit_remote_type_new").val(response.data.tipe_uker);
                     $("#edit_region_new").val(response.data.nama_kanwil);
                     $("#edit_remote_address_new").val(response.data.alamat_uker);
+                    $("#edit_remote_latitude_new").val(response.data.latitude);
+                    $("#edit_remote_longitude_new").val(response.data.longitude);
                 } else if(response.code == 404) {
                     swal("Oops", "Data not found for "+name, "success");
                 }  else {
@@ -147,8 +149,6 @@ $(document).ready(function() {
                             return true;
                         } else if($("#edit_status").val() == "Done") {
                             return true;
-                        } else if($("#edit_status").val() == "Cancel") {
-                            return true;
                         } else {
                             return false;
                         }
@@ -160,8 +160,6 @@ $(document).ready(function() {
                         if($("#edit_status").val() == "in Progress") {
                             return true;
                         } else if($("#edit_status").val() == "Done") {
-                            return true;
-                        } else if($("#edit_status").val() == "Cancel") {
                             return true;
                         } else {
                             return false;
@@ -194,8 +192,6 @@ $(document).ready(function() {
                         return true;
                     } else if($("#status").val() == "Done") {
                         return true;
-                    } else if($("#status").val() == "Cancel") {
-                        return true;
                     } else {
                         return false;
                     }
@@ -207,8 +203,6 @@ $(document).ready(function() {
                     if($("#status").val() == "in Progress") {
                         return true;
                     } else if($("#status").val() == "Done") {
-                        return true;
-                    } else if($("#status").val() == "Cancel") {
                         return true;
                     } else {
                         return false;
@@ -283,6 +277,8 @@ $(document).ready(function() {
                     $("#region_new").val(response.data.nama_kanwil);
                     $("#remote_address_new").val(response.data.alamat_uker);
                     $("#remote_name_new_val").val(response.data.nama_remote);
+                    $("#remote_latitude_new").val(response.data.latitude);
+                    $("#remote_longitude_new").val(response.data.longitude);
                 } else if(response.code == 404) {
                     swal("Oops", "Data not found for "+name, "success");
                 }  else {
@@ -307,8 +303,6 @@ $(document).ready(function() {
                     $("#id_remote_old").val(response.data.id_remote);
                     $("#kode_jarkom").val(response.data.kode_jarkom);
                     $("#no_spk").val(response.data.no_spk);
-                    // $("#network_type_old").val(response.data.network_type);
-                    // $("#network_type_new").val(response.data.network_type);
                     $("#ip_lan_old").val(response.data.ip_lan);
                     $("#ip_lan_new").val(response.data.ip_lan);
                     $("#ip_wan_old").val(response.data.ip_wan);
@@ -331,6 +325,8 @@ $(document).ready(function() {
                         success: function (response_second) {
                             $("#network_type_old").val(response_second.data.jenis_jarkom);
                             $("#network_type_new").val(response_second.data.jenis_jarkom);
+                            $("#remote_latitude_old").val(response_second.data.latitude);
+                            $("#remote_longitude_old").val(response_second.data.longitude);
                         }
                     });
                 } else {
@@ -553,6 +549,11 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
+
+                $("#edit_remote_latitude_old").val(response.data.remote_latitude_old);
+                $("#edit_remote_longitude_old").val(response.data.remote_longitude_old);
+                $("#edit_remote_latitude_new").val(response.data.remote_latitude_new);
+                $("#edit_remote_longitude_new").val(response.data.remote_longitude_new);
 
                 $('#file_req_doc').empty();
                 $('#file_work_order').empty();

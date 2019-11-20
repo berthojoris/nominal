@@ -161,6 +161,18 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Latitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="edit_remote_latitude_old" id="edit_remote_latitude_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Longitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="edit_remote_longitude_old" id="edit_remote_longitude_old" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Region</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="edit_region_old" id="edit_region_old" readonly>
@@ -210,6 +222,18 @@
                                 <label class="col-sm-5 col-form-label">Remote Type</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control input-sm" name="edit_remote_type_new" id="edit_remote_type_new" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Latitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="edit_remote_latitude_new" id="edit_remote_latitude_new" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Longitude</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-sm" name="edit_remote_longitude_new" id="edit_remote_longitude_new" required>
                                 </div>
                             </div>
                             <div class="form-group row">
