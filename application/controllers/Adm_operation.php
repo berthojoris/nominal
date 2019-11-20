@@ -340,7 +340,7 @@ class Adm_operation extends CI_Controller {
             $this->session->set_flashdata('notif_error', 'Data has not been updated');
         }
 
-        $this->session->set_flashdata('notif_success', 'Relokasi has been created');
+        $this->session->set_flashdata('notif_success', 'Relokasi has been updated');
 
         redirect($_SERVER['HTTP_REFERER']);
     }
