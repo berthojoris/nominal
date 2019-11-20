@@ -65,6 +65,7 @@ select.input-sm {
     border-color: #46E4FF;
     color: #fff;
     padding: 1px;
+    display: none;
 }
 .alert a {
     color: #fff;
