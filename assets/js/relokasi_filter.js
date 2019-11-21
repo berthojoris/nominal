@@ -469,7 +469,6 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
 $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var passData    = $(e.relatedTarget);
     var id          = passData.data("id");
-    $(".alert-biru").hide();
     $.ajax({
         type: "POST",
         url: getBaseUrl()+"index.php/Api_relokasi/searchById",
@@ -561,7 +560,6 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $('#file_work_order').empty();
                 $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
                 $('#file_work_order').html(openViewOtf(response.data.work_order_file));
-                $(".alert-biru").show();
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }
