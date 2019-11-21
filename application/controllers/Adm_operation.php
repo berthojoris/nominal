@@ -333,12 +333,10 @@ class Adm_operation extends CI_Controller {
         $this->db->where('id', $this->input->post('id_relokasi'));
 
         if($this->db->update('tb_relokasi', $update)) {
-            $this->session->set_flashdata('notif_success', 'Relokasi has been updated');
+            $this->session->set_flashdata('notifMessage', 'Relokasi has been updated');
         } else {
-            $this->session->set_flashdata('notif_error', 'Data has not been updated');
+            $this->session->set_flashdata('notifMessage', 'Data has not been updated');
         }
-
-        $this->session->set_flashdata('notif_success', 'Relokasi has been updated');
 
         redirect($_SERVER['HTTP_REFERER']);
     }
