@@ -13,6 +13,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="form_type" name="form_type" value="CREATE">
                     <input type="hidden" id="kode_jarkom" name="kode_jarkom" value="">
+                    <input type="hidden" id="key_id_jarkom" name="key_id_jarkom" value="">
                     
                     <div class="row">
                         <div class="col-md-6">

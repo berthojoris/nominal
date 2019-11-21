@@ -315,6 +315,7 @@ $(document).ready(function() {
                     $("#network_id_old").val(response.data.kode_jarkom);
                     $("#network_id_new").val(response.data.kode_jarkom);
                     $("#no_serial_spk").val(response.data.id_contract);
+                    $("#key_id_jarkom").val(response.data.id_jarkom);
                     $("#reason").focus();
                     $.ajax({
                         type: "POST",

@@ -159,10 +159,25 @@ class Adm_operation extends CI_Controller {
             'remote_longitude_new' => $this->input->post('remote_longitude_new')
         ];
 
-        if($this->db->insert('tb_relokasi', $insert)) {
-            $this->session->set_flashdata('notifMessage', 'Relokasi has been created');
-        } else {
+        $jarkomData = [
+            'kode_jarkom' => $this->input->post('network_id_new'),
+            'ip_wan' => $this->input->post('ip_wan_new'),
+            'id_remote' => $this->input->post('remote_name_new')
+        ];
+
+        $this->db->trans_begin();
+
+        $this->db->insert('tb_relokasi', $insert);
+
+        $this->db->where('id', $this->input->post('key_id_jarkom'));
+        $this->db->update('tb_jarkom', $jarkomData);
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
             $this->session->set_flashdata('notifMessage', 'Data has not been created');
+        } else {
+            $this->db->trans_commit();
+            $this->session->set_flashdata('notifMessage', 'Relokasi has been created');
         }
 
         redirect($_SERVER['HTTP_REFERER']);
