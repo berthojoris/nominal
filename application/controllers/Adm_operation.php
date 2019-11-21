@@ -160,12 +160,10 @@ class Adm_operation extends CI_Controller {
         ];
 
         if($this->db->insert('tb_relokasi', $insert)) {
-            $this->session->set_flashdata('notif_success', 'Relokasi has been created');
+            $this->session->set_flashdata('notifMessage', 'Relokasi has been created');
         } else {
-            $this->session->set_flashdata('notif_error', 'Data has not been created');
+            $this->session->set_flashdata('notifMessage', 'Data has not been created');
         }
-
-        $this->session->set_flashdata('notif_success', 'Relokasi has been created');
 
         redirect($_SERVER['HTTP_REFERER']);
     }

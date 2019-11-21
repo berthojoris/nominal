@@ -19,14 +19,6 @@
 <section class="content" id="full" style="margin-top: -20px">
     <div class="row">
 
-    <?php if ($this->session->flashdata('notif_success')) { ?>
-        <div class="alert alert-success"> <?= $this->session->flashdata('notif_success') ?> </div>
-    <?php } ?>
-
-    <?php if ($this->session->flashdata('notif_error')) { ?>
-        <div class="alert alert-danger"> <?= $this->session->flashdata('notif_error') ?> </div>
-    <?php } ?>
-
     <?php 
     function showHide($name) {
         if($name == "default.jpg") {

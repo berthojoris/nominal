@@ -284,6 +284,7 @@ $(document).ready(function() {
                 }  else {
                     swal("Oops", "Search failed. Please reload the page", "error");
                 }
+                $("#distance").focus();
             }
         });
     });
