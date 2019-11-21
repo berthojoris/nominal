@@ -56,7 +56,7 @@
                                         <option value="Draft">Draft</option>
                                         <option value="Pending Approval">Pending Approval</option>
                                         <option value="in Progress">in Progress</option>
-                                        <option value="Done">Done</option>
+                                        <option value="Done">Done - Closed</option>
                                         <option value="Cancel">Cancel</option>
                                     </select>
                                 </div>
