@@ -243,7 +243,7 @@ $(document).ready(function() {
         autoclose: true,
         changeMonth: true,
         inline: true,
-    })
+    });
 
     $("#filter_order_date, #filter_live_target").datepicker({ 
         todayHighlight: true,
@@ -551,6 +551,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_region_new").val(response.data.region);
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
+                $("#edit_key_id_jarkom").val(response.data.id_jarkom);
 
                 $("#edit_remote_latitude_old").val(response.data.remote_latitude_old);
                 $("#edit_remote_longitude_old").val(response.data.remote_longitude_old);

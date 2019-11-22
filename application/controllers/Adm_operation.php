@@ -345,12 +345,26 @@ class Adm_operation extends CI_Controller {
             ];
         }
 
-        $this->db->where('id', $this->input->post('id_relokasi'));
+        $updateJarkomData = [
+            'kode_jarkom' => $this->input->post('edit_network_id_new'),
+            'ip_wan' => $this->input->post('edit_ip_wan_new'),
+            'id_remote' => $this->input->post('edit_remote_name_new')
+        ];
 
-        if($this->db->update('tb_relokasi', $update)) {
-            $this->session->set_flashdata('notifMessage', 'Relokasi has been updated');
-        } else {
+        $this->db->trans_begin();
+
+        $this->db->where('id', $this->input->post('id_relokasi'));
+        $this->db->update('tb_relokasi', $update);
+
+        $this->db->where('id', $this->input->post('edit_key_id_jarkom'));
+        $this->db->update('tb_jarkom', $updateJarkomData);
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
             $this->session->set_flashdata('notifMessage', 'Data has not been updated');
+        } else {
+            $this->db->trans_commit();
+            $this->session->set_flashdata('notifMessage', 'Relokasi has been updated');
         }
 
         redirect($_SERVER['HTTP_REFERER']);

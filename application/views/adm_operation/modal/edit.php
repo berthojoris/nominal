@@ -13,6 +13,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="form_type" name="form_type" value="UPDATE">
                     <input type="hidden" id="id_relokasi" name="id_relokasi" value="">
+                    <input type="hidden" id="edit_key_id_jarkom" name="edit_key_id_jarkom" value="">
                     
                     <div class="row">
                         <div class="col-md-6">
