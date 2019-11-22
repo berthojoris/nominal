@@ -549,10 +549,8 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
                 $("#edit_key_id_jarkom").val(response.data.id_jarkom);
-
                 $("#edit_id_remote_new").val(response.data.id_remote_new);
                 $("#edit_id_remote_old").val(response.data.id_remote_old);
-
                 $("#edit_remote_latitude_old").val(response.data.remote_latitude_old);
                 $("#edit_remote_longitude_old").val(response.data.remote_longitude_old);
                 $("#edit_remote_latitude_new").val(response.data.remote_latitude_new);
