@@ -4,6 +4,8 @@ CREATE
 (SELECT
     `tb_relokasi`.`id`                AS `id_relokasi`,
     `tb_relokasi`.`id_jarkom`         AS `id_jarkom`,
+    `tb_relokasi`.`id_remote_old`     AS `id_remote_old`,
+    `tb_relokasi`.`id_remote_new`     AS `id_remote_new`,
     `tb_jarkom`.`kode_jarkom`         AS `kode_jarkom`,
     `tb_jarkom`.`id_contract`         AS `id_contract`,
     `tb_relokasi`.`reason`            AS `reason`,

@@ -6,6 +6,8 @@ CREATE
     `v_relokasi_list`.`id_jarkom`              AS `id_jarkom`,
     `v_relokasi_list`.`kode_jarkom`            AS `kode_jarkom`,
     `v_relokasi_list`.`id_contract`            AS `id_contract`,
+    `v_relokasi_list`.`id_remote_old`          AS `id_remote_old`,
+    `v_relokasi_list`.`id_remote_new`          AS `id_remote_new`,
     `v_relokasi_list`.`reason`                 AS `reason`,
     `v_relokasi_list`.`status`                 AS `status`,
     `v_relokasi_list`.`due_date`               AS `due_date`,

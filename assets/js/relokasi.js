@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
 
     $(document).on('change', '#edit_remote_name_new',function (e) {
-        $("#edit_remote_name_new_id").val(this.value);
+        $("#edit_id_remote_new").val(this.value);
         $("#edit_remote_name_new_val").val(this.innerText);
         $("#remote_type_new").val('');
         $("#region_new").val('');
@@ -529,16 +529,13 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_reason").val(response.data.reason);
                 $("#edit_no_spk").val(response.data.no_spk);
                 $("#edit_no_serial_spk").val(response.data.id_contract);
-
                 $("#edit_req_doc_no").val(response.data.req_doc_no);
                 $("#edit_req_doc_date").val(response.data.req_doc_date);
                 $("#edit_pic").val(response.data.pic);
                 $("#edit_work_order_no").val(response.data.work_order_no);
                 $("#edit_live_target").val(response.data.due_date);
-
                 $("#edit_network_id_old").val(response.data.kode_jarkom);
                 $("#edit_network_id_new").val(response.data.kode_jarkom);
-
                 $("#edit_ip_lan_old").val(response.data.ip_lan_old);
                 $("#edit_ip_wan_old").val(response.data.ip_wan_old);
                 $("#edit_remote_name_old").val(response.data.remote_name_old);
@@ -552,6 +549,9 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_remote_address_new").val(response.data.address_old);
                 $("#edit_distance").val(response.data.distance);
                 $("#edit_key_id_jarkom").val(response.data.id_jarkom);
+
+                $("#edit_id_remote_new").val(response.data.id_remote_new);
+                $("#edit_id_remote_old").val(response.data.id_remote_old);
 
                 $("#edit_remote_latitude_old").val(response.data.remote_latitude_old);
                 $("#edit_remote_longitude_old").val(response.data.remote_longitude_old);

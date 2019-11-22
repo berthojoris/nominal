@@ -215,7 +215,7 @@
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
                                     <select id="edit_remote_name_new" name="edit_remote_name_new"></select>
-                                    <input type="hidden" name="edit_remote_name_new_id" id="edit_remote_name_new_id">
+                                    <input type="hidden" name="edit_id_remote_new" id="edit_id_remote_new">
                                     <input type="hidden" name="edit_remote_name_new_val" id="edit_remote_name_new_val">
                                 </div>
                             </div>
