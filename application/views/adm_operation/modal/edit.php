@@ -66,14 +66,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <div class="col-md-12 mbReduce">
-                                    <div class="alert alert-biru" id="file_req_doc"></div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Req Doc File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_1" id="edit_rec_doc_file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12 mbReduce">
+                                    <div class="alert alert-biru" id="file_req_doc"></div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -89,14 +89,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-12 mbReduce">
-                                    <div class="alert alert-biru" id="file_work_order"></div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_2" id="edit_work_order_file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12 mbReduce">
+                                    <div class="alert alert-biru" id="file_work_order"></div>
                                 </div>
                             </div>
                             <div class="form-group row">
