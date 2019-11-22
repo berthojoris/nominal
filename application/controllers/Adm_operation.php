@@ -165,16 +165,30 @@ class Adm_operation extends CI_Controller {
             'id_remote' => $this->input->post('remote_name_new')
         ];
 
+        $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
+        $jarkom = $this->db->query($sqlJarkom, [$this->input->post('id_jarkom')])->row();
+
+        $jarkomHistoryData = [
+            'kode_jarkom' => $this->input->post('network_id_new'),
+            'ip_wan' => $this->input->post('ip_wan_new'),
+            'id_remote' => $this->input->post('remote_name_new'),
+            'kode_jenis_jarkom' => $jarkom->kode_jenis_jarkom,
+            'kode_provider' => $jarkom->kode_provider,
+            'user_create' => $this->session->userdata('id'),
+            'create_at' => date('Y-m-d H:i:s'),
+        ];
+
         $this->db->trans_begin();
 
         $this->db->insert('tb_relokasi', $insert);
+        $this->db->insert('tb_jarkom_history', $jarkomHistoryData);
 
         $this->db->where('id', $this->input->post('key_id_jarkom'));
         $this->db->update('tb_jarkom', $jarkomData);
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
-            $this->session->set_flashdata('notifMessage', 'Data has not been created');
+            $this->session->set_flashdata('notifMessage', 'Relokasi has not been created');
         } else {
             $this->db->trans_commit();
             $this->session->set_flashdata('notifMessage', 'Relokasi has been created');
@@ -348,7 +362,19 @@ class Adm_operation extends CI_Controller {
         $updateJarkomData = [
             'kode_jarkom' => $this->input->post('edit_network_id_new'),
             'ip_wan' => $this->input->post('edit_ip_wan_new'),
-            'id_remote' => $this->input->post('edit_remote_name_new')
+            'id_remote' => $this->input->post('edit_remote_name_new_id')
+        ];
+
+        $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
+        $jarkom = $this->db->query($sqlJarkom, [$this->input->post('edit_id_jarkom_val')])->row();
+
+        $jarkomHistoryData = [
+            'ip_wan' => $this->input->post('edit_ip_wan_new'),
+            'id_remote' => $this->input->post('edit_remote_name_new_id'),
+            'kode_jenis_jarkom' => $jarkom->kode_jenis_jarkom,
+            'kode_provider' => $jarkom->kode_provider,
+            'user_update' => $this->session->userdata('id'),
+            'update_at' => date('Y-m-d H:i:s')
         ];
 
         $this->db->trans_begin();
@@ -358,6 +384,9 @@ class Adm_operation extends CI_Controller {
 
         $this->db->where('id', $this->input->post('edit_key_id_jarkom'));
         $this->db->update('tb_jarkom', $updateJarkomData);
+
+        $this->db->where('kode_jarkom', $this->input->post('edit_network_id_new'));
+        $this->db->update('tb_jarkom_history', $jarkomHistoryData);
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
