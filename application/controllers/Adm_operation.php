@@ -258,7 +258,7 @@ class Adm_operation extends CI_Controller {
                 'due_date' => $this->input->post('edit_live_target'),
                 'network_id_new' => $this->input->post('edit_network_id_new'),
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
-                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'work_order_file' => $data[1]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
@@ -286,7 +286,7 @@ class Adm_operation extends CI_Controller {
                 'due_date' => $this->input->post('edit_live_target'),
                 'network_id_new' => $this->input->post('edit_network_id_new'),
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
-                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'req_doc_file' => $data[0]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
@@ -314,7 +314,7 @@ class Adm_operation extends CI_Controller {
                 'due_date' => $this->input->post('edit_live_target'),
                 'network_id_new' => $this->input->post('edit_network_id_new'),
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
-                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'distance' => $this->input->post('edit_distance'),
                 'region_name_old' => $this->input->post('edit_region_old'),
@@ -341,7 +341,7 @@ class Adm_operation extends CI_Controller {
                 'due_date' => $this->input->post('edit_live_target'),
                 'network_id_new' => $this->input->post('edit_network_id_new'),
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
-                'id_remote_new' => $this->input->post('edit_remote_name_new_id'),
+                'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
                 'req_doc_file' => $data[0]['file_name'],
                 'work_order_file' => $data[1]['file_name'],
@@ -379,6 +379,14 @@ class Adm_operation extends CI_Controller {
             'update_at' => date('Y-m-d H:i:s')
         ];
 
+        $remoteUpdate = [
+            'latitude' => $this->input->post('edit_remote_latitude_new'),
+            'longitude' => $this->input->post('edit_remote_longitude_new'),
+            'alamat_uker' => $this->input->post('edit_remote_address_new'),
+            'user_update' => $this->session->userdata('id'),
+            'update_at' => date('Y-m-d H:i:s')
+        ];
+
         $this->db->trans_begin();
 
         $this->db->where('id', $this->input->post('id_relokasi'));
@@ -389,6 +397,9 @@ class Adm_operation extends CI_Controller {
 
         $this->db->where('kode_jarkom', $this->input->post('edit_network_id_new'));
         $this->db->update('tb_jarkom_history', $jarkomHistoryData);
+
+        $this->db->where('id_remote', $this->input->post('edit_id_remote_new'));
+        $this->db->update('tb_remote', $remoteUpdate);
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
