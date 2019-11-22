@@ -362,7 +362,9 @@ class Adm_operation extends CI_Controller {
         $updateJarkomData = [
             'kode_jarkom' => $this->input->post('edit_network_id_new'),
             'ip_wan' => $this->input->post('edit_ip_wan_new'),
-            'id_remote' => $this->input->post('edit_id_remote_new')
+            'id_remote' => $this->input->post('edit_id_remote_new'),
+            'user_update' => $this->session->userdata('id'),
+            'update_at' => date('Y-m-d H:i:s')
         ];
 
         $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
@@ -376,8 +378,6 @@ class Adm_operation extends CI_Controller {
             'user_update' => $this->session->userdata('id'),
             'update_at' => date('Y-m-d H:i:s')
         ];
-
-        // die($this->input->post('edit_network_id_new'));
 
         $this->db->trans_begin();
 
