@@ -54,11 +54,11 @@
                                 <label class="col-sm-5 col-form-label">Status</label>
                                 <div class="col-sm-7">
                                     <select id="status" name="status" class="form-control input-sm">
-                                        <option value="Draft">Draft</option>
-                                        <option value="Pending Approval">Pending Approval</option>
-                                        <option value="in Progress">in Progress</option>
-                                        <option value="Done">Done - Closed</option>
-                                        <option value="Cancel">Cancel</option>
+                                        <option value="Draft">DRAFT</option>
+                                        <option value="Pending Approval">PENDING APPROVAL</option>
+                                        <option value="in Progress">IN PROGRESS</option>
+                                        <option value="Done">DONE - CLOSED</option>
+                                        <option value="Cancel">CANCEL</option>
                                     </select>
                                 </div>
                             </div>
