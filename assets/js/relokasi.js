@@ -141,29 +141,31 @@ $(document).ready(function() {
     });
 
     $(document).on("click", "#updateRelokasi", function (e) {
+        var allowEmpty = ["Draft", "Pending Approval", "Cancel"];
+        var activeValidate = ["in Progress", "Done"];
         $("#form_edit").validate({
             rules: {
                 edit_file_upload_1: {
                     required: function(element) {
-                        if($("#edit_status").val() == "in Progress") {
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() == "") {
                             return true;
-                        } else if($("#edit_status").val() == "Done") {
-                            return true;
-                        } else {
+                        }
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() != "") {
                             return false;
                         }
+                        return false;
                     },
                     extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
                 },
                 edit_file_upload_2: {
                     required: function(element) {
-                        if($("#edit_status").val() == "in Progress") {
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() == "") {
                             return true;
-                        } else if($("#edit_status").val() == "Done") {
-                            return true;
-                        } else {
+                        }
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() != "") {
                             return false;
                         }
+                        return false;
                     },
                     extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
                 }
@@ -470,6 +472,8 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
 $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var passData    = $(e.relatedTarget);
     var id          = passData.data("id");
+    $("#valid_edit_reqdocfile").val('');
+    $("#valid_edit_wofile").val('');
     $.ajax({
         type: "POST",
         url: getBaseUrl()+"index.php/Api_relokasi/searchById",
@@ -560,6 +564,8 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $('#file_work_order').empty();
                 $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
                 $('#file_work_order').html(openViewOtf(response.data.work_order_file));
+                $("#valid_edit_reqdocfile").val(response.data.req_doc_file);
+                $("#valid_edit_wofile").val(response.data.work_order_file);
             } else {
                 swal("Oops", "Data not found for id "+id, "success");
             }

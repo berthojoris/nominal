@@ -69,6 +69,7 @@
                                 <label class="col-sm-5 col-form-label">Req Doc File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_1" id="edit_rec_doc_file">
+                                    <input type="hidden" name="valid_edit_reqdocfile" id="valid_edit_reqdocfile" value="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -92,6 +93,7 @@
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_2" id="edit_work_order_file">
+                                    <input type="hidden" name="valid_edit_wofile" id="valid_edit_wofile" value="">
                                 </div>
                             </div>
                             <div class="form-group row">
