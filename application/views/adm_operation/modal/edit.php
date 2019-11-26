@@ -46,8 +46,8 @@
                                 <label class="col-sm-5 col-form-label">Type</label>
                                 <div class="col-sm-7">
                                     <select id="edit_type" name="edit_type" class="form-control input-sm">
-                                        <option value="RELOKASI">Relokasi</option>
-                                        <option value="RELAYOUT">Relayout</option>
+                                        <option value="RELOKASI">RELOKASI</option>
+                                        <option value="RELAYOUT">RELAYOUT</option>
                                     </select>
                                 </div>
                             </div>
