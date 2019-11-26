@@ -594,10 +594,11 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
 function openViewOtf(filename) {
     var parsing = filename.split('.').pop();
+    var img = getBaseUrl()+"assets/icon/office/"+checkExt(filename);
     if(parsing == "pdf") {
-        return "<a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+        return "<img src='"+img+"' /><a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
     } else {
-        return filename;
+        return "<img src='"+img+"' />"+filename;
     }
 }
 
@@ -610,13 +611,13 @@ function checkExt(data) {
     var output = "";
     if(parsing == "png") {
         output = "icons8-png-30.png";
-    } else if(parsing == "jpg" || output == "jpeg") {
+    } else if(parsing == "jpg" || parsing == "jpeg") {
         output = "icons8-jpg-30.png";
     } else if(parsing == "pdf") {
         output = "icons8-pdf-30.png";
-    } else if(parsing == "xls" || output == "xlsx") {
+    } else if(parsing == "xls" || parsing == "xlsx") {
         output = "icons8-xls-30.png";
-    } else if(parsing == "doc" || output == "docs") {
+    } else if(parsing == "doc" || parsing == "docs") {
         output = "icons8-doc-30.png";
     } else if(parsing == "csv") {
         output = "icons8-csv-30.png";
@@ -624,7 +625,7 @@ function checkExt(data) {
         output = "icons8-rar-30.png";
     } else if(parsing == "zip") {
         output = "icons8-save-archive-30.png";
-    } else if(parsing == "doc" || output == "docx") {
+    } else if(parsing == "doc" || parsing == "docx") {
         output = "icons8-word-30.png";
     } else {
         output = "icons8-document-30.png";
