@@ -12,6 +12,10 @@ function Popup(url) {
     return true;
 }
 
+function upperCase(string) {
+    return string.toUpperCase()
+}
+
 function OpenDetailPrint(url) {
     window.open(url);
 }
@@ -104,24 +108,33 @@ $(document).ready(function() {
                 "data": "address_new",
                 "render": function(data, type, row, meta) {
                     return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
-                 }
+                }
             },
             {
                 "data": "req_doc_file",
                 "render": function(data, type, row, meta) {
-                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
+                    var rowIndex = meta.col-1;
+                    $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                    var img = getBaseUrl()+"assets/icon/office/download-icon.png";
+                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width=20 /></a>';
                     return isian;
-                 }
+                }
             },
             {
                 "data": "work_order_file",
                 "render": function(data, type, row, meta) {
-                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'">Download</a>';
+                    var rowIndex = meta.col-1;
+                    $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                    var img = getBaseUrl()+"assets/icon/office/download-icon.png";
+                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width=20 /></a>';
                     return wo;
-                 }
+                }
             },
             {
                 "data": "status",
+                "render": function(data, type, row, meta) {
+                    return upperCase(data);
+                }
             },
             {
                 "data": "due_date",

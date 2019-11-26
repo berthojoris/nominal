@@ -70,3 +70,9 @@ select.input-sm {
     color: #fff;
     text-decoration: none;
 }
+.lightRed {
+    background-color: #f0aaaa !important;
+}
+.centerText {
+    text-align: center;
+}
