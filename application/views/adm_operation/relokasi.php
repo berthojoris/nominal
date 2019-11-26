@@ -44,6 +44,7 @@
                     <table id="filter_table_Data" class="table table-bordered table-striped table-hover" id="table_relokasi">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Kode Jarkom</th>
                                 <th>IP WAN</th>

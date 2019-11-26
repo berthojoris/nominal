@@ -77,6 +77,12 @@ $(document).ready(function() {
         },
         "columns": [
             {
+                "data": "id",
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1+".";
+                }
+            },
+            {
                 "data": "id_relokasi",
                 "visible": false,
                 "searchable": false
