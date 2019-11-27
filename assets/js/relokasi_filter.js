@@ -125,7 +125,7 @@ $(document).ready(function() {
                     var rowIndex = meta.col-1;
                     $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                     var img = getBaseUrl()+"assets/icon/office/download-icon.png";
-                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width="20" /></a>';
+                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width=20 /></a>';
                     return wo;
                 }
             },
@@ -251,25 +251,20 @@ $(document).ready(function() {
         $("#add_form_relokasi").modal('show');
     });
 
-    $("#live_target, #req_doc_date, #edit_req_doc_date").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        changeMonth: true,
-        inline: true,
-    });
-
-    $("#edit_live_target").datepicker({ 
-        todayHighlight: true,
-        autoclose: true,
-        changeMonth: true,
-        inline: true,
+    $("#add_form_relokasi").on('show.bs.modal', function (e) {
+        $("#live_target, #req_doc_date").datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            changeMonth: true,
+            inline: false,
+        });
     });
 
     $("#filter_order_date, #filter_live_target").datepicker({ 
         todayHighlight: true,
         autoclose: true,
         changeMonth: true,
-        inline: true,
+        inline: false,
     });
 
     $("#filter_form_btn").click(function (e) {
@@ -492,6 +487,14 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
     var id          = passData.data("id");
     $("#valid_edit_reqdocfile").val('');
     $("#valid_edit_wofile").val('');
+
+    $("#edit_live_target").datepicker({ 
+        todayHighlight: false,
+        autoclose: true,
+        changeMonth: true,
+        inline: false,
+    });
+
     $.ajax({
         type: "POST",
         url: getBaseUrl()+"index.php/Api_relokasi/searchById",
@@ -514,6 +517,21 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                         $("#edit_network_type_new").val(response_second.data.jenis_jarkom);
                     }
                 });
+
+                $("#edit_req_doc_date").datepicker({ 
+                    todayHighlight: false,
+                    autoclose: true,
+                    changeMonth: true
+                });
+
+                $("#edit_live_target").datepicker({ 
+                    todayHighlight: false,
+                    autoclose: true,
+                    changeMonth: true
+                });
+
+                $("#edit_req_doc_date").datepicker("update", response.data.req_doc_date);
+                $("#edit_live_target").datepicker("update", response.data.due_date);
 
                 $("#edit_id_jarkom").val(response.data.ip_wan_new+" / "+response.data.kode_jarkom+" / "+response.data.nickname_provider +" / "+response.data.singkatan);
                 $("#edit_id_jarkom_val").val(response.data.id_jarkom);
@@ -552,10 +570,8 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_no_spk").val(response.data.no_spk);
                 $("#edit_no_serial_spk").val(response.data.id_contract);
                 $("#edit_req_doc_no").val(response.data.req_doc_no);
-                $("#edit_req_doc_date").val(response.data.req_doc_date);
                 $("#edit_pic").val(response.data.pic);
                 $("#edit_work_order_no").val(response.data.work_order_no);
-                $("#edit_live_target").val(response.data.due_date);
                 $("#edit_network_id_old").val(response.data.kode_jarkom);
                 $("#edit_network_id_new").val(response.data.kode_jarkom);
                 $("#edit_ip_lan_old").val(response.data.ip_lan_old);
