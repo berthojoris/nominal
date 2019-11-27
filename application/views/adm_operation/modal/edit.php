@@ -71,6 +71,9 @@
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_1" id="edit_rec_doc_file">
                                     <input type="hidden" name="valid_edit_reqdocfile" id="valid_edit_reqdocfile" value="">
                                 </div>
+                                <div class="col-md-12" style="margin-left: 187px">
+                                pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12 mbReduce">
@@ -94,6 +97,9 @@
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="edit_file_upload_2" id="edit_work_order_file">
                                     <input type="hidden" name="valid_edit_wofile" id="valid_edit_wofile" value="">
+                                </div>
+                                <div class="col-md-12" style="margin-left: 187px">
+                                pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
                                 </div>
                             </div>
                             <div class="form-group row">

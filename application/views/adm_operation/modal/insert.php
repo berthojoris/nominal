@@ -69,6 +69,9 @@
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="file_upload_1" id="rec_doc_file">
                                 </div>
+                                <div class="col-md-12" style="margin-left: 187px">
+                                pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc No.</label>
@@ -86,6 +89,9 @@
                                 <label class="col-sm-5 col-form-label">Work Order File</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="file_upload_2" id="work_order_file">
+                                </div>
+                                <div class="col-md-12" style="margin-left: 187px">
+                                pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
                                 </div>
                             </div>
                             <div class="form-group row">
