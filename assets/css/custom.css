@@ -76,3 +76,8 @@ select.input-sm {
 .centerText {
     text-align: center;
 }
+.lblExt {
+    margin-left: 210px;
+    font-size: 11px;
+    color: red;
+}

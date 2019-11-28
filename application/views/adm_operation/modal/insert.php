@@ -69,7 +69,7 @@
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="file_upload_1" id="rec_doc_file">
                                 </div>
-                                <div class="col-md-12" style="margin-left: 187px">
+                                <div class="col-md-12 lblExt">
                                 pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control input-sm"  name="file_upload_2" id="work_order_file">
                                 </div>
-                                <div class="col-md-12" style="margin-left: 187px">
+                                <div class="col-md-12 lblExt">
                                 pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv
                                 </div>
                             </div>
