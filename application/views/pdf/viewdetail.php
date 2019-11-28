@@ -42,22 +42,28 @@
     </style>
 </head>
 <body id="printPage">
+    
+    <table align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center" style="padding-left: 10px; padding-right: 10px;">
+                <span style="font-weight: bold;">Berdasarkan <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= $req_doc_date ?> dengan ini kami berikan izin kerja kepada:</span>
+            </td>
+        </tr>
+    </table>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <p class="lead">Berdasarkan <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= $req_doc_date ?></span> dengan ini kami berikan izin kerja kepada:</p>
-    </div>
-
+    <br>
+    
     <div class="container">
 
         <div class="row text-center">
-            <table class="table">
+            <table border="1" align="center" cellpadding="0" cellspacing="0" width="600">
                 <thead>
-                    <tr class="text-center">
+                    <tr align="center">
                         <th width="30%">NAMA/NIP</th>
                         <th width="30%">JABATAN</th>
                         <th width="30%">BAGIAN/PERUSAHAAN</th>
                     </tr>
-                    <tr class="text-center">
+                    <tr>
                         <th colspan="3">NP <?= $nickname_provider ?> - <?= $network_type_new ?></th>
                     </tr>
                 </thead>
@@ -77,33 +83,33 @@
         </div>
         
         <div class="row">
-            <table class="table">
+            <table border="1" align="center" cellpadding="0" cellspacing="0" width="600">
                 <thead>
-                    <tr class="text-center">
+                    <tr align="center">
                         <th colspan="2">HARDWARE</th>
                         <th>SOFTWARE</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr col="3">
-                        <td class="tdCheck"></td>
-                        <td>Site Survey</td>
-                        <td>Memasang System/Aplikasi</td>
+                        <td style="width: 60px; text-align: center;">&radic;</td>
+                        <td style="text-align: center;">Site Survey</td>
+                        <td style="text-align: center;">Memasang System/Aplikasi</td>
                     </tr>
                     <tr col="3">
-                        <td class="tdCheck"></td>
-                        <td>Instalasi H/w indoor & outdoor</td>
-                        <td>Mengganti/Upgrade System</td>
+                        <td style="width: 60px; text-align: center;">&radic;</td>
+                        <td style="text-align: center;">Instalasi H/w indoor & outdoor</td>
+                        <td style="text-align: center;">Mengganti/Upgrade System</td>
                     </tr>
                     <tr col="3">
-                        <td class="tdCheck"></td>
-                        <td>Memperbaiki/Upgrade Hardware</td>
-                        <td>Menghapus/Merubah System/Aplikasi</td>
+                        <td style="width: 60px; text-align: center;">&radic;</td>
+                        <td style="text-align: center;">Memperbaiki/Upgrade Hardware</td>
+                        <td style="text-align: center;">Menghapus/Merubah System/Aplikasi</td>
                     </tr>
                     <tr col="3">
-                        <td class="tdCheck"></td>
-                        <td>Menarik/Memindahkan Hardware</td>
-                        <td>Maintenance</td>
+                        <td style="width: 60px; text-align: center;">&radic;</td>
+                        <td style="text-align: center;">Menarik/Memindahkan Hardware</td>
+                        <td style="text-align: center;">Maintenance</td>
                     </tr>
                 </tbody>
             </table>
