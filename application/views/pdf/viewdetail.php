@@ -41,12 +41,48 @@
     }
     </style>
 </head>
+<?php 
+function indoDate($oridate) {
+    $format = explode("-", $oridate);
+    $date = $format[2];
+    $month = $format[1];
+    $year = $format[0];
+
+    if($month == "01") {
+        $convMonth = "Januari";
+    } else if($month == "02") {
+        $convMonth = "Februari";
+    } else if($month == "03") {
+        $convMonth = "Maret";
+    } else if($month == "04") {
+        $convMonth = "April";
+    } else if($month == "05") {
+        $convMonth = "Mei";
+    } else if($month == "06") {
+        $convMonth = "Juni";
+    } else if($month == "07") {
+        $convMonth = "Juli";
+    } else if($month == "08") {
+        $convMonth = "Agustus";
+    } else if($month == "09") {
+        $convMonth = "September";
+    } else if($month == "10") {
+        $convMonth = "Oktober";
+    } else if($month == "11") {
+        $convMonth = "November";
+    } else {
+        $convMonth = "Desember";
+    }
+    return $date."-".$convMonth."-".$year;
+}
+?>
 <body id="printPage">
     
     <table align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td align="center" style="padding-left: 10px; padding-right: 10px;">
-                <span style="font-weight: bold;">Berdasarkan <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= $req_doc_date ?> dengan ini kami berikan izin kerja kepada:</span>
+                <span style="font-weight: bold;">Berdasarkan Nota Dinas/Facs/Email <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= indoDate($req_doc_date);?> 
+                dengan ini kami berikan izin kerja kepada:</span>
             </td>
         </tr>
     </table>
@@ -59,9 +95,9 @@
             <table border="1" align="center" cellpadding="0" cellspacing="0" width="600">
                 <thead>
                     <tr align="center">
-                        <th width="30%">NAMA/NIP</th>
-                        <th width="30%">JABATAN</th>
-                        <th width="30%">BAGIAN/PERUSAHAAN</th>
+                        <th width="30%"><u>NAMA/NIP</u></th>
+                        <th width="30%"><u>JABATAN</u></th>
+                        <th width="30%"><u>BAGIAN/PERUSAHAAN</u></th>
                     </tr>
                     <tr>
                         <th colspan="3">NP <?= $nickname_provider ?> - <?= $network_type_new ?></th>
@@ -86,8 +122,8 @@
             <table border="1" align="center" cellpadding="0" cellspacing="0" width="600">
                 <thead>
                     <tr align="center">
-                        <th colspan="2">HARDWARE</th>
-                        <th>SOFTWARE</th>
+                        <th colspan="2"><u>HARDWARE</u></th>
+                        <th><u>SOFTWARE</u></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,7 +160,7 @@
             </div>
             <div class="col-md-12">
                 <p>No SPK <b><?= $no_spk ?></b> no urut : <b><?= ($id_contract == '' || empty($id_contract)) ? '-' : $id_contract ?></b></p>
-                <p>Target Live : <b><?= $due_date ?></b></p>
+                <p>Target Live : <b><?= indoDate($due_date) ?></b></p>
                 <p>PIC : <b><?= $pic ?></b></p>
             </div>
         </div>

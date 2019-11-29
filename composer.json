@@ -17,7 +17,8 @@
         "phpro/soap-client": "^1.0",
         "mpdf/mpdf": "^8.0",
         "dompdf/dompdf": "^0.8.3",
-        "tijsverkoyen/css-to-inline-styles": "^2.2"
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "nesbot/carbon": "^2.27"
 	},
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"
