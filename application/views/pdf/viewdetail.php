@@ -81,7 +81,7 @@ function indoDate($oridate) {
     <table align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td align="center" style="padding-left: 10px; padding-right: 10px;">
-                <span style="font-weight: bold;">Berdasarkan Nota Dinas/Facs/Email <span class="boldText"><?= $req_doc_no ?></span> tanggal <span class="boldText"><?= indoDate($req_doc_date);?> 
+                <span>Berdasarkan Nota Dinas/Facs/Email <span><?= $req_doc_no ?></span> tanggal <span><?= indoDate($req_doc_date);?> 
                 dengan ini kami berikan izin kerja kepada:</span>
             </td>
         </tr>
