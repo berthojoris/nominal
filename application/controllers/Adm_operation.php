@@ -8,7 +8,6 @@ class Adm_operation extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('url', 'path'));
-        $this->load->model('m_admoperation');
         $this->load->helper('download');
         $this->load->helper('form');
         $this->load->helper('directory');
