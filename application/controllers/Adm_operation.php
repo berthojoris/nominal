@@ -23,16 +23,6 @@ class Adm_operation extends CI_Controller {
         $this->load->view('pdf/viewotf');
     }
 
-    public function test()
-    {
-        $this->load->view('pdf/print');
-    }
-
-    public function contoh()
-    {
-        $this->load->view('pdf/contoh');
-    }
-
     public function showdetail($id)
     {
         $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
