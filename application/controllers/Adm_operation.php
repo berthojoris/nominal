@@ -16,13 +16,6 @@ class Adm_operation extends CI_Controller {
         }
     }
 
-    public function viewpdf($name)
-    {
-        $exp = explode('-', $name);
-        $filepath = FCPATH."fileUpload/sik/2019/FILE_PDF.pdf";
-        $this->load->view('pdf/viewotf');
-    }
-
     public function showdetail($id)
     {
         $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
