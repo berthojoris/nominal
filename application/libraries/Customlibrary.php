@@ -17,7 +17,7 @@ if (!defined('BASEPATH'))
  *             Yusuf Ozdemir <yusuf@ozdemir.be>
  * @link       http://ellislab.com/forums/viewthread/160896/
  */
-class Datatables {
+class Customlibrary {
 
     /**
      * Global container variables for chained argument results
