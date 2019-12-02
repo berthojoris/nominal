@@ -61,13 +61,12 @@ select.input-sm {
 }
 .alert-biru {
     text-align: center;
-    background-color: #46E4FF !important;
     border-color: #46E4FF;
-    color: #fff;
+    color: #000000;
     padding: 1px;
 }
 .alert a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
 }
 .lightRed {

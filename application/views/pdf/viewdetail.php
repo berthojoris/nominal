@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Detail Report</title>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/4.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap4.css">
     <style>
     html {
         font-size: 14px;

@@ -606,11 +606,11 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
 function openViewOtf(filename) {
     var parsing = filename.split('.').pop();
-    var img = getBaseUrl()+"assets/icon/office/"+checkExt(filename);
+    var img = checkExt(filename);
     if(parsing == "pdf") {
-        return "<img src='"+img+"' /><a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+        return img+" <a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
     } else {
-        return "<img src='"+img+"' />"+filename;
+        return img+" "+filename;
     }
 }
 
@@ -621,26 +621,20 @@ function download(data) {
 function checkExt(data) {
     var parsing = data.split('.').pop();
     var output = "";
-    if(parsing == "png") {
-        output = "icons8-png-30.png";
-    } else if(parsing == "jpg" || parsing == "jpeg") {
-        output = "icons8-jpg-30.png";
+    if(parsing == "jpg" || parsing == "jpeg" || parsing == "png") {
+        output = '<i class="fa fa-fw fa-file-image-o"></i>';
     } else if(parsing == "pdf") {
-        output = "icons8-pdf-30.png";
+        output = '<i class="fa fa-fw fa-file-pdf-o"></i>';
     } else if(parsing == "xls" || parsing == "xlsx") {
-        output = "icons8-xls-30.png";
-    } else if(parsing == "doc" || parsing == "docs") {
-        output = "icons8-doc-30.png";
-    } else if(parsing == "csv") {
-        output = "icons8-csv-30.png";
-    } else if(parsing == "rar") {
-        output = "icons8-rar-30.png";
-    } else if(parsing == "zip") {
-        output = "icons8-save-archive-30.png";
+        output = '<i class="fa fa-fw fa-file-excel-o"></i>';
     } else if(parsing == "doc" || parsing == "docx") {
-        output = "icons8-word-30.png";
+        output = '<i class="fa fa-fw fa-file-word-o"></i>';
+    } else if(parsing == "csv") {
+        output = '<i class="fa fa-fw fa-file-text-o"></i>';
+    } else if(parsing == "rar" || parsing == "zip") {
+        output = '<i class="fa fa-fw fa-file-archive-o"></i>';
     } else {
-        output = "icons8-document-30.png";
+        output = '<i class="fa fa-fw fa-file-file-o"></i>';
     }
     return output;
 }
