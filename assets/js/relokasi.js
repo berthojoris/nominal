@@ -114,8 +114,7 @@ $(document).ready(function() {
                 "render": function(data, type, row, meta) {
                     var rowIndex = meta.col-1;
                     $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    var img = getBaseUrl()+"assets/icon/office/download-icon.png";
-                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width=20 /></a>';
+                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
                     return isian;
                 }
             },
@@ -124,8 +123,7 @@ $(document).ready(function() {
                 "render": function(data, type, row, meta) {
                     var rowIndex = meta.col-1;
                     $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    var img = getBaseUrl()+"assets/icon/office/download-icon.png";
-                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><img src="'+img+'" width=20 /></a>';
+                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
                     return wo;
                 }
             },
