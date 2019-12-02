@@ -40,6 +40,6 @@
     <?php echo @$_js; ?>
     <?php echo put_bottom(); ?>
 
-    <?php $this->view('adm_operation/custom/alert'); ?>
+    <?php $this->view('adm_operation/modal/alert'); ?>
   </body>
 </html>

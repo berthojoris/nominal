@@ -71,7 +71,7 @@ $(document).ready(function() {
     
     $('#filter_table_Data').DataTable({ 
         "processing": true,
-        "serverSide": false,
+        "serverSide": true,
         "paging": true,
         "responsive": true,
         "ajax": {
