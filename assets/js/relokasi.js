@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.print', function() {
         var id = $(this).data('open');
-        var url = getBaseUrl()+"index.php/adm_operation/showdetail/"+id;
+        var url = getBaseUrl()+"index.php/relokasi/showdetail/"+id;
         OpenDetailPrint(url);
     });
 
@@ -114,7 +114,7 @@ $(document).ready(function() {
                 "render": function(data, type, row, meta) {
                     var rowIndex = meta.col-1;
                     $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    isian = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                    isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
                     return isian;
                 }
             },
@@ -123,7 +123,7 @@ $(document).ready(function() {
                 "render": function(data, type, row, meta) {
                     var rowIndex = meta.col-1;
                     $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    wo = '<a href="'+getBaseUrl()+'index.php/adm_operation/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                    wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
                     return wo;
                 }
             },
@@ -608,14 +608,14 @@ function openViewOtf(filename) {
     var parsing = filename.split('.').pop();
     var img = checkExt(filename);
     if(parsing == "pdf") {
-        return img+" <a href='"+getBaseUrl()+"index.php/adm_operation/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
+        return img+" <a href='"+getBaseUrl()+"index.php/relokasi/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
     } else {
         return img+" "+filename;
     }
 }
 
 function download(data) {
-    return getBaseUrl()+'index.php/adm_operation/download/'+data;
+    return getBaseUrl()+'index.php/relokasi/download/'+data;
 }
 
 function checkExt(data) {

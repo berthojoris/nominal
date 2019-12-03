@@ -24,7 +24,7 @@
         if($name == "default.jpg") {
             return "-";
         } else {
-            return anchor(base_url()."index.php/adm_operation/download/".$name, "Download File", "");
+            return anchor(base_url()."index.php/relokasi/download/".$name, "Download File", "");
         }
     }
     ?>
@@ -38,7 +38,7 @@
 
             <div class="panel-body">
 
-                <?php $this->view('adm_operation/filter'); ?>
+                <?php $this->view('adm_operation/relokasi/filter'); ?>
 
                 <div class="box-body table-responsive no-padding">
                     <table id="filter_table_Data" class="table table-bordered table-striped table-hover" id="table_relokasi">
@@ -68,6 +68,6 @@
     </div>
 </section>
 
-<?php $this->view('adm_operation/modal/insert'); ?>
-<?php $this->view('adm_operation/modal/detail'); ?>
-<?php $this->view('adm_operation/modal/edit'); ?>
+<?php $this->view('adm_operation/relokasi/insert'); ?>
+<?php $this->view('adm_operation/relokasi/detail'); ?>
+<?php $this->view('adm_operation/relokasi/edit'); ?>

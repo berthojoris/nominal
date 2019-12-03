@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Adm_operation extends CI_Controller {
+class Relokasi extends CI_Controller {
     
     public function __construct() 
     {
@@ -29,7 +29,7 @@ class Adm_operation extends CI_Controller {
         force_download('./filesUpload/sik/'.$separate[0].'/'.$separate[1], NULL);
     }
 
-    public function relokasi()
+    public function index()
     {
         if($this->input->method(TRUE) == "POST") {
             add_js('relokasi_filter.js');
@@ -68,12 +68,12 @@ class Adm_operation extends CI_Controller {
 
             $data['title'] = 'Relokasi';
             $data['page'] = 'Relokasi';
-            $this->template->views('adm_operation/relokasi_filter', $data);
+            $this->template->views('adm_operation/relokasi/relokasi_filter', $data);
         } else {
             add_js('relokasi.js');
             $data['title'] = 'Relokasi';
             $data['page'] = 'Relokasi';
-            $this->template->views('adm_operation/relokasi', $data);
+            $this->template->views('adm_operation/relokasi/relokasi', $data);
         }
     }
 
