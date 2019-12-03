@@ -20,7 +20,7 @@ class Relokasi extends CI_Controller {
     {
         $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
         $query = $this->db->query($sql, [$id]);
-        $this->load->view('pdf/viewdetail', $query->row());
+        $this->load->view('adm_operation/relokasi/viewdetail', $query->row());
     }
 
     public function download($fileName)
