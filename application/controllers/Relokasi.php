@@ -16,6 +16,11 @@ class Relokasi extends CI_Controller {
         }
     }
 
+    public function viewpdf($name)
+    {
+        $this->load->view('adm_operation/relokasi/viewotf');
+    }
+
     public function showdetail($id)
     {
         $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
