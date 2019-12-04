@@ -68,93 +68,182 @@ $(document).ready(function() {
     });
 
     getProvider();
-    
-    $('#filter_table_Data').DataTable({ 
-        "processing": true,
-        "serverSide": true,
-        "paging": true,
-        "responsive": true,
-        "ajax": {
-            "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiData",
-            "type": "POST"
-        },
-        "columns": [
-            {
-                "data": "id",
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1+".";
-                }
+
+    if($("#config_form").val() == 0) {
+        $('#filter_table_Data').DataTable({ 
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            "responsive": true,
+            "ajax": {
+                "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiData",
+                "type": "POST"
             },
-            {
-                "data": "id_relokasi",
-                "visible": false,
-                "searchable": false
+            "columns": [
+                {
+                    "data": "id",
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1+".";
+                    }
+                },
+                {
+                    "data": "id_relokasi",
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "data": "kode_jarkom",
+                },
+                {
+                    "data": "ip_wan_new",
+                    "visible": false,
+                },
+                {
+                    "data": "remote_name_old",
+                },
+                {
+                    "data": "remote_name_new",
+                },
+                {
+                    "data": "address_new",
+                    "render": function(data, type, row, meta) {
+                        return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
+                    }
+                },
+                {
+                    "data": "req_doc_file",
+                    "render": function(data, type, row, meta) {
+                        var rowIndex = meta.col-1;
+                        $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                        isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                        return isian;
+                    }
+                },
+                {
+                    "data": "work_order_file",
+                    "render": function(data, type, row, meta) {
+                        var rowIndex = meta.col-1;
+                        $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                        wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                        return wo;
+                    }
+                },
+                {
+                    "data": "status",
+                    "render": function(data, type, row, meta) {
+                        return upperCase(data);
+                    }
+                },
+                {
+                    "data": "due_date",
+                },
+                {
+                    "data": "pic",
+                },
+                {
+                    "data": "id_relokasi",
+                    "sortable": false,
+                     "render": function(data, type, row) {
+                         return '<button class="btn btn-success btn-xs print" data-open="'+row.id_relokasi+'">View</button>'
+                    }
+                },
+                {
+                    "data": "id",
+                    "sortable": false,
+                     "render": function(data, type, row) {
+                         return '<button class="btn btn-warning btn-xs" data-toggle="modal" data-id="'+row.id_jarkom+'" data-target="#edit_form_relokasi">Edit</button>'
+                    }
+                },
+            ],
+        });
+    } else {
+        $('#filter_table_Data').DataTable({ 
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            "responsive": true,
+            "ajax": {
+                "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiDataFilter",
+                "type": "POST"
             },
-            {
-                "data": "kode_jarkom",
-            },
-            {
-                "data": "ip_wan_new",
-                "visible": false,
-            },
-            {
-                "data": "remote_name_old",
-            },
-            {
-                "data": "remote_name_new",
-            },
-            {
-                "data": "address_new",
-                "render": function(data, type, row, meta) {
-                    return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
-                }
-            },
-            {
-                "data": "req_doc_file",
-                "render": function(data, type, row, meta) {
-                    var rowIndex = meta.col-1;
-                    $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                    return isian;
-                }
-            },
-            {
-                "data": "work_order_file",
-                "render": function(data, type, row, meta) {
-                    var rowIndex = meta.col-1;
-                    $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
-                    wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                    return wo;
-                }
-            },
-            {
-                "data": "status",
-                "render": function(data, type, row, meta) {
-                    return upperCase(data);
-                }
-            },
-            {
-                "data": "due_date",
-            },
-            {
-                "data": "pic",
-            },
-            {
-                "data": "id_relokasi",
-                "sortable": false,
-                 "render": function(data, type, row) {
-                     return '<button class="btn btn-success btn-xs print" data-open="'+row.id_relokasi+'">View</button>'
-                }
-            },
-            {
-                "data": "id",
-                "sortable": false,
-                 "render": function(data, type, row) {
-                     return '<button class="btn btn-warning btn-xs" data-toggle="modal" data-id="'+row.id_jarkom+'" data-target="#edit_form_relokasi">Edit</button>'
-                }
-            },
-        ],
-    });
+            "columns": [
+                {
+                    "data": "id",
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1+".";
+                    }
+                },
+                {
+                    "data": "id_relokasi",
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "data": "kode_jarkom",
+                },
+                {
+                    "data": "ip_wan_new",
+                    "visible": false,
+                },
+                {
+                    "data": "remote_name_old",
+                },
+                {
+                    "data": "remote_name_new",
+                },
+                {
+                    "data": "address_new",
+                    "render": function(data, type, row, meta) {
+                        return (data.length >= 20) ? data.substring(0, 20)+"..." : data;
+                    }
+                },
+                {
+                    "data": "req_doc_file",
+                    "render": function(data, type, row, meta) {
+                        var rowIndex = meta.col-1;
+                        $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                        isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                        return isian;
+                    }
+                },
+                {
+                    "data": "work_order_file",
+                    "render": function(data, type, row, meta) {
+                        var rowIndex = meta.col-1;
+                        $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
+                        wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
+                        return wo;
+                    }
+                },
+                {
+                    "data": "status",
+                    "render": function(data, type, row, meta) {
+                        return upperCase(data);
+                    }
+                },
+                {
+                    "data": "due_date",
+                },
+                {
+                    "data": "pic",
+                },
+                {
+                    "data": "id_relokasi",
+                    "sortable": false,
+                     "render": function(data, type, row) {
+                         return '<button class="btn btn-success btn-xs print" data-open="'+row.id_relokasi+'">View</button>'
+                    }
+                },
+                {
+                    "data": "id",
+                    "sortable": false,
+                     "render": function(data, type, row) {
+                         return '<button class="btn btn-warning btn-xs" data-toggle="modal" data-id="'+row.id_jarkom+'" data-target="#edit_form_relokasi">Edit</button>'
+                    }
+                },
+            ],
+        });
+    }
 
     $(document).on("click", "#updateRelokasi", function (e) {
         var allowEmpty = ["Draft", "Pending Approval", "Cancel"];

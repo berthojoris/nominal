@@ -30,6 +30,7 @@
     ?>
 
         <div class="panel panel-default">
+            <input type="hidden" name="config_form" id="config_form" value="0">
             <div class="panel-heading" style="background-color:#3C8DBC;color:#FFFFFF;font-weight:bold;font-size:14pt;">Add SIK</div>
             <div class="buttonXtra">
                 <button id="add_form_btn" class="btn btn-primary">Add</button>

@@ -31,8 +31,8 @@ class Relokasi extends CI_Controller {
 
     public function index()
     {
+        add_js('relokasi.js');
         if($this->input->method(TRUE) == "POST") {
-            add_js('relokasi_filter.js');
             $this->session->unset_userdata('filter_ip_wan');
             $this->session->unset_userdata('filter_provider');
             $this->session->unset_userdata('filter_ip_lan');
@@ -70,7 +70,6 @@ class Relokasi extends CI_Controller {
             $data['page'] = 'Relokasi';
             $this->template->views('adm_operation/relokasi/relokasi_filter', $data);
         } else {
-            add_js('relokasi.js');
             $data['title'] = 'Relokasi';
             $data['page'] = 'Relokasi';
             $this->template->views('adm_operation/relokasi/relokasi', $data);
