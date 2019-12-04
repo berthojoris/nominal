@@ -608,11 +608,6 @@ function openViewOtf(filename) {
     var parsing = filename.split('.').pop();
     var img = checkExt(filename);
     return img+" "+filename;
-    // if(parsing == "pdf") {
-    //     return img+" <a href='"+getBaseUrl()+"index.php/relokasi/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
-    // } else {
-    //     return img+" "+filename;
-    // }
 }
 
 function download(data) {
