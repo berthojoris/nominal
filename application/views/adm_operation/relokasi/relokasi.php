@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/swal/sweetalert.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/plugins/datepicker/datepicker3.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/relokasi.css">
 <script src="<?php echo base_url(); ?>assets/swal/sweetalert.min.js"></script>
 <script src="<?php echo base_url('assets/js/plugins/datepicker/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url()?>assets/plugins/select2/select2.full.min.js"></script>
