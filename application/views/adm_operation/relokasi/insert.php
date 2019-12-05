@@ -177,7 +177,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Remote Address</label>
                                 <div class="col-sm-7">
-                                    <textarea name="remote_address_old" id="remote_address_old" class="form-control input-sm" rows="3" required readonly></textarea>
+                                    <textarea name="remote_address_old" id="remote_address_old" class="form-control input-sm" rows="3" readonly></textarea>
                                 </div>
                             </div>
                         </div>
