@@ -8,7 +8,7 @@ class Api_relokasi extends CI_Controller
 
 		parent::__construct();
         $this->load->library('session');
-        $this->load->library('customlibrary');
+        $this->load->library('relokasi');
     }
 
     public function getRelokasiDataFilter()
@@ -26,58 +26,58 @@ class Api_relokasi extends CI_Controller
         $filter_order_date = $this->session->userdata('filter_order_date');
         $filter_live_target = $this->session->userdata('filter_live_target');
 
-        $this->customlibrary->select('*');
+        $this->relokasi->select('*');
 
         if($filter_ip_wan != '-') {
-            $this->customlibrary->like('ip_wan_new', $filter_ip_wan)->or_like('ip_wan_old', $filter_ip_wan);
+            $this->relokasi->like('ip_wan_new', $filter_ip_wan)->or_like('ip_wan_old', $filter_ip_wan);
         }
         
         if($filter_provider != '-') {
-            $this->customlibrary->like('nickname_provider', $filter_provider);
+            $this->relokasi->like('nickname_provider', $filter_provider);
         }
 
         if($filter_ip_lan != '-') {
-            $this->customlibrary->like('ip_lan_new', $filter_ip_lan)->or_like('ip_lan_old', $filter_ip_lan);
+            $this->relokasi->like('ip_lan_new', $filter_ip_lan)->or_like('ip_lan_old', $filter_ip_lan);
         }
 
         if($filter_wo_no != '-') {
-            $this->customlibrary->like('work_order_no', $filter_wo_no);
+            $this->relokasi->like('work_order_no', $filter_wo_no);
         }
 
         if($filter_remote_name != '-') {
-            $this->customlibrary->like('remote_name_new', $filter_remote_name)->or_like('remote_name_old', $filter_remote_name);
+            $this->relokasi->like('remote_name_new', $filter_remote_name)->or_like('remote_name_old', $filter_remote_name);
         }
 
         if($filter_req_doc_no != '-') {
-            $this->customlibrary->like('req_doc_no', $filter_req_doc_no);
+            $this->relokasi->like('req_doc_no', $filter_req_doc_no);
         }
 
         if($filter_status != '-') {
-            $this->customlibrary->like('status', $filter_status);
+            $this->relokasi->like('status', $filter_status);
         }
 
         if($filter_pic != '-') {
-            $this->customlibrary->like('pic', $filter_pic);
+            $this->relokasi->like('pic', $filter_pic);
         }
 
         if($filter_order_date != '-') {
-            $this->customlibrary->like('req_doc_date', $filter_order_date);
+            $this->relokasi->like('req_doc_date', $filter_order_date);
         }
 
         if($filter_live_target != '-') {
-            $this->customlibrary->like('due_date', $filter_live_target);
+            $this->relokasi->like('due_date', $filter_live_target);
         }
         
-        $this->customlibrary->from('v_relokasi_edit');
-        echo $this->customlibrary->generate();
+        $this->relokasi->from('v_relokasi_edit');
+        echo $this->relokasi->generate();
     }
 
     public function getRelokasiData()
     {
         header('Content-Type: application/json');
-        $this->customlibrary->select('*');
-        $this->customlibrary->from('v_relokasi_list');
-        echo $this->customlibrary->generate();
+        $this->relokasi->select('*');
+        $this->relokasi->from('v_relokasi_list');
+        echo $this->relokasi->generate();
     }
 
     public function getDetail($id)
