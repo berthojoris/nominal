@@ -72,7 +72,7 @@ $(document).ready(function() {
     if($("#config_form").val() == 0) {
         $('#filter_table_Data').DataTable({ 
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "paging": true,
             "responsive": true,
             "ajax": {
@@ -159,7 +159,7 @@ $(document).ready(function() {
     } else {
         $('#filter_table_Data').DataTable({ 
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "paging": true,
             "responsive": true,
             "ajax": {
