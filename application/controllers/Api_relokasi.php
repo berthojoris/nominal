@@ -76,7 +76,7 @@ class Api_relokasi extends CI_Controller
     {
         header('Content-Type: application/json');
         $this->relokasi->select('*');
-        $this->relokasi->from('v_relokasi_list');
+        $this->relokasi->from('v_relokasi_edit');
         echo $this->relokasi->generate();
     }
 

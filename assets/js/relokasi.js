@@ -75,14 +75,12 @@ $(document).ready(function() {
             "serverSide": false,
             "paging": true,
             "responsive": true,
-            "order": [[ 0, "desc" ]],
             "ajax": {
                 "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiData",
                 "type": "POST"
             },
             "columns": [
                 {
-                    "data": "id",
                     render: function (data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1+".";
                     }
@@ -163,14 +161,12 @@ $(document).ready(function() {
             "serverSide": false,
             "paging": true,
             "responsive": true,
-            "order": [[ 0, "desc" ]],
             "ajax": {
                 "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiDataFilter",
                 "type": "POST"
             },
             "columns": [
                 {
-                    "data": "id",
                     render: function (data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1+".";
                     }

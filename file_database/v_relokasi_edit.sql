@@ -1,5 +1,5 @@
 CREATE
-    VIEW `v_relokasi_edit` 
+    VIEW `nominal`.`v_relokasi_edit` 
     AS
 (SELECT
     `v_relokasi_list`.`id_relokasi`            AS `id_relokasi`,
@@ -58,4 +58,5 @@ JOIN `tb_kanca`
 JOIN `tb_kanwil`
     ON ((`tb_kanca`.`kode_kanwil` = `tb_kanwil`.`kode_kanwil`)))
 JOIN `tb_tipe_uker`
-    ON ((`tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`))));
+    ON ((`tb_remote`.`kode_tipe_uker` = `tb_tipe_uker`.`kode_tipe_uker`)))
+ORDER BY `id_relokasi` DESC);

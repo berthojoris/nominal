@@ -11,6 +11,7 @@ class Relokasi extends CI_Controller {
         $this->load->helper('download');
         $this->load->helper('form');
         $this->load->helper('directory');
+        $this->load->model('M_relokasi');
 		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
@@ -113,7 +114,7 @@ class Relokasi extends CI_Controller {
             }
         }
 
-        $insert = [
+        $relokasi = [
             'id_jarkom' => $this->input->post('id_jarkom'),
             'id_remote_old' => $this->input->post('id_remote_old'),
             'id_remote_new' => $this->input->post('remote_name_new'),
@@ -159,7 +160,7 @@ class Relokasi extends CI_Controller {
         $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
         $jarkom = $this->db->query($sqlJarkom, [$this->input->post('id_jarkom')])->row();
 
-        $jarkomHistoryData = [
+        $jarkomHistory = [
             'kode_jarkom' => $this->input->post('network_id_new'),
             'ip_wan' => $this->input->post('ip_wan_new'),
             'id_remote' => $this->input->post('remote_name_new'),
@@ -169,19 +170,11 @@ class Relokasi extends CI_Controller {
             'create_at' => date('Y-m-d H:i:s'),
         ];
 
-        $this->db->trans_begin();
+        $insert = $this->M_relokasi->insertData($relokasi, $jarkom, $jarkomHistory, $this->input->post('key_id_jarkom'));
 
-        $this->db->insert('tb_relokasi', $insert);
-        $this->db->insert('tb_jarkom_history', $jarkomHistoryData);
-
-        $this->db->where('id', $this->input->post('key_id_jarkom'));
-        $this->db->update('tb_jarkom', $jarkomData);
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
+        if($insert == "FAILED") {
             $this->session->set_flashdata('notifMessage', 'Relokasi has not been created');
         } else {
-            $this->db->trans_commit();
             $this->session->set_flashdata('notifMessage', 'Relokasi has been created');
         }
 
