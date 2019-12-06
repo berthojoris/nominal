@@ -1,5 +1,5 @@
 CREATE
-    VIEW `nominal`.`v_relokasi_edit` 
+    VIEW `v_relokasi_edit` 
     AS
 (SELECT
     `v_relokasi_list`.`id_relokasi`            AS `id_relokasi`,
