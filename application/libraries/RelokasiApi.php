@@ -17,7 +17,7 @@ if (!defined('BASEPATH'))
  *             Yusuf Ozdemir <yusuf@ozdemir.be>
  * @link       http://ellislab.com/forums/viewthread/160896/
  */
-class Relokasi {
+class RelokasiApi {
 
     /**
      * Global container variables for chained argument results

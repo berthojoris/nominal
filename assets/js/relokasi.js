@@ -45,7 +45,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: getBaseUrl()+"index.php/Api_relokasi/getremotebyname",
+            url: getBaseUrl()+"index.php/relokasi/getremotebyname",
             dataType: "json",
             data: {
                 name: this.value
@@ -76,7 +76,7 @@ $(document).ready(function() {
             "paging": true,
             "responsive": true,
             "ajax": {
-                "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiData",
+                "url": getBaseUrl()+"index.php/relokasi/getRelokasiData",
                 "type": "POST"
             },
             "columns": [
@@ -162,7 +162,7 @@ $(document).ready(function() {
             "paging": true,
             "responsive": true,
             "ajax": {
-                "url": getBaseUrl()+"index.php/Api_relokasi/getRelokasiDataFilter",
+                "url": getBaseUrl()+"index.php/relokasi/getRelokasiDataFilter",
                 "type": "POST"
             },
             "columns": [
@@ -365,7 +365,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: getBaseUrl()+"index.php/Api_relokasi/getremotebyname",
+            url: getBaseUrl()+"index.php/relokasi/getremotebyname",
             dataType: "json",
             data: {
                 name: name
@@ -394,7 +394,7 @@ $(document).ready(function() {
         var id_jarkom = $(this).val();
         $.ajax({
             type: "POST",
-            url: getBaseUrl()+"index.php/Api_relokasi/searchByIpAddress",
+            url: getBaseUrl()+"index.php/relokasi/searchByIpAddress",
             dataType: "json",
             data: {
                 id_jarkom: id_jarkom
@@ -419,7 +419,7 @@ $(document).ready(function() {
                     $("#reason").focus();
                     $.ajax({
                         type: "POST",
-                        url: getBaseUrl()+"index.php/Api_relokasi/findAllRemoteJarkom",
+                        url: getBaseUrl()+"index.php/relokasi/findAllRemoteJarkom",
                         dataType: "json",
                         data: {
                             id_jarkom: id_jarkom
@@ -445,7 +445,7 @@ $(document).ready(function() {
         placeholder:"Type at least 2 charachter",
         allowClear: true,
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/searchUpdate",
+            url:getBaseUrl()+"index.php/relokasi/searchUpdate",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -463,7 +463,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
+            url:getBaseUrl()+"index.php/relokasi/getRemoteByNameSelect2",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -480,7 +480,7 @@ $(document).ready(function() {
         minimumInputLength:3,
         placeholder:"Type at least 3 charachter",
         ajax:{
-            url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameFilter",
+            url:getBaseUrl()+"index.php/relokasi/getRemoteByNameFilter",
             type:"POST",
             dataType:"json",
             data: function(param) {
@@ -500,7 +500,7 @@ function getBaseUrl() {
 function getProvider() {
     $.ajax({
         type: "GET",
-        url: getBaseUrl()+"index.php/Api_relokasi/getProvider",
+        url: getBaseUrl()+"index.php/relokasi/getProvider",
         dataType: "json",
         success: function (response) {
             var toAppend = '';
@@ -532,7 +532,7 @@ $("#open_detail_modal").on('show.bs.modal', function (e) {
     $("#id_jarkom").val('').trigger('change');
     $.ajax({
         type: "GET",
-        url: getBaseUrl()+"index.php/Api_relokasi/getDetail/"+id,
+        url: getBaseUrl()+"index.php/relokasi/getDetail/"+id,
         dataType: "json",
         success: function (response) {
             $("#loadingPanel").hide();
@@ -581,7 +581,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
     $.ajax({
         type: "POST",
-        url: getBaseUrl()+"index.php/Api_relokasi/searchById",
+        url: getBaseUrl()+"index.php/relokasi/searchById",
         dataType: "json",
         data: {
             id: id
@@ -591,7 +591,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $.ajax({
                     type: "POST",
-                    url: getBaseUrl()+"index.php/Api_relokasi/findAllRemoteJarkom",
+                    url: getBaseUrl()+"index.php/relokasi/findAllRemoteJarkom",
                     dataType: "json",
                     data: {
                         id_jarkom: id
@@ -626,7 +626,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                     minimumInputLength:3,
                     placeholder:"Type at least 3 charachter",
                     ajax:{
-                        url:getBaseUrl()+"index.php/Api_relokasi/getRemoteByNameSelect2",
+                        url:getBaseUrl()+"index.php/relokasi/getRemoteByNameSelect2",
                         type:"POST",
                         dataType:"json",
                         data: function(param) {

@@ -4,9 +4,10 @@ class Relokasi extends CI_Controller {
     
     public function __construct() 
     {
-		parent::__construct();
+        parent::__construct();
         $this->load->library('session');
         $this->load->library('form_validation');
+        $this->load->library('relokasiapi');
         $this->load->helper(array('url', 'path'));
         $this->load->helper('download');
         $this->load->helper('form');
@@ -15,6 +16,83 @@ class Relokasi extends CI_Controller {
 		if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+    }
+
+    public function getProvider()
+    {
+        header('Content-Type: application/json');
+        $query = $this->M_relokasi->getProvider();
+        echo json_encode($query);
+    }
+
+    public function searchById()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->searchById($_POST['id']);
+        echo json_encode($output);
+    }
+
+    public function getRemoteByName()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getRemoteByName($_POST['name']);
+        echo json_encode($output);
+    }
+
+    public function searchByIpAddress()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->searchByIpAddress($_POST['id_jarkom']);
+        echo json_encode($output);
+    }
+
+    public function findAllRemoteJarkom()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->findAllRemoteJarkom($_POST['id_jarkom']);
+        echo json_encode($output);
+    }
+
+    public function searchUpdate()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->searchUpdate($_POST['ip_network']);
+        echo json_encode($output);
+    }
+
+    public function getRemoteByNameSelect2()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getRemoteByNameSelect2($_POST['name']);
+        echo json_encode($output);
+    }
+
+    public function getRemoteByNameFilter()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getRemoteByNameSelect2($_POST['name']);
+        echo json_encode($output);
+    }
+
+    public function getRelokasiData()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getRelokasiData();
+        echo $output;
+    }
+
+    public function getDetail($id)
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getDetail($id);
+        echo $output;
+    }
+
+    public function getRelokasiDataFilter()
+    {
+        header('Content-Type: application/json');
+        $output = $this->M_relokasi->getRelokasiDataFilter();
+        echo $output;
     }
 
     public function showdetail($id)
