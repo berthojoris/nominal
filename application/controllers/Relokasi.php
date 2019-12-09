@@ -19,8 +19,7 @@ class Relokasi extends CI_Controller {
 
     public function showdetail($id)
     {
-        $sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
-        $query = $this->db->query($sql, [$id]);
+        $query = $this->M_relokasi->showDetail($id);
         $this->load->view('adm_operation/relokasi/viewdetail', $query->row());
     }
 
@@ -157,8 +156,7 @@ class Relokasi extends CI_Controller {
             'id_remote' => $this->input->post('remote_name_new')
         ];
 
-        $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
-        $jarkom = $this->db->query($sqlJarkom, [$this->input->post('id_jarkom')])->row();
+        $jarkom = $this->M_relokasi->getJarkom($this->input->post('id_jarkom'));
 
         $jarkomHistory = [
             'kode_jarkom' => $this->input->post('network_id_new'),
@@ -351,8 +349,7 @@ class Relokasi extends CI_Controller {
             'update_at' => date('Y-m-d H:i:s')
         ];
 
-        $sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
-        $jarkom = $this->db->query($sqlJarkom, [$this->input->post('edit_id_jarkom_val')])->row();
+        $jarkom = $this->M_relokasi->getJarkom($this->input->post('edit_id_jarkom_val'));
 
         $jarkomHistoryData = [
             'ip_wan' => $this->input->post('edit_ip_wan_new'),
@@ -371,25 +368,20 @@ class Relokasi extends CI_Controller {
             'update_at' => date('Y-m-d H:i:s')
         ];
 
-        $this->db->trans_begin();
+        $update = $this->M_relokasi->updateData(
+            $this->input->post('id_relokasi'), 
+            $update, 
+            $this->input->post('edit_key_id_jarkom'), 
+            $updateJarkomData, 
+            $this->input->post('edit_network_id_new'), 
+            $jarkomHistoryData, 
+            $this->input->post('edit_id_remote_new'), 
+            $remoteUpdate
+        );
 
-        $this->db->where('id', $this->input->post('id_relokasi'));
-        $this->db->update('tb_relokasi', $update);
-
-        $this->db->where('id', $this->input->post('edit_key_id_jarkom'));
-        $this->db->update('tb_jarkom', $updateJarkomData);
-
-        $this->db->where('kode_jarkom', $this->input->post('edit_network_id_new'));
-        $this->db->update('tb_jarkom_history', $jarkomHistoryData);
-
-        $this->db->where('id_remote', $this->input->post('edit_id_remote_new'));
-        $this->db->update('tb_remote', $remoteUpdate);
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
+        if($update == "FAILED") {
             $this->session->set_flashdata('notifMessage', 'Data has not been updated');
         } else {
-            $this->db->trans_commit();
             $this->session->set_flashdata('notifMessage', 'Relokasi has been updated');
         }
 

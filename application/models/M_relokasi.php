@@ -30,4 +30,42 @@ class M_relokasi extends CI_Model {
 			return "SUCCESS";
         }
 	}
+
+	function updateData($id_relokasi, $update, $id_jarkom, $updateJarkomData, $id_network, $jarkomHistoryData, $id_remote_new, $remoteUpdate)
+	{
+		$this->db->trans_begin();
+
+        $this->db->where('id', $id_relokasi);
+        $this->db->update('tb_relokasi', $update);
+
+        $this->db->where('id', $id_jarkom);
+        $this->db->update('tb_jarkom', $updateJarkomData);
+
+        $this->db->where('kode_jarkom', $id_network);
+        $this->db->update('tb_jarkom_history', $jarkomHistoryData);
+
+        $this->db->where('id_remote', $id_remote_new);
+        $this->db->update('tb_remote', $remoteUpdate);
+
+        if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+			return "FAILED";
+        } else {
+			$this->db->trans_commit();
+			return "SUCCESS";
+        }
+	}
+
+	function showDetail($id)
+	{
+		$sql = "SELECT * FROM v_relokasi_edit WHERE id_relokasi = ?";
+		$query = $this->db->query($sql, [$id]);
+		return $query;
+	}
+
+	function getJarkom($id)
+	{
+		$sqlJarkom = "SELECT * FROM tb_jarkom WHERE id = ?";
+        return $this->db->query($sqlJarkom, [$id])->row();
+	}
 }
