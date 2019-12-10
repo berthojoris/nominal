@@ -41,7 +41,7 @@ class M_relokasi extends CI_Model {
         }
 
         if($filter_remote_name != '-') {
-            $this->relokasiapi->like('remote_name_new', $filter_remote_name)->or_like('remote_name_old', $filter_remote_name);
+            $this->relokasiapi->where('id_remote_new', $filter_remote_name)->or_where('id_remote_old', $filter_remote_name);
         }
 
         if($filter_req_doc_no != '-') {
