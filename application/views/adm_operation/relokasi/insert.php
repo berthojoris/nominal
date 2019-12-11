@@ -20,13 +20,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">IP LAN / Network ID</label>
                                 <div class="col-sm-7">
-                                    <select id="id_jarkom" name="id_jarkom" required></select>
+                                    <select id="id_jarkom" name="id_jarkom" ></select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">No.SPK</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="no_spk" id="no_spk" required readonly>
+                                    <input type="text" class="form-control input-sm" name="no_spk" id="no_spk"  readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -38,7 +38,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Reason</label>
                                 <div class="col-sm-7">
-                                    <textarea name="reason" id="reason" class="form-control input-sm" rows="3" required></textarea>
+                                    <textarea name="reason" id="reason" class="form-control input-sm" rows="3" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -76,13 +76,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="req_doc_no" id="req_doc_no" required>
+                                    <input type="text" class="form-control input-sm" name="req_doc_no" id="req_doc_no" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc Date</label>
                                 <div class="col-sm-7">
-                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="req_doc_date" id="req_doc_date" autocomplete="off" required>
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="req_doc_date" id="req_doc_date" autocomplete="off" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -97,19 +97,19 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="work_order_no" id="work_order_no" required>
+                                    <input type="text" class="form-control input-sm" name="work_order_no" id="work_order_no" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Persons In Charge</label>
                                 <div class="col-sm-7">
-                                    <input type="text" autocomplete="off" class="form-control input-sm" name="pic" id="pic" required>
+                                    <input type="text" autocomplete="off" class="form-control input-sm" name="pic" id="pic" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Live Target</label>
                                 <div class="col-sm-7">
-                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="live_target" autocomplete="off" id="live_target" required>
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="live_target" autocomplete="off" id="live_target" >
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Network ID</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="network_id_new" id="network_id_new" required>
+                                    <input type="text" class="form-control input-sm" name="network_id_new" id="network_id_new" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -203,13 +203,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">IP WAN</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="ip_wan_new" id="ip_wan_new" required>
+                                    <input type="text" class="form-control input-sm" name="ip_wan_new" id="ip_wan_new" >
                                 </div>
                             </div>
                             <div class="form-group row" id="remotePanel">
                                 <label class="col-sm-5 col-form-label">Remote Name</label>
                                 <div class="col-sm-7">
-                                    <select id="remote_name_new" name="remote_name_new" required></select>
+                                    <select id="remote_name_new" name="remote_name_new" ></select>
                                     <input type="hidden" name="remote_name_new_val" id="remote_name_new_val">
                                 </div>
                             </div>
@@ -222,13 +222,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Latitude</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="remote_latitude_new" id="remote_latitude_new" required>
+                                    <input type="text" class="form-control input-sm" name="remote_latitude_new" id="remote_latitude_new" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Longitude</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="remote_longitude_new" id="remote_longitude_new" required>
+                                    <input type="text" class="form-control input-sm" name="remote_longitude_new" id="remote_longitude_new" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -246,7 +246,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Distance</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="distance" id="distance" required>
+                                    <input type="text" class="form-control input-sm" name="distance" id="distance" >
                                 </div>
                             </div>
                         </div>
