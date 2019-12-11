@@ -38,7 +38,6 @@
 
     <!-- js -->
     <?php echo @$_js; ?>
-    <?php echo put_bottom(); ?>
 
     <?php $this->view('adm_operation/relokasi/alert'); ?>
   </body>

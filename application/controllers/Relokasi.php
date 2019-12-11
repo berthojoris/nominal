@@ -108,7 +108,6 @@ class Relokasi extends CI_Controller {
 
     public function index()
     {
-        add_js('relokasi.js');
         if($this->input->method(TRUE) == "POST") {
             $this->session->unset_userdata('filter_ip_wan');
             $this->session->unset_userdata('filter_provider');
