@@ -6,7 +6,6 @@
 <script src="<?php echo base_url()?>assets/plugins/select2/select2.full.min.js"></script>
 <script src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url()?>assets/js/additional-methods.min.js"></script>
-<script src="<?php echo base_url()?>assets/js/relokasi.js"></script>
 <section>
     <div style="width:100%;height:38px;" class="panel panel-default">
         <ol class="breadcrumb" style="background: white;">
@@ -72,3 +71,4 @@
 <?php $this->view('adm_operation/relokasi/insert'); ?>
 <?php $this->view('adm_operation/relokasi/detail'); ?>
 <?php $this->view('adm_operation/relokasi/edit'); ?>
+<script src="<?php echo base_url()?>assets/js/relokasi.js"></script>
