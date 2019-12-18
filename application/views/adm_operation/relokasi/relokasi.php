@@ -826,7 +826,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_ip_wan_new").val(response.data.ip_wan_old);
                 $("#edit_remote_type_new").val(response.data.remote_type_new);
                 $("#edit_region_new").val(response.data.region);
-                $("#edit_remote_address_new").val(response.data.address_old);
+                $("#edit_remote_address_new").val(response.data.address_new);
                 $("#edit_distance").val(response.data.distance);
                 $("#edit_key_id_jarkom").val(response.data.id_jarkom);
                 $("#edit_id_remote_new").val(response.data.id_remote_new);
