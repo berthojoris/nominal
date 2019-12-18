@@ -1,4 +1,7 @@
-SELECT
+CREATE
+    VIEW `v_all_remote_jarkom` 
+    AS
+(SELECT
     `a`.`id_remote`          AS `id_remote`,
     `a`.`nama_remote`        AS `nama_remote`,
     (CASE WHEN (`f`.`kode_jenis_jarkom` = 3) THEN `a`.`status_rec_date_l` ELSE `e`.`status_rec_date_l` END) AS `status_rec_date_l`,
@@ -56,4 +59,4 @@ FROM ((((((`tb_remote` `a`
         ON ((`f`.`kode_jenis_jarkom` = `e`.`kode_jenis_jarkom`)))
      LEFT JOIN `tb_provider` `g`
        ON ((`g`.`kode_provider` = `e`.`kode_provider`)))
-WHERE (`a`.`kode_op` IN(1,2))
+WHERE (`a`.`kode_op` IN(1,2)));
