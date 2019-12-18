@@ -65,7 +65,10 @@ select.input-sm {
     display: none;
     margin-bottom: 50px;
 }
-.mbReduce {
+.mbReduceRD {
+    margin-bottom: -20px;
+}
+.mbReduceWO {
     margin-bottom: -20px;
 }
 .alert-biru {
@@ -846,8 +849,27 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $('#file_req_doc').empty();
                 $('#file_work_order').empty();
-                $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
-                $('#file_work_order').html(openViewOtf(response.data.work_order_file));
+
+                $('.mbReduceRD').parent().show();
+                $('.mbReduceWO').parent().show();
+                
+                $('#file_req_doc').show();
+                $('#file_work_order').show();
+
+                if(response.data.req_doc_file) {
+                    $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
+                } else {
+                    $('#file_req_doc').hide();
+                    $('.mbReduceRD').parent().hide();
+                }
+
+                if(response.data.work_order_file) {
+                    $('#file_work_order').html(openViewOtf(response.data.work_order_file));
+                } else {
+                    $('#file_work_order').hide();
+                    $('.mbReduceWO').parent().hide();
+                }
+
                 $("#valid_edit_reqdocfile").val(response.data.req_doc_file);
                 $("#valid_edit_wofile").val(response.data.work_order_file);
             } else {

@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-12 mbReduce">
+                                <div class="col-md-12 mbReduceRD">
                                     <div class="alert alert-biru" id="file_req_doc"></div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-12 mbReduce">
+                                <div class="col-md-12 mbReduceWO">
                                     <div class="alert alert-biru" id="file_work_order"></div>
                                 </div>
                             </div>
