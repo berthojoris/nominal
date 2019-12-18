@@ -329,7 +329,8 @@ class Relokasi extends CI_Controller {
                 'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
                 'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
                 'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
-                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
+                'address_new' => $this->input->post('edit_remote_address_new')
             ];
         } else if($notif[0]['notif'] == "upload" && $notif[1]['notif'] == "noupload") {
             $update = [
@@ -357,7 +358,8 @@ class Relokasi extends CI_Controller {
                 'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
                 'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
                 'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
-                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
+                'address_new' => $this->input->post('edit_remote_address_new')
             ];
         } else if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "noupload") {
             $update = [
@@ -384,7 +386,8 @@ class Relokasi extends CI_Controller {
                 'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
                 'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
                 'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
-                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
+                'address_new' => $this->input->post('edit_remote_address_new')
             ];
         } else {
             $update = [
@@ -413,7 +416,8 @@ class Relokasi extends CI_Controller {
                 'remote_latitude_old' => $this->input->post('edit_remote_latitude_old'),
                 'remote_longitude_old' => $this->input->post('edit_remote_longitude_old'),
                 'remote_latitude_new' => $this->input->post('edit_remote_latitude_new'),
-                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new')
+                'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
+                'address_new' => $this->input->post('edit_remote_address_new')
             ];
         }
 
