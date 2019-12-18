@@ -106,11 +106,6 @@ class Relokasi extends CI_Controller {
         force_download('./filesUpload/sik/'.$separate[0].'/'.$separate[1], NULL);
     }
 
-    public function viewpdf($name)
-    {
-        $this->load->view('adm_operation/relokasi/viewotf');
-    }
-
     public function index()
     {
         if($this->input->method(TRUE) == "POST") {

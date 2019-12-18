@@ -852,11 +852,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 function openViewOtf(filename) {
     var parsing = filename.split('.').pop();
     var img = checkExt(filename);
-    if(parsing == "pdf") {
-        return img+" <a href='"+getBaseUrl()+"index.php/relokasi/viewpdf/"+filename+"' target='_blank'>"+filename+"</a>";
-    } else {
-        return img+" "+filename;
-    }
+    return img+" "+filename;
 }
 
 function download(data) {
