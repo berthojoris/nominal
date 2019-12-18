@@ -275,7 +275,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return isian;
+                        if(data) {
+                            return isian;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -284,7 +288,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return wo;
+                        if(data) {
+                            return wo;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -361,7 +369,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return isian;
+                        if(data) {
+                            return isian;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -370,7 +382,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return wo;
+                        if(data) {
+                            return wo;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
