@@ -166,7 +166,7 @@ class Relokasi extends CI_Controller {
         $config['max_size']         = '10240';
         $config['overwrite']        = true;
         $config['file_ext_tolower'] = true;
-        $config['encrypt_name']     = false;
+        $config['encrypt_name']     = true;
         $config['remove_spaces']    = true;
 
         $this->load->library('upload', $config);
@@ -269,7 +269,7 @@ class Relokasi extends CI_Controller {
         $config['max_size']         = '10240';
         $config['overwrite']        = true;
         $config['file_ext_tolower'] = true;
-        $config['encrypt_name']     = false;
+        $config['encrypt_name']     = true;
         $config['remove_spaces']    = true;
 
         $this->load->library('upload',$config);
