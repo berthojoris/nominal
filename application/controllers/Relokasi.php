@@ -448,21 +448,23 @@ class Relokasi extends CI_Controller {
             'update_at' => date('Y-m-d H:i:s')
         ];
 
-        $update = $this->M_relokasi->updateData(
-            $this->input->post('id_relokasi'), 
-            $update, 
-            $this->input->post('edit_key_id_jarkom'), 
-            $updateJarkomData, 
-            $this->input->post('edit_network_id_new'), 
-            $jarkomHistoryData, 
-            $this->input->post('edit_id_remote_new'), 
+        $updateNow = $this->M_relokasi->updateRelokasi(
+            $this->input->post('id_relokasi'),
+            $update,
+            $this->input->post('edit_key_id_jarkom'),
+            $updateJarkomData,
+            $this->input->post('edit_network_id_new'),
+            $jarkomHistoryData,
+            $this->input->post('edit_id_remote_new'),
             $remoteUpdate
         );
 
-        if($update == "FAILED") {
-            $this->session->set_flashdata('notifMessage', 'Data has not been updated');
-        } else {
+        if($updateNow == "FAILED") {
+            $this->session->set_flashdata('notifMessage', 'Data has not been updated ');
+        } elseif($updateNow == "SUCCESS") {
             $this->session->set_flashdata('notifMessage', 'Relokasi has been updated');
+        } else {
+            $this->session->set_flashdata('notifMessage', 'Return status not found');
         }
 
         redirect($_SERVER['HTTP_REFERER']);

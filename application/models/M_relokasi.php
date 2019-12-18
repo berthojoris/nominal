@@ -413,32 +413,32 @@ class M_relokasi extends CI_Model {
 			$this->db->trans_commit();
 			return "SUCCESS";
         }
-	}
-
-	function updateData($id_relokasi, $update, $id_jarkom, $updateJarkomData, $id_network, $jarkomHistoryData, $id_remote_new, $remoteUpdate)
-	{
-		$this->db->trans_begin();
+    }
+    
+    function updateRelokasi($id_relokasi, $relokasi, $id_jarkom, $jarkom, $id_jarkom_history, $jarkomHistory, $id_remote, $remote)
+    {
+        $this->db->trans_begin();
 
         $this->db->where('id', $id_relokasi);
-        $this->db->update('tb_relokasi', $update);
+        $this->db->update('tb_relokasi', $relokasi);
+
+        $this->db->where('kode_jarkom', $id_jarkom_history);
+        $this->db->update('tb_jarkom_history', $jarkomHistory);
 
         $this->db->where('id', $id_jarkom);
-        $this->db->update('tb_jarkom', $updateJarkomData);
+        $this->db->update('tb_jarkom', $jarkom);
 
-        $this->db->where('kode_jarkom', $id_network);
-        $this->db->update('tb_jarkom_history', $jarkomHistoryData);
-
-        $this->db->where('id_remote', $id_remote_new);
-        $this->db->update('tb_remote', $remoteUpdate);
-
+        $this->db->where('id_remote', $id_remote);
+        $this->db->update('tb_remote', $remote);
+        
         if ($this->db->trans_status() === FALSE) {
 			$this->db->trans_rollback();
 			return "FAILED";
         } else {
-			$this->db->trans_commit();
-			return "SUCCESS";
+            $this->db->trans_commit();
+            return "SUCCESS";
         }
-	}
+    }
 
 	function showDetail($id)
 	{
