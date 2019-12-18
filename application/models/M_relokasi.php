@@ -14,6 +14,7 @@ class M_relokasi extends CI_Model {
     private $or_where = array();
     private $where_in = array();
     private $like = array();
+    private $or_like = array();
     private $filter = array();
     private $add_columns = array();
     private $edit_columns = array();
