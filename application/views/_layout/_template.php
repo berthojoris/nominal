@@ -30,12 +30,6 @@
       <div class="control-sidebar-bg"></div>
     </div>
 
-     <!-- Ajax loader process -->
-    <div id="ajax_loader" class="container" align="center">
-        <div id="icon_gif"></div>
-        <div id="message">processing..</div>
-    </div>
-
     <!-- js -->
     <?php echo @$_js; ?>
 

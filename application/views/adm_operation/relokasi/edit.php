@@ -27,7 +27,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">No.SPK</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_no_spk" id="edit_no_spk"  readonly>
+                                    <input type="text" class="form-control input-sm" name="edit_no_spk" id="edit_no_spk"  readonly required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -39,7 +39,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Reason</label>
                                 <div class="col-sm-7">
-                                    <textarea name="edit_reason" id="edit_reason" class="form-control input-sm" rows="3" ></textarea>
+                                    <textarea name="edit_reason" id="edit_reason" class="form-control input-sm" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -83,13 +83,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_req_doc_no" id="edit_req_doc_no" >
+                                    <input type="text" class="form-control input-sm" name="edit_req_doc_no" id="edit_req_doc_no" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Rec Doc Date</label>
                                 <div class="col-sm-7">
-                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="edit_req_doc_date" id="edit_req_doc_date" autocomplete="off" >
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="edit_req_doc_date" id="edit_req_doc_date" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -110,19 +110,19 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Work Order No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_work_order_no" id="edit_work_order_no" >
+                                    <input type="text" class="form-control input-sm" name="edit_work_order_no" id="edit_work_order_no" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Persons In Charge</label>
                                 <div class="col-sm-7">
-                                    <input type="text" autocomplete="off" class="form-control input-sm" name="edit_pic" id="edit_pic" >
+                                    <input type="text" autocomplete="off" class="form-control input-sm" name="edit_pic" id="edit_pic" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Live Target</label>
                                 <div class="col-sm-7">
-                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="edit_live_target" autocomplete="off" id="edit_live_target" >
+                                    <input type="text" data-date-format='yyyy-mm-dd' class="form-control input-sm" name="edit_live_target" autocomplete="off" id="edit_live_target" required>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Network ID</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_network_id_new" id="edit_network_id_new" >
+                                    <input type="text" class="form-control input-sm" name="edit_network_id_new" id="edit_network_id_new" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -216,7 +216,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">IP WAN</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_ip_wan_new" id="edit_ip_wan_new" >
+                                    <input type="text" class="form-control input-sm" name="edit_ip_wan_new" id="edit_ip_wan_new" required>
                                 </div>
                             </div>
                             <div class="form-group row" id="remotePanel">
@@ -236,13 +236,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Latitude</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_remote_latitude_new" id="edit_remote_latitude_new" >
+                                    <input type="text" class="form-control input-sm" name="edit_remote_latitude_new" id="edit_remote_latitude_new" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Longitude</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_remote_longitude_new" id="edit_remote_longitude_new" >
+                                    <input type="text" class="form-control input-sm" name="edit_remote_longitude_new" id="edit_remote_longitude_new" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -260,7 +260,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Distance</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control input-sm" name="edit_distance" id="edit_distance" >
+                                    <input type="text" class="form-control input-sm" name="edit_distance" id="edit_distance" required>
                                 </div>
                             </div>
                         </div>

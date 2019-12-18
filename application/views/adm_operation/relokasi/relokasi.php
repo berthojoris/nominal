@@ -563,6 +563,94 @@ $(document).ready(function() {
     });
 });
 
+    $(document).on("click", "#updateRelokasi", function (e) {
+        var allowEmpty = ["Draft", "Pending Approval", "Cancel"];
+        var activeValidate = ["in Progress", "Done"];
+        $("#form_edit").validate({
+            rules: {
+                edit_file_upload_1: {
+                    required: function(element) {
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() == "") {
+                            return true;
+                        }
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() != "") {
+                            return false;
+                        }
+                        return false;
+                    },
+                    extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+                },
+                edit_file_upload_2: {
+                    required: function(element) {
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() == "") {
+                            return true;
+                        }
+                        if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() != "") {
+                            return false;
+                        }
+                        return false;
+                    },
+                    extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+                }
+            },
+            messages: {
+                edit_file_upload_1: {
+                    required: 'This field is required.',
+                    extension: 'File extension not permitted.'
+                },
+                edit_file_upload_2: {
+                    required: 'This field is required.',
+                    extension: 'File extension not permitted.'
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+
+    $("#form_add").validate({
+        rules: {
+            file_upload_1: {
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            },
+            file_upload_2: {
+                required: function(element) {
+                    if($("#status").val() == "in Progress") {
+                        return true;
+                    } else if($("#status").val() == "Done") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            }
+        },
+        messages: {
+            file_upload_1: {
+                required: 'This field is required.',
+                extension: 'File extension not permitted.'
+            },
+            file_upload_1: {
+                required: 'This field is required.',
+                extension: 'File extension not permitted.'
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
 function getBaseUrl() {
     return $('meta[name=baseURL]').attr("content");
 }
