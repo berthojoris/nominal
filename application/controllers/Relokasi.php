@@ -172,6 +172,7 @@ class Relokasi extends CI_Controller {
         $this->load->library('upload', $config);
 
         $data = [];
+        $notif = [];
 
         if(!empty($_FILES['edit_file_upload_1']['name'])) {
             if(!$this->upload->do_upload('edit_file_upload_1')) {
