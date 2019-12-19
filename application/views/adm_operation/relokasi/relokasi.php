@@ -603,6 +603,7 @@ $(document).on("click", "#updateRelokasi", function (e) {
                         return false;
                     }
                 },
+                filesize: 10000,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
             edit_file_upload_2: {
@@ -613,6 +614,7 @@ $(document).on("click", "#updateRelokasi", function (e) {
                         return false;
                     }
                 },
+                filesize: 10000,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },
@@ -642,7 +644,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
-            filesize: 5000,
+            filesize: 10000,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         },
         file_upload_2: {
@@ -653,7 +655,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
-            filesize: 5000,
+            filesize: 10000,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         }
     },
