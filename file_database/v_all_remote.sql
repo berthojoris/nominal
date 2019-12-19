@@ -49,5 +49,5 @@ FROM ((((`tb_remote` `a`
      ON ((`e`.`kode_op` = `a`.`kode_op`)))
 WHERE (`a`.`kode_op` IN(1,2))
 ORDER BY (CASE WHEN(`a`.`status_l` = 3)THEN 2 WHEN(((`a`.`status_l` = 1)
-                                                    AND (`b`.`kode_tipe_uker` IN(6,8,9,10,11,12,13)))
-                                                    OR (`a`.`kode_op` = 2))THEN 3 WHEN(`a`.`status_l` = 1)THEN 1 ELSE 4 END));
+AND (`b`.`kode_tipe_uker` IN(6,8,9,10,11,12,13)))
+OR (`a`.`kode_op` = 2))THEN 3 WHEN(`a`.`status_l` = 1)THEN 1 ELSE 4 END));
