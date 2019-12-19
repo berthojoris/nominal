@@ -174,8 +174,8 @@ class Relokasi extends CI_Controller {
         $data = [];
         $notif = [];
 
-        if(!empty($_FILES['edit_file_upload_1']['name'])) {
-            if(!$this->upload->do_upload('edit_file_upload_1')) {
+        if(!empty($_FILES['file_upload_1']['name'])) {
+            if(!$this->upload->do_upload('file_upload_1')) {
                 array_push($notif, [
                     'error' => $this->upload->display_errors(),
                     'file_name' => null,
@@ -196,8 +196,8 @@ class Relokasi extends CI_Controller {
             ]);
         }
 
-        if(!empty($_FILES['edit_file_upload_2']['name'])) {
-            if(!$this->upload->do_upload('edit_file_upload_2')) {
+        if(!empty($_FILES['file_upload_2']['name'])) {
+            if(!$this->upload->do_upload('file_upload_2')) {
                 array_push($notif, [
                     'error' => $this->upload->display_errors(),
                     'file_name' => null,
