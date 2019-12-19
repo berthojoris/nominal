@@ -165,7 +165,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
     size=size/1024;
     size=Math.round(size);
     return this.optional(element) || size <=param ;
-}, 'File size must be less than {0}');
+}, 'File size must be less than 10MB');
 
 function openPrint(url) {
     document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
