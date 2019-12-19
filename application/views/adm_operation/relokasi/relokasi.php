@@ -159,6 +159,14 @@ select.input-sm {
 <?php $this->view('adm_operation/relokasi/detail'); ?>
 <?php $this->view('adm_operation/relokasi/edit'); ?>
 <script type="text/javascript">
+
+$.validator.addMethod('filesize', function (value, element, param) {
+    var size=element.files[0].size;
+    size=size/1024;
+    size=Math.round(size);
+    return this.optional(element) || size <=param ;
+}, 'File size must be less than {0}');
+
 function openPrint(url) {
     document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
     document.close();
@@ -634,6 +642,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
+            filesize: 5000,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         },
         file_upload_2: {
@@ -644,6 +653,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
+            filesize: 5000,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         }
     },
