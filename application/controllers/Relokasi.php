@@ -173,20 +173,48 @@ class Relokasi extends CI_Controller {
 
         $data = [];
 
-        for ($i=1; $i <=2 ; $i++) {
-            if(!empty($_FILES['file_upload_'.$i]['name'])) {
-                if(!$this->upload->do_upload('file_upload_'.$i)) {
-                    array_push($data, [
-                        'error' => $this->upload->display_errors(),
-                        'file_name' => $year."-".$this->upload->data()['file_name']
-                    ]);
-                } else {
-                    array_push($data, [
-                        'error' => null,
-                        'file_name' => $year."-".$this->upload->data()['file_name']
-                    ]);
-                }
+        if(!empty($_FILES['edit_file_upload_1']['name'])) {
+            if(!$this->upload->do_upload('edit_file_upload_1')) {
+                array_push($notif, [
+                    'error' => $this->upload->display_errors(),
+                    'file_name' => null,
+                    'type' => 'noupload'
+                ]);
+            } else {
+                array_push($notif, [
+                    'error' => null,
+                    'file_name' => $year."-".$this->upload->data()['file_name'],
+                    'type' => 'upload'
+                ]);
             }
+        } else {
+            array_push($notif, [
+                'error' => null,
+                'file_name' => null,
+                'type' => 'noupload'
+            ]);
+        }
+
+        if(!empty($_FILES['edit_file_upload_2']['name'])) {
+            if(!$this->upload->do_upload('edit_file_upload_2')) {
+                array_push($notif, [
+                    'error' => $this->upload->display_errors(),
+                    'file_name' => null,
+                    'type' => 'noupload'
+                ]);
+            } else {
+                array_push($notif, [
+                    'error' => null,
+                    'file_name' => $year."-".$this->upload->data()['file_name'],
+                    'type' => 'upload'
+                ]);
+            }
+        } else {
+            array_push($notif, [
+                'error' => null,
+                'file_name' => null,
+                'type' => 'noupload'
+            ]);
         }
 
         $relokasi = [
@@ -199,10 +227,10 @@ class Relokasi extends CI_Controller {
             'pic' => $this->input->post('pic'),
             'ip_wan_old' => $this->input->post('ip_wan_old'),
             'ip_wan_new' => $this->input->post('ip_wan_new'),
-            'req_doc_file' => $data[0]['file_name'],
+            'req_doc_file' => $notif[0]['file_name'],
             'req_doc_no' => $this->input->post('req_doc_no'),
             'req_doc_date' => $this->input->post('req_doc_date'),
-            'work_order_file' => $data[1]['file_name'],
+            'work_order_file' => $notif[1]['file_name'],
             'work_order_no' => $this->input->post('work_order_no'),
             'type_relocate' => $this->input->post('type'),
             'network_id_old' => $this->input->post('network_id_old'),
@@ -277,33 +305,51 @@ class Relokasi extends CI_Controller {
         $data = [];
         $notif = [];
 
-        for ($i=1; $i <=2 ; $i++) {
-            if(!empty($_FILES['edit_file_upload_'.$i]['name'])) {
-                if(!$this->upload->do_upload('edit_file_upload_'.$i)) {
-                    array_push($data, [
-                        'error' => $this->upload->display_errors(),
-                        'file_name' => $year."-".$this->upload->data()['file_name']
-                    ]);
-                    array_push($notif, [
-                        'notif' => 'upload'
-                    ]);
-                } else {
-                    array_push($data, [
-                        'error' => null,
-                        'file_name' => $year."-".$this->upload->data()['file_name']
-                    ]);
-                    array_push($notif, [
-                        'notif' => 'upload'
-                    ]);
-                }
+        if(!empty($_FILES['edit_file_upload_1']['name'])) {
+            if(!$this->upload->do_upload('edit_file_upload_1')) {
+                array_push($notif, [
+                    'error' => $this->upload->display_errors(),
+                    'file_name' => null,
+                    'type' => 'noupload'
+                ]);
             } else {
                 array_push($notif, [
-                    'notif' => 'noupload'
+                    'error' => null,
+                    'file_name' => $year."-".$this->upload->data()['file_name'],
+                    'type' => 'upload'
                 ]);
             }
+        } else {
+            array_push($notif, [
+                'error' => null,
+                'file_name' => null,
+                'type' => 'noupload'
+            ]);
         }
 
-        if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "upload") {
+        if(!empty($_FILES['edit_file_upload_2']['name'])) {
+            if(!$this->upload->do_upload('edit_file_upload_2')) {
+                array_push($notif, [
+                    'error' => $this->upload->display_errors(),
+                    'file_name' => null,
+                    'type' => 'noupload'
+                ]);
+            } else {
+                array_push($notif, [
+                    'error' => null,
+                    'file_name' => $year."-".$this->upload->data()['file_name'],
+                    'type' => 'upload'
+                ]);
+            }
+        } else {
+            array_push($notif, [
+                'error' => null,
+                'file_name' => null,
+                'type' => 'noupload'
+            ]);
+        }
+
+        if($notif[0]['type'] == "noupload" && $notif[1]['type'] == "upload") {
             $update = [
                 'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
                 'reason' => $this->input->post('edit_reason'),
@@ -318,7 +364,7 @@ class Relokasi extends CI_Controller {
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
                 'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
-                'work_order_file' => $data[1]['file_name'],
+                'work_order_file' => $notif[1]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
                 'region_name_old' => $this->input->post('edit_region_old'),
                 'region_name_new' => $this->input->post('edit_region_new'),
@@ -332,7 +378,7 @@ class Relokasi extends CI_Controller {
                 'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
                 'address_new' => $this->input->post('edit_remote_address_new')
             ];
-        } else if($notif[0]['notif'] == "upload" && $notif[1]['notif'] == "noupload") {
+        } else if($notif[0]['type'] == "upload" && $notif[1]['type'] == "noupload") {
             $update = [
                 'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
                 'reason' => $this->input->post('edit_reason'),
@@ -347,7 +393,7 @@ class Relokasi extends CI_Controller {
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
                 'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
-                'req_doc_file' => $data[0]['file_name'],
+                'req_doc_file' => $notif[0]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
                 'region_name_old' => $this->input->post('edit_region_old'),
                 'region_name_new' => $this->input->post('edit_region_new'),
@@ -361,7 +407,7 @@ class Relokasi extends CI_Controller {
                 'remote_longitude_new' => $this->input->post('edit_remote_longitude_new'),
                 'address_new' => $this->input->post('edit_remote_address_new')
             ];
-        } else if($notif[0]['notif'] == "noupload" && $notif[1]['notif'] == "noupload") {
+        } else if($notif[0]['type'] == "noupload" && $notif[1]['type'] == "noupload") {
             $update = [
                 'id_jarkom' => $this->input->post('edit_id_jarkom_val'),
                 'reason' => $this->input->post('edit_reason'),
@@ -404,8 +450,8 @@ class Relokasi extends CI_Controller {
                 'ip_wan_new' => $this->input->post('edit_ip_wan_new'),
                 'id_remote_new' => $this->input->post('edit_id_remote_new'),
                 'remote_name_new' => $this->input->post('edit_remote_name_new_val'),
-                'req_doc_file' => $data[0]['file_name'],
-                'work_order_file' => $data[1]['file_name'],
+                'req_doc_file' => $notif[0]['file_name'],
+                'work_order_file' => $notif[1]['file_name'],
                 'distance' => $this->input->post('edit_distance'),
                 'region_name_old' => $this->input->post('edit_region_old'),
                 'region_name_new' => $this->input->post('edit_region_new'),
