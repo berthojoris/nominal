@@ -160,12 +160,19 @@ select.input-sm {
 <?php $this->view('adm_operation/relokasi/edit'); ?>
 <script type="text/javascript">
 
+var fileSizeLimit = "File size must be less than 2 MB";
+var acceptSize = 2000;
+
 $.validator.addMethod('filesize', function (value, element, param) {
-    var size=element.files[0].size;
-    size=size/1024;
-    size=Math.round(size);
-    return this.optional(element) || size <=param ;
-}, 'File size must be less than 2MB');
+    if(element.files.length >= 1) {
+        var size=element.files[0].size;
+        size=size/1024;
+        size=Math.round(size);
+        return this.optional(element) || size <=param ;
+    } else {
+        return true;
+    }
+}, fileSizeLimit);
 
 function openPrint(url) {
     document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
@@ -603,7 +610,7 @@ $(document).on("click", "#updateRelokasi", function (e) {
                         return false;
                     }
                 },
-                filesize: 2000,
+                filesize: acceptSize,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
             edit_file_upload_2: {
@@ -614,7 +621,7 @@ $(document).on("click", "#updateRelokasi", function (e) {
                         return false;
                     }
                 },
-                filesize: 2000,
+                filesize: acceptSize,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             }
         },
@@ -644,7 +651,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
-            filesize: 2000,
+            filesize: acceptSize,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         },
         file_upload_2: {
@@ -655,7 +662,7 @@ $("#form_add").validate({
                     return false;
                 }
             },
-            filesize: 2000,
+            filesize: acceptSize,
             extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
         }
     },
