@@ -604,22 +604,26 @@ $(document).on("click", "#updateRelokasi", function (e) {
         rules: {
             edit_file_upload_1: {
                 required: function(element) {
-                    if(activeValidate.includes($("#edit_status").val())) {
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() == "") {
                         return true;
-                    } else {
+                    }
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() != "") {
                         return false;
                     }
+                    return false;
                 },
                 filesize: acceptSize,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
             },
             edit_file_upload_2: {
                 required: function(element) {
-                    if(activeValidate.includes($("#edit_status").val())) {
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() == "") {
                         return true;
-                    } else {
+                    }
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() != "") {
                         return false;
                     }
+                    return false;
                 },
                 filesize: acceptSize,
                 extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
