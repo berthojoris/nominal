@@ -160,8 +160,8 @@ select.input-sm {
 <?php $this->view('adm_operation/relokasi/edit'); ?>
 <script type="text/javascript">
 
-var fileSizeLimit = "File size must be less than 2 MB";
-var acceptSize = 2000;
+var fileSizeLimit = "File size must be less than 10 MB";
+var acceptSize = 10000;
 
 $.validator.addMethod('filesize', function (value, element, param) {
     if(element.files.length >= 1) {
