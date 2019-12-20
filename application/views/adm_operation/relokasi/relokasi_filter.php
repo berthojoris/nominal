@@ -156,6 +156,21 @@ select.input-sm {
 <?php $this->view('adm_operation/relokasi/detail'); ?>
 <?php $this->view('adm_operation/relokasi/edit'); ?>
 <script type="text/javascript">
+
+var fileSizeLimit = "File size must be less than 10 MB";
+var acceptSize = 10000;
+
+$.validator.addMethod('filesize', function (value, element, param) {
+    if(element.files.length >= 1) {
+        var size=element.files[0].size;
+        size=size/1024;
+        size=Math.round(size);
+        return this.optional(element) || size <=param ;
+    } else {
+        return true;
+    }
+}, fileSizeLimit);
+
 function openPrint(url) {
     document.write('<body onload="window.print()"><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" src="'+url+'"></body>');
     document.close();
@@ -177,6 +192,8 @@ function upperCase(string) {
 function OpenDetailPrint(url) {
     window.open(url);
 }
+
+var activeValidate = ["in Progress", "Done"];
 
 $(document).ready(function() {
 
@@ -273,7 +290,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return isian;
+                        if(data) {
+                            return isian;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -282,7 +303,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return wo;
+                        if(data) {
+                            return wo;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -359,7 +384,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         isian = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return isian;
+                        if(data) {
+                            return isian;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -368,7 +397,11 @@ $(document).ready(function() {
                         var rowIndex = meta.col-1;
                         $('#filter_table_Data tbody td:nth-child('+rowIndex+')').addClass('centerText');
                         wo = '<a href="'+getBaseUrl()+'index.php/relokasi/download/'+data+'"><i class="fa fa-fw fa-download"></i></a>';
-                        return wo;
+                        if(data) {
+                            return wo;
+                        } else {
+                            return "-";
+                        }
                     }
                 },
                 {
@@ -563,6 +596,92 @@ $(document).ready(function() {
     });
 });
 
+$(document).on("click", "#updateRelokasi", function (e) {
+    $("#form_edit").validate({
+        rules: {
+            edit_file_upload_1: {
+                required: function(element) {
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() == "") {
+                        return true;
+                    }
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_reqdocfile").val() != "") {
+                        return false;
+                    }
+                    return false;
+                },
+                filesize: acceptSize,
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            },
+            edit_file_upload_2: {
+                required: function(element) {
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() == "") {
+                        return true;
+                    }
+                    if(activeValidate.includes($("#edit_status").val()) && $("#valid_edit_wofile").val() != "") {
+                        return false;
+                    }
+                    return false;
+                },
+                filesize: acceptSize,
+                extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+            }
+        },
+        messages: {
+            edit_file_upload_1: {
+                required: 'This field is required.',
+                extension: 'File extension not permitted.'
+            },
+            edit_file_upload_2: {
+                required: 'This field is required.',
+                extension: 'File extension not permitted.'
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+});
+
+$("#form_add").validate({
+    rules: {
+        file_upload_1: {
+            required: function(element) {
+                if(activeValidate.includes($("#status").val())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            filesize: acceptSize,
+            extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+        },
+        file_upload_2: {
+            required: function(element) {
+                if(activeValidate.includes($("#status").val())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            filesize: acceptSize,
+            extension: "pdf|jpg|jpeg|png|doc|docx|zip|rar|pdf|xls|xlsx|csv"
+        }
+    },
+    messages: {
+        file_upload_1: {
+            required: 'This field is required.',
+            extension: 'File extension not permitted.'
+        },
+        file_upload_1: {
+            required: 'This field is required.',
+            extension: 'File extension not permitted.'
+        }
+    },
+    submitHandler: function(form) {
+        form.submit();
+    }
+});
+
 function getBaseUrl() {
     return $('meta[name=baseURL]').attr("content");
 }
@@ -738,7 +857,7 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
                 $("#edit_ip_wan_new").val(response.data.ip_wan_old);
                 $("#edit_remote_type_new").val(response.data.remote_type_new);
                 $("#edit_region_new").val(response.data.region);
-                $("#edit_remote_address_new").val(response.data.address_old);
+                $("#edit_remote_address_new").val(response.data.address_new);
                 $("#edit_distance").val(response.data.distance);
                 $("#edit_key_id_jarkom").val(response.data.id_jarkom);
                 $("#edit_id_remote_new").val(response.data.id_remote_new);
@@ -750,8 +869,27 @@ $("#edit_form_relokasi").on('show.bs.modal', function (e) {
 
                 $('#file_req_doc').empty();
                 $('#file_work_order').empty();
-                $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
-                $('#file_work_order').html(openViewOtf(response.data.work_order_file));
+
+                $('.mbReduceRD').parent().show();
+                $('.mbReduceWO').parent().show();
+                
+                $('#file_req_doc').show();
+                $('#file_work_order').show();
+
+                if(response.data.req_doc_file) {
+                    $('#file_req_doc').html(openViewOtf(response.data.req_doc_file));
+                } else {
+                    $('#file_req_doc').hide();
+                    $('.mbReduceRD').parent().hide();
+                }
+
+                if(response.data.work_order_file) {
+                    $('#file_work_order').html(openViewOtf(response.data.work_order_file));
+                } else {
+                    $('#file_work_order').hide();
+                    $('.mbReduceWO').parent().hide();
+                }
+
                 $("#valid_edit_reqdocfile").val(response.data.req_doc_file);
                 $("#valid_edit_wofile").val(response.data.work_order_file);
             } else {
