@@ -32,7 +32,5 @@
 
     <!-- js -->
     <?php echo @$_js; ?>
-
-    <?php $this->view('adm_operation/relokasi/alert'); ?>
   </body>
 </html>

@@ -93,6 +93,7 @@ select.input-sm {
     color: red;
 }
 </style>
+<?php $this->view('adm_operation/relokasi/alert'); ?>
 <section>
     <div style="width:100%;height:38px;" class="panel panel-default">
         <ol class="breadcrumb" style="background: white;">
